@@ -4,10 +4,8 @@ import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.RentalAgreement;
 import com.example.g3bilabonnement.entity.Renter;
 import com.example.g3bilabonnement.entity.Subscription;
-import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.RentalAgreementService;
-import com.example.g3bilabonnement.service.RenterService;
-import com.example.g3bilabonnement.service.SubscriptionService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/rental-agreement")
@@ -26,18 +26,21 @@ public class RentalAgreementController {
     @Autowired
     private RentalAgreementService rentalAgreementService;
 
-    @GetMapping("/create")
-    public String createRentalAgreementPage(Model model) {
-        model.addAttribute("returnPath", "/rental-agreement/create");
+    @GetMapping("/new")
+    public String createRentalAgreementPage(Model model, HttpSession session) {
+        model.addAttribute("returnPath", "/rental-agreement/new");
+        Car car = (Car) session.getAttribute("car");
+        model.addAttribute("car", car);
+
         return "createRentalAgreement";
     }
 
     @PostMapping("/create")
-    public String createRentalAgreement( @RequestParam("carId") int carId,
-                                       @RequestParam("renterId") int renterId,
-                                       @RequestParam("subscriptionId") int subscriptionId,
-                                       @RequestParam("startDate") String startDate,
-                                       @RequestParam("endDate") String endDate) {
+    public String createRentalAgreement(@RequestParam("carId") int carId,
+                                        @RequestParam("renterId") int renterId,
+                                        @RequestParam("subscriptionId") int subscriptionId,
+                                        @RequestParam("startDate") String startDate,
+                                        @RequestParam("endDate") String endDate) {
         RentalAgreement rentalAgreement = new RentalAgreement();
 
         Car car = new Car();
@@ -63,7 +66,7 @@ public class RentalAgreementController {
     public String showSuccessPage(Model model) {
         model.addAttribute("message", "Rental agreement created successfully!");
         model.addAttribute("type", "success");
-        model.addAttribute("redirect", "/rental-agreement/create");
+        model.addAttribute("redirect", "/rental-agreement/new");
         model.addAttribute("redirectText", "Ok");
         return "createRentalAgreementResult";
     }

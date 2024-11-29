@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Car</title>
+</head>
+<body>
+<form th:action="@{/car/search-car(returnPath=${returnPath})}" method="post">
+    <input type="text" name="carId" placeholder="Enter vehicle number" required />
+    <button type="submit">Search</button>
+</form>
+</body>
+</html>
