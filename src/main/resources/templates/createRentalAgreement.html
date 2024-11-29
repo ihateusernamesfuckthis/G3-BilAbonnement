@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Agreement</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/createRentalAgreement.css">
+    <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
+    <link rel="stylesheet" href="/css/fragments/returnButtonFragment.css">
+</head>
+<body>
+<div class="rental-agreement-container container">
+    <div class="rental-agreement__title-container">
+    <h1 class="rental-agreement__title">Create Rental Agreement</h1><div th:replace="~{fragments/returnButtonFragment :: return-button(${returnPath})}"></div>
+    </div>
+    <form class="rental-agreement__form" th:action="@{/rental-agreement/create}" th:method="post">
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'carId', 'Car id', 'form-group__car', true)}"></div>
+
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'renterId', 'Renter id', 'form-group__car', true)}"></div>
+
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'subscriptionId', 'Subscription id', 'form-group__car', true)}"></div>
+
+        <div th:replace="~{fragments/formGroupFragments :: input-field('date', 'startDate','Start date', 'form-group__start-date', true)}"></div>
+
+        <div th:replace="~{fragments/formGroupFragments :: input-field('date', 'endDate' ,'End date', 'form-group__end-date', true)}"></div>
+
+        <div class="form-group form-group__submit-button">
+            <button type="submit" class="button rental-agreement__button">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
