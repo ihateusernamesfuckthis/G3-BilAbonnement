@@ -1,0 +1,11 @@
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group__label {
+    display: block;
+}
+
+.form-group__input {
+    width: 100%;
+}
