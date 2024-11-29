@@ -1,6 +1,7 @@
 package com.example.g3bilabonnement.entity;
 
 public class Location {
+    private int id;
     private String address;
     private String city;
     private String zipCode;
@@ -8,7 +9,8 @@ public class Location {
     public Location() {
     }
 
-    public Location(String address, String city, String zipCode) {
+    public Location(int id, String address, String city, String zipCode) {
+        this.id = id;
         this.address = address;
         this.city = city;
         this.zipCode = zipCode;
@@ -36,5 +38,13 @@ public class Location {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -73,7 +73,6 @@ public class RentalAgreement {
         this.endDate = endDate;
     }
 
-
     //TODO add total price calculation based of subscription
     public double getTotalPrice() {
         return totalPrice;

@@ -3,7 +3,7 @@ CREATE DATABASE G3Bilabonnement;
 
 USE G3Bilabonnement;
 
-CREATE TABLE Location
+CREATE TABLE location
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     address  VARCHAR(255) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE Location
     zip_code VARCHAR(20)  NOT NULL
 );
 
-CREATE TABLE Renter
+CREATE TABLE renter
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     firstname      VARCHAR(100) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE Renter
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE Car
+CREATE TABLE car
 (
     id                INT AUTO_INCREMENT PRIMARY KEY,
     vehicle_number    VARCHAR(20)    NOT NULL UNIQUE,
@@ -42,21 +42,22 @@ CREATE TABLE Car
     car_status        VARCHAR(50)    NOT NULL
 );
 
-CREATE TABLE Subscription
+CREATE TABLE subscription
 (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
-    baseprice            DECIMAL(10, 2),
+    base_price            DECIMAL(10, 2),
     subscription_type    VARCHAR(50),
-    start_date           DATE,
-    end_date             DATE,
     allowed_km_per_month INT,
-    pickup_location      VARCHAR(100),
-    return_location      VARCHAR(100),
+    pickup_location_id      INT,
+    return_location_id      INT,
     price_per_month      DECIMAL(10, 2),
-    total_price          DECIMAL(10, 2)
+    FOREIGN KEY (pickup_location_id) REFERENCES Location (id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (return_location_id) REFERENCES Location (id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE RentalAgreement
+CREATE TABLE rental_agreement
 (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     car_id          INT            NOT NULL,
@@ -64,7 +65,6 @@ CREATE TABLE RentalAgreement
     renter_id       INT            NOT NULL,
     start_date      DATE           NOT NULL,
     end_date        DATE           NOT NULL,
-    total_price     DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (car_id) REFERENCES Car (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (subscription_id) REFERENCES Subscription (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (renter_id) REFERENCES Renter (id) ON DELETE CASCADE ON UPDATE CASCADE

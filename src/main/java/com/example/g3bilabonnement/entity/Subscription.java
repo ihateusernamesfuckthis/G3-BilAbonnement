@@ -1,7 +1,5 @@
 package com.example.g3bilabonnement.entity;
 
-import java.time.LocalDate;
-
 public class Subscription {
     private int id;
     private double basePriceForCar;
