@@ -29,6 +29,7 @@ CREATE TABLE renter
 CREATE TABLE car
 (
     id                INT AUTO_INCREMENT PRIMARY KEY,
+    image_url         VARCHAR(255),
     vehicle_number    VARCHAR(20)    NOT NULL UNIQUE,
     vin_number        VARCHAR(50)    NOT NULL UNIQUE,
     brand             VARCHAR(50)    NOT NULL,
@@ -69,3 +70,36 @@ CREATE TABLE rental_agreement
     FOREIGN KEY (subscription_id) REFERENCES Subscription (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (renter_id) REFERENCES Renter (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+-- Inserting dummy data into `location` table
+INSERT INTO location (address, city, zip_code) VALUES
+                                                   ('123 Elm St', 'Copenhagen', '1000'),
+                                                   ('456 Maple Ave', 'Aarhus', '8000'),
+                                                   ('789 Oak Blvd', 'Odense', '5000');
+
+-- Inserting dummy data into `renter` table
+INSERT INTO renter (firstname, lastname, email, phone_number, cpr_number, reg_number, account_number, location_id) VALUES
+                                                                                                                       ('John', 'Doe', 'john.doe@example.com', '1234567890', '1234567890', 'AB12345', '100012345', 1),
+                                                                                                                       ('Jane', 'Smith', 'jane.smith@example.com', '0987654321', '0987654321', 'CD67890', '100076543', 2),
+                                                                                                                       ('Alice', 'Johnson', 'alice.johnson@example.com', '1122334455', '1122334455', 'EF98765', '100089234', 3);
+
+-- Inserting dummy data into `car` table
+INSERT INTO car (image_url, vehicle_number, vin_number, brand, model, equipment_level, power_source_type, transmission_type, net_price, registration_tax, co2_emissions, car_status) VALUES
+                                                                                                                                                                                         ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/ntvy28bwzctxshinupxz', 'AB123CD', '1HGBH41JXMN109186', 'Fiat', '500', 'Basic', 'Petrol', 'Manual', 15000.00, 500.00, 120.00, 'Available'),
+                                                                                                                                                                                         ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'EF456GH', '1HGBH41JXMN109187', 'Fiat', '500', 'Sport', 'Electric', 'Automatic', 25000.00, 600.00, 90.00, 'Available'),
+                                                                                                                                                                                         ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/jvlzzkgtqbydaika503u', 'IJ789KL', '1HGBH41JXMN109188', 'Fiat', '500c', 'Luxury', 'Hybrid', 'Automatic', 35000.00, 700.00, 80.00, 'Rented'),
+('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/jvlzzkgtqbydaika503u', 'AB789KL', '23123asdasd', 'Fiat', '500c', 'Luxury', 'Hybrid', 'Automatic', 35000.00, 700.00, 80.00, 'Rented'),
+('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/jvlzzkgtqbydaika503u', 'EF789KL', '1234fsasf2', 'Fiat', '500c', 'Luxury', 'Hybrid', 'Automatic', 35000.00, 700.00, 80.00, 'Rented');
+
+-- Inserting dummy data into `subscription` table
+INSERT INTO subscription (base_price, subscription_type, allowed_km_per_month, pickup_location_id, return_location_id, price_per_month) VALUES
+                                                                                                                                            (2000.00, 'Basic', 1000, 1, 1, 3000.00),
+                                                                                                                                            (2500.00, 'Sport', 1500, 2, 2, 3500.00),
+                                                                                                                                            (3000.00, 'Luxury', 2000, 3, 3, 4000.00);
+
+-- Inserting dummy data into `rental_agreement` table
+INSERT INTO rental_agreement (car_id, subscription_id, renter_id, start_date, end_date) VALUES
+                                                                                            (1, 1, 1, '2024-11-01', '2024-11-30'),
+                                                                                            (2, 2, 2, '2024-11-10', '2024-12-10'),
+                                                                                            (3, 3, 3, '2024-11-20', '2024-12-20');

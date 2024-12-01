@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CarRepository {
     @Autowired
@@ -14,6 +16,7 @@ public class CarRepository {
     private final RowMapper<Car> carRowMapper = (rs, rowNum) -> {
         Car car = new Car();
         car.setId(rs.getInt("id"));
+        car.setImageUrl(rs.getString("image_url"));
         car.setVehicleNumber(rs.getString("vehicle_number"));
         car.setVinNumber(rs.getString("vin_number"));
         car.setBrand(rs.getString("brand"));
@@ -31,5 +34,10 @@ public class CarRepository {
     public Car getById(int id) {
         String sql = "SELECT * FROM car WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, carRowMapper, id);
+    }
+
+    public List<Car> searchByVehicleNumber(String vehicleNumber) {
+        String sql = "SELECT * FROM car WHERE vehicle_number like ?";
+        return jdbcTemplate.query(sql, carRowMapper, '%' + vehicleNumber + '%');
     }
 }

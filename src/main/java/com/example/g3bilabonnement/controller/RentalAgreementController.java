@@ -28,7 +28,9 @@ public class RentalAgreementController {
 
     @GetMapping("/new")
     public String createRentalAgreementPage(Model model, HttpSession session) {
-        model.addAttribute("returnPath", "/rental-agreement/new");
+        session.setAttribute("returnPath", "/rental-agreement/new");
+
+        // returns car if there is one else null - Page handles null value
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("car", car);
 
@@ -40,7 +42,8 @@ public class RentalAgreementController {
                                         @RequestParam("renterId") int renterId,
                                         @RequestParam("subscriptionId") int subscriptionId,
                                         @RequestParam("startDate") String startDate,
-                                        @RequestParam("endDate") String endDate) {
+                                        @RequestParam("endDate") String endDate,
+                                        HttpSession session) {
         RentalAgreement rentalAgreement = new RentalAgreement();
 
         Car car = new Car();
@@ -58,6 +61,9 @@ public class RentalAgreementController {
         rentalAgreement.setEndDate(end);
 
         rentalAgreementService.add(rentalAgreement);
+
+        // Clear session data for rental agreement to "reset" the form
+        session.removeAttribute("car");
 
         return "redirect:/rental-agreement/success"; // Redirect to success page
     }
