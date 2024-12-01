@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.Entities;
+package com.example.g3bilabonnement.entity;
 
 public class FinalSettlement {
 
@@ -6,7 +6,7 @@ public class FinalSettlement {
     Car car;
     DamageReport damageReport;
     Double totalMilage;
-    Double totalPrice;
+    Double totalPrice = 5000.0;
 
     public int getId() {
         return id;

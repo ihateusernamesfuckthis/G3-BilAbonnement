@@ -1,8 +1,6 @@
 package com.example.g3bilabonnement.Repository;
 
-import com.example.g3bilabonnement.Entities.Car;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

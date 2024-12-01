@@ -1,10 +1,10 @@
 DROP
-DATABASE IF EXISTS G3Bilabonnement;
+DATABASE IF EXISTS g3bilabonnement;
 CREATE
-DATABASE G3Bilabonnement;
+DATABASE g3bilabonnement;
 
 USE
-G3Bilabonnement;
+g3bilabonnement;
 
 CREATE TABLE Location
 (
@@ -74,47 +74,11 @@ CREATE TABLE FinalSettlement
     id              INT AUTO_INCREMENT PRIMARY KEY
 );
 
-CREATE TABLE PurchaseAgreement(
+CREATE TABLE PurchaseAgreement
+(
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     car_id              INT NOT NULL,
-    finalSettlement_id  INT NOT NULL
+    finalSettlement_id  INT NOT NULL,
+    pickup_location     VARCHAR(255),
+    final_price         DECIMAL(10, 2)
 );
-
-
--- Vælg databasen
-USE G3Bilabonnement;
-
--- Indsæt dummy-data i Location-tabellen
-INSERT INTO Location (address, city, zip_code)
-VALUES
-    ('Main Street 1', 'Copenhagen', '1000'),
-    ('River Road 5', 'Aarhus', '8000'),
-    ('Hilltop Avenue 12', 'Odense', '5000');
-
--- Indsæt dummy-data i Renter-tabellen
-INSERT INTO Renter (firstname, lastname, email, phone_number, cpr_number, reg_number, account_number, location_id)
-VALUES
-    ('John', 'Doe', 'john.doe@example.com', '12345678', '123456-7890', '1234', '567890', 1),
-    ('Jane', 'Smith', 'jane.smith@example.com', '87654321', '234567-8901', '5678', '123456', 2),
-    ('Michael', 'Brown', 'michael.brown@example.com', '11223344', '345678-9012', '9012', '345678', 3);
-
--- Indsæt dummy-data i Car-tabellen
-INSERT INTO Car (vehicle_number, vin_number, brand, model, equipment_level, power_source_type, transmission_type, net_price, registration_tax, co2_emissions, car_status)
-VALUES
-    ('VH001', 'VIN123456789', 'Toyota', 'Corolla', 'Standard', 'Hybrid', 'Automatic', 200000.00, 25000.00, 100.5, 'Available'),
-    ('VH002', 'VIN987654321', 'Volkswagen', 'Golf', 'Comfort', 'Petrol', 'Manual', 180000.00, 23000.00, 120.0, 'Rented'),
-    ('VH003', 'VIN456123789', 'Tesla', 'Model 3', 'Performance', 'Electric', 'Automatic', 400000.00, 50000.00, 0.0, 'Available');
-
--- Indsæt dummy-data i Subscription-tabellen
-INSERT INTO Subscription (baseprice, subscription_type, allowed_km_per_month, pickup_location, return_location, price_per_month)
-VALUES
-    (1000.00, 'Limited', 1000, 'Main Street 1', 'Main Street 1', 1500.00),
-    (1500.00, 'Limited', 2000, 'River Road 5', 'River Road 5', 2500.00),
-    (2000.00, 'Unlimited', 3000, 'Hilltop Avenue 12', 'Hilltop Avenue 12', 3500.00);
-
--- Indsæt dummy-data i RentalAgreement-tabellen
-INSERT INTO RentalAgreement (car_id, subscription_id, renter_id, start_date, end_date)
-VALUES
-    (1, 1, 1, '2024-01-01', '2024-06-01'),
-    (2, 2, 2, '2024-03-01', '2024-09-01'),
-    (3, 3, 3, '2024-05-01', '2024-11-01');

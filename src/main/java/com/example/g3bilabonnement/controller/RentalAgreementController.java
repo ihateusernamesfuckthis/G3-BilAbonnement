@@ -1,13 +1,10 @@
-package com.example.g3bilabonnement.controller;
+package com.example.g3bilabonnement.Controller;
 
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.RentalAgreement;
 import com.example.g3bilabonnement.entity.Renter;
 import com.example.g3bilabonnement.entity.Subscription;
-import com.example.g3bilabonnement.service.CarService;
-import com.example.g3bilabonnement.service.RentalAgreementService;
-import com.example.g3bilabonnement.service.RenterService;
-import com.example.g3bilabonnement.service.SubscriptionService;
+import com.example.g3bilabonnement.Service.RentalAgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

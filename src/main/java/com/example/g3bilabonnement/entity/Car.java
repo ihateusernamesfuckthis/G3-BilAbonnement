@@ -9,29 +9,27 @@ public class Car {
     private String equipmentLevel;
     private String powerSourceType;
     private String transmissionType;
-    private double netPrice;
+    private String status;
+    private double netPrice = 2000;
     private double registrationTax;
     private double co2Emissions;
-    private String carStatus;
+    private boolean prePurchased;
+    private DamageReport damageReport;
 
-    public Car() {
+    public String getStatus() {
+        return status;
     }
 
-    public Car(int id, String vehicleNumber, String vinNumber, String brand, String model, String equipmentLevel,
-               String powerSourceType, String transmissionType, double netPrice,
-               double registrationTax, double co2Emissions, String carStatus) {
-        this.id = id;
-        this.vehicleNumber = vehicleNumber;
-        this.vinNumber = vinNumber;
-        this.brand = brand;
-        this.model = model;
-        this.equipmentLevel = equipmentLevel;
-        this.powerSourceType = powerSourceType;
-        this.transmissionType = transmissionType;
-        this.netPrice = netPrice;
-        this.registrationTax = registrationTax;
-        this.co2Emissions = co2Emissions;
-        this.carStatus = carStatus;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public DamageReport getDamageReport() {
+        return damageReport;
+    }
+
+    public void setDamageReport(DamageReport damageReport) {
+        this.damageReport = damageReport;
     }
 
     public int getId() {
@@ -122,11 +120,15 @@ public class Car {
         this.co2Emissions = co2Emissions;
     }
 
-    public String getCarStatus() {
-        return carStatus;
+    public boolean isPrePurchased() {
+        return prePurchased;
     }
 
-    public void setCarStatus(String carStatus) {
-        this.carStatus = carStatus;
+    public void setPrePurchased(boolean prePurchased) {
+        this.prePurchased = prePurchased;
     }
 }
+
+
+
+

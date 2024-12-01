@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.service;
+package com.example.g3bilabonnement.Service;
 
 import com.example.g3bilabonnement.entity.RentalAgreement;
 import com.example.g3bilabonnement.repository.RentalAgreementRepository;

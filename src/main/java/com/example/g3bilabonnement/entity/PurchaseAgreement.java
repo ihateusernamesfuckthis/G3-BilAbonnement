@@ -1,10 +1,12 @@
-package com.example.g3bilabonnement.Entities;
+package com.example.g3bilabonnement.entity;
 
 public class PurchaseAgreement {
     private Car car;
     private FinalSettlement finalSettlement;
     double finalPrice;
     String pickUpLocation;
+
+    public PurchaseAgreement(){}
 
     public PurchaseAgreement(int carId, String pickupLocation) {
     }

@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.Entities;
+package com.example.g3bilabonnement.entity;
 
 public class DamageReport {
 
