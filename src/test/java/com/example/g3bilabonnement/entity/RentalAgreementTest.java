@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class RentalAgreementTest {
 
@@ -46,7 +45,7 @@ class RentalAgreementTest {
     void calculateTotalPrice_NullEndDate_ShouldNotCalculate() {
 
         rentalAgreement.setStartDate(LocalDate.of(2024, 1, 1));
-        subscription.setTotalPricePerMonth(1000.0);;
+        subscription.setTotalPricePerMonth(1000.0);
 
         rentalAgreement.calculateTotalPrice();
 
