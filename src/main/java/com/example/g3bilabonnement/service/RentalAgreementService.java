@@ -11,7 +11,11 @@ public class RentalAgreementService {
     @Autowired
     private RentalAgreementRepository rentalAgreementRepository;
 
+    @Autowired
+    private CarService carService;
+
     public void add(RentalAgreement rentalAgreement) {
         rentalAgreementRepository.add(rentalAgreement);
+        carService.updateCarStatus(rentalAgreement.getCar(), "Udlejet");
     }
 }

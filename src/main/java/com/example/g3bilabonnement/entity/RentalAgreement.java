@@ -25,6 +25,32 @@ public class RentalAgreement {
         this.totalPrice = totalPrice;
     }
 
+    public void calculateTotalPrice(){
+        // only try to calculate the total price if both dates and subscription are not null to avoid errors
+        if (startDate == null || endDate == null || subscription == null) {
+            return;
+        }
+        int months = calculateTotalMonths();
+        double pricePerMonth = subscription.getTotalPricePerMonth();
+        this.totalPrice = pricePerMonth * months;
+    }
+
+    public int calculateTotalMonths() {
+        int startYear = startDate.getYear();
+        int startMonth = startDate.getMonthValue();
+
+        int endYear = endDate.getYear();
+        int endMonth = endDate.getMonthValue();
+
+        int yearDifference = endYear - startYear;
+        int totalMonths = yearDifference * 12 + (endMonth - startMonth);
+
+        if (endDate.getDayOfMonth() > startDate.getDayOfMonth()) {
+            totalMonths++;
+        }
+        return totalMonths;
+    }
+
     public int getId() {
         return id;
     }
@@ -47,6 +73,7 @@ public class RentalAgreement {
 
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
+        calculateTotalPrice();
     }
 
     public Renter getRenter() {
@@ -63,6 +90,7 @@ public class RentalAgreement {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+        calculateTotalPrice();
     }
 
     public LocalDate getEndDate() {
@@ -71,10 +99,11 @@ public class RentalAgreement {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+        calculateTotalPrice();
     }
 
-    //TODO add total price calculation based of subscription
     public double getTotalPrice() {
+        calculateTotalPrice();
         return totalPrice;
     }
 
