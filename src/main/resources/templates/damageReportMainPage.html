@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/damageReportMainPage.css">
+    <link rel="stylesheet" href="/css/headerRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/redirectBtnSmallFragment.css">
+</head>
+<body>
+<div class="header">
+    <img src="/images/Logo.png" alt="Logo" class="Logo">
+    <div class="btnChoice">
+        <div th:replace="~{fragments/headerRedirectBtnFragment :: headerRedirectBtnFragment(path='/damageReportMainpage', headerRedirectBtnText='SKADERAPPORT')}"></div>
+    </div>
+</div>
+<div class="Container-left">
+    <div class="damageReportFunctionsBtn">
+        <form action="/damageReportFunctions" method="get">
+            <div th:replace="~{fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment(name='damageReportFunction', value='create', redirectBtnSmallText='Opret Skaderapport')}"></div>
+        </form>
+    </div>
+    <div class="inner_container">
+        <div class="createDamageReport" th:if="${selectedContractFunction == 'create'}">
+            <form action="/createDamageReport" method="post">
+                <h2>Skaderapport</h2>
+                <label id="carIdLabel" for="carId">Bil ID:</label>
+                <input type="number" name="carId" id="carId" required><br>
+
+                <label id="creationDateLabel" for="creationDate">Oprettelsesdato:</label>
+                <input type="date" name="creationDate" id="creationDate" required>
+
+                <h3>Skader</h3>
+                <div id="damageSpecificationSection">
+                    <div>
+                        <label id="damageDescriptionsLabel" for="damageDescriptions">Skadebeskrivelse:</label>
+                        <input type="text" name="damageDescriptions[]" id="damageDescriptions" required>
+
+                        <label id="damagePricesLabel" for="damagePrices">Skadepris:</label>
+                        <input type="number" name="damagePrices[]" id="damagePrices" required>
+                    </div>
+                </div>
+                <input type="submit" value="Opret">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="Container-right"></div>
+</body>
+</html>

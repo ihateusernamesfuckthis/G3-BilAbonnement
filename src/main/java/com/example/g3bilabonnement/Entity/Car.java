@@ -34,7 +34,6 @@ public class Car {
         this.prePurchased = prePurchased;
         this.damageReport= damageReport;
     }
-
     public int getId() {
         return id;
     }

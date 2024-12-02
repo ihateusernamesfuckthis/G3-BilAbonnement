@@ -13,18 +13,18 @@ public class DamageReport {
     public DamageReport() {
     }
 
-    public DamageReport(Date creationDate, List<DamageSpecification> damageSpecifications, double totalDamagePrice, Car car) {
-        this.creationDate = LocalDate.now();;
+    public DamageReport(LocalDate creationDate, List<DamageSpecification> damageSpecifications, Car car) {
+        this.creationDate = creationDate;
         this.damageSpecifications = damageSpecifications;
-        this.totalDamagePrice = totalDamagePrice;
+        this.totalDamagePrice = calculateTotalDamagePrice();
         this.car = car;
     }
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate newCreationDate) {
-        this.creationDate = newCreationDate;
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public List<DamageSpecification> getDamageSpecification() {
@@ -36,6 +36,9 @@ public class DamageReport {
     }
 
     public double getTotalDamagePrice() {
+        return totalDamagePrice;
+    }
+    public double calculateTotalDamagePrice() {
         double total = 0.0;
         for (DamageSpecification d : damageSpecifications) {
             total += d.getDamagePrice();

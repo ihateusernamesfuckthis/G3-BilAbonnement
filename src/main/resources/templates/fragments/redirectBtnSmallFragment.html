@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/redirectBtnSmallFragment.css">
+</head>
+<body>
+<div th:fragment="redirectBtnSmallFragment(name, value, redirectBtnSmallText)" class="redirectBtnSmallFragment">
+    <button type="submit" th:name="${name}" th:value="${value}" class="redirectBtnSmallFragment">
+        <span th:text="${redirectBtnSmallText}" class="redirectBtnSmallText"></span>
+    </button>
+</div>
+</body>
+</html>
