@@ -4,9 +4,37 @@ public class FinalSettlement {
 
     int id;
     Car car;
+    RentalAgreement rentalAgreement;
     DamageReport damageReport;
-    Double totalMilage;
+    Double totalDamageReportPrice;
+    int totalKilometerDriven;
     Double totalPrice = 5000.0;
+
+    public FinalSettlement(){}
+
+    public Double getTotalDamageReportPrice() {
+        return totalDamageReportPrice;
+    }
+
+    public void setTotalDamageReportPrice(Double totalDamageReportPrice) {
+        this.totalDamageReportPrice = totalDamageReportPrice;
+    }
+
+    public int getTotalKilometerDriven() {
+        return totalKilometerDriven;
+    }
+
+    public void setTotalKilometerDriven(int totalKilometerDriven) {
+        this.totalKilometerDriven = totalKilometerDriven;
+    }
+
+    public RentalAgreement getRentalAgreement() {
+        return rentalAgreement;
+    }
+
+    public void setRentalAgreement(RentalAgreement rentalAgreement) {
+        this.rentalAgreement = rentalAgreement;
+    }
 
     public int getId() {
         return id;
@@ -32,13 +60,6 @@ public class FinalSettlement {
         this.damageReport = damageReport;
     }
 
-    public Double getTotalMilage() {
-        return totalMilage;
-    }
-
-    public void setTotalMilage(Double totalMilage) {
-        this.totalMilage = totalMilage;
-    }
 
     public Double getTotalPrice() {
         return totalPrice;
