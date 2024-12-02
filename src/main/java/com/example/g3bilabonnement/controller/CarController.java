@@ -1,6 +1,7 @@
 package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.helper.CarFilter;
 import com.example.g3bilabonnement.service.CarService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,13 @@ public class CarController {
 
     @PostMapping("/search")
     public String searchCarsWithCarId(@RequestParam String carVehicleNumber,Model model) {
-        List<Car> cars = carService.searchByVehicleNumber(carVehicleNumber);
+        CarFilter carFilter = new CarFilter("Klar til udlejning"); // Searching for available cars - how this is handled might need to change in this method
+        List<Car> cars = carService.searchByVehicleNumber(carVehicleNumber, carFilter);
         model.addAttribute("cars", cars);
+        model.addAttribute("currentLocation", "search");
         return "searchCar";
     }
 
-    //TODO What happens if this is called without return path @RequestParam(required = false) String returnPath
     @PostMapping("/return-car")
     public String searchCarResults(@RequestParam int carId, HttpSession session) {
         Car car = carService.getById(carId);

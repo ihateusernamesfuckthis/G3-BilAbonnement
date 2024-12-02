@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/searchCar.css">
     <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,5 +23,10 @@
         </div>
     </div>
 </form>
+
+<!-- Pop up message if the no cars found-->
+<div th:if="${cars != null && cars.size() == 0}">
+    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', ${currentLocation}, 'Ok')"></div>
+</div>
 </body>
 </html>

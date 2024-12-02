@@ -75,9 +75,9 @@
                 </div>
                 <div class="car-display-card__details-column">
                     <div class="car-display-card__detail-container">
-                        <div th:replace="~{fragments/logoFragment :: logo('equipment',20)}"></div>
-                        <span class="car-display-card__detail car-display-card__detail--equipment-level"
-                              th:text="${car.equipmentLevel}">Equipment Level</span>
+                        <div th:replace="~{fragments/logoFragment :: logo('status',20)}"></div>
+                        <span class="car-display-card__detail car-display-card__detail--status"
+                              th:text="${car.status}">Car Status</span>
                     </div>
                     <div class="car-display-card__detail-container">
                         <div th:replace="~{fragments/logoFragment :: logo('fuelType',20)}"></div>

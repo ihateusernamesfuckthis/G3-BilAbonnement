@@ -1,12 +1,14 @@
 package com.example.g3bilabonnement.repository;
 
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.helper.CarFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class CarRepository {
@@ -27,17 +29,27 @@ public class CarRepository {
         car.setNetPrice(rs.getDouble("net_price"));
         car.setRegistrationTax(rs.getDouble("registration_tax"));
         car.setCo2Emissions(rs.getDouble("co2_emissions"));
-        car.setCarStatus(rs.getString("car_status"));
+        car.setStatus(rs.getString("status"));
         return car;
     };
 
     public Car getById(int id) {
-        String sql = "SELECT * FROM car WHERE id = ?";
+        String sql = "SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE car.id = ?";
         return jdbcTemplate.queryForObject(sql, carRowMapper, id);
     }
 
-    public List<Car> searchByVehicleNumber(String vehicleNumber) {
-        String sql = "SELECT * FROM car WHERE vehicle_number like ?";
+    public List<Car> searchByVehicleNumber(String vehicleNumber, CarFilter carFilter) {
+        String sql = "SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE vehicle_number like ?";
+
+        if (!carFilter.status.isEmpty()) {
+            // Only include filter options if any are set
+            sql += " AND car_status.status = '" + carFilter.status + "'";
+        }
         return jdbcTemplate.query(sql, carRowMapper, '%' + vehicleNumber + '%');
+    }
+
+    public void updateCarStatus(Car car, String newStatus){
+        String sql = "UPDATE car SET car_status_id = (SELECT car_status.id FROM car_status WHERE status = ?) WHERE car.id = ?";
+        jdbcTemplate.update(sql, newStatus, car.getId());
     }
 }

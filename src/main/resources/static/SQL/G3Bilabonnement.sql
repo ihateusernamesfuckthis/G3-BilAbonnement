@@ -11,6 +11,12 @@ CREATE TABLE location
     zip_code VARCHAR(20)  NOT NULL
 );
 
+CREATE TABLE car_status
+(
+    id      INT AUTO_INCREMENT PRIMARY KEY,
+    status  VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE renter
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +46,9 @@ CREATE TABLE car
     net_price         DECIMAL(10, 2) NOT NULL,
     registration_tax  DECIMAL(10, 2) NOT NULL,
     co2_emissions     DECIMAL(10, 2),
-    car_status        VARCHAR(50)    NOT NULL
+    car_status_id     INT,
+    FOREIGN KEY (car_status_id) REFERENCES car_status (id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE subscription
@@ -78,6 +86,17 @@ INSERT INTO location (address, city, zip_code) VALUES
                                                    ('456 Maple Ave', 'Aarhus', '8000'),
                                                    ('789 Oak Blvd', 'Odense', '5000');
 
+INSERT INTO car_status (status)
+VALUES
+    ('Klar til udlejning'),
+    ('Udlejet'),
+    ('Skadet'),
+    ('Til reparation'),
+    ('Klar til transport'),
+    ('Klar til salg'),
+    ('Solgt');
+
+
 -- Inserting dummy data into `renter` table
 INSERT INTO renter (firstname, lastname, email, phone_number, cpr_number, reg_number, account_number, location_id) VALUES
                                                                                                                        ('John', 'Doe', 'john.doe@example.com', '1234567890', '1234567890', 'AB12345', '100012345', 1),
@@ -85,12 +104,11 @@ INSERT INTO renter (firstname, lastname, email, phone_number, cpr_number, reg_nu
                                                                                                                        ('Alice', 'Johnson', 'alice.johnson@example.com', '1122334455', '1122334455', 'EF98765', '100089234', 3);
 
 -- Inserting dummy data into `car` table
-INSERT INTO car (image_url, vehicle_number, vin_number, brand, model, equipment_level, power_source_type, transmission_type, net_price, registration_tax, co2_emissions, car_status) VALUES
-                                                                                                                                                                                         ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/ntvy28bwzctxshinupxz', 'AB123CD', '1HGBH41JXMN109186', 'Fiat', '500', 'Basic', 'Petrol', 'Manual', 15000.00, 500.00, 120.00, 'Available'),
-                                                                                                                                                                                         ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'EF456GH', '1HGBH41JXMN109187', 'Fiat', '500', 'Sport', 'Electric', 'Automatic', 25000.00, 600.00, 90.00, 'Available'),
-                                                                                                                                                                                         ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/jvlzzkgtqbydaika503u', 'IJ789KL', '1HGBH41JXMN109188', 'Fiat', '500c', 'Luxury', 'Hybrid', 'Automatic', 35000.00, 700.00, 80.00, 'Rented'),
-('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/jvlzzkgtqbydaika503u', 'AB789KL', '23123asdasd', 'Fiat', '500c', 'Luxury', 'Hybrid', 'Automatic', 35000.00, 700.00, 80.00, 'Rented'),
-('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/jvlzzkgtqbydaika503u', 'EF789KL', '1234fsasf2', 'Fiat', '500c', 'Luxury', 'Hybrid', 'Automatic', 35000.00, 700.00, 80.00, 'Rented');
+INSERT INTO car (image_url, vehicle_number, vin_number, brand, model, equipment_level, power_source_type, transmission_type, net_price, registration_tax, co2_emissions, car_status_id)
+VALUES
+    ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'VH12345', '1HGCM82633A123456', 'Toyota', 'Corolla', 'Standard', 'Gasoline', 'Automatic', 200000, 25000, 95, 1),
+    ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'VH67890', '1HGCM82633A654321', 'Ford', 'Focus', 'Luxury', 'Diesel', 'Manual', 250000, 30000, 120, 2),
+    ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'VH54321', '1HGCM82633A098765', 'Volkswagen', 'Golf', 'Premium', 'Electric', 'Automatic', 300000, 35000, 0, 4);
 
 -- Inserting dummy data into `subscription` table
 INSERT INTO subscription (base_price, subscription_type, allowed_km_per_month, pickup_location_id, return_location_id, price_per_month) VALUES
