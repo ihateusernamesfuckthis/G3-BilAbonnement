@@ -1,0 +1,106 @@
+<div th:fragment="car-display-card(car, customCssClass, selectable, showActions)"
+     class="car-display-card"
+     th:classappend="${selectable} ? 'car-display-card--selectable ' + ${customCssClass} : ${customCssClass}">
+
+    <!-- If car is available uses this-->
+    <div th:if="${car != null}">
+        <!-- If selectable uses this-->
+        <label th:if="${selectable}" class="car-display-card__select-label">
+            <input type="radio" name="carId" class="car-display-card__select-checkbox" th:value="${car.id}">
+            <div th:replace="~{fragments/carFragment :: car-display-card-inner(${car}, ${showActions})}"></div>
+        </label>
+
+        <!-- If not selectable uses this-->
+        <div th:if="${!selectable}">
+            <div th:replace="~{fragments/carFragment :: car-display-card-inner(${car}, ${showActions})}"></div>
+        </div>
+    </div>
+
+    <!-- If car is NOT available uses this and displays a grayed out template-->
+    <div th:if="${car == null}">
+        <div th:else class="car-display-card__inner card car-display-card__inner--placeholder">
+            <div class="car-display-card__image-section car-display-card__image-section--placeholder">
+                <div class="car-display-card__image-placeholder"></div>
+            </div>
+
+            <div class="car-display-card__details">
+                <div class="car-display-card__details-section">
+                    <div class="car-display-card__details-column">
+                        <div class="car-display-card__detail-placeholder car-display-card__detail-placeholder--large"></div>
+                        <div class="car-display-card__detail-placeholder car-display-card__detail-placeholder--small"></div>
+                    </div>
+                    <div class="car-display-card__details-column">
+                        <div class="car-display-card__detail-placeholder car-display-card__detail-placeholder--large"></div>
+                        <div class="car-display-card__detail-placeholder car-display-card__detail-placeholder--small"></div>
+                    </div>
+                </div>
+                <div class="car-display-card__details-section car-display-card__details-section--actions">
+                    <div class="car-display-card__actions">
+                        <div th:if="${showActions}"
+                             th:replace="~{fragments/logoButtonFragment :: logo-button('search', @{/car/search}, '1.5rem','rental-agreement-form-group-car-search-button')}"></div>
+                    </div>
+                    <div class="car-display-card__details-column">
+                        <div class="car-display-card__detail-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="car-display-card-inner(car, showActions)">
+    <div class="car-display-card__inner card">
+        <!-- Image Section -->
+        <div class="car-display-card__image-section">
+            <img th:src="${car.imageUrl}"
+                 th:alt="'Image of ' + ${car.brand} + ' ' + ${car.model}"
+                 class="car-display-card__image">
+        </div>
+
+        <!-- Details Section -->
+        <div class="car-display-card__details">
+            <!-- General Details -->
+            <div class="car-display-card__details-section">
+                <div class="car-display-card__details-column">
+                    <div class="car-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('car',20)}"></div>
+                        <span class="car-display-card__detail car-display-card__detail--brand-model"
+                              th:text="${car.brand} + ' ' + ${car.model}">Model and Brand</span>
+                    </div>
+                    <div class="car-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('licensePlate',20)}"></div>
+                        <span class="car-display-card__detail car-display-card__detail--vehicle-number"
+                              th:text="${car.vehicleNumber}">Vehicle Number</span>
+                    </div>
+                </div>
+                <div class="car-display-card__details-column">
+                    <div class="car-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('status',20)}"></div>
+                        <span class="car-display-card__detail car-display-card__detail--status"
+                              th:text="${car.status}">Car Status</span>
+                    </div>
+                    <div class="car-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('fuelType',20)}"></div>
+                        <span class="car-display-card__detail car-display-card__detail--power-transmission"
+                              th:text="${car.powerSourceType} + ' / ' + ${car.transmissionType}">Power Source and Transmission</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing and Actions -->
+            <div class="car-display-card__details-section car-display-card__details-section--actions">
+                <div class="car-display-card__actions">
+                    <div th:if="${showActions}">
+                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/car/search}, '1.5rem', 'car-display-card__actions-edit-button')}"></div>
+                    </div>
+                </div>
+                <div class="car-display-card__details-column car-display-card__detail--net-price">
+                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                    <span class="car-display-card__detail"
+                          th:text="${car.netPrice} + ' DKK'">Net Price</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

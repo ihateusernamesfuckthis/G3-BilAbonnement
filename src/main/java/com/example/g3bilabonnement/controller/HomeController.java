@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.Controller;
+package com.example.g3bilabonnement.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

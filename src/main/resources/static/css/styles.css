@@ -9,20 +9,23 @@
     --color-black: #101011;
     --color-border-focus: var(--color-black);
 
-    --font-family: Montserrat, sans-serif;
+    --font-family: Montserrat;
     --border-radius: 3px;
-    --button-border-radius: 1.5rem;
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* General Styles */
 body {
-    font-family: var(--font-family);
+    font-family: var(--font-family), sans-serif;
     background-color: var(--color-white);
     color: var(--color-border-focus);
-    margin: 0;
-    padding: 0;
     line-height: 1.6;
-    letter-spacing: 0.02rem;
 }
 
 /* Headings */
@@ -49,7 +52,7 @@ button, .button {
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
     padding: 0.5rem 1rem;
-    border-radius: var(--button-border-radius);
+    border-radius: 1.5rem;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -101,7 +104,11 @@ input:focus, select:focus, textarea:focus {
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
 }
 
 /* Tables */
@@ -126,6 +133,10 @@ tr:nth-child(even) {
 }
 
 /* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
 .text-center {
     text-align: center;
 }
@@ -141,3 +152,4 @@ tr:nth-child(even) {
 .p-1 {
     padding: 1rem;
 }
+

@@ -12,7 +12,7 @@
 <body>
 <div class="rental-agreement-container container">
     <div class="rental-agreement__title-container">
-        <h1 class="rental-agreement__title">Create Rental Agreement</h1><div th:replace="~{fragments/returnButtonFragment :: return-button(${returnPath})}"></div>
+        <h1 class="rental-agreement__title">Create Rental Agreement</h1><div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
     </div>
     <form class="rental-agreement__form" th:action="@{/rental-agreement/create}" th:method="post">
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'carId', 'Car id', 'form-group__car', true)}"></div>
