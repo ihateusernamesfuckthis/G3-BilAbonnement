@@ -2,26 +2,26 @@ package com.example.g3bilabonnement.entity;
 
 public class Subscription {
     private int id;
-    private double basePriceForCar;
+    private double baseSubscriptionPrice;
     private String subscriptionType;
     private int allowedKmPerMonth;
     private Location pickupLocation;
     private Location returnLocation;
-    private double pricePerMonth;
+    private double totalPricePerMonth;
 
     public Subscription() {
     }
 
-    public Subscription(int id, double basePriceForCar, String subscriptionType,
+    public Subscription(int id, double baseSubscriptionPrice, String subscriptionType,
                         int allowedKmPerMonth, Location pickupLocation, Location returnLocation,
-                        double pricePerMonth) {
+                        double totalPricePerMonth) {
         this.id = id;
-        this.basePriceForCar = basePriceForCar;
+        this.baseSubscriptionPrice = baseSubscriptionPrice;
         this.subscriptionType = subscriptionType;
         this.allowedKmPerMonth = allowedKmPerMonth;
         this.pickupLocation = pickupLocation;
         this.returnLocation = returnLocation;
-        this.pricePerMonth = pricePerMonth;
+        this.totalPricePerMonth = totalPricePerMonth;
     }
 
     public int getId() {
@@ -32,12 +32,12 @@ public class Subscription {
         this.id = id;
     }
 
-    public double getBasePriceForCar() {
-        return basePriceForCar;
+    public double getBaseSubscriptionPrice() {
+        return baseSubscriptionPrice;
     }
 
-    public void setBasePriceForCar(double basePriceForCar) {
-        this.basePriceForCar = basePriceForCar;
+    public void setBaseSubscriptionPrice(double baseSubscriptionPrice) {
+        this.baseSubscriptionPrice = baseSubscriptionPrice;
     }
 
     public String getSubscriptionType() {
@@ -72,11 +72,11 @@ public class Subscription {
         this.returnLocation = returnLocation;
     }
 
-    public double getPricePerMonth() {
-        return pricePerMonth;
+    public double getTotalPricePerMonth() {
+        return totalPricePerMonth;
     }
 
-    public void setPricePerMonth(double pricePerMonth) {
-        this.pricePerMonth = pricePerMonth;
+    public void setTotalPricePerMonth(double totalPricePerMonth) {
+        this.totalPricePerMonth = totalPricePerMonth;
     }
 }

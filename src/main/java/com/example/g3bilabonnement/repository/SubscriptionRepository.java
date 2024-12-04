@@ -1,7 +1,6 @@
 package com.example.g3bilabonnement.repository;
 
 import com.example.g3bilabonnement.entity.Location;
-import com.example.g3bilabonnement.entity.Renter;
 import com.example.g3bilabonnement.entity.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +15,7 @@ public class SubscriptionRepository {
     private final RowMapper<Subscription> subscriptionRowMapper = (rs, rowNum) -> {
         Subscription subscription = new Subscription();
         subscription.setId(rs.getInt("id"));
-        subscription.setBasePriceForCar(rs.getDouble("base_price"));
+        subscription.setBaseSubscriptionPrice(rs.getDouble("base_price"));
         subscription.setSubscriptionType(rs.getString("subscription_type"));
         subscription.setAllowedKmPerMonth(rs.getInt("allowed_km_per_month"));
         Location pickupLocation = new Location();
@@ -25,7 +24,7 @@ public class SubscriptionRepository {
         Location returnLocation = new Location();
         returnLocation.setId(rs.getInt("return_location_id"));
         subscription.setPickupLocation(returnLocation);
-        subscription.setPricePerMonth(rs.getDouble("price_per_month"));
+        subscription.setTotalPricePerMonth(rs.getDouble("price_per_month"));
         return subscription;
     };
 
