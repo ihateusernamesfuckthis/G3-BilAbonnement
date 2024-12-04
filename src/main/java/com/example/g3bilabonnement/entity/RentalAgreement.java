@@ -12,7 +12,24 @@ public class RentalAgreement {
     private LocalDate endDate;
     private double totalPrice;
 
+
     public RentalAgreement() {
+    }
+
+    public int calculateTotalMonths() {
+        int startYear = startDate.getYear();
+        int startMonth = startDate.getMonthValue();
+
+        int endYear = endDate.getYear();
+        int endMonth = endDate.getMonthValue();
+
+        int yearDifference = endYear - startYear;
+        int totalMonths = yearDifference * 12 + (endMonth - startMonth);
+
+        if (endDate.getDayOfMonth() > startDate.getDayOfMonth()) {
+            totalMonths++;
+        }
+        return totalMonths;
     }
 
     public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, LocalDate startDate, LocalDate endDate, double totalPrice) {

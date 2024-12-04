@@ -8,7 +8,9 @@ public class PurchaseAgreement {
 
     public PurchaseAgreement(){}
 
-    public PurchaseAgreement(int carId, String pickupLocation) {
+    public PurchaseAgreement(Car car, String pickupLocation) {
+        this.car = car;
+        this.pickUpLocation = pickupLocation;
     }
 
     public void calculateFinalPrice() {
@@ -25,7 +27,9 @@ public class PurchaseAgreement {
 
     public void setCar(Car car) {
         this.car = car;
-        calculateFinalPrice();
+        if (finalSettlement != null && finalSettlement.getDamageReport() != null) {
+            calculateFinalPrice(); // Kun udløs beregning, hvis alle data er klar
+        }
     }
 
     public FinalSettlement getFinalSettlement() {
@@ -34,7 +38,6 @@ public class PurchaseAgreement {
 
     public void setFinalSettlement(FinalSettlement finalSettlement) {
         this.finalSettlement = finalSettlement;
-        calculateFinalPrice();
     }
 
     public double getFinalPrice() {

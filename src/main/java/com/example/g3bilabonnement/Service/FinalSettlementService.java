@@ -11,7 +11,6 @@ public class FinalSettlementService {
     @Autowired
     private FinalSettlementRepository finalSettlementRepository;
 
-
     public void add(FinalSettlement finalSettlement){
         finalSettlementRepository.add(finalSettlement);
     }

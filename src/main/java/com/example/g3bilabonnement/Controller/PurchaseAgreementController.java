@@ -2,6 +2,7 @@ package com.example.g3bilabonnement.Controller;
 
 import com.example.g3bilabonnement.Service.PurchaseAgreementService;
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.FinalSettlement;
 import com.example.g3bilabonnement.entity.PurchaseAgreement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +31,19 @@ public class PurchaseAgreementController {
                                           @RequestParam("pickuplocation") String pickupLocation) {
 
         PurchaseAgreement purchaseAgreement = new PurchaseAgreement();
-
-        Car car = new Car();
-        car.setId(carId);
-        purchaseAgreement.setCar(car);
         purchaseAgreement.setPickUpLocation(pickupLocation);
 
+        purchaseAgreement.setCar(purchaseAgreementService.findCarById(carId)); //her indsættes den specifikke bil på købskontrakten
+
         FinalSettlement finalSettlement = new FinalSettlement();
+        finalSettlement.setId(1); // hardcoded placeholder værdi for test - hiv finalesettlement objektet fra databasen
+        DamageReport placeholderDamageReport = new DamageReport(); //instantiering af placeholder damage report
+        placeholderDamageReport.setId(0); // Placeholder ID
+        placeholderDamageReport.setTotalDamagePrice(0.0); //Placeholder samlet pris
+        finalSettlement.setDamageReport(placeholderDamageReport);
         purchaseAgreement.setFinalSettlement(finalSettlement);
 
-        purchaseAgreementService.add(purchaseAgreement);
+        purchaseAgreementService.add(purchaseAgreement, carId);
 
         return "redirect:/purchase-agreement/success";
     }

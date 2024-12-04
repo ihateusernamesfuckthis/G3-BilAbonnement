@@ -1,7 +1,7 @@
 package com.example.g3bilabonnement.Service;
 
 import com.example.g3bilabonnement.entity.Car;
-import com.example.g3bilabonnement.entity.FinalSettlement;
+import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.PurchaseAgreement;
 import com.example.g3bilabonnement.Repository.PurchaseAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,28 @@ public class PurchaseAgreementService {
     @Autowired
     private PurchaseAgreementRepository purchaseAgreementRepository;
 
+    public Car findCarById(int carId){
+        return purchaseAgreementRepository.findCarById(carId);
+    }
 
-    public void add (PurchaseAgreement purchaseAgreement) {
+
+    public void add (PurchaseAgreement purchaseAgreement, int carId) {
+
+
+        if(purchaseAgreement.getCar() == null){
+            throw new IllegalArgumentException(purchaseAgreement.getCar().getId() + "not found");
+        }
+
+        if (purchaseAgreement.getCar().getDamageReport() == null) { //placeholder damagereport
+            DamageReport placeholderDamageReport = new DamageReport();
+            placeholderDamageReport.setId(0); // Indikerer, at det er en placeholder
+            placeholderDamageReport.setTotalDamagePrice(1000.0); // Ingen skade
+            purchaseAgreement.getCar().setDamageReport(placeholderDamageReport);
+        }
 
 
         purchaseAgreementRepository.add(purchaseAgreement);
 
-        purchaseAgreementRepository.updateCarStatusToSold(purchaseAgreement.getCar().getId(), "sold");
+        //purchaseAgreementRepository.updateCarStatusToPrepurchased(purchaseAgreement.getCar().getId(), true);
     }
 }

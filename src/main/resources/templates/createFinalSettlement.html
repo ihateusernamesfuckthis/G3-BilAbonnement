@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret Slutopgørelse</title>
+</head>
+<body>
+<h1>Opret Slutopgørelsen</h1>
+<form action="/final-settlement/create" method="POST">
+    <label for="rentalAgreementId">Lejekontrakt id:</label>
+    <input type="text" id="rentalAgreementId" name="rentalAgreementId" required><br><br>
+
+    <label for="kilometersDriven">Antal kørte kilometer:</label>
+    <input type="int" id="kilometersDriven" name="kilometersDriven" required><br><br>
+
+    <button type="submit">Opret slutopgørelse</button>
+</form>
+</body>
+</html>
