@@ -4,6 +4,7 @@ import com.example.g3bilabonnement.Entity.Car;
 import com.example.g3bilabonnement.Entity.DamageReport;
 import com.example.g3bilabonnement.Entity.DamageSpecification;
 import com.example.g3bilabonnement.Service.DamageReportAndSpecificationService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +34,12 @@ public class DamageReportAndSpecificationController {
         return "damageReportMainPage";
     }
 
-    @PostMapping("/createDamageReport")
+   @PostMapping("/createDamageReport")
     public String createDamageReportWithSpecifications(
             @RequestParam int carId,
             @RequestParam LocalDate creationDate,
             @RequestParam List<String> damageDescriptions,
-            @RequestParam List<Double> damagePrices, Model model) {
+            @RequestParam List<Double> damagePrices) {
 
         DamageReport damageReport = new DamageReport();
         Car car = damageReportAndSpecificationService.getCarById(carId); // Jeg henter den indtastede bil
@@ -64,5 +65,4 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("damageReport", damageReport);
         return "createdDamageReportView";
     }
-
 }

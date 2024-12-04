@@ -1,0 +1,160 @@
+/* Define CSS Variables */
+:root {
+    --color-primary: #1892c3;
+    --color-secondary: #61c1d8;
+    --color-light-gray: #fafafa;
+    --color-darker-gray: #f2f2f2;
+    --color-white: #ffffff;
+    --color-border: #d9d9d9;
+    --color-black: #101011;
+    --color-border-focus: var(--color-black);
+
+    --font-family: Montserrat, sans-serif;
+    --border-radius: 3px;
+    --button-border-radius: 1.5rem;
+}
+
+/* General Styles */
+body {
+    font-family: var(--font-family);
+    background-color: rgb(186, 199, 208);
+    color: var(--color-border-focus);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    letter-spacing: 0.02rem;
+}
+.headerbox{
+    background-color: rgb(186, 199, 208);
+    width: 100%;
+    height: 170px;
+    position: relative;
+}
+.headerLogo{
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 70px;
+    width: auto;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+/* Links */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-secondary);
+}
+
+/* Buttons */
+button, .button {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--button-border-radius);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+button:hover, .button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+button:focus, .button:focus {
+    outline: none;
+    border-color: var(--color-border-focus);
+}
+
+/* Form Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-white);
+    font-size: 1rem;
+    font-weight: bold;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    padding: 0.2rem
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--color-border-focus);
+    outline: none;
+}
+
+.container {
+    padding: 35px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1315px;
+    height: auto;
+    left: 20px;
+    background-color: white;
+    position: absolute;
+    top: 180px;
+}
+
+.card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-darker-gray);
+    color: var(--color-border-focus);
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-light-gray);
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.p-1 {
+    padding: 1rem;
+}

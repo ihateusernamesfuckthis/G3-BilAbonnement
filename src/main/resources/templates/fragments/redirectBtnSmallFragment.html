@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
 </head>
 <body>
 <div th:fragment="redirectBtnSmallFragment(name, value, redirectBtnSmallText)" class="redirectBtnSmallFragment">
-    <button type="submit" th:name="${name}" th:value="${value}" class="redirectBtnSmallFragment">
+    <button type="submit" th:name="${name}" th:value="${value}">
         <span th:text="${redirectBtnSmallText}" class="redirectBtnSmallText"></span>
     </button>
 </div>

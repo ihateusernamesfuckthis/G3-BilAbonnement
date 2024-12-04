@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
+</head>
+<body>
+<div th:fragment="headerChosenRedirectBtnFragment(path, headerChosenRedirectBtnText)" class="headerChosenRedirectBtnFragment">
+    <a th:href="@{${path}}" style="text-decoration: none;">
+        <span th:text="${headerChosenRedirectBtnText}" class="headerChosenRedirectBtnText"></span>
+    </a>
+</div>
+</body>
+</html>

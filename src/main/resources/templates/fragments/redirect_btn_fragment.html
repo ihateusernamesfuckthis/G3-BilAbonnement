@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"  href="/css/fragments/redirect_btn.css">
+</head>
+<body>
+<div th:fragment="redirectBtn(path, redirectBtnText)" class="redirectBtn">
+    <a th:href="${path}" style="text-decoration: none;">
+        <span th:text="${redirectBtnText}" class="redirectBtnText"></span>
+    </a>
+</div>
+</body>
+</html>
+</body>
+</html>

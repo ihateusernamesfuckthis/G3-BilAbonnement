@@ -3,11 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
-    <link rel="stylesheet" href="/css/headerRedirectBtnFragment.css">
-    <link rel="stylesheet" href="/css/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
 </head>
 <body>
+<div class="headerbox">
+    <img src="/images/Logo.png" alt="Logo" class="headerLogo">
+    <div class="btnChoice">
+        <div th:replace="~{fragments/headerChosenRedirectBtnFragment :: headerChosenRedirectBtnFragment(path='/damageReportMainpage', headerChosenRedirectBtnText='SKADERAPPORT')}"></div>
+        <span class="separator"> | </span>
+        <div th:replace="~{fragments/headerRedirectBtnFragment :: headerRedirectBtnFragment(path='/damageReportMainpage', headerRedirectBtnText='BIL')}"></div>
+    </div>
+    <div class="damageReportFunctionsBtn">
+        <form action="/damageReportFunctions" method="get">
+            <div th:replace="~{fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment(name='damageReportFunction', value='create', redirectBtnSmallText='Opret Skaderapport')}"></div>
+        </form>
+    </div>
+</div>
+<div class="container">
+            <div th:if="${damageReport != null}">
+                <h2>Oprettet Skaderapport</h2>
+                <p class="creationDate">Dato for oprettelse: <span th:text="${damageReport.creationDate}"></span></p>
+                <div class="carDetails">
+                    <p><strong>Bil ID:</strong> <span th:text="${damageReport.car.id}"></span></p>
+                    <p><strong>Vognnummer:</strong> <span th:text="${damageReport.car.vehicleNumber}"></span></p>
+                    <p><strong>Stelnummer:</strong> <span th:text="${damageReport.car.vinNumber}"></span></p>
+                    <p><strong>Status:</strong> <span th:text="${damageReport.car.carStatus}"></span></p>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Skadebeskrivelse</th>
+                        <th>Skadepris</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Karosseriskader</td>
+                        <td th:text="${damageReport.damageSpecifications[0]?.damageDescription}">Skadebeskrivelse</td>
+                        <td th:text="${damageReport.damageSpecifications[0]?.damagePrice}">Skadepris</td>
+                    </tr>
+                    <tr>
+                        <td>Glas-og lygteskader</td>
+                        <td th:text="${damageReport.damageSpecifications[1]?.damageDescription}">Skadebeskrivelse</td>
+                        <td th:text="${damageReport.damageSpecifications[1]?.damagePrice}">Skadepris</td>
+                    </tr>
+                    <tr>
+                        <td>Hjul- og dækskader</td>
+                        <td th:text="${damageReport.damageSpecifications[2]?.damageDescription}">Skadebeskrivelse</td>
+                        <td th:text="${damageReport.damageSpecifications[2]?.damagePrice}">Skadepris</td>
+                    </tr>
+                    <tr>
+                        <td>Interiørskader</td>
+                        <td th:text="${damageReport.damageSpecifications[3]?.damageDescription}">Skadebeskrivelse</td>
+                        <td th:text="${damageReport.damageSpecifications[3]?.damagePrice}">Skadepris</td>
+                    </tr>
+                    <tr>
+                        <td>Mekaniske og tekniske skader</td>
+                        <td th:text="${damageReport.damageSpecifications[4]?.damageDescription}">Skadebeskrivelse</td>
+                        <td th:text="${damageReport.damageSpecifications[4]?.damagePrice}">Skadepris</td>
+                    </tr>
+                    <tr>
+                        <td>Andet</td>
+                        <td th:text="${damageReport.damageSpecifications[5]?.damageDescription}">Skadebeskrivelse</td>
+                        <td th:text="${damageReport.damageSpecifications[5]?.damagePrice}">Skadepris</td>
+                    </tr>
 
+                    <tr>
+                        <td><strong>Total:</strong></td>
+                        <td></td>
+                        <td th:text="${damageReport.calculateTotalDamagePrice()}">Totalpris</td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
 </body>
 </html>

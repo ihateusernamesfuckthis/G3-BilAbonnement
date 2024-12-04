@@ -1,16 +1,15 @@
-.headerRedirectBtnFragment {
-    background-color: rgba(3, 52, 70, 0.35);
+.headerChosenRedirectBtnFragment {
     border: none;
     height: 25px;
     width: 200px;
-    border-radius: 3px;
-    padding: 10px;
     text-align: center;
+    justify-content: center;
+    display: inline-block;
 }
-.headerRedirectBtnText{
+.headerChosenRedirectBtnText{
     font-family: "Montserrat" , sans-serif;
     font-weight: bold;
     color: white;
     font-size: 20px;
-    display: block;
+    background-color: rgb(138, 158, 173);
 }

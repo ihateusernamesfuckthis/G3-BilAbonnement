@@ -1,0 +1,22 @@
+.redirectBtnSmallFragment{
+    padding: 5px;
+    background-color: #b9b9b9;
+    width: 210px;
+    height: 50px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.3s;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color: black;
+}
+
+.redirectBtnSmallFragment:hover {
+    font-weight: bold;
+    background-color: lightgrey;
+}
+.redirectBtnSmallFragment > button{
+    all:unset;
+}

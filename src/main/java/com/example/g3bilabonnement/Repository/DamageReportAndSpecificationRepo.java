@@ -27,7 +27,7 @@ public class DamageReportAndSpecificationRepo {
                 int carId = rs.getInt("carId");
                 Car car = carRepo.getCarById(carId);  //Her bruger jeg CarRepo til at hente Car objektet
                 damageReport.setCar(car);
-
+                damageReport.setCreationDate(creationDate);
                 return damageReport;
             }
         };

@@ -27,7 +27,7 @@ public class DamageReport {
         this.creationDate = creationDate;
     }
 
-    public List<DamageSpecification> getDamageSpecification() {
+    public List<DamageSpecification> getDamageSpecifications() {
         return damageSpecifications;
     }
 
