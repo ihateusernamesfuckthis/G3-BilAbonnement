@@ -29,7 +29,18 @@ body {
     flex-direction: column;
 }
 
+.rental-agreement__form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
 .form-group__submit-button {
     margin-top: 20px;
+}
+
+.rental-agreement-form-group-car-search-button {
+    align-self: flex-end;
 }
 
