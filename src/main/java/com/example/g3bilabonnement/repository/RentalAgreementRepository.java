@@ -43,12 +43,14 @@ public class RentalAgreementRepository {
 //    }
 
     public void add(RentalAgreement rentalAgreement) {
-        String sql = "INSERT INTO rental_agreement (car_id, subscription_id, renter_id, start_date, end_date) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO rental_agreement (car_id, subscription_id, renter_id, pickup_location_id, return_location_id ,start_date, end_date) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
                 rentalAgreement.getCar().getId(),
                 rentalAgreement.getSubscription().getId(),
                 rentalAgreement.getRenter().getId(),
+                rentalAgreement.getPickupLocation().getId(),
+                rentalAgreement.getReturnLocation().getId(),
                 rentalAgreement.getStartDate(),
                 rentalAgreement.getEndDate());
     }
