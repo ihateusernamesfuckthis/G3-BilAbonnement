@@ -24,11 +24,9 @@ public class DamageReportRepo {
                 DamageReport damageReport = new DamageReport();
                 LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
                 int carId = rs.getInt("carId");
-
-                Car car = new Car();// Her sætte jeg IDét i et car objekt.
+                Car car = new Car();// Her sætter jeg IDét i et car objekt.
                 car.setId(carId);
                 damageReport.setCar(car);
-
                 damageReport.setCreationDate(creationDate);
                 return damageReport;
             }

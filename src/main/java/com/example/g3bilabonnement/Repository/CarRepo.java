@@ -19,6 +19,7 @@ public class CarRepo {
             public Car mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Car car = new Car(); //Jeg laver et nyt car objekt og efterfølgende adder jeg dataen fra hver kolonne til objektets fields.
                 car.setId(rs.getInt("id"));
+                car.setImageUrl(rs.getString("image_url"));
                 car.setVehicleNumber(rs.getString("vehicle_number"));
                 car.setVinNumber(rs.getString("vin_number"));
                 car.setBrand(rs.getString("brand"));
@@ -29,19 +30,14 @@ public class CarRepo {
                 car.setNetPrice(rs.getDouble("net_price"));
                 car.setRegistrationTax(rs.getDouble("registration_tax"));
                 car.setCo2Emissions(rs.getDouble("co2_emissions"));
-                car.setCarStatus(rs.getString("status"));// car_status fra car_status tabellen
+                car.setCarStatus(rs.getString("car_status_id"));// car_status fra car_status tabellen
 
                 return car;
             }
         };
     }
     public Car getCarById(int id) {
-        String getCarByIdsql="""
-        SELECT car.*, car_status.status
-        FROM car
-        JOIN car_status ON car.car_status_id = car_status.id
-        WHERE car.id = ?;
-        """;
+        String getCarByIdsql="SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE car.id = ?";;
         return template.queryForObject(getCarByIdsql, new Object[]{id}, getCarWithRowMapper());
     }
 }

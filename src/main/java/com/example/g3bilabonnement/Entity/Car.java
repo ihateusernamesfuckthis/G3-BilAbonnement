@@ -2,6 +2,7 @@ package com.example.g3bilabonnement.Entity;
 
 public class Car {
     private int id;
+    private String imageUrl;
     private String vehicleNumber;
     private String vinNumber;
     private String brand;
@@ -13,13 +14,12 @@ public class Car {
     private double registrationTax;
     private double co2Emissions;
     private String carStatus;
-    private boolean prePurchased;
-    private DamageReport damageReport;
-
-    public Car(){
+    public Car() {
     }
-    public Car(int id, String vehicleNumber, String vinNumber, String brand, String model, String equipmentLevel, String powerSourceType, String transmissionType, double netPrice, double registrationTax, double co2Emissions, String carStatus, boolean prePurchased, DamageReport damageReport) {
+
+    public Car(int id, String imageUrl, String vehicleNumber, String vinNumber, String brand, String model, String equipmentLevel, String powerSourceType, String transmissionType, double netPrice, double registrationTax, double co2Emissions, String carStatus) {
         this.id = id;
+        this.imageUrl = imageUrl;
         this.vehicleNumber = vehicleNumber;
         this.vinNumber = vinNumber;
         this.brand = brand;
@@ -31,15 +31,22 @@ public class Car {
         this.registrationTax = registrationTax;
         this.co2Emissions = co2Emissions;
         this.carStatus = carStatus;
-        this.prePurchased = prePurchased;
-        this.damageReport= damageReport;
     }
+
     public int getId() {
         return id;
     }
 
     public void setId(int newId) {
         this.id = newId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String newImageUrl) {
+        this.imageUrl = newImageUrl;
     }
 
     public String getVehicleNumber() {
@@ -130,18 +137,4 @@ public class Car {
         this.carStatus = newCarStatus;
     }
 
-    public boolean getPrePurchased() {
-        return prePurchased;
-    }
-
-    public void setPrePurchased( boolean newPrePurchased) {
-        this.prePurchased = newPrePurchased;
-    }
-    public DamageReport getDamageReport() {
-        return damageReport;
-    }
-
-    public void setDamageReport(DamageReport newDamageReport) {
-        this.damageReport = newDamageReport;
-    }
 }

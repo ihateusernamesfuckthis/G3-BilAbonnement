@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class CarService {
     @Autowired
     CarRepo carRepo;
-    public Car getCarById(int carId) {
-        return carRepo.getCarById(carId);//Her finder jeg bil på bilens id
+    public Car getCarById(int id) {
+        return carRepo.getCarById(id);//Her finder jeg bil på bilens id
     }
 }

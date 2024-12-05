@@ -4,7 +4,8 @@ import com.example.g3bilabonnement.Entity.Car;
 import com.example.g3bilabonnement.Entity.DamageReport;
 import com.example.g3bilabonnement.Entity.DamageSpecification;
 import com.example.g3bilabonnement.Service.CarService;
-import com.example.g3bilabonnement.Service.DamageReportAndSpecificationService;
+import com.example.g3bilabonnement.Service.DamageReportService;
+import com.example.g3bilabonnement.Service.DamageSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,11 @@ import java.util.List;
 @Controller
 public class DamageReportAndSpecificationController {
     @Autowired
-    DamageReportAndSpecificationService damageReportAndSpecificationService;
+    private CarService carService;
     @Autowired
-    CarService carService;
+    private DamageReportService damageReportService;
+    @Autowired
+    private DamageSpecificationService damageSpecificationService;
     @GetMapping("/damageReportMainPage")
     public String damageReportMainPage() {
         //Her kan biler evt. listes?
@@ -46,7 +49,7 @@ public class DamageReportAndSpecificationController {
         Car car = carService.getCarById(carId); // Jeg henter den indtastede bil
         damageReport.setCar(car); //Jeg sætter car objektet i damagereport til car
         damageReport.setCreationDate(creationDate);
-        int damageReportId = damageReportAndSpecificationService.createDamageReport(damageReport); //Her gemmes skaderapporten og id til den gemt skadesrapport returneres.
+        int damageReportId = damageReportService.createDamageReport(damageReport); //Her gemmes skaderapporten og id til den gemt skadesrapport returneres.
 
         List<DamageSpecification> specifications = new ArrayList<>();// Her opretter jeg en liste med specifikationer
         for (int i = 0; i < damageDescriptions.size(); i++) {
@@ -55,15 +58,18 @@ public class DamageReportAndSpecificationController {
             ds.setDamagePrice(damagePrices.get(i));
             specifications.add(ds);
         }
-
-        damageReportAndSpecificationService.createDamageSpecificationsForReport(specifications, damageReportId);
+        damageSpecificationService.createDamageSpecifications(specifications, damageReportId);
         return "redirect:/createdDamageReportView?damageReportId=" + damageReportId;
     }
 
     @GetMapping("/createdDamageReportView")
     public String viewDamageReport(@RequestParam int damageReportId, Model model) {
-        DamageReport damageReport = damageReportAndSpecificationService.getDamageReportWithSpecifications(damageReportId);
-        model.addAttribute("damageReport", damageReport);
-        return "createdDamageReportView";
+            DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
+
+            List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReportId);
+            damageReport.setDamageSpecifications(damageSpecifications);
+
+            model.addAttribute("damageReport", damageReport);
+            return "createdDamageReportView";
+        }
     }
-}
