@@ -1,16 +1,9 @@
-package com.example.g3bilabonnement.Repository;
+package com.example.g3bilabonnement.repository;
 
-import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.RentalAgreement;
-import com.example.g3bilabonnement.entity.Renter;
-import com.example.g3bilabonnement.entity.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 public class RentalAgreementRepository {

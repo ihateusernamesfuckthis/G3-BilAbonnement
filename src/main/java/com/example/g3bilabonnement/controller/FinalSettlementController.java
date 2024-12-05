@@ -1,7 +1,6 @@
 package com.example.g3bilabonnement.Controller;
 
-import com.example.g3bilabonnement.Repository.FinalSettlementRepository;
-import com.example.g3bilabonnement.Service.FinalSettlementService;
+import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

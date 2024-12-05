@@ -1,6 +1,6 @@
-package com.example.g3bilabonnement.Service;
+package com.example.g3bilabonnement.service;
 
-import com.example.g3bilabonnement.Repository.FinalSettlementRepository;
+import com.example.g3bilabonnement.repository.FinalSettlementRepository;
 import com.example.g3bilabonnement.entity.FinalSettlement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

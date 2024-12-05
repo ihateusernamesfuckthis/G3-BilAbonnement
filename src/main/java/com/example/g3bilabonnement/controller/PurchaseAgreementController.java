@@ -1,7 +1,6 @@
 package com.example.g3bilabonnement.Controller;
 
-import com.example.g3bilabonnement.Service.PurchaseAgreementService;
-import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.service.PurchaseAgreementService;
 import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.FinalSettlement;
 import com.example.g3bilabonnement.entity.PurchaseAgreement;

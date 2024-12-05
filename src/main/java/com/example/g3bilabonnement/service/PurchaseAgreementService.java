@@ -1,9 +1,9 @@
-package com.example.g3bilabonnement.Service;
+package com.example.g3bilabonnement.service;
 
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.PurchaseAgreement;
-import com.example.g3bilabonnement.Repository.PurchaseAgreementRepository;
+import com.example.g3bilabonnement.repository.PurchaseAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

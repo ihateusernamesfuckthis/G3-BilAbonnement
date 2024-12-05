@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.Repository;
+package com.example.g3bilabonnement.repository;
 
 import com.example.g3bilabonnement.entity.FinalSettlement;
 import com.example.g3bilabonnement.entity.RentalAgreement;

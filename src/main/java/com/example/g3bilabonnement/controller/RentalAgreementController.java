@@ -4,7 +4,7 @@ import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.RentalAgreement;
 import com.example.g3bilabonnement.entity.Renter;
 import com.example.g3bilabonnement.entity.Subscription;
-import com.example.g3bilabonnement.Service.RentalAgreementService;
+import com.example.g3bilabonnement.service.RentalAgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/rental-agreement")
