@@ -2,6 +2,7 @@ package com.example.g3bilabonnement.entity;
 
 public class Car {
     private int id;
+    private String imageUrl = "";
     private String vehicleNumber;
     private String vinNumber;
     private String brand;
@@ -16,6 +17,18 @@ public class Car {
     private boolean prePurchased;
     private DamageReport damageReport;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setDamageReport(DamageReport damageReport) {
+        this.damageReport = damageReport;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -28,9 +41,23 @@ public class Car {
         return damageReport;
     }
 
-    public void setDamageReport(DamageReport damageReport) {
-        this.damageReport = damageReport;
+    public Car(int id, String imageUrl, String vehicleNumber, String vinNumber, String brand, String model, String equipmentLevel, String powerSourceType, String transmissionType, double netPrice, double registrationTax, double co2Emissions, String status) {
+        this.id = id;
+        this.imageUrl = imageUrl;
+        this.vehicleNumber = vehicleNumber;
+        this.vinNumber = vinNumber;
+        this.brand = brand;
+        this.model = model;
+        this.equipmentLevel = equipmentLevel;
+        this.powerSourceType = powerSourceType;
+        this.transmissionType = transmissionType;
+        this.netPrice = netPrice;
+        this.registrationTax = registrationTax;
+        this.co2Emissions = co2Emissions;
+        this.status = status;
     }
+
+    public Car(){}
 
     public int getId() {
         return id;
@@ -128,7 +155,3 @@ public class Car {
         this.prePurchased = prePurchased;
     }
 }
-
-
-
-

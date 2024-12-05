@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.repository;
+package com.example.g3bilabonnement.Repository;
 
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.RentalAgreement;
@@ -29,5 +29,6 @@ public class RentalAgreementRepository {
                 rentalAgreement.getStartDate(),
                 rentalAgreement.getEndDate());
     }
+
 
 }

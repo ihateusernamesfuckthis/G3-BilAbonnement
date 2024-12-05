@@ -16,6 +16,16 @@ public class RentalAgreement {
     public RentalAgreement() {
     }
 
+    public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, LocalDate startDate, LocalDate endDate, double totalPrice) {
+        this.id = id;
+        this.car = car;
+        this.subscription = subscription;
+        this.renter = renter;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.totalPrice = totalPrice;
+    }
+
     public int calculateTotalMonths() {
         int startYear = startDate.getYear();
         int startMonth = startDate.getMonthValue();
@@ -32,14 +42,14 @@ public class RentalAgreement {
         return totalMonths;
     }
 
-    public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, LocalDate startDate, LocalDate endDate, double totalPrice) {
-        this.id = id;
-        this.car = car;
-        this.subscription = subscription;
-        this.renter = renter;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.totalPrice = totalPrice;
+    public void calculateTotalPrice(){
+        // only try to calculate the total price if both dates and subscription are not null to avoid errors
+        if (startDate == null || endDate == null || subscription == null) {
+            return;
+        }
+        int months = calculateTotalMonths();
+        double pricePerMonth = subscription.getTotalPricePerMonth();
+        this.totalPrice = pricePerMonth * months;
     }
 
     public int getId() {
@@ -64,6 +74,7 @@ public class RentalAgreement {
 
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
+        calculateTotalPrice();
     }
 
     public Renter getRenter() {
@@ -80,6 +91,7 @@ public class RentalAgreement {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+        calculateTotalPrice();
     }
 
     public LocalDate getEndDate() {
@@ -88,10 +100,11 @@ public class RentalAgreement {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+        calculateTotalPrice();
     }
 
-    //TODO add total price calculation based of subscription
     public double getTotalPrice() {
+        calculateTotalPrice();
         return totalPrice;
     }
 

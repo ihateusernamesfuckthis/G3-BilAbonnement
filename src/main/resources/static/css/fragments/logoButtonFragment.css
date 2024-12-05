@@ -1,0 +1,4 @@
+.logo-button:hover svg {
+    stroke-width: 2px;
+    stroke: var(--color-primary);
+}

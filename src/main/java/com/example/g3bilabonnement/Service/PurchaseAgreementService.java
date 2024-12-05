@@ -35,6 +35,5 @@ public class PurchaseAgreementService {
 
         purchaseAgreementRepository.add(purchaseAgreement);
 
-        //purchaseAgreementRepository.updateCarStatusToPrepurchased(purchaseAgreement.getCar().getId(), true);
     }
 }

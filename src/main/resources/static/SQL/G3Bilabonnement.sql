@@ -14,7 +14,13 @@ CREATE TABLE Location
     zip_code VARCHAR(20)  NOT NULL
 );
 
-CREATE TABLE Renter
+CREATE TABLE car_status
+(
+    id      INT AUTO_INCREMENT PRIMARY KEY,
+    status  VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE renter
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     firstname      VARCHAR(100) NOT NULL,
@@ -32,6 +38,7 @@ CREATE TABLE Renter
 CREATE TABLE Car
 (
     id                INT AUTO_INCREMENT PRIMARY KEY,
+    image_url         VARCHAR(255),
     vehicle_number    VARCHAR(20)    NOT NULL UNIQUE,
     vin_number        VARCHAR(50)    NOT NULL UNIQUE,
     brand             VARCHAR(50)    NOT NULL,
@@ -42,7 +49,9 @@ CREATE TABLE Car
     net_price         DECIMAL(10, 2) NOT NULL,
     registration_tax  DECIMAL(10, 2) NOT NULL,
     co2_emissions     DECIMAL(10, 2),
-    car_status        VARCHAR(50)    NOT NULL
+    car_status_id     INT,
+    FOREIGN KEY (car_status_id) REFERENCES car_status (id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE Subscription
