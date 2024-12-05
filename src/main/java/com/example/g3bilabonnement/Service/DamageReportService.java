@@ -21,6 +21,8 @@ public class DamageReportService {
     }
 
     public DamageReport getDamageReportById(int damageReportId) {
-        DamageReport damageReportRepo= damageReportRepo.getDamageReportById(damageReportId);
+        DamageReport damageReport= damageReportRepo.getDamageReportById(damageReportId);
+        damageReport.setCar(carRepo.getCarById(damageReport.getCar().getId()));
+        return damageReport;
     }
 }

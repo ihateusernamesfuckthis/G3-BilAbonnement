@@ -30,7 +30,7 @@ public class CarRepo {
                 car.setNetPrice(rs.getDouble("net_price"));
                 car.setRegistrationTax(rs.getDouble("registration_tax"));
                 car.setCo2Emissions(rs.getDouble("co2_emissions"));
-                car.setCarStatus(rs.getString("car_status_id"));// car_status fra car_status tabellen
+                car.setCarStatus(rs.getString("status"));// car_status fra car_status tabellen
 
                 return car;
             }
