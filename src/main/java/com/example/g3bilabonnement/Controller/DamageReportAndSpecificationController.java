@@ -3,8 +3,8 @@ package com.example.g3bilabonnement.Controller;
 import com.example.g3bilabonnement.Entity.Car;
 import com.example.g3bilabonnement.Entity.DamageReport;
 import com.example.g3bilabonnement.Entity.DamageSpecification;
+import com.example.g3bilabonnement.Service.CarService;
 import com.example.g3bilabonnement.Service.DamageReportAndSpecificationService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,8 @@ import java.util.List;
 public class DamageReportAndSpecificationController {
     @Autowired
     DamageReportAndSpecificationService damageReportAndSpecificationService;
-
+    @Autowired
+    CarService carService;
     @GetMapping("/damageReportMainPage")
     public String damageReportMainPage() {
         //Her kan biler evt. listes?
@@ -42,7 +43,7 @@ public class DamageReportAndSpecificationController {
             @RequestParam List<Double> damagePrices) {
 
         DamageReport damageReport = new DamageReport();
-        Car car = damageReportAndSpecificationService.getCarById(carId); // Jeg henter den indtastede bil
+        Car car = carService.getCarById(carId); // Jeg henter den indtastede bil
         damageReport.setCar(car); //Jeg sætter car objektet i damagereport til car
         damageReport.setCreationDate(creationDate);
         int damageReportId = damageReportAndSpecificationService.createDamageReport(damageReport); //Her gemmes skaderapporten og id til den gemt skadesrapport returneres.

@@ -1,7 +1,6 @@
 package com.example.g3bilabonnement.Repository;
 import com.example.g3bilabonnement.Entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -30,14 +29,19 @@ public class CarRepo {
                 car.setNetPrice(rs.getDouble("net_price"));
                 car.setRegistrationTax(rs.getDouble("registration_tax"));
                 car.setCo2Emissions(rs.getDouble("co2_emissions"));
-                car.setCarStatus(rs.getString("car_status"));
+                car.setCarStatus(rs.getString("status"));// car_status fra car_status tabellen
 
                 return car;
             }
         };
     }
     public Car getCarById(int id) {
-        String getCarByIdsql="SELECT * FROM car WHERE id= ?";
+        String getCarByIdsql="""
+        SELECT car.*, car_status.status
+        FROM car
+        JOIN car_status ON car.car_status_id = car_status.id
+        WHERE car.id = ?;
+        """;
         return template.queryForObject(getCarByIdsql, new Object[]{id}, getCarWithRowMapper());
     }
 }
