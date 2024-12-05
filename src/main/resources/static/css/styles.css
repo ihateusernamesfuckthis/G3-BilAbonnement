@@ -9,9 +9,15 @@
     --color-black: #101011;
     --color-border-focus: var(--color-black);
 
-    --font-family: Montserrat, sans-serif;
+    --font-family: Montserrat;
     --border-radius: 3px;
-    --button-border-radius: 1.5rem;
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* General Styles */
@@ -121,6 +127,11 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
 /* Tables */
 table {
     width: 100%;
@@ -143,6 +154,10 @@ tr:nth-child(even) {
 }
 
 /* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
 .text-center {
     text-align: center;
 }

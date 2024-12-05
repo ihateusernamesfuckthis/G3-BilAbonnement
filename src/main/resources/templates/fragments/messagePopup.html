@@ -1,0 +1,8 @@
+<!-- fragments/messagePopup.html -->
+<!-- type = success, failure, info -->
+<div th:fragment="popup-message(type, message, redirect, redirectText)" class="popup-message">
+    <div class="popup-message__container " th:classappend="'popup-message__container--' + ${type}">
+        <p class="popup-message__text" th:text="${message}"></p>
+        <a class="popup-message__back-button" th:href="${redirect}" role="button" th:text="${redirectText}">Go Back</a>
+    </div>
+</div>
