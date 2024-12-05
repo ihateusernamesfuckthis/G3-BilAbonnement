@@ -68,4 +68,8 @@ public class RentalAgreementRepository {
 //    public void delete(int id) {
 //        jdbcTemplate.update("DELETE FROM Artist WHERE ArtistID = ?", id);
 //    }
+public List<Integer> getCarIdsFromExpiredRentalAgreements() {
+    String sql = "SELECT car_id FROM rental_agreement WHERE end_date < ?";
+    return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
+}
 }

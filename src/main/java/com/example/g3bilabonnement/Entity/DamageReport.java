@@ -1,4 +1,4 @@
-package com.example.g3bilabonnement.Entity;
+package com.example.g3bilabonnement.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

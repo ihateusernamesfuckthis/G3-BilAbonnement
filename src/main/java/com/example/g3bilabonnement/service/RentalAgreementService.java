@@ -5,6 +5,8 @@ import com.example.g3bilabonnement.repository.RentalAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RentalAgreementService {
 
@@ -17,5 +19,8 @@ public class RentalAgreementService {
     public void add(RentalAgreement rentalAgreement) {
         rentalAgreementRepository.add(rentalAgreement);
         carService.updateCarStatus(rentalAgreement.getCar(), "Udlejet");
+    }
+    public List<Integer> getCarsWithExpiredRentalAgreements() {
+        return rentalAgreementRepository.getCarIdsWithExpiredRentalAgreements();  // Kalder repository-metoden
     }
 }
