@@ -18,8 +18,8 @@ public class CarService {
         return carRepository.getById(id);
     }
 
-    public List<Car> searchByVehicleNumber(String vehicleNumber, CarFilter carFilter) {
-        return carRepository.searchByVehicleNumber(vehicleNumber, carFilter);
+    public List<Car> searchByFilter(CarFilter carFilter) {
+        return carRepository.searchByFilter(carFilter);
     }
 
     public void updateCarStatus(Car car, String newStatus){
