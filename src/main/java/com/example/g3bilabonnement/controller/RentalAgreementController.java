@@ -1,9 +1,6 @@
 package com.example.g3bilabonnement.controller;
 
-import com.example.g3bilabonnement.entity.Car;
-import com.example.g3bilabonnement.entity.RentalAgreement;
-import com.example.g3bilabonnement.entity.Renter;
-import com.example.g3bilabonnement.entity.Subscription;
+import com.example.g3bilabonnement.entity.*;
 import com.example.g3bilabonnement.service.RentalAgreementService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,12 @@ public class RentalAgreementController {
     public String createRentalAgreement(@RequestParam("carId") int carId,
                                         @RequestParam("renterId") int renterId,
                                         @RequestParam("subscriptionId") int subscriptionId,
+                                        @RequestParam("pickupLocationAddress") String pickupLocationAddress,
+                                        @RequestParam("pickupLocationZipcode") String pickupLocationZipcode,
+                                        @RequestParam("pickupLocationCity") String pickupLocationCity,
+                                        @RequestParam("returnLocationAddress") String returnLocationAddress,
+                                        @RequestParam("returnLocationZipcode") String returnLocationZipcode,
+                                        @RequestParam("returnLocationCity") String returnLocationCity,
                                         @RequestParam("startDate") String startDate,
                                         @RequestParam("endDate") String endDate,
                                         HttpSession session) {
@@ -49,12 +52,27 @@ public class RentalAgreementController {
         Car car = new Car();
         car.setId(carId);
         rentalAgreement.setCar(car);
+
         Renter renter = new Renter();
         renter.setId(renterId);
         rentalAgreement.setRenter(renter);
+
         Subscription subscription = new Subscription();
         subscription.setId(subscriptionId);
         rentalAgreement.setSubscription(subscription);
+
+        Location pickupLocation = new Location();
+        pickupLocation.setAddress(pickupLocationAddress);
+        pickupLocation.setZipCode(pickupLocationZipcode);
+        pickupLocation.setCity(pickupLocationCity);
+        rentalAgreement.setPickupLocation(pickupLocation);
+
+        Location returnLocation = new Location();
+        returnLocation.setAddress(returnLocationAddress);
+        returnLocation.setZipCode(returnLocationZipcode);
+        returnLocation.setCity(returnLocationCity);
+        rentalAgreement.setReturnLocation(returnLocation);
+
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
         rentalAgreement.setStartDate(start);
