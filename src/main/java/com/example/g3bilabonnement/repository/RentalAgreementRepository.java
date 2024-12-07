@@ -16,24 +16,22 @@ import java.util.List;
 public class RentalAgreementRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    //TODO Teknisk set må Crud ikke eksistere i denne opgave
 
-//    private final RowMapper<RentalAgreement> rentalAgreementRowMapper = (rs, rowNum) -> {
-//        Car car = new Car();
-//        Renter renter = new Renter();
-//        Subscription subscription = new Subscription();
-//
-//        int id = rs.getInt("id");
-//        car.setId(rs.getInt("car_id"));
-//        renter.setId(rs.getInt("renter_id"));
-//        subscription.setId(rs.getInt("subscription_id"));
-//        LocalDate startDate = rs.getDate("start_date").toLocalDate();
-//        LocalDate endDate = rs.getDate("end_date").toLocalDate();
-//        double totalPrice = rs.getDouble("total_price");
-//
-//        return new RentalAgreement(id, car, subscription, renter, startDate, endDate, totalPrice);
-//    };
+/*private final RowMapper<RentalAgreement> rentalAgreementRowMapper = (rs, rowNum) -> {
+       Car car = new Car();
+        Renter renter = new Renter();
+        Subscription subscription = new Subscription();
+        int id = rs.getInt("id");
+        car.setId(rs.getInt("car_id"));
+        renter.setId(rs.getInt("renter_id"));
+        subscription.setId(rs.getInt("subscription_id"));
+        LocalDate startDate = rs.getDate("start_date").toLocalDate();
+        LocalDate endDate = rs.getDate("end_date").toLocalDate();
+       double totalPrice = rs.getDouble("total_price");
 
+        return new RentalAgreement(id, car, subscription, renter, startDate, endDate, totalPrice);
+   };
+*/
 //    public List<RentalAgreement> findAll() {
 //        return jdbcTemplate.query("SELECT * FROM RentalAgreement", rentalAgreementRowMapper);
 //    }
@@ -68,8 +66,4 @@ public class RentalAgreementRepository {
 //    public void delete(int id) {
 //        jdbcTemplate.update("DELETE FROM Artist WHERE ArtistID = ?", id);
 //    }
-public List<Integer> getCarIdsFromExpiredRentalAgreements() {
-    String sql = "SELECT car_id FROM rental_agreement WHERE end_date < ?";
-    return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
-}
 }

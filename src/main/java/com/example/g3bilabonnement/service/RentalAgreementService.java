@@ -20,7 +20,4 @@ public class RentalAgreementService {
         rentalAgreementRepository.add(rentalAgreement);
         carService.updateCarStatus(rentalAgreement.getCar(), "Udlejet");
     }
-    public List<Integer> getCarsWithExpiredRentalAgreements() {
-        return rentalAgreementRepository.getCarIdsWithExpiredRentalAgreements();  // Kalder repository-metoden
-    }
 }

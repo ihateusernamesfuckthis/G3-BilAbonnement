@@ -6,6 +6,7 @@ import com.example.g3bilabonnement.entity.DamageSpecification;
 import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.DamageReportService;
 import com.example.g3bilabonnement.service.DamageSpecificationService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,25 +28,33 @@ public class DamageReportAndSpecificationController {
     private DamageSpecificationService damageSpecificationService;
 
     @GetMapping("/damageReportFunctions")
-    public String updateContractSection(@RequestParam String damageReportFunction, Model model) {
+    public String updateContractSection(@RequestParam String damageReportFunction,HttpSession session, Model model) {
         model.addAttribute("selectedContractFunction", damageReportFunction);
+        session.setAttribute("returnPath", "/damageReportFunctions?damageReportFunction=create");
+        Car car = (Car) session.getAttribute("car");
+        model.addAttribute("car", car);
         return "damageReportMainPage";
     }
 
-   @PostMapping("/createDamageReport")
+    @PostMapping("/createDamageReport")
     public String createDamageReportWithSpecifications(
-            @RequestParam int carId,
+            @RequestParam("carId") int carId,
             @RequestParam LocalDate creationDate,
             @RequestParam List<String> damageDescriptions,
-            @RequestParam List<Double> damagePrices) {
+            @RequestParam List<Double> damagePrices,
+            HttpSession session // Her bruger jeg  session til at hente den valgte bil
+            ) {
 
         DamageReport damageReport = new DamageReport();
-        Car car = carService.getById(carId); // Jeg henter den indtastede bil
-        damageReport.setCar(car); //Jeg sætter car objektet i damagereport til car
-        damageReport.setCreationDate(creationDate);
-        int damageReportId = damageReportService.createDamageReport(damageReport); //Her gemmes skaderapporten og id til den gemt skadesrapport returneres.
 
-        List<DamageSpecification> specifications = new ArrayList<>();// Her opretter jeg en liste med specifikationer
+        Car car = new Car();
+        car.setId(carId);
+        damageReport.setCar(car);
+        damageReport.setCar(car);
+        damageReport.setCreationDate(creationDate);
+        int damageReportId = damageReportService.createDamageReport(damageReport);
+
+        List<DamageSpecification> specifications = new ArrayList<>();
         for (int i = 0; i < damageDescriptions.size(); i++) {
             DamageSpecification ds = new DamageSpecification();
             ds.setDamageDescription(damageDescriptions.get(i));
@@ -53,17 +62,23 @@ public class DamageReportAndSpecificationController {
             specifications.add(ds);
         }
         damageSpecificationService.createDamageSpecifications(specifications, damageReportId);
+
+        session.removeAttribute("car");
+
         return "redirect:/createdDamageReportView?damageReportId=" + damageReportId;
     }
 
     @GetMapping("/createdDamageReportView")
     public String viewDamageReport(@RequestParam int damageReportId, Model model) {
-            DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
+        DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
+        List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReportId);
+        damageReport.setDamageSpecifications(damageSpecifications);
 
-            List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReportId);
-            damageReport.setDamageSpecifications(damageSpecifications);
+        Car car = damageReport.getCar();
 
-            model.addAttribute("damageReport", damageReport);
-            return "createdDamageReportView";
-        }
+        model.addAttribute("damageReport", damageReport);
+        model.addAttribute("car", car);
+
+        return "createdDamageReportView";
     }
+}
