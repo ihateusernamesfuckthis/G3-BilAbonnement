@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/fragments/headerRedirectBtnFragment.css">
     <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/carFragment.css">
 </head>
 <body>
 <div class="headerbox">
@@ -26,12 +27,9 @@
 <div class="container">
             <div th:if="${damageReport != null}">
                 <h2>Oprettet Skaderapport</h2>
-                <p class="creationDate">Dato for oprettelse: <span th:text="${damageReport.creationDate}"></span></p>
-                <div class="carDetails">
-                    <p><strong>Bil ID:</strong> <span th:text="${damageReport.car.id}"></span></p>
-                    <p><strong>Vognnummer:</strong> <span th:text="${damageReport.car.vehicleNumber}"></span></p>
-                    <p><strong>Stelnummer:</strong> <span th:text="${damageReport.car.vinNumber}"></span></p>
-                    <p><strong>Status:</strong> <span th:text="${damageReport.car.carStatus}"></span></p>
+                <p class="creationDate"><strong>Dato for oprettelse: </strong><span th:text="${damageReport.creationDate}"></span></p>
+                <div class="__form-group">
+                    <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, false)}"></div>
                 </div>
                 <table>
                     <thead>

@@ -1,7 +1,7 @@
-package com.example.g3bilabonnement.Service;
+package com.example.g3bilabonnement.service;
 
-import com.example.g3bilabonnement.Entity.DamageSpecification;
-import com.example.g3bilabonnement.Repository.DamageSpecificationRepo;
+import com.example.g3bilabonnement.entity.DamageSpecification;
+import com.example.g3bilabonnement.repository.DamageSpecificationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
