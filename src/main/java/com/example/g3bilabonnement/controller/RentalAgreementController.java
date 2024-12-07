@@ -39,6 +39,7 @@ public class RentalAgreementController {
         Car car = new Car();
         car.setId(carId);
         rentalAgreement.setCar(car);
+
         Renter renter = new Renter();
         renter.setId(renterId);
         rentalAgreement.setRenter(renter);

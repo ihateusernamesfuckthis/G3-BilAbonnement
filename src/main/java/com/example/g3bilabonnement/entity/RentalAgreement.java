@@ -52,6 +52,15 @@ public class RentalAgreement {
         this.totalPrice = pricePerMonth * months;
     }
 
+    public double calculateOverdrivenKilometerPrice(int totalKilometerDriven){
+
+        int totalAllowedKilometer = calculateTotalMonths() * subscription.getAllowedKmPerMonth();
+        int overdrivenKilometer = totalKilometerDriven - (totalAllowedKilometer);
+
+
+        return overdrivenKilometer <= 0 ? 0.0 : overdrivenKilometer * 0.75;
+    }
+
     public int getId() {
         return id;
     }

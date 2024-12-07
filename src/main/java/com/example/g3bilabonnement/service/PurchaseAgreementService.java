@@ -13,12 +13,8 @@ public class PurchaseAgreementService {
     @Autowired
     private PurchaseAgreementRepository purchaseAgreementRepository;
 
-    public Car findCarById(int carId){
-        return purchaseAgreementRepository.findCarById(carId);
-    }
 
-
-    public void add (PurchaseAgreement purchaseAgreement, int carId) {
+    public void add (PurchaseAgreement purchaseAgreement) {
 
 
         if(purchaseAgreement.getCar() == null){

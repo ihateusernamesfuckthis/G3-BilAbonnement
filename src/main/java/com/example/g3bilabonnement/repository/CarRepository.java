@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class CarRepository {
@@ -18,7 +17,6 @@ public class CarRepository {
     private final RowMapper<Car> carRowMapper = (rs, rowNum) -> {
         Car car = new Car();
         car.setId(rs.getInt("id"));
-        car.setImageUrl(rs.getString("image_url"));
         car.setVehicleNumber(rs.getString("vehicle_number"));
         car.setVinNumber(rs.getString("vin_number"));
         car.setBrand(rs.getString("brand"));
@@ -29,13 +27,14 @@ public class CarRepository {
         car.setNetPrice(rs.getDouble("net_price"));
         car.setRegistrationTax(rs.getDouble("registration_tax"));
         car.setCo2Emissions(rs.getDouble("co2_emissions"));
-        car.setStatus(rs.getString("status"));
+        car.setCarStatus(rs.getString("car_status"));
         return car;
     };
 
     public Car getById(int id) {
-        String sql = "SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE car.id = ?";
-        return jdbcTemplate.queryForObject(sql, carRowMapper, id);
+        String sql = "SELECT * FROM car WHERE id = ?";
+        System.out.println("Executing SQL: " + sql + " with id = " + id);
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, carRowMapper);
     }
 
     public List<Car> searchByVehicleNumber(String vehicleNumber, CarFilter carFilter) {

@@ -1,5 +1,8 @@
-package com.example.g3bilabonnement.Controller;
+package com.example.g3bilabonnement.controller;
 
+import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.repository.CarRepository;
+import com.example.g3bilabonnement.repository.FinalSettlementRepository;
 import com.example.g3bilabonnement.service.PurchaseAgreementService;
 import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.FinalSettlement;
@@ -18,6 +21,10 @@ public class PurchaseAgreementController {
 
     @Autowired
     PurchaseAgreementService purchaseAgreementService;
+    @Autowired
+    FinalSettlementRepository finalSettlementRepository;
+    @Autowired
+    CarRepository carRepository;
 
     @GetMapping("/create")
     public String createPurchaseAgreementPage (Model model) {
@@ -29,20 +36,21 @@ public class PurchaseAgreementController {
     public String createPurchaseAgreement(@RequestParam("carId") int carId,
                                           @RequestParam("pickuplocation") String pickupLocation) {
 
+        //her hentes bil-objektet til købsaftalen baseret på brugerinput
+        Car car = carRepository.getById(carId);
+
+        //Her hentes slutopgørelsen der sidder på det valgte bilobjekt på købsaftalen
+        FinalSettlement finalSettlement = finalSettlementRepository.getByCarId(carId);
+
+        // her oprettes købsaftalen og pickupLocation sættes på købsaftale-objeketet
         PurchaseAgreement purchaseAgreement = new PurchaseAgreement();
-        purchaseAgreement.setPickUpLocation(pickupLocation);
 
-        purchaseAgreement.setCar(purchaseAgreementService.findCarById(carId)); //her indsættes den specifikke bil på købskontrakten
-
-        FinalSettlement finalSettlement = new FinalSettlement();
-        finalSettlement.setId(1); // hardcoded placeholder værdi for test - hiv finalesettlement objektet fra databasen
-        DamageReport placeholderDamageReport = new DamageReport(); //instantiering af placeholder damage report
-        placeholderDamageReport.setId(0); // Placeholder ID
-        placeholderDamageReport.setTotalDamagePrice(0.0); //Placeholder samlet pris
-        finalSettlement.setDamageReport(placeholderDamageReport);
+        purchaseAgreement.setCar(car);
         purchaseAgreement.setFinalSettlement(finalSettlement);
+        purchaseAgreement.setPickUpLocation(pickupLocation);
+        purchaseAgreement.setFinalPrice(purchaseAgreement.calculateFinalPrice());
 
-        purchaseAgreementService.add(purchaseAgreement, carId);
+        purchaseAgreementService.add(purchaseAgreement);
 
         return "redirect:/purchase-agreement/success";
     }

@@ -12,7 +12,6 @@ public class FinalSettlement {
     Double totalPrice;
 
     public FinalSettlement(){}
-
     public FinalSettlement(int id, Car car, RentalAgreement rentalAgreement, DamageReport damageReport, Double totalDamageReportPrice, int totalKilometerDriven, double overdrivenKilometerPrice, Double totalPrice) {
         this.id = id;
         this.car = car;
@@ -24,45 +23,11 @@ public class FinalSettlement {
         this.totalPrice = totalPrice;
     }
 
-    public void calculateTotalPrice(DamageReport damageReport, RentalAgreement rentalAgreement){
+    public double calculateTotalPrice(){
 
         double rentAndDamagePrice = (damageReport.totalDamagePrice + rentalAgreement.getTotalPrice());
-        totalPrice = rentAndDamagePrice + overdrivenKilometerPrice;
-    }
-
-    public void calculateOverdrivenKilometerPrice(RentalAgreement rentalAgreement){
-        int totalAllowedKilometer = (rentalAgreement.calculateTotalMonths() * rentalAgreement.getSubscription().getAllowedKmPerMonth());
-        int overdrivenKilometer = totalKilometerDriven - (totalAllowedKilometer);
-
-        if (overdrivenKilometer <= 0) {
-            overdrivenKilometerPrice = 0.0;
-        }
-        overdrivenKilometerPrice = overdrivenKilometer * 0.75;
-    }
-
-    public Double getTotalDamageReportPrice() {
-        return totalDamageReportPrice;
-    }
-
-    public void setTotalDamageReportPrice(Double totalDamageReportPrice) {
-        this.totalDamageReportPrice = totalDamageReportPrice;
-    }
-
-    public int getTotalKilometerDriven() {
-        return totalKilometerDriven;
-    }
-
-    public void setTotalKilometerDriven(int totalKilometerDriven) {
-        this.totalKilometerDriven = totalKilometerDriven;
-        calculateOverdrivenKilometerPrice(rentalAgreement);
-    }
-
-    public RentalAgreement getRentalAgreement() {
-        return rentalAgreement;
-    }
-
-    public void setRentalAgreement(RentalAgreement rentalAgreement) {
-        this.rentalAgreement = rentalAgreement;
+        this.totalPrice = rentAndDamagePrice + this.overdrivenKilometerPrice;
+        return totalPrice;
     }
 
     public int getId() {
@@ -81,6 +46,14 @@ public class FinalSettlement {
         this.car = car;
     }
 
+    public RentalAgreement getRentalAgreement() {
+        return rentalAgreement;
+    }
+
+    public void setRentalAgreement(RentalAgreement rentalAgreement) {
+        this.rentalAgreement = rentalAgreement;
+    }
+
     public DamageReport getDamageReport() {
         return damageReport;
     }
@@ -89,9 +62,31 @@ public class FinalSettlement {
         this.damageReport = damageReport;
     }
 
+    public Double getTotalDamageReportPrice() {
+        return totalDamageReportPrice;
+    }
+
+    public void setTotalDamageReportPrice(Double totalDamageReportPrice) {
+        this.totalDamageReportPrice = totalDamageReportPrice;
+    }
+
+    public int getTotalKilometerDriven() {
+        return totalKilometerDriven;
+    }
+
+    public void setTotalKilometerDriven(int totalKilometerDriven) {
+        this.totalKilometerDriven = totalKilometerDriven;
+    }
+
+    public double getOverdrivenKilometerPrice() {
+        return overdrivenKilometerPrice;
+    }
+
+    public void setOverdrivenKilometerPrice(double overdrivenKilometerPrice) {
+        this.overdrivenKilometerPrice = overdrivenKilometerPrice;
+    }
 
     public Double getTotalPrice() {
-        calculateTotalPrice(damageReport, rentalAgreement);
         return totalPrice;
     }
 
@@ -99,3 +94,5 @@ public class FinalSettlement {
         this.totalPrice = totalPrice;
     }
 }
+
+

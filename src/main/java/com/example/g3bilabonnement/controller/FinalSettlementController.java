@@ -1,5 +1,7 @@
-package com.example.g3bilabonnement.Controller;
+package com.example.g3bilabonnement.controller;
 
+import com.example.g3bilabonnement.repository.DamageReportRepository;
+import com.example.g3bilabonnement.repository.RentalAgreementRepository;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,14 @@ import java.time.LocalDate;
 @Controller
 public class FinalSettlementController {
 
-@Autowired
+    @Autowired
     FinalSettlementService finalSettlementService;
+
+    @Autowired
+    RentalAgreementRepository rentalAgreementRepository;
+
+    @Autowired
+    DamageReportRepository damageReportRepository;
 
     @GetMapping("/create")
     public String createFinalSettlement(Model model){
@@ -29,28 +37,23 @@ public class FinalSettlementController {
     public String createFinalSettlement(@RequestParam ("rentalAgreementId") int rentalAgreementId,
                                         @RequestParam ("kilometersDriven") int totalKilometersDriven){
 
-
-        LocalDate startDate = LocalDate.of(2023, 1, 1);
-        LocalDate endDate = LocalDate.of(2023, 12, 31);
-
-        // Opret RentalAgreement-objekt
-        RentalAgreement rentalAgreement = new RentalAgreement();
-        Subscription subscription = new Subscription();
-        subscription.setAllowedKmPerMonth(500);
-        rentalAgreement.setSubscription(subscription);
-
         FinalSettlement finalSettlement = new FinalSettlement();
-        //RentalAgreement rentalAgreement = new RentalAgreement();
-        rentalAgreement.setId(rentalAgreementId);
-        rentalAgreement.setStartDate(startDate);
-        rentalAgreement.setEndDate(endDate);
 
-
-        DamageReport damageReport = new DamageReport();
-
-        finalSettlement.setDamageReport(damageReport);
+        //her hentes og sættes rentalagreement objektet ud fra brugerens input
+        RentalAgreement rentalAgreement = rentalAgreementRepository.getById(rentalAgreementId);
         finalSettlement.setRentalAgreement(rentalAgreement);
+
+        //Her hentes og sættes DamageReport objektet ud fra bil id'er hentet fra rental agreement objektet
+        DamageReport damageReport = damageReportRepository.getDamageReportByCarId(rentalAgreement.getCar().getId());
+        finalSettlement.setDamageReport(damageReport);
+
+        //Dette er hentet fra et brugerinput
         finalSettlement.setTotalKilometerDriven(totalKilometersDriven);
+
+        double overDrivenKilometerPrice = rentalAgreement.calculateOverdrivenKilometerPrice(totalKilometersDriven);
+        finalSettlement.setOverdrivenKilometerPrice(overDrivenKilometerPrice);
+
+        finalSettlement.calculateTotalPrice();
 
         finalSettlementService.add(finalSettlement);
 
