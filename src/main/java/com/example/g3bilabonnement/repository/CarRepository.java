@@ -38,14 +38,19 @@ public class CarRepository {
         return jdbcTemplate.queryForObject(sql, carRowMapper, id);
     }
 
-    public List<Car> searchByVehicleNumber(String vehicleNumber, CarFilter carFilter) {
-        String sql = "SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE vehicle_number like ?";
+    public List<Car> searchByFilter(CarFilter carFilter) {
+        // adding 'where 1 = 1' to allow 0 -> all filters
+        StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
 
-        if (!carFilter.status.isEmpty()) {
-            // Only include filter options if any are set
-            sql += " AND car_status.status = '" + carFilter.status + "'";
+        if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
+            sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
         }
-        return jdbcTemplate.query(sql, carRowMapper, '%' + vehicleNumber + '%');
+        if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
+            sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
+        }
+
+
+        return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
 
     public void updateCarStatus(Car car, String newStatus){

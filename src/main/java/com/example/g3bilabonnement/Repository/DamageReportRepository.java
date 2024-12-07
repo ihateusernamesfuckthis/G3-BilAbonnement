@@ -1,7 +1,7 @@
-package com.example.g3bilabonnement.Repository;
+package com.example.g3bilabonnement.repository;
 
-import com.example.g3bilabonnement.Entity.Car;
-import com.example.g3bilabonnement.Entity.DamageReport;
+import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.DamageReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 @Repository
-public class DamageReportRepo {
+public class DamageReportRepository {
 
     @Autowired
     private JdbcTemplate template;

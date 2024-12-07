@@ -1,11 +1,11 @@
-package com.example.g3bilabonnement.Controller;
+package com.example.g3bilabonnement.controller;
 
-import com.example.g3bilabonnement.Entity.Car;
-import com.example.g3bilabonnement.Entity.DamageReport;
-import com.example.g3bilabonnement.Entity.DamageSpecification;
-import com.example.g3bilabonnement.Service.CarService;
-import com.example.g3bilabonnement.Service.DamageReportService;
-import com.example.g3bilabonnement.Service.DamageSpecificationService;
+import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.DamageReport;
+import com.example.g3bilabonnement.entity.DamageSpecification;
+import com.example.g3bilabonnement.service.CarService;
+import com.example.g3bilabonnement.service.DamageReportService;
+import com.example.g3bilabonnement.service.DamageSpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +25,6 @@ public class DamageReportAndSpecificationController {
     private DamageReportService damageReportService;
     @Autowired
     private DamageSpecificationService damageSpecificationService;
-    @GetMapping("/damageReportMainPage")
-    public String damageReportMainPage() {
-        //Her kan biler evt. listes?
-        //Her kan skadesrapporter evt. listet?
-        return "damageReportMainPage";
-    }
 
     @GetMapping("/damageReportFunctions")
     public String updateContractSection(@RequestParam String damageReportFunction, Model model) {
@@ -46,7 +40,7 @@ public class DamageReportAndSpecificationController {
             @RequestParam List<Double> damagePrices) {
 
         DamageReport damageReport = new DamageReport();
-        Car car = carService.getCarById(carId); // Jeg henter den indtastede bil
+        Car car = carService.getById(carId); // Jeg henter den indtastede bil
         damageReport.setCar(car); //Jeg sætter car objektet i damagereport til car
         damageReport.setCreationDate(creationDate);
         int damageReportId = damageReportService.createDamageReport(damageReport); //Her gemmes skaderapporten og id til den gemt skadesrapport returneres.
