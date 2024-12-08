@@ -39,29 +39,17 @@ public class CarRepository {
         return jdbcTemplate.queryForObject(sql, carRowMapper, id);
     }
 
-    public List<Car> searchByFilter(CarFilter carFilter) {
-        if (carFilter != null && carFilter.getId() != 0){
-            StringBuilder sql = new StringBuilder("SELECT ra.car_id " +
-                    "FROM rental_agreement ra " +
-                    "LEFT JOIN damage_report dr ON ra.car_id = dr.carId " +
-                    "WHERE ra.end_date < ? " +
-                    "AND dr.carId IS NULL");
-        }
-        StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
+        public List<Car> searchByFilter(CarFilter carFilter){
+            // adding 'where 1 = 1' to allow 0 -> all filters
+            StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
 
-        if (carFilter != null && carFilter.isMissingDamageReport()) { // Tilføj betingelse for manglende skaderapport
-            sql.append("LEFT JOIN damage_report dr ON car.id = dr.carId ");
-            sql.append("WHERE dr.carId IS NULL ");
-        } else {
-            sql.append("WHERE 1 = 1 ");  // Hvis vi ikke kigger på manglende skaderapport, vis alle biler
-        }
-        if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
-            sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
-        }
-        if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
-            sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
-        }
-        return jdbcTemplate.query(sql.toString(), carRowMapper);
+            if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
+                sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
+            }
+            if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
+                sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
+            }
+            return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
     public void updateCarStatus(Car car, String newStatus){
         String sql = "UPDATE car SET car_status_id = (SELECT car_status.id FROM car_status WHERE status = ?) WHERE car.id = ?";

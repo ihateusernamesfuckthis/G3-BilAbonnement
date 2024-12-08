@@ -4,14 +4,8 @@ public class CarFilter {
     private String status;
     private int id;
     private String vehicleNumber;
-    private boolean missingDamageReport; // Ny parameter for at filtrere biler uden skaderapport
+    private boolean missingDamageReport;
 
-    // Getters og setters
-    public CarFilter(String status, int id, String vehicleNumber) {
-        this.status = status;
-        this.id  = id;
-        this.vehicleNumber = vehicleNumber;
-    }
     public CarFilter(){
 
     }
@@ -36,10 +30,9 @@ public class CarFilter {
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
-    public boolean isMissingDamageReport() {
+    public boolean isMissingDamageReport() {// Checkbox kan have tre værdier og derfor skal wrapper klassen bruges
         return missingDamageReport;
     }
-
     public void setMissingDamageReport(boolean missingDamageReport) {
         this.missingDamageReport = missingDamageReport;
     }

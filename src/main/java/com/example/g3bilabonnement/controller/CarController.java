@@ -33,8 +33,25 @@ public class CarController {
     @GetMapping("/search")
     public String searchCarsWithFilter(@ModelAttribute("filter") CarFilter carFilter, @RequestParam(required = false) boolean showSearchFilter, Model model) {
                         // carFilter indeholder de værdier, som brugeren har udfyldt.
-                List<Car> cars = carService.searchByFilter(carFilter);
-                model.addAttribute("cars", cars);
+        List<Car> cars = carService.searchByFilter(carFilter);
+
+        if (carFilter.isMissingDamageReport()) {
+            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
+
+            cars = expiredCars;
+        } else {
+            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
+
+            cars.addAll(expiredCars);
+
+            Set<Car> carsWithoutDuplicates = new HashSet<>(cars);
+            cars = new ArrayList<>(carsWithoutDuplicates);
+        }
+
+        model.addAttribute("cars", cars);
+
 
         if (showSearchFilter) {
             // TODO Replace with the status' from the database when they are added as a separate table
