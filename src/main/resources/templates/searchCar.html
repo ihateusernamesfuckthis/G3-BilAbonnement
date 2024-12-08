@@ -11,8 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<form th:action="@{/car/search}" method="post" class="car-search__form">
+<form th:action="@{/car/search}" method="get" class="car-search__form">
     <input type="text" name="carVehicleNumber" placeholder="Enter vehicle number"/>
+    <label for="missingDamageReport">Biler der mangler skaderapport</label>
+    <input type="checkbox" id="missingDamageReport" name="missingDamageReport" value="true" th:checked="${filter.missingDamageReport}" />
+
     <button type="submit">Search</button>
 </form>
 <form th:if="${cars != null && cars.size() > 0}" th:action="@{/car/return-car}" method="post" class="car-search-result__form">

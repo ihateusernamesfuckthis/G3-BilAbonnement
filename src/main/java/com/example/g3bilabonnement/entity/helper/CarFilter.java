@@ -4,7 +4,9 @@ public class CarFilter {
     private String status;
     private int id;
     private String vehicleNumber;
+    private boolean missingDamageReport; // Ny parameter for at filtrere biler uden skaderapport
 
+    // Getters og setters
     public CarFilter(String status, int id, String vehicleNumber) {
         this.status = status;
         this.id  = id;
@@ -33,5 +35,12 @@ public class CarFilter {
 
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
+    }
+    public boolean isMissingDamageReport() {
+        return missingDamageReport;
+    }
+
+    public void setMissingDamageReport(boolean missingDamageReport) {
+        this.missingDamageReport = missingDamageReport;
     }
 }

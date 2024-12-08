@@ -47,10 +47,14 @@ public class CarRepository {
                     "WHERE ra.end_date < ? " +
                     "AND dr.carId IS NULL");
         }
-
-        // adding 'where 1 = 1' to allow 0 -> all filters
         StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
 
+        if (carFilter != null && carFilter.isMissingDamageReport()) { // Tilføj betingelse for manglende skaderapport
+            sql.append("LEFT JOIN damage_report dr ON car.id = dr.carId ");
+            sql.append("WHERE dr.carId IS NULL ");
+        } else {
+            sql.append("WHERE 1 = 1 ");  // Hvis vi ikke kigger på manglende skaderapport, vis alle biler
+        }
         if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
             sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
         }

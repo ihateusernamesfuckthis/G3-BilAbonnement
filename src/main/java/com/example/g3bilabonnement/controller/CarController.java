@@ -32,18 +32,9 @@ public class CarController {
 
     @GetMapping("/search")
     public String searchCarsWithFilter(@ModelAttribute("filter") CarFilter carFilter, @RequestParam(required = false) boolean showSearchFilter, Model model) {
-        // Fetch filtered cars, if no filter is added uses the blank filter
-        List<Car> cars = carService.searchByFilter(carFilter);
-
-        List<Integer> carIds = new ArrayList<>();
-        for (Car car : cars) {
-            carIds.add(car.getId());
-        }
-
-        List<Car> carsToDamageReport = new ArrayList<>();
-        if (!carIds.isEmpty()) {
-            carsToDamageReport = carService.getCarsByIds(carIds);
-        }
+                        // carFilter indeholder de værdier, som brugeren har udfyldt.
+                List<Car> cars = carService.searchByFilter(carFilter);
+                model.addAttribute("cars", cars);
 
         if (showSearchFilter) {
             // TODO Replace with the status' from the database when they are added as a separate table
@@ -60,12 +51,10 @@ public class CarController {
             }
 
             model.addAttribute("statusSelectOptions", statusSelectOptions);
-            model.addAttribute("filter", carFilter);
         }
 
-        model.addAttribute("carsToDamageReport", carsToDamageReport);
         model.addAttribute("showSearchFilter", showSearchFilter);
-        model.addAttribute("cars", cars);
+        model.addAttribute("filter", carFilter);
         return "searchCar";
     }
 
