@@ -25,4 +25,8 @@ public class CarService {
     public void updateCarStatus(Car car, String newStatus){
         carRepository.updateCarStatus(car, newStatus);
     }
+
+    public List<String> getCarStatuses() {
+        return carRepository.getCarStatuses();
+    }
 }

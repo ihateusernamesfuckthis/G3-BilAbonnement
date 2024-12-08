@@ -57,4 +57,9 @@ public class CarRepository {
         String sql = "UPDATE car SET car_status_id = (SELECT car_status.id FROM car_status WHERE status = ?) WHERE car.id = ?";
         jdbcTemplate.update(sql, newStatus, car.getId());
     }
+
+    public List<String> getCarStatuses() {
+        String sql = "SELECT status FROM car_status";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
 }

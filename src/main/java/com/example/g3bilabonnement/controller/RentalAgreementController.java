@@ -2,6 +2,7 @@ package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.*;
 import com.example.g3bilabonnement.service.RentalAgreementService;
+import com.example.g3bilabonnement.service.SubscriptionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ public class RentalAgreementController {
 
     @Autowired
     private RentalAgreementService rentalAgreementService;
+    @Autowired
+    private SubscriptionService subscriptionService;
 
     @GetMapping("/new")
     public String createRentalAgreementPage(Model model, HttpSession session) {
@@ -30,6 +33,11 @@ public class RentalAgreementController {
         // returns car if there is one else null - Page handles null value
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("car", car);
+
+        // returns subscriptionId if there is one else null - Page handles null value
+        Integer subscriptionId = (Integer) session.getAttribute("subscriptionId");
+        Subscription subscription = subscriptionId == null ? null : subscriptionService.getById(subscriptionId);
+        model.addAttribute("subscription", subscription);
 
         return "createRentalAgreement";
     }
