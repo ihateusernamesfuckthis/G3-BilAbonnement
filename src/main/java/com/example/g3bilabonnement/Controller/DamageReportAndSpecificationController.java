@@ -42,8 +42,16 @@ public class DamageReportAndSpecificationController {
             @RequestParam LocalDate creationDate,
             @RequestParam List<String> damageDescriptions,
             @RequestParam List<Double> damagePrices,
-            HttpSession session // Her bruger jeg  session til at hente den valgte bil
-            ) {
+            HttpSession session,
+            Model model) {
+
+        /*List<Integer> validCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+
+        if (!validCarIds.contains(carId)) {
+            model.addAttribute("errorMessage", "Skaderapport kan kun oprettes, hvis lejeaftalen er udløbet og bilen ikke har en eksisterende skaderapport.");
+            model.addAttribute("errorType", "failure");
+            return "damageReportMainPage";
+        }*/
 
         DamageReport damageReport = new DamageReport();
 
