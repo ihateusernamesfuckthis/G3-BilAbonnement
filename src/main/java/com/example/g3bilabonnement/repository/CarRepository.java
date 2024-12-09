@@ -7,8 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class CarRepository {
@@ -38,23 +38,29 @@ public class CarRepository {
         return jdbcTemplate.queryForObject(sql, carRowMapper, id);
     }
 
-    public List<Car> searchByFilter(CarFilter carFilter) {
-        // adding 'where 1 = 1' to allow 0 -> all filters
-        StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
+        public List<Car> searchByFilter(CarFilter carFilter){
+            // adding 'where 1 = 1' to allow 0 -> all filters
+            StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
 
-        if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
-            sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
-        }
-        if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
-            sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
-        }
-
-
-        return jdbcTemplate.query(sql.toString(), carRowMapper);
+            if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
+                sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
+            }
+            if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
+                sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
+            }
+            return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
 
     public void updateCarStatus(Car car, String newStatus){
         String sql = "UPDATE car SET car_status_id = (SELECT car_status.id FROM car_status WHERE status = ?) WHERE car.id = ?";
         jdbcTemplate.update(sql, newStatus, car.getId());
+    }
+    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
+        String sql = "SELECT ra.car_id " +
+                "FROM rental_agreement ra " +
+                "LEFT JOIN damage_report dr ON ra.car_id = dr.carId " +
+                "WHERE ra.end_date < ? " +
+                "AND dr.carId IS NULL";
+        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
     }
 }

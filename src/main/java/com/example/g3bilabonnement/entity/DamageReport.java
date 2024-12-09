@@ -2,10 +2,10 @@ package com.example.g3bilabonnement.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DamageReport {
+    private int id;
     private LocalDate creationDate;
     private List<DamageSpecification> damageSpecifications = new ArrayList<>();
     private double totalDamagePrice;
@@ -13,11 +13,20 @@ public class DamageReport {
     public DamageReport() {
     }
 
-    public DamageReport(LocalDate creationDate, List<DamageSpecification> damageSpecifications, Car car) {
+    public DamageReport(int id, LocalDate creationDate, List<DamageSpecification> damageSpecifications, Car car) {
+        this.id = id;
         this.creationDate = creationDate;
         this.damageSpecifications = damageSpecifications;
         this.totalDamagePrice = calculateTotalDamagePrice();
         this.car = car;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int newId){
+        this.id= newId;
     }
     public LocalDate getCreationDate() {
         return creationDate;

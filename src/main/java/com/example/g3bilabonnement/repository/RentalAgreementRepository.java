@@ -1,39 +1,30 @@
 package com.example.g3bilabonnement.repository;
 
-import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.RentalAgreement;
-import com.example.g3bilabonnement.entity.Renter;
-import com.example.g3bilabonnement.entity.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 public class RentalAgreementRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    //TODO Teknisk set må Crud ikke eksistere i denne opgave
 
-//    private final RowMapper<RentalAgreement> rentalAgreementRowMapper = (rs, rowNum) -> {
-//        Car car = new Car();
-//        Renter renter = new Renter();
-//        Subscription subscription = new Subscription();
-//
-//        int id = rs.getInt("id");
-//        car.setId(rs.getInt("car_id"));
-//        renter.setId(rs.getInt("renter_id"));
-//        subscription.setId(rs.getInt("subscription_id"));
-//        LocalDate startDate = rs.getDate("start_date").toLocalDate();
-//        LocalDate endDate = rs.getDate("end_date").toLocalDate();
-//        double totalPrice = rs.getDouble("total_price");
-//
-//        return new RentalAgreement(id, car, subscription, renter, startDate, endDate, totalPrice);
-//    };
+/*private final RowMapper<RentalAgreement> rentalAgreementRowMapper = (rs, rowNum) -> {
+       Car car = new Car();
+        Renter renter = new Renter();
+        Subscription subscription = new Subscription();
+        int id = rs.getInt("id");
+        car.setId(rs.getInt("car_id"));
+        renter.setId(rs.getInt("renter_id"));
+        subscription.setId(rs.getInt("subscription_id"));
+        LocalDate startDate = rs.getDate("start_date").toLocalDate();
+        LocalDate endDate = rs.getDate("end_date").toLocalDate();
+       double totalPrice = rs.getDouble("total_price");
 
+        return new RentalAgreement(id, car, subscription, renter, startDate, endDate, totalPrice);
+   };
+*/
 //    public List<RentalAgreement> findAll() {
 //        return jdbcTemplate.query("SELECT * FROM RentalAgreement", rentalAgreementRowMapper);
 //    }
