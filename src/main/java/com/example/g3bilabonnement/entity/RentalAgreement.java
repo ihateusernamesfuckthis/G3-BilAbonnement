@@ -8,19 +8,22 @@ public class RentalAgreement {
     private Car car;
     private Subscription subscription;
     private Renter renter;
+    private Location pickupLocation;
+    private Location returnLocation;
     private LocalDate startDate;
     private LocalDate endDate;
     private double totalPrice;
 
-
     public RentalAgreement() {
     }
 
-    public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, LocalDate startDate, LocalDate endDate, double totalPrice) {
+    public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, Location pickupLocation, Location returnLocation, LocalDate startDate, LocalDate endDate, double totalPrice) {
         this.id = id;
         this.car = car;
         this.subscription = subscription;
         this.renter = renter;
+        this.pickupLocation = pickupLocation;
+        this.returnLocation = returnLocation;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalPrice = totalPrice;
@@ -120,5 +123,21 @@ public class RentalAgreement {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public void setPickupLocation(Location pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public Location getReturnLocation() {
+        return returnLocation;
+    }
+
+    public void setReturnLocation(Location returnLocation) {
+        this.returnLocation = returnLocation;
     }
 }

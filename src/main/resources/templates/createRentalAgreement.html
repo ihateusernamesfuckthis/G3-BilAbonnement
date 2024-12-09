@@ -30,6 +30,16 @@
 
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'subscriptionId', 'Subscription id', 'rental-agreement__form-group__subscription-input form-group-input', true)}"></div>
 
+        <div class="rental-agreement__form-group__pickup-location-container">
+            <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickupLocationAddress', 'Opsamling adresse', 'rental-agreement__form-group__pickup-location-address-input form-group-input', true)}"></div>
+            <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickupLocationZipcode', 'Opsamling postnummer', 'rental-agreement__form-group__pickup-location-zipcode-input form-group-input', true)}"></div>
+            <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickupLocationCity', 'Opsamling By', 'rental-agreement__form-group__pickup-location-zipcode-input form-group-input', true)}"></div>
+        </div>
+        <div class="rental-agreement__form-group__return-location-container">
+            <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'returnLocationAddress', 'Aflevering adresse', 'rental-agreement__form-group__return-location-address-input form-group-input', true)}"></div>
+            <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'returnLocationZipcode', 'Aflevering postnummer', 'rental-agreement__form-group__return-location-zipcode-input form-group-input', true)}"></div>
+            <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'returnLocationCity', 'Aflevering By', 'rental-agreement__form-group__return-location-zipcode-input form-group-input', true)}"></div>
+        </div>
         <div th:replace="~{fragments/formGroupFragments :: input-field('date', 'startDate','Start date', 'rental-agreement__form-group__start-date-input form-group-input', true)}"></div>
 
         <div th:replace="~{fragments/formGroupFragments :: input-field('date', 'endDate' ,'End date', 'rental-agreement__form-group__end-date-input form-group-input', true)}"></div>

@@ -1,9 +1,9 @@
 <!-- Fragment: Select Input -->
 <!-- Parse options to this using the SelectOption class -->
 <div th:fragment="select-input(label, cssClass, required, options)" th:classappend="${cssClass}">
-    <label th:for="${label}" th:text="${label} + ':'" class="form-group__label"></label>
+    <label th:for="${label}" th:text="${label}" class="form-group__label"></label>
     <select th:id="${label}" th:name="${label}" th:required="${required}">
-      <option value="" th:text="'Select ' + ${label}" disabled selected>Select ${label}</option>
+      <option value="" th:text="'Vælg ' + ${label}" disabled selected>Select ${label}</option>
       <option th:each="option : ${options}" th:value="${option.value}" th:text="${option.label}"></option>
     </select>
 </div>

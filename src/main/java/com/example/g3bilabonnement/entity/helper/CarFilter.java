@@ -1,12 +1,28 @@
 package com.example.g3bilabonnement.entity.helper;
 
-public class CarFilter {
-    public String status;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-    public CarFilter(String status) {
+
+public class CarFilter {
+    private String status;
+    private String vehicleNumber;
+
+    public CarFilter() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public CarFilter() {
+    public String getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
     }
 }

@@ -1,41 +1,53 @@
-body {
-    width:70%;
-    margin: 1rem auto 0;
-}
-
-.car-search__form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1rem;
+.car-search-container {
+    margin: 50px;
 }
 
 .car-search-result__form {
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
+border: 1px solid var(--color-border);
+border-radius: var(--border-radius);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.car-search-result__form-header {
     display: flex;
-    flex-direction: column;
+    align-items: center; /* Vertically center the items */
+    justify-content: flex-end; /* Distribute space between elements */
+    padding: 1rem 1rem 0; /* Optional padding for spacing */
+    width: 100%; /* Ensure the container takes the full width */
+    position: relative; /* Allow precise positioning */
+    min-height: calc(1rem + 38px);
+}
+
+.car-search-result__form-header__submit-button {
+    position: absolute; /* Position relative to the container */
+    left: 50%; /* Move to the center horizontally */
+    transform: translateX(-50%); /* Adjust for the button's own width */
+}
+
+.car-search-form-close-button {
+}
+
+.car-search-form-close-button .logo {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.car-search-result__form > button {
-    margin: 1rem 0;
-}
-
 .car-search-result__cars {
-    width: -webkit-fill-available;
-    margin: 1rem;
-    padding: 1px;
-    max-height: 80vh;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    border: 1px solid var(--color-border);
+width: -webkit-fill-available;
+margin: 1rem;
+padding: 1px;
+max-height: 80vh;
+overflow-y: scroll;
+display: flex;
+flex-direction: column;
+gap: 2px;
+border: 1px solid var(--color-border);
 }
 
 button {
-    width: fit-content;
+width: fit-content;
 }

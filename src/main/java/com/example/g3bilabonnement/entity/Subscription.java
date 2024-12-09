@@ -52,7 +52,6 @@ public class Subscription {
         this.allowedKmPerMonth = allowedKmPerMonth;
     }
 
-
     public double getTotalPricePerMonth() {
         return totalPricePerMonth;
     }

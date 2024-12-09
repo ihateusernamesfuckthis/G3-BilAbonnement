@@ -2,19 +2,19 @@ package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.helper.CarFilter;
+import com.example.g3bilabonnement.entity.helper.SelectOption;
 import com.example.g3bilabonnement.service.CarService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -24,17 +24,37 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/search")
-    public String searchCars(Model model) {
-        return "searchCar";
+    // Ensures the filter is always present in the model
+    @ModelAttribute("filter")
+    public CarFilter carFilter() {
+        return new CarFilter();
     }
 
-    @PostMapping("/search")
-    public String searchCarsWithCarId(@RequestParam String carVehicleNumber,Model model) {
-        CarFilter carFilter = new CarFilter("Klar til udlejning"); // Searching for available cars - how this is handled might need to change in this method
-        List<Car> cars = carService.searchByVehicleNumber(carVehicleNumber, carFilter);
+    @GetMapping("/search")
+    public String searchCarsWithFilter(@ModelAttribute("filter") CarFilter carFilter, @RequestParam(required = false) boolean showSearchFilter, Model model) {
+        // Fetch filtered cars, if no filter is added uses the blank filter
+        List<Car> cars = carService.searchByFilter(carFilter);
+
+        if (showSearchFilter) {
+            // TODO Replace with the status' from the database when they are added as a separate table
+            List<String> statuses = List.of("Klar til udlejning", "Udlejet", "Skadet",
+                    "Til reparation", "Klar til transport",
+                    "Klar til salg", "Solgt", "Forhåndskøbt");
+
+            // Transform the list of strings into a list of SelectOption to use in formSelectFragment
+            // Used for displaying the options in a dropdown
+            List<SelectOption> statusSelectOptions = new ArrayList<>(); // <SelectOption>
+            for (String status : statuses) {
+                SelectOption option = new SelectOption(status, status);
+                statusSelectOptions.add(option);
+            }
+
+            model.addAttribute("statusSelectOptions", statusSelectOptions);
+            model.addAttribute("filter", carFilter);
+        }
+
+        model.addAttribute("showSearchFilter", showSearchFilter);
         model.addAttribute("cars", cars);
-        model.addAttribute("currentLocation", "search");
         return "searchCar";
     }
 
