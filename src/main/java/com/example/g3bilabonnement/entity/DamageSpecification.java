@@ -2,14 +2,23 @@ package com.example.g3bilabonnement.entity;
 
 public class DamageSpecification {
 
-    String damageDescription;
-    Double damagePrice;
-
+    private int id;
+    private String damageDescription;
+    private Double damagePrice;
     public DamageSpecification() {
     }
-    public DamageSpecification(String damageDescription, Double damagePrice){
+    public DamageSpecification(int id, String damageDescription, Double damagePrice){
+        this.id = id;
         this.damageDescription = damageDescription;
         this.damagePrice = damagePrice;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int newId){
+        this.id= newId;
     }
     public String getDamageDescription() {
         return damageDescription;

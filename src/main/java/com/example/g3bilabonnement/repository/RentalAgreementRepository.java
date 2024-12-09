@@ -1,16 +1,15 @@
 package com.example.g3bilabonnement.repository;
 
 import com.example.g3bilabonnement.entity.*;
+import com.example.g3bilabonnement.entity.RentalAgreement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class RentalAgreementRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    //TODO Teknisk set må Crud ikke eksistere i denne opgave
 
 
     public void add(RentalAgreement rentalAgreement) {
@@ -60,9 +59,4 @@ public class RentalAgreementRepository {
         String sql = "SELECT * FROM rental_agreement WHERE id =?";
         return jdbcTemplate.queryForObject(sql, rentalAgreementRowMapper, id);
     }
-
-
-
-
-}
-
+    }
