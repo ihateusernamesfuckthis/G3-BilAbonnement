@@ -4,6 +4,7 @@ import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.helper.CarFilter;
 import com.example.g3bilabonnement.entity.helper.SelectOption;
 import com.example.g3bilabonnement.service.CarService;
+import com.example.g3bilabonnement.service.SubscriptionAddonService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class CarController {
 
     @Autowired
     private CarService carService;
+
+    @Autowired
+    private SubscriptionAddonService subscriptionAddonService;
 
     // Ensures the filter is always present in the model
     @ModelAttribute("filter")
@@ -53,10 +57,7 @@ public class CarController {
 
 
         if (showSearchFilter) {
-            // TODO Replace with the status' from the database when they are added as a separate table
-            List<String> statuses = List.of("Klar til udlejning", "Udlejet", "Skadet",
-                    "Til reparation", "Klar til transport",
-                    "Klar til salg", "Solgt", "Forhåndskøbt");
+            List<String> statuses = carService.getCarStatuses();
 
             // Transform the list of strings into a list of SelectOption to use in formSelectFragment
             // Used for displaying the options in a dropdown

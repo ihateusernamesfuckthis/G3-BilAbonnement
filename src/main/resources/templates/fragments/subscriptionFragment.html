@@ -1,0 +1,86 @@
+<div th:fragment="subscription-display-card(subscription, customCssClass, showActions)"
+     class="subscription-display-card"
+     th:classappend="${customCssClass}">
+
+    <!-- If subscription is available uses this-->
+    <div th:if="${subscription != null}">
+        <div th:replace="~{fragments/subscriptionFragment :: subscription-display-card-inner(${subscription}, ${showActions})}"></div>
+    </div>
+
+    <!-- If subscription is NOT available uses this and displays a grayed out template-->
+    <div th:if="${subscription == null}">
+        <div th:else class="subscription-display-card__inner card subscription-display-card__inner--placeholder">
+            <div class="subscription-display-card__image-section subscription-display-card__image-section--placeholder">
+                <div class="subscription-display-card__image-placeholder"></div>
+            </div>
+
+            <div class="subscription-display-card__details">
+                <div class="subscription-display-card__details-section">
+                    <div class="subscription-display-card__details-column">
+                        <div class="subscription-display-card__detail-placeholder subscription-display-card__detail-placeholder--large"></div>
+                        <div class="subscription-display-card__detail-placeholder subscription-display-card__detail-placeholder--small"></div>
+                    </div>
+                    <div class="subscription-display-card__details-column">
+                        <div class="subscription-display-card__detail-placeholder subscription-display-card__detail-placeholder--large"></div>
+                        <div class="subscription-display-card__detail-placeholder subscription-display-card__detail-placeholder--small"></div>
+                    </div>
+                </div>
+                <div class="subscription-display-card__details-section subscription-display-card__details-section--actions">
+                    <div class="subscription-display-card__actions">
+                        <div th:if="${showActions}"
+                             th:replace="~{fragments/logoButtonFragment :: logo-button('square-add', @{/subscription/new}, '1.5rem','rental-agreement-form-group-subscription-search-button')}"></div>
+                    </div>
+                    <div class="subscription-display-card__details-column">
+                        <div class="subscription-display-card__detail-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="subscription-display-card-inner(subscription, showActions)">
+    <div class="subscription-display-card__inner card">
+        <!-- Details Section -->
+        <div class="subscription-display-card__details">
+            <!-- General Details -->
+            <div class="subscription-display-card__details-section">
+                <div class="subscription-display-card__details-column">
+                    <div class="subscription-display-card__detail-container">
+                        <span class="subscription-display-card__detail subscription-display-card__detail--base-price"
+                              th:text="${subscription.baseSubscriptionPricePerMonth} + 'kr./md.'">Base price pr month</span>
+                    </div>
+                    <div class="subscription-display-card__detail-container">
+                        <span class="subscription-display-card__detail subscription-display-card__detail--kilometer-option"
+                              th:text="${subscription.kilometerOption.kilometersPerMonth} + 'km. ' + ${#numbers.formatDecimal(subscription.kilometerOption.pricePerMonth, 0, 2)} + ' kr./md.'">Kilometer option</span>
+                    </div>
+                </div>
+                <div class="subscription-display-card__details-column">
+                    <div class="subscription-display-card__detail-container">
+                        <span class="subscription-display-card__detail subscription-display-card__detail--type"
+                              th:text="${subscription.subscriptionType}">subscription type</span>
+                    </div>
+                    <div class="subscription-display-card__detail-container">
+                        <span class="subscription-display-card__detail subscription-display-card__detail--addons"
+                              th:text="${subscription.subscriptionAddons != null ? subscription.subscriptionAddons.size() + ' tilføjelser' : 'Ingen tilføjelser'}">subscription addons amount</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing and Actions -->
+            <div class="subscription-display-card__details-section subscription-display-card__details-section--actions">
+                <div class="subscription-display-card__actions">
+                    <div th:if="${showActions}">
+<!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/subscription/search}, '1.5rem', 'subscription-display-card__actions-edit-button')}"></div>-->
+                    </div>
+                </div>
+                <div class="subscription-display-card__details-column subscription-display-card__detail--total-price">
+                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                    <span class="subscription-display-card__detail"
+                          th:text="${subscription.totalPricePerMonth != null ? subscription.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,13 @@ CREATE TABLE car_status
     status VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE kilometer_options
+(
+    id                   INT AUTO_INCREMENT PRIMARY KEY,
+    kilometers_per_month INT            NOT NULL,
+    price_per_month      DECIMAL(10, 2) NOT NULL
+);
+
 CREATE TABLE Renter
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,8 +66,25 @@ CREATE TABLE Subscription
     id                   INT AUTO_INCREMENT PRIMARY KEY,
     baseprice            DECIMAL(10, 2),
     subscription_type    VARCHAR(50),
-    allowed_km_per_month INT,
-    price_per_month      DECIMAL(10, 2)
+    kilometer_options_id    INT,
+    price_per_month      DECIMAL(10, 2),
+    FOREIGN KEY (kilometer_options_id) REFERENCES kilometer_options (id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE SubscriptionAddon
+(
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    name            VARCHAR(255),
+    price_per_month DECIMAL(10, 2)
+);
+
+CREATE TABLE Subscription_SubscriptionAddon
+(
+    subscription_id INT NOT NULL,
+    addon_id        INT NOT NULL,
+    PRIMARY KEY (subscription_id, addon_id), -- Composite primary key, ensures uniqueness but will not be used
+    FOREIGN KEY (subscription_id) REFERENCES Subscription (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (addon_id) REFERENCES SubscriptionAddon (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE rental_agreement
@@ -127,7 +151,16 @@ VALUES ('Klar til udlejning'), -- Ready for rental
        ('Klar til salg'),      -- Ready for sale
        ('Solgt'),              -- Sold
        ('Forhåndskøbt');
--- Pre-purchased with a preliminary agreement
+
+INSERT INTO kilometer_options (kilometers_per_month, price_per_month)
+VALUES (1500, 0.00),
+       (1750, 300.00),
+       (2000, 590.00),
+       (2500, 1160.00),
+       (3000, 1710.00),
+       (3500, 2240.00),
+       (4000, 2750.00),
+       (4500, 3240.00);
 
 -- Populate Renter table
 INSERT INTO Renter (firstname, lastname, email, phone_number, cpr_number, reg_number, account_number, location_id)
@@ -151,17 +184,23 @@ VALUES ('https://example.com/car2.jpg', 'VN12345', 'VIN0001', 'Tesla', 'Model S'
         5000.00, 90.00, 7),                        -- Solgt
        ('https://example.com/car7.jpg', 'VN44556', 'VIN0007', 'Mercedes', 'C-Class', 'Luxury', 'Gasoline', 'Automatic',
         75000.00, 18000.00, 145.00, 8),            -- Forhåndskøbt
-       ('/images/Citroën_C1_Le_Mans_72_HK.jpg', 'VN55679', 'VIN0012', 'Citroën', 'C1 Le Mans', '72 HK', 'Benzin', 'Manuel',
+       ('/images/Citroën_C1_Le_Mans_72_HK.jpg', 'VN55679', 'VIN0012', 'Citroën', 'C1 Le Mans', '72 HK', 'Benzin',
+        'Manuel',
         29999.00, 1000.00, 109.00, 1),
-       ('/images/Fiat 500 Cabriolet Vita Comfort 70 HK.jpg', 'VN55680', 'VIN0013', 'Fiat', '500 Vita Comfort', '70 HK', 'Benzin', 'Manuel',
+       ('/images/Fiat 500 Cabriolet Vita Comfort 70 HK.jpg', 'VN55680', 'VIN0013', 'Fiat', '500 Vita Comfort', '70 HK',
+        'Benzin', 'Manuel',
         29999.00, 1000.00, 105.00, 1),
-       ('/images/Fiat 500 Vita Comfort 70 HK.jpg', 'VN55681', 'VIN0014', 'Fiat', '500 Cabriolet Dolcevita', '70 HK', 'Benzin',
+       ('/images/Fiat 500 Vita Comfort 70 HK.jpg', 'VN55681', 'VIN0014', 'Fiat', '500 Cabriolet Dolcevita', '70 HK',
+        'Benzin',
         'Manuel', 32999.00, 1000.00, 116.00, 1),
-       ('/images/Fiat 500e CABRIO La Prima 118 HK.jpg', 'VN55682', 'VIN0015', 'Fiat', '500 Cabriolet Vita Comfort', '70 HK', 'Benzin',
+       ('/images/Fiat 500e CABRIO La Prima 118 HK.jpg', 'VN55682', 'VIN0015', 'Fiat', '500 Cabriolet Vita Comfort',
+        '70 HK', 'Benzin',
         'Manuel', 33999.00, 1000.00, 108.00, 1),
-       ('/images/Peugeot e-2008 GT Line 136 HK.jpg', 'VN55683', 'VIN0016', 'Peugeot', 'e-2008 GT Line', '136 HK', 'Elbil',
+       ('/images/Peugeot e-2008 GT Line 136 HK.jpg', 'VN55683', 'VIN0016', 'Peugeot', 'e-2008 GT Line', '136 HK',
+        'Elbil',
         'Automatgear', 42999.00, 1000.00, 0.00, 1),
-       ('/images/Fiat 500e CABRIO La Prima 118 HK.jpg', 'VN55684', 'VIN0017', 'Fiat', '500e CABRIO La Prima', '118 HK', 'Elbil',
+       ('/images/Fiat 500e CABRIO La Prima 118 HK.jpg', 'VN55684', 'VIN0017', 'Fiat', '500e CABRIO La Prima', '118 HK',
+        'Elbil',
         'Automatgear', 39999.00, 1000.00, 0.00, 1);
 
 -- Populate Subscription table

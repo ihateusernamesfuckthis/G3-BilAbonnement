@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/fragments/returnButtonFragment.css">
     <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet" href="/css/fragments/subscriptionFragment.css">
 </head>
 <body>
 <div class="rental-agreement-container container">
@@ -28,7 +29,13 @@
 
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'renterId', 'Renter id', 'rental-agreement__form-group__renter-input form-group-input', true)}"></div>
 
-        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'subscriptionId', 'Subscription id', 'rental-agreement__form-group__subscription-input form-group-input', true)}"></div>
+        <div class="rental-agreement__form-group">
+            <label>
+                <input th:if="${subscription != null}" type="text" name="subscriptionId" class="hidden" th:value="${subscription.id}"/>
+            </label>
+            <div th:replace="~{fragments/subscriptionFragment :: subscription-display-card(${subscription}, 'rental-agreement-form-group-subscription', false)}"></div>
+        </div>
+<!--        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'subscriptionId', 'Subscription id', 'rental-agreement__form-group__subscription-input form-group-input', true)}"></div>-->
 
         <div class="rental-agreement__form-group__pickup-location-container">
             <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickupLocationAddress', 'Opsamling adresse', 'rental-agreement__form-group__pickup-location-address-input form-group-input', true)}"></div>

@@ -39,8 +39,11 @@ public class CarService {
     public void updateCarStatus(Car car, String newStatus){
         carRepository.updateCarStatus(car, newStatus);
     }
-
     public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
         return carRepository.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+    }
+
+    public List<String> getCarStatuses() {
+        return carRepository.getCarStatuses();
     }
 }

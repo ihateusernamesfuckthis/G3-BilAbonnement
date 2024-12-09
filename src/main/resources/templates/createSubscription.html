@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret abonnement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/createRentalAgreement.css">
+    <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
+    <link rel="stylesheet" href="/css/fragments/returnButtonFragment.css">
+</head>
+<body>
+<div class="subscription-container container">
+    <div class="subscription__title-container">
+        <h1 class="subscription__title">Opret lejekontrakt</h1>
+        <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
+    </div>
+    <form class="subscription__form" th:action="@{/subscription/create}" th:method="post">
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'baseSubscriptionPrice', 'Base pris per måned', 'subscription-form-group-base-subscription-price-input', true)}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: select-input('kmPrMonth','Kilometer pr. måned', 'subscription-form-group-kilomiter-options-select', false, false, ${kilometerOptionsSelectOptions})}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: select-input('subscriptionAddons','Tilføjelser', 'subscription-form-group-addons-select', false, true, ${subscriptionAddonSelectOptions})}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: select-input('subscriptionType','Abonnements type', 'subscription-form-group-subscription-type-select', false, false, ${subscriptionTypeSelectOptions})}"></div>
+        <div class="form-group form-group__submit-button">
+            <button type="submit" class="button subscription__button">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
