@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velkommen</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/damageReportMainPage.css">
+    <link rel="stylesheet" href="/css/fragments/headerRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
 </head>
 <body>
 
+<div class="headerbox">
+    <img src="/images/logo.png" alt="Logo" class="headerLogo">
+    <div class="btnChoice">
+        <div th:replace="~{fragments/headerChosenRedirectBtnFragment :: headerChosenRedirectBtnFragment(path='/purchaseAgreementMainpage', headerChosenRedirectBtnText='KØBSAFTALER')}"></div>
+        <span class="separator"> | </span>
+        <div th:replace="~{fragments/headerRedirectBtnFragment :: headerRedirectBtnFragment(path='/purchaseAgreementMainpage', headerRedirectBtnText='LAGERBEHOLDNING')}"></div>
+    </div>
+</div>
+<h1>Velkommen til BilAbonnement.dk</h1>
+<p>Vælg en handling nedenfor:</p>
+<button onclick="location.href='/purchase-agreement/create'">Opret en købsaftale</button>
 </body>
 </html>

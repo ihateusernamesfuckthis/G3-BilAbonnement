@@ -49,4 +49,9 @@ public class DamageReportRepository {
         String sql = "SELECT * FROM damage_report WHERE damage_report_id = ?";
         return template.queryForObject(sql, damageReportRowMapper(), id);
     }
+
+    public DamageReport getDamageReportByCarId ( int id){
+        String sql = "SELECT * FROM damage_report WHERE carId = ?";
+        return template.queryForObject(sql, damageReportRowMapper(), id);
+    }
 }

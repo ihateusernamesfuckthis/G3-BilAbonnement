@@ -29,17 +29,6 @@ public class RentalAgreement {
         this.totalPrice = totalPrice;
     }
 
-
-    public void calculateTotalPrice(){
-        // only try to calculate the total price if both dates and subscription are not null to avoid errors
-        if (startDate == null || endDate == null || subscription == null) {
-            return;
-        }
-        int months = calculateTotalMonths();
-        double pricePerMonth = subscription.getTotalPricePerMonth();
-        this.totalPrice = pricePerMonth * months;
-    }
-
     public int calculateTotalMonths() {
         int startYear = startDate.getYear();
         int startMonth = startDate.getMonthValue();
@@ -54,6 +43,26 @@ public class RentalAgreement {
             totalMonths++;
         }
         return totalMonths;
+    }
+
+    public void calculateTotalPrice(){
+        // only try to calculate the total price if both dates and subscription are not null to avoid errors
+        if (startDate == null || endDate == null || subscription == null) {
+            return;
+        }
+        int months = calculateTotalMonths();
+        double pricePerMonth = subscription.getTotalPricePerMonth();
+        this.totalPrice = pricePerMonth * months;
+    }
+
+    public double calculateOverdrivenKilometerPrice(int totalKilometerDriven){
+
+        int totalAllowedKilometer = calculateTotalMonths() * subscription.getAllowedKmPerMonth();
+        int overdrivenKilometer = totalKilometerDriven - (totalAllowedKilometer);
+
+
+        //hvis prisen er 0 eller mindre returnerer den 0, hvis den er over ganger den antallet kilometer med 0.75
+        return overdrivenKilometer <= 0 ? 0.0 : overdrivenKilometer * 0.75;
     }
 
     public int getId() {
