@@ -26,12 +26,6 @@ public class DamageReportAndSpecificationController {
     private DamageReportService damageReportService;
     @Autowired
     private DamageSpecificationService damageSpecificationService;
-    @GetMapping("/damageReportMainPage")
-    public String damageReportMainPage() {
-        //Her kan biler evt. listes?
-        //Her kan skadesrapporter evt. listet?
-        return "damageReportMainPage";
-    }
 
     @GetMapping("/damageReportFunctions")
     public String updateContractSection(@RequestParam String damageReportFunction,HttpSession session, Model model) {
