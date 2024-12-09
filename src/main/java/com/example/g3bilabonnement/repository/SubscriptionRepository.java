@@ -1,6 +1,5 @@
 package com.example.g3bilabonnement.repository;
 
-import com.example.g3bilabonnement.entity.Location;
 import com.example.g3bilabonnement.entity.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
