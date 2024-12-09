@@ -2,6 +2,7 @@ package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.repository.DamageReportRepository;
 import com.example.g3bilabonnement.repository.RentalAgreementRepository;
+import com.example.g3bilabonnement.service.DamageReportService;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class FinalSettlementController {
     RentalAgreementRepository rentalAgreementRepository;
 
     @Autowired
-    DamageReportRepository damageReportRepository;
+    DamageReportService damageReportService;
 
     @GetMapping("/create")
     public String createFinalSettlement(Model model){
@@ -44,7 +45,7 @@ public class FinalSettlementController {
         finalSettlement.setRentalAgreement(rentalAgreement);
 
         //Her hentes og sættes DamageReport objektet ud fra bil id'er hentet fra rental agreement objektet
-        DamageReport damageReport = damageReportRepository.getDamageReportByCarId(rentalAgreement.getCar().getId());
+        DamageReport damageReport = damageReportService.getDamageReportByCarId(rentalAgreement.getCar().getId());
         finalSettlement.setDamageReport(damageReport);
 
         //Dette er hentet fra et brugerinput

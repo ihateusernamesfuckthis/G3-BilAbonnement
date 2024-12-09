@@ -3,6 +3,7 @@ package com.example.g3bilabonnement.controller;
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.repository.CarRepository;
 import com.example.g3bilabonnement.repository.FinalSettlementRepository;
+import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.service.PurchaseAgreementService;
 import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.FinalSettlement;
@@ -22,7 +23,7 @@ public class PurchaseAgreementController {
     @Autowired
     PurchaseAgreementService purchaseAgreementService;
     @Autowired
-    FinalSettlementRepository finalSettlementRepository;
+    FinalSettlementService finalSettlementService;
     @Autowired
     CarRepository carRepository;
 
@@ -40,7 +41,7 @@ public class PurchaseAgreementController {
         Car car = carRepository.getById(carId);
 
         //Her hentes slutopgørelsen der sidder på det valgte bilobjekt på købsaftalen
-        FinalSettlement finalSettlement = finalSettlementRepository.getByCarId(carId);
+        FinalSettlement finalSettlement = finalSettlementService.getByCarId(carId);
 
         // her oprettes købsaftalen og pickupLocation sættes på købsaftale-objeketet
         PurchaseAgreement purchaseAgreement = new PurchaseAgreement();

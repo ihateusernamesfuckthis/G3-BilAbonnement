@@ -26,26 +26,27 @@ public class RentalAgreementRepository {
 
     private final RowMapper<RentalAgreement> rentalAgreementRowMapper = (rs, rowNum) -> {
         RentalAgreement rentalAgreement = new RentalAgreement();
+        Car car = new Car();
+        Renter renter = new Renter();
+        Subscription subscription = new Subscription();
+
+        rentalAgreement.setCar(car);
+        rentalAgreement.setRenter(renter);
+        rentalAgreement.setSubscription(subscription);
 
         rentalAgreement.setId(rs.getInt("id"));
 
         //Her hentes det specifikke bil objekt fra rental agreement
         int carId = rs.getInt("car_id");
-        CarRepository carRepository = new CarRepository();
-        Car car = carRepository.getById(carId);
-        rentalAgreement.setCar(car);
+        car.setId(carId);
 
         //Her hentes det specifikke subscription objekt
         int subscriptionId = rs.getInt("subscription_id");
-        SubscriptionRepository subscriptionRepository = new SubscriptionRepository();
-        Subscription subscription = subscriptionRepository.getById(subscriptionId);
-        rentalAgreement.setSubscription(subscription);
+        subscription.setId(subscriptionId);
 
         //Her hentes det specifikke renter objekt fra databasen
         int renterId = rs.getInt("renter_id");
-        RenterRepository renterRepository = new RenterRepository();
-        Renter renter = renterRepository.getById(renterId);
-        rentalAgreement.setRenter(renter);
+        renter.setId(renterId);
 
         rentalAgreement.setStartDate(rs.getDate("start_date").toLocalDate());
         rentalAgreement.setEndDate(rs.getDate("end_date").toLocalDate());

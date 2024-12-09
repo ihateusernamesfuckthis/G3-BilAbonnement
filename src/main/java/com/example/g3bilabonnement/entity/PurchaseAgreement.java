@@ -20,7 +20,7 @@ public class PurchaseAgreement {
     }
 
     public double calculateFinalPrice() {
-        finalPrice = (car.getNetPrice() - finalSettlement.getTotalDamageReportPrice());
+        finalPrice = (car.getNetPrice() - finalSettlement.getDamageReport().getTotalDamagePrice());
         return finalPrice;
     }
     public Car getCar() {

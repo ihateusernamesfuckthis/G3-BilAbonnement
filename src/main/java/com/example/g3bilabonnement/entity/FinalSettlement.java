@@ -6,10 +6,10 @@ public class FinalSettlement {
     Car car;
     RentalAgreement rentalAgreement;
     DamageReport damageReport;
-    Double totalDamageReportPrice;
+    double totalDamageReportPrice;
     int totalKilometerDriven;
     double overdrivenKilometerPrice;
-    Double totalPrice;
+    double totalPrice;
 
     public FinalSettlement(){}
     public FinalSettlement(int id, Car car, RentalAgreement rentalAgreement, DamageReport damageReport, Double totalDamageReportPrice, int totalKilometerDriven, double overdrivenKilometerPrice, Double totalPrice) {
@@ -25,6 +25,7 @@ public class FinalSettlement {
 
     public double calculateTotalPrice(){
 
+        //Vi regner det samlede beløb ud fra både lejeperioden + meromkostninger
         double rentAndDamagePrice = (damageReport.totalDamagePrice + rentalAgreement.getTotalPrice());
         this.totalPrice = rentAndDamagePrice + this.overdrivenKilometerPrice;
         return totalPrice;
@@ -62,11 +63,11 @@ public class FinalSettlement {
         this.damageReport = damageReport;
     }
 
-    public Double getTotalDamageReportPrice() {
+    public double getTotalDamageReportPrice() {
         return totalDamageReportPrice;
     }
 
-    public void setTotalDamageReportPrice(Double totalDamageReportPrice) {
+    public void setTotalDamageReportPrice(double totalDamageReportPrice) {
         this.totalDamageReportPrice = totalDamageReportPrice;
     }
 

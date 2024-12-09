@@ -62,7 +62,9 @@ public class FinalSettlementRepository {
         }
 
     public FinalSettlement getByCarId(int carId){
-        String sql = "SELECT * FROM final_settlement WHERE car_id =?";
+
+        //får bil id fra rental agreement og bruger den til at få finalsettlement
+        String sql = "SELECT * FROM final_settlement as fs JOIN rental_agreement as ra ON fs.rental_agreement_id WHERE ra.car_id =?;";
         return jdbcTemplate.queryForObject(sql, finalSettlementRowMapper, carId);
     }
     }

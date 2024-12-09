@@ -18,7 +18,7 @@ public class PurchaseAgreementRepository {
     CarRepository carRepository;
 
     public void add(PurchaseAgreement purchaseAgreement) {
-        String sql = "INSERT INTO PurchaseAgreement (car_id, finalSettlement_id, " +
+        String sql = "INSERT INTO purchase_agreement (car_id, final_settlement_id, " +
                 "pickup_location, final_price) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
