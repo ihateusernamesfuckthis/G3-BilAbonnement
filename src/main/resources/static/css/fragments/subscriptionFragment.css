@@ -17,7 +17,6 @@
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    border-left: 1px var(--color-border) solid;
 }
 
 .subscription-display-card__detail-container {
@@ -43,7 +42,6 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin-left: 1rem;
 }
 
 .subscription-display-card__details-column {

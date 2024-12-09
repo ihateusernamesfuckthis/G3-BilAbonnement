@@ -90,6 +90,7 @@ public class RentalAgreementController {
 
         // Clear session data for rental agreement to "reset" the form
         session.removeAttribute("car");
+        session.removeAttribute("subscriptionId");
 
         return "redirect:/rental-agreement/success"; // Redirect to success page
     }
