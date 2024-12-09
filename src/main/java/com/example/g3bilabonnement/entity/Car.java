@@ -133,8 +133,8 @@ public class Car {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String newCarStatus) {
+        this.status = newCarStatus;
     }
 
 }

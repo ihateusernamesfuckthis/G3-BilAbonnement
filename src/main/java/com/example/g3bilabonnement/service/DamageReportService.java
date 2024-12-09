@@ -24,4 +24,10 @@ public class DamageReportService {
         damageReport.setCar(carRepository.getById(damageReport.getCar().getId()));
         return damageReport;
     }
+
+    public DamageReport getDamageReportByCarId(int carID){
+        DamageReport damageReport = damageReportRepository.getDamageReportByCarId(carID);
+        damageReport.setCar(carRepository.getById(damageReport.getCar().getId()));
+        return damageReport;
+    }
 }

@@ -16,6 +16,12 @@ public class RentalAgreementService {
     private LocationRepository locationRepository;
 
     @Autowired
+    private RenterService renterService;
+
+    @Autowired
+    private SubscriptionService subscriptionService;
+
+    @Autowired
     private CarService carService;
 
     public void add(RentalAgreement rentalAgreement) {
@@ -27,5 +33,15 @@ public class RentalAgreementService {
 
         rentalAgreementRepository.add(rentalAgreement);
         carService.updateCarStatus(rentalAgreement.getCar(), "Udlejet"); // Update car to rented out
+    }
+
+    public RentalAgreement getById(int id){
+        RentalAgreement rentalAgreement = rentalAgreementRepository.getById(id);
+
+        rentalAgreement.setCar(carService.getById(rentalAgreement.getCar().getId()));
+        rentalAgreement.setRenter(renterService.getById(rentalAgreement.getRenter().getId()));
+        rentalAgreement.setSubscription(subscriptionService.getById(rentalAgreement.getSubscription().getId()));
+
+        return rentalAgreement;
     }
 }

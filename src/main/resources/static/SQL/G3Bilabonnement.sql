@@ -128,7 +128,7 @@ CREATE TABLE damage_report
 
 CREATE TABLE damage_specification
 (
-    damage_specifiktaion_id int            NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    damage_specification_id int            NOT NULL AUTO_INCREMENT PRIMARY KEY,
     damage_description      varchar(200)   NOT NULL,
     damage_price            decimal(10, 2) NOT NULL,
     damage_report_id        int            NOT NULL,

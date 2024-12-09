@@ -7,8 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class CarRepository {
@@ -48,12 +48,10 @@ public class CarRepository {
         if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
             sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
         }
-
-
         return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
 
-    public void updateCarStatus(Car car, String newStatus){
+    public void updateCarStatus(Car car, String newStatus) {
         String sql = "UPDATE car SET car_status_id = (SELECT car_status.id FROM car_status WHERE status = ?) WHERE car.id = ?";
         jdbcTemplate.update(sql, newStatus, car.getId());
     }
@@ -61,5 +59,14 @@ public class CarRepository {
     public List<String> getCarStatuses() {
         String sql = "SELECT status FROM car_status";
         return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
+        String sql = "SELECT ra.car_id " +
+                "FROM rental_agreement ra " +
+                "LEFT JOIN damage_report dr ON ra.car_id = dr.carId " +
+                "WHERE ra.end_date < ? " +
+                "AND dr.carId IS NULL";
+        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
     }
 }
