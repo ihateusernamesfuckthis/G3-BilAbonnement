@@ -55,8 +55,8 @@ public class RentalAgreementRepository {
         return rentalAgreement;
     };
 
-    public RentalAgreement getById(int id){
+    public RentalAgreement getById(int id) {
         String sql = "SELECT * FROM rental_agreement WHERE id =?";
         return jdbcTemplate.queryForObject(sql, rentalAgreementRowMapper, id);
     }
-    }
+}
