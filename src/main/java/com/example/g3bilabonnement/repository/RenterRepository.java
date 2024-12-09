@@ -1,6 +1,5 @@
 package com.example.g3bilabonnement.repository;
 
-import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.Location;
 import com.example.g3bilabonnement.entity.Renter;
 import org.springframework.beans.factory.annotation.Autowired;

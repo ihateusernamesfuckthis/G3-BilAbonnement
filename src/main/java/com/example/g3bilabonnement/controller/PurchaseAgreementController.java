@@ -2,10 +2,8 @@ package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.repository.CarRepository;
-import com.example.g3bilabonnement.repository.FinalSettlementRepository;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.service.PurchaseAgreementService;
-import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.FinalSettlement;
 import com.example.g3bilabonnement.entity.PurchaseAgreement;
 import org.springframework.beans.factory.annotation.Autowired;

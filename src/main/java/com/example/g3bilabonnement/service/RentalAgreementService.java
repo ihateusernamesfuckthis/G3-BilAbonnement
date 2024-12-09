@@ -2,7 +2,6 @@ package com.example.g3bilabonnement.service;
 
 import com.example.g3bilabonnement.entity.RentalAgreement;
 import com.example.g3bilabonnement.repository.LocationRepository;
-import com.example.g3bilabonnement.entity.Subscription;
 import com.example.g3bilabonnement.repository.RentalAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

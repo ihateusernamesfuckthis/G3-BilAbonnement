@@ -1,7 +1,5 @@
 package com.example.g3bilabonnement.entity.helper;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 
 public class CarFilter {
     private String status;

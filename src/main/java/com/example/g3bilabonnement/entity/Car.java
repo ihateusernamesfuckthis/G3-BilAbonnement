@@ -13,11 +13,11 @@ public class Car {
     private double netPrice;
     private double registrationTax;
     private double co2Emissions;
-    private String status;
+    private String carStatus;
     public Car() {
     }
 
-    public Car(int id, String imageUrl, String vehicleNumber, String vinNumber, String brand, String model, String equipmentLevel, String powerSourceType, String transmissionType, double netPrice, double registrationTax, double co2Emissions, String status) {
+    public Car(int id, String imageUrl, String vehicleNumber, String vinNumber, String brand, String model, String equipmentLevel, String powerSourceType, String transmissionType, double netPrice, double registrationTax, double co2Emissions, String carStatus) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.vehicleNumber = vehicleNumber;
@@ -30,7 +30,7 @@ public class Car {
         this.netPrice = netPrice;
         this.registrationTax = registrationTax;
         this.co2Emissions = co2Emissions;
-        this.status = status;
+        this.carStatus = carStatus;
     }
 
     public int getId() {
@@ -129,12 +129,12 @@ public class Car {
         this.co2Emissions = newCo2Emissions;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCarStatus() {
+        return carStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCarStatus(String newCarStatus) {
+        this.carStatus = newCarStatus;
     }
 
 }

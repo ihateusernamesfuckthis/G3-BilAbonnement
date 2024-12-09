@@ -1,7 +1,5 @@
 package com.example.g3bilabonnement.entity;
 
-import com.example.g3bilabonnement.repository.PurchaseAgreementRepository;
-
 public class PurchaseAgreement {
 
     private int id;

@@ -1,6 +1,5 @@
 package com.example.g3bilabonnement.controller;
 
-import com.example.g3bilabonnement.repository.DamageReportRepository;
 import com.example.g3bilabonnement.repository.RentalAgreementRepository;
 import com.example.g3bilabonnement.service.DamageReportService;
 import com.example.g3bilabonnement.service.FinalSettlementService;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
 
 @RequestMapping("/final-settlement")
 @Controller
