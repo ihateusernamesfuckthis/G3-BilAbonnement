@@ -16,6 +16,7 @@ public class DamageSpecificationRepo {
     private RowMapper<DamageSpecification> damageSpecificationRowMapper() {
         return (rs, rowNum) -> {
             DamageSpecification damageSpecification = new DamageSpecification();
+            damageSpecification.setId(rs.getInt("damage_specification_id"));
             damageSpecification.setDamageDescription(rs.getString("damage_description"));
             damageSpecification.setDamagePrice(rs.getDouble("damage_price"));
             return damageSpecification;

@@ -22,6 +22,7 @@ public class DamageReportRepo {
             @Override
             public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
                 DamageReport damageReport = new DamageReport();
+                damageReport.setId(rs.getInt("damage_report_id"));
                 LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
                 int carId = rs.getInt("carId");
                 Car car = new Car();// Her sætter jeg IDét i et car objekt.
