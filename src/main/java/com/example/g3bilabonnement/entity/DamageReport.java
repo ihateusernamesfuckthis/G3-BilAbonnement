@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 public class DamageReport {
+
+    private int id;
     private LocalDate creationDate;
     private List<DamageSpecification> damageSpecifications = new ArrayList<>();
     private double totalDamagePrice;
@@ -19,6 +21,15 @@ public class DamageReport {
         this.totalDamagePrice = calculateTotalDamagePrice();
         this.car = car;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }

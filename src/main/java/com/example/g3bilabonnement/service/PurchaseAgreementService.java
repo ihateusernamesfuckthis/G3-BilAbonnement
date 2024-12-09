@@ -16,20 +16,10 @@ public class PurchaseAgreementService {
 
     public void add (PurchaseAgreement purchaseAgreement) {
 
-
         if(purchaseAgreement.getCar() == null){
             throw new IllegalArgumentException(purchaseAgreement.getCar().getId() + "not found");
         }
 
-        if (purchaseAgreement.getCar().getDamageReport() == null) { //placeholder damagereport
-            DamageReport placeholderDamageReport = new DamageReport();
-            placeholderDamageReport.setId(0); // Indikerer, at det er en placeholder
-            placeholderDamageReport.setTotalDamagePrice(1000.0); // Ingen skade
-            purchaseAgreement.getCar().setDamageReport(placeholderDamageReport);
-        }
-
-
         purchaseAgreementRepository.add(purchaseAgreement);
-
     }
 }

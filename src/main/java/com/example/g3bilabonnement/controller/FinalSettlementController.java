@@ -28,7 +28,7 @@ public class FinalSettlementController {
     @Autowired
     DamageReportService damageReportService;
 
-    @GetMapping("/create")
+    @GetMapping("/new")
     public String createFinalSettlement(Model model){
         model.addAttribute("returnpath", "/final-settlement/create");
         return "createFinalSettlement";
@@ -58,6 +58,15 @@ public class FinalSettlementController {
 
         finalSettlementService.add(finalSettlement);
 
+        return "redirect:/final-settlement/success";
+    }
+
+    @GetMapping("/success")
+    public String showSuccessPage(Model model) {
+        model.addAttribute("message", "Slutopgørelsen er oprettet!");
+        model.addAttribute("type", "success");
+        model.addAttribute("redirect", "/final-settlement/new");
+        model.addAttribute("redirectText", "Ok");
         return "createFinalSettlementResult";
     }
 }

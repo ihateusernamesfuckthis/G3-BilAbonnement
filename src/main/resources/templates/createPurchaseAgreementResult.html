@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Købsaftale Oprettet</title>
+    <title>Purchase Agreement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/createPurchaseAgreement.css">
+    <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
+    <link rel="stylesheet" href="/css/fragments/returnButtonFragment.css">
+    <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
 </head>
 <body>
-<h1>Købsaftale Oprettet!</h1>
-<p>Bilen er blevet solgt, og købsaftalen er gemt i systemet.</p>
-<a href="/purchase-agreement/create">Opret en ny købsaftale</a>
+<div class="purchase-agreement-container container">
+    <div class="purchase-agreement__title-container">
+        <h1 class="purchase-agreement__title">Opret Købsaftale</h1>
+        <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
+    </div>
+    <form class="purchase-agreement__form" th:action="@{/purchase-agreement/create}" th:method="post">
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'carId', 'Car ID', 'purchase-agreement__form-group__car-input form-group-input', true)}"></div>
+
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickuplocation', 'Pickup Location', 'purchase-agreement__form-group__pickup-location-input form-group-input', false)}"></div>
+
+        <div class="form-group__submit-button">
+            <button type="submit" class="button purchase-agreement__button">Opret</button>
+        </div>
+    </form>
+    <div th:replace="~{fragments/messagePopup :: popup-message(${type}, ${message}, ${redirect}, ${redirectText})}"></div>
+</div>
 </body>
 </html>

@@ -22,6 +22,7 @@ public class DamageReportRepository {
             @Override
             public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
                 DamageReport damageReport = new DamageReport();
+                damageReport.setId(rs.getInt("damage_report_id"));
                 LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
                 int carId = rs.getInt("carId");
                 Car car = new Car();// Her sætter jeg IDét i et car objekt.
@@ -46,6 +47,11 @@ public class DamageReportRepository {
 
     public DamageReport getDamageReportById(int id) {
         String sql = "SELECT * FROM damage_report WHERE damage_report_id = ?";
+        return template.queryForObject(sql, damageReportRowMapper(), id);
+    }
+
+    public DamageReport getDamageReportByCarId ( int id){
+        String sql = "SELECT * FROM damage_report WHERE carId = ?";
         return template.queryForObject(sql, damageReportRowMapper(), id);
     }
 }

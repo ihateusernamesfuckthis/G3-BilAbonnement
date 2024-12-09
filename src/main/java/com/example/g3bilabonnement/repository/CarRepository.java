@@ -17,6 +17,7 @@ public class CarRepository {
     private final RowMapper<Car> carRowMapper = (rs, rowNum) -> {
         Car car = new Car();
         car.setId(rs.getInt("id"));
+        car.setImageUrl(rs.getString("image_url"));
         car.setVehicleNumber(rs.getString("vehicle_number"));
         car.setVinNumber(rs.getString("vin_number"));
         car.setBrand(rs.getString("brand"));
@@ -27,14 +28,13 @@ public class CarRepository {
         car.setNetPrice(rs.getDouble("net_price"));
         car.setRegistrationTax(rs.getDouble("registration_tax"));
         car.setCo2Emissions(rs.getDouble("co2_emissions"));
-        car.setCarStatus(rs.getString("car_status"));
+        car.setStatus(rs.getString("status"));
         return car;
     };
 
     public Car getById(int id) {
-        String sql = "SELECT * FROM car WHERE id = ?";
-        System.out.println("Executing SQL: " + sql + " with id = " + id);
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, carRowMapper);
+        String sql = "SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE car.id = ?";
+        return jdbcTemplate.queryForObject(sql, carRowMapper, id);
     }
 
     public List<Car> searchByFilter(CarFilter carFilter) {

@@ -27,7 +27,7 @@ public class PurchaseAgreementController {
     @Autowired
     CarRepository carRepository;
 
-    @GetMapping("/create")
+    @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
         model.addAttribute("returnpath", "/purchase-agreement/create");
         return "createPurchaseAgreement";
@@ -58,9 +58,9 @@ public class PurchaseAgreementController {
 
     @GetMapping("/success")
     public String showSuccesPage(Model model){
-        model.addAttribute("Message", "Purchase Agreement created succesfully");
-        model.addAttribute("Type", "Succes");
-        model.addAttribute("redirect", "/purchase-agreement/create");
+        model.addAttribute("message", "Purchase Agreement created succesfully");
+        model.addAttribute("type", "success");
+        model.addAttribute("redirect", "/purchase-agreement/new");
         model.addAttribute("redirectText", "Ok");
 
         return"createPurchaseAgreementResult";

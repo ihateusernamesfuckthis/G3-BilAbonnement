@@ -26,7 +26,7 @@ public class FinalSettlement {
     public double calculateTotalPrice(){
 
         //Vi regner det samlede beløb ud fra både lejeperioden + meromkostninger
-        double rentAndDamagePrice = (damageReport.totalDamagePrice + rentalAgreement.getTotalPrice());
+        double rentAndDamagePrice = (damageReport.getTotalDamagePrice() + rentalAgreement.getTotalPrice());
         this.totalPrice = rentAndDamagePrice + this.overdrivenKilometerPrice;
         return totalPrice;
     }
