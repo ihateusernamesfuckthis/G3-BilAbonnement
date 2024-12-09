@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 @Repository
-public class DamageReportRepo {
+public class DamageReportRepository {
 
     @Autowired
     private JdbcTemplate template;

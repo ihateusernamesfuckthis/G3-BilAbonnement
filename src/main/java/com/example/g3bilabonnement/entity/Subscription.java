@@ -5,8 +5,6 @@ public class Subscription {
     private double baseSubscriptionPrice;
     private String subscriptionType;
     private int allowedKmPerMonth;
-    private Location pickupLocation;
-    private Location returnLocation;
     private double totalPricePerMonth;
 
     public Subscription() {
@@ -19,8 +17,6 @@ public class Subscription {
         this.baseSubscriptionPrice = baseSubscriptionPrice;
         this.subscriptionType = subscriptionType;
         this.allowedKmPerMonth = allowedKmPerMonth;
-        this.pickupLocation = pickupLocation;
-        this.returnLocation = returnLocation;
         this.totalPricePerMonth = totalPricePerMonth;
     }
 
@@ -54,22 +50,6 @@ public class Subscription {
 
     public void setAllowedKmPerMonth(int allowedKmPerMonth) {
         this.allowedKmPerMonth = allowedKmPerMonth;
-    }
-
-    public Location getPickupLocation() {
-        return pickupLocation;
-    }
-
-    public void setPickupLocation(Location pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
-
-    public Location getReturnLocation() {
-        return returnLocation;
-    }
-
-    public void setReturnLocation(Location returnLocation) {
-        this.returnLocation = returnLocation;
     }
 
     public double getTotalPricePerMonth() {

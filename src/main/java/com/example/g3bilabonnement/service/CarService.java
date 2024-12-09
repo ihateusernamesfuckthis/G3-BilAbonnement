@@ -31,6 +31,7 @@ public class CarService {
         }
         return cars;
     }
+
     public List<Car> searchByFilter(CarFilter carFilter) {
         return carRepository.searchByFilter(carFilter);
     }
@@ -43,4 +44,3 @@ public class CarService {
         return carRepository.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
     }
 }
-

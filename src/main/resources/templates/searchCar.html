@@ -12,23 +12,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<form th:action="@{/car/search}" method="get" class="car-search__form">
-    <div th:replace="~{fragments/formGroupFragments :: checkbox(name='missingDamageReport', label='Biler der mangler skaderapport', cssClass='formGroupFragment', checked=${filter.missingDamageReport})}"></div>
-    <input type="text" name="carVehicleNumber" placeholder="Enter vehicle number"/>
-    <button type="submit">Search</button>
-</form>
-<form th:if="${cars != null && cars.size() > 0}" th:action="@{/car/return-car}" method="post" class="car-search-result__form">
-    <button type="submit">Select</button>
-    <div class="car-search-result__cars">
-        <div th:each="car :${cars}">
-            <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'rental-agreement-form-group-car', true, false)}"></div>
+<div class="car-search-container search-form-container">
+
+    <!-- search form uses search-form class for styling-->
+    <form th:if="${showSearchFilter}" th:action="@{/car/search}" method="get" class="car-search-form search-form card"
+          th:object="${filter}">
+        <div class="search-form-header">
+            <h2 class="car-search-form-title">Søg efter bil</h2>
+            <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/car/search(showSearchFilter=${!showSearchFilter},
+        vehicleNumber=${filter.vehicleNumber}, status=${filter.status})},40,'car-search-form-close-button')}"></div>
         </div>
-    </div>
-</form>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'vehicleNumber', 'Registreringsnummer', 'car-search-form-group-vehicle-number-input', false)}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: select-input('Status', 'car-search-form-group-status-select', false, ${statusSelectOptions})}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: checkbox(name='missingDamageReport', label='Biler der mangler skaderapport', cssClass='formGroupFragment', checked=${filter.missingDamageReport})}"></div>
+        <button type="submit" class="search-form-button">Search</button>
+    </form>
+
+    <form th:if="${cars != null && cars.size() > 0}" th:action="@{/car/return-car}" method="post"
+          class="car-search-result__form">
+        <div class="car-search-result__form-header">
+            <button type="submit" class="car-search-result__form-header__submit-button">Select</button>
+            <div th:if="${!showSearchFilter}">
+                <div th:replace="~{fragments/logoButtonFragment :: logo-button('search',@{/car/search(showSearchFilter=${!showSearchFilter},
+        vehicleNumber=${filter.vehicleNumber}, status=${filter.status})},38,'car-search-form-close-button')}"></div>
+            </div>
+        </div>
+        <div class="car-search-result__cars">
+            <div th:each="car :${cars}">
+                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'rental-agreement-form-group-car', true, false)}"></div>
+            </div>
+        </div>
+    </form>
 
 <!-- Pop up message if the no cars found-->
 <div th:if="${cars != null && cars.size() == 0}">
-    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', 'search', 'Ok')"></div>
+    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', ${currentLocation}, 'Ok')"></div>
 </div>
 </body>
 </html>

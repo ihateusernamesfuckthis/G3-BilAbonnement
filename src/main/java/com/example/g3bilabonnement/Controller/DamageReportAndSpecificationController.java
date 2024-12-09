@@ -26,6 +26,12 @@ public class DamageReportAndSpecificationController {
     private DamageReportService damageReportService;
     @Autowired
     private DamageSpecificationService damageSpecificationService;
+    @GetMapping("/damageReportMainPage")
+    public String damageReportMainPage() {
+        //Her kan biler evt. listes?
+        //Her kan skadesrapporter evt. listet?
+        return "damageReportMainPage";
+    }
 
     @GetMapping("/damageReportFunctions")
     public String updateContractSection(@RequestParam String damageReportFunction,HttpSession session, Model model) {
@@ -55,10 +61,8 @@ public class DamageReportAndSpecificationController {
 
         DamageReport damageReport = new DamageReport();
 
-        Car car = new Car();
-        car.setId(carId);
-        damageReport.setCar(car);
-        damageReport.setCar(car);
+        Car car = carService.getById(carId); // Jeg henter den indtastede bil
+        damageReport.setCar(car); //Jeg sætter car objektet i damagereport til car
         damageReport.setCreationDate(creationDate);
         int damageReportId = damageReportService.createDamageReport(damageReport);
 

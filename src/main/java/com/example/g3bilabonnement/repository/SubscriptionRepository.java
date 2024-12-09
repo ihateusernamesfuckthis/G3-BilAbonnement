@@ -18,12 +18,6 @@ public class SubscriptionRepository {
         subscription.setBaseSubscriptionPrice(rs.getDouble("base_price"));
         subscription.setSubscriptionType(rs.getString("subscription_type"));
         subscription.setAllowedKmPerMonth(rs.getInt("allowed_km_per_month"));
-        Location pickupLocation = new Location();
-        pickupLocation.setId(rs.getInt("pickup_location_id"));
-        subscription.setPickupLocation(pickupLocation);
-        Location returnLocation = new Location();
-        returnLocation.setId(rs.getInt("return_location_id"));
-        subscription.setPickupLocation(returnLocation);
         subscription.setTotalPricePerMonth(rs.getDouble("price_per_month"));
         return subscription;
     };

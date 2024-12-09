@@ -1,9 +1,12 @@
-DROP DATABASE IF EXISTS G3Bilabonnement;
-CREATE DATABASE G3Bilabonnement;
+DROP
+    DATABASE IF EXISTS G3Bilabonnement;
+CREATE
+    DATABASE G3Bilabonnement;
 
-USE G3Bilabonnement;
+USE
+    G3Bilabonnement;
 
-CREATE TABLE location
+CREATE TABLE Location
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     address  VARCHAR(255) NOT NULL,
@@ -13,11 +16,11 @@ CREATE TABLE location
 
 CREATE TABLE car_status
 (
-    id      INT AUTO_INCREMENT PRIMARY KEY,
-    status  VARCHAR(255) NOT NULL
+    id     INT AUTO_INCREMENT PRIMARY KEY,
+    status VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE renter
+CREATE TABLE Renter
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     firstname      VARCHAR(100) NOT NULL,
@@ -32,7 +35,7 @@ CREATE TABLE renter
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE car
+CREATE TABLE Car
 (
     id                INT AUTO_INCREMENT PRIMARY KEY,
     image_url         VARCHAR(255),
@@ -51,73 +54,143 @@ CREATE TABLE car
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE subscription
+CREATE TABLE Subscription
 (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
-    base_price            DECIMAL(10, 2),
+    baseprice            DECIMAL(10, 2),
     subscription_type    VARCHAR(50),
     allowed_km_per_month INT,
-    pickup_location_id      INT,
-    return_location_id      INT,
-    price_per_month      DECIMAL(10, 2),
-    FOREIGN KEY (pickup_location_id) REFERENCES Location (id)
-        ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (return_location_id) REFERENCES Location (id)
-        ON DELETE SET NULL ON UPDATE CASCADE
+    price_per_month      DECIMAL(10, 2)
 );
 
 CREATE TABLE rental_agreement
 (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
-    car_id          INT            NOT NULL,
-    subscription_id INT            NOT NULL,
-    renter_id       INT            NOT NULL,
-    start_date      DATE           NOT NULL,
-    end_date        DATE           NOT NULL,
+    id                 INT AUTO_INCREMENT PRIMARY KEY,
+    car_id             INT  NOT NULL,
+    subscription_id    INT  NOT NULL,
+    renter_id          INT  NOT NULL,
+    start_date         DATE NOT NULL,
+    end_date           DATE NOT NULL,
+    pickup_location_id INT,
+    return_location_id INT,
+    FOREIGN KEY (pickup_location_id) REFERENCES Location (id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (return_location_id) REFERENCES Location (id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
     FOREIGN KEY (car_id) REFERENCES Car (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (subscription_id) REFERENCES Subscription (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (renter_id) REFERENCES Renter (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE FinalSettlement
+(
+    id INT AUTO_INCREMENT PRIMARY KEY
+);
 
--- Inserting dummy data into `location` table
-INSERT INTO location (address, city, zip_code) VALUES
-                                                   ('123 Elm St', 'Copenhagen', '1000'),
-                                                   ('456 Maple Ave', 'Aarhus', '8000'),
-                                                   ('789 Oak Blvd', 'Odense', '5000');
+CREATE TABLE PurchaseAgreement
+(
+    id                 INT AUTO_INCREMENT PRIMARY KEY,
+    car_id             INT NOT NULL,
+    finalSettlement_id INT NOT NULL
+);
 
+CREATE TABLE damage_report
+(
+    damage_report_id int  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    carId            int  NOT NULL,
+    creation_date    date NOT NULL,
+    FOREIGN KEY (carID) REFERENCES car (id)
+);
+
+CREATE TABLE damage_specification
+(
+    damage_specifiktaion_id int            NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    damage_description      varchar(200)   NOT NULL,
+    damage_price            decimal(10, 2) NOT NULL,
+    damage_report_id        int            NOT NULL,
+    FOREIGN KEY (damage_report_id) REFERENCES damage_report (damage_report_id)
+);
+
+-- Populate Location table
+INSERT INTO Location (address, city, zip_code)
+VALUES ('123 Main St', 'Copenhagen', '1000'),
+       ('456 Elm St', 'Aarhus', '8000'),
+       ('789 Pine Ave', 'Odense', '5000');
+
+-- Populate car_status table
 INSERT INTO car_status (status)
-VALUES
-    ('Klar til udlejning'),
-    ('Udlejet'),
-    ('Skadet'),
-    ('Til reparation'),
-    ('Klar til transport'),
-    ('Klar til salg'),
-    ('Solgt');
+VALUES ('Klar til udlejning'), -- Ready for rental
+       ('Udlejet'),            -- Currently rented out
+       ('Skadet'),             -- Damaged
+       ('Til reparation'),     -- Undergoing repairs
+       ('Klar til transport'),-- Ready for transport (includes planned return date)
+       ('Klar til salg'),      -- Ready for sale
+       ('Solgt'),              -- Sold
+       ('Forhåndskøbt');
+-- Pre-purchased with a preliminary agreement
 
+-- Populate Renter table
+INSERT INTO Renter (firstname, lastname, email, phone_number, cpr_number, reg_number, account_number, location_id)
+VALUES ('John', 'Doe', 'john.doe@example.com', '12345678', '123456-7890', '1001', '5678901234', 1),
+       ('Jane', 'Smith', 'jane.smith@example.com', '87654321', '987654-3210', '1002', '4321098765', 2);
 
--- Inserting dummy data into `renter` table
-INSERT INTO renter (firstname, lastname, email, phone_number, cpr_number, reg_number, account_number, location_id) VALUES
-                                                                                                                       ('John', 'Doe', 'john.doe@example.com', '1234567890', '1234567890', 'AB12345', '100012345', 1),
-                                                                                                                       ('Jane', 'Smith', 'jane.smith@example.com', '0987654321', '0987654321', 'CD67890', '100076543', 2),
-                                                                                                                       ('Alice', 'Johnson', 'alice.johnson@example.com', '1122334455', '1122334455', 'EF98765', '100089234', 3);
+-- Populate Car table
+INSERT INTO Car (image_url, vehicle_number, vin_number, brand, model, equipment_level, power_source_type,
+                 transmission_type, net_price, registration_tax, co2_emissions, car_status_id)
+VALUES ('https://example.com/car2.jpg', 'VN12345', 'VIN0001', 'Tesla', 'Model S', 'Performance', 'Electric',
+        'Automatic', 80000.00, 20000.00, 0.00, 1), -- Klar til udlejning
+       ('https://example.com/car2.jpg', 'VN67890', 'VIN0002', 'Toyota', 'Corolla', 'Standard', 'Hybrid', 'Automatic',
+        25000.00, 5000.00, 98.00, 2),              -- Udlejet
+       ('https://example.com/car3.jpg', 'VN54321', 'VIN0003', 'BMW', 'X5', 'Luxury', 'Diesel', 'Manual', 70000.00,
+        15000.00, 150.00, 4),                      -- Til reparation
+       ('https://example.com/car4.jpg', 'VN98765', 'VIN0004', 'Audi', 'A6', 'Standard', 'Gasoline', 'Automatic',
+        60000.00, 12000.00, 130.00, 5),            -- Klar til transport
+       ('https://example.com/car5.jpg', 'VN65432', 'VIN0005', 'Volkswagen', 'Golf', 'Comfort', 'Electric', 'Automatic',
+        30000.00, 8000.00, 0.00, 6),               -- Klar til salg
+       ('https://example.com/car6.jpg', 'VN11223', 'VIN0006', 'Ford', 'Focus', 'Standard', 'Hybrid', 'Manual', 20000.00,
+        5000.00, 90.00, 7),                        -- Solgt
+       ('https://example.com/car7.jpg', 'VN44556', 'VIN0007', 'Mercedes', 'C-Class', 'Luxury', 'Gasoline', 'Automatic',
+        75000.00, 18000.00, 145.00, 8),            -- Forhåndskøbt
+       ('/images/Citroën_C1_Le_Mans_72_HK.jpg', 'VN55679', 'VIN0012', 'Citroën', 'C1 Le Mans', '72 HK', 'Benzin', 'Manuel',
+        29999.00, 1000.00, 109.00, 1),
+       ('/images/Fiat 500 Cabriolet Vita Comfort 70 HK.jpg', 'VN55680', 'VIN0013', 'Fiat', '500 Vita Comfort', '70 HK', 'Benzin', 'Manuel',
+        29999.00, 1000.00, 105.00, 1),
+       ('/images/Fiat 500 Vita Comfort 70 HK.jpg', 'VN55681', 'VIN0014', 'Fiat', '500 Cabriolet Dolcevita', '70 HK', 'Benzin',
+        'Manuel', 32999.00, 1000.00, 116.00, 1),
+       ('/images/Fiat 500e CABRIO La Prima 118 HK.jpg', 'VN55682', 'VIN0015', 'Fiat', '500 Cabriolet Vita Comfort', '70 HK', 'Benzin',
+        'Manuel', 33999.00, 1000.00, 108.00, 1),
+       ('/images/Peugeot e-2008 GT Line 136 HK.jpg', 'VN55683', 'VIN0016', 'Peugeot', 'e-2008 GT Line', '136 HK', 'Elbil',
+        'Automatgear', 42999.00, 1000.00, 0.00, 1),
+       ('/images/Fiat 500e CABRIO La Prima 118 HK.jpg', 'VN55684', 'VIN0017', 'Fiat', '500e CABRIO La Prima', '118 HK', 'Elbil',
+        'Automatgear', 39999.00, 1000.00, 0.00, 1);
 
--- Inserting dummy data into `car` table
-INSERT INTO car (image_url, vehicle_number, vin_number, brand, model, equipment_level, power_source_type, transmission_type, net_price, registration_tax, co2_emissions, car_status_id)
-VALUES
-    ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'VH12345', '1HGCM82633A123456', 'Toyota', 'Corolla', 'Standard', 'Gasoline', 'Automatic', 200000, 25000, 95, 1),
-    ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'VH67890', '1HGCM82633A654321', 'Ford', 'Focus', 'Luxury', 'Diesel', 'Manual', 250000, 30000, 120, 2),
-    ('https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/utxdwfbv2btg4ss5hopj', 'VH54321', '1HGCM82633A098765', 'Volkswagen', 'Golf', 'Premium', 'Electric', 'Automatic', 300000, 35000, 0, 4);
+-- Populate Subscription table
+INSERT INTO Subscription (baseprice, subscription_type, allowed_km_per_month, price_per_month)
+VALUES (200.00, 'Standard', 1000, 500.00),
+       (300.00, 'Premium', 2000, 800.00),
+       (400.00, 'Unlimited', NULL, 1200.00);
 
--- Inserting dummy data into `subscription` table
-INSERT INTO subscription (base_price, subscription_type, allowed_km_per_month, pickup_location_id, return_location_id, price_per_month) VALUES
-                                                                                                                                            (2000.00, 'Basic', 1000, 1, 1, 3000.00),
-                                                                                                                                            (2500.00, 'Sport', 1500, 2, 2, 3500.00),
-                                                                                                                                            (3000.00, 'Luxury', 2000, 3, 3, 4000.00);
+-- Populate rental_agreement table
+INSERT INTO rental_agreement (car_id, subscription_id, renter_id, start_date, end_date, pickup_location_id,
+                              return_location_id)
+VALUES (1, 1, 1, '2024-01-01', '2024-06-01', 1, 2),
+       (2, 2, 2, '2024-02-01', '2024-05-01', 2, 3);
 
--- Inserting dummy data into `rental_agreement` table
-INSERT INTO rental_agreement (car_id, subscription_id, renter_id, start_date, end_date) VALUES
-                                                                                            (1, 1, 1, '2024-11-01', '2024-11-30'),
-                                                                                            (2, 2, 2, '2024-11-10', '2024-12-10'),
-                                                                                            (3, 3, 3, '2024-11-20', '2024-12-20');
+-- Populate FinalSettlement table
+INSERT INTO FinalSettlement ()
+VALUES (),
+       ();
+
+-- Populate PurchaseAgreement table
+INSERT INTO PurchaseAgreement (car_id, finalSettlement_id)
+VALUES (3, 1);
+
+-- Populate damage_report table
+INSERT INTO damage_report (carId, creation_date)
+VALUES (1, '2024-03-01'),
+       (2, '2024-04-01');
+
+-- Populate damage_specification table
+INSERT INTO damage_specification (damage_description, damage_price, damage_report_id)
+VALUES ('Front bumper scratch', 200.00, 1),
+       ('Cracked windshield', 500.00, 2);

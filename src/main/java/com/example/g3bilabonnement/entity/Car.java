@@ -2,7 +2,7 @@ package com.example.g3bilabonnement.entity;
 
 public class Car {
     private int id;
-    private String imageUrl = "";
+    private String imageUrl;
     private String vehicleNumber;
     private String vinNumber;
     private String brand;
@@ -14,7 +14,6 @@ public class Car {
     private double registrationTax;
     private double co2Emissions;
     private String status;
-
     public Car() {
     }
 
@@ -34,93 +33,100 @@ public class Car {
         this.status = status;
     }
 
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int newId) {
+        this.id = newId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String newImageUrl) {
+        this.imageUrl = newImageUrl;
     }
 
     public String getVehicleNumber() {
         return vehicleNumber;
     }
 
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
+    public void setVehicleNumber(String newVehicleNumber) {
+        this.vehicleNumber = newVehicleNumber;
     }
 
     public String getVinNumber() {
         return vinNumber;
     }
 
-    public void setVinNumber(String vinNumber) {
-        this.vinNumber = vinNumber;
+    public void setVinNumber(String newVinNumber) {
+        this.vinNumber = newVinNumber;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setBrand(String newBrand) {
+        this.brand = newBrand;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setModel(String newModel) {
+        this.model = newModel;
     }
 
     public String getEquipmentLevel() {
         return equipmentLevel;
     }
 
-    public void setEquipmentLevel(String equipmentLevel) {
-        this.equipmentLevel = equipmentLevel;
+    public void setEquipmentLevel(String newEquipmentLevel) {
+        this.equipmentLevel = newEquipmentLevel;
     }
 
     public String getPowerSourceType() {
         return powerSourceType;
     }
 
-    public void setPowerSourceType(String powerSourceType) {
-        this.powerSourceType = powerSourceType;
+    public void setPowerSourceType(String newPowerSourceType) {
+        this.powerSourceType = newPowerSourceType;
     }
 
     public String getTransmissionType() {
         return transmissionType;
     }
 
-    public void setTransmissionType(String transmissionType) {
-        this.transmissionType = transmissionType;
+    public void setTransmissionType(String newTransmissionType) {
+        this.transmissionType = newTransmissionType;
     }
 
     public double getNetPrice() {
         return netPrice;
     }
 
-    public void setNetPrice(double netPrice) {
-        this.netPrice = netPrice;
+    public void setNetPrice(double newNetPrice) {
+        this.netPrice = newNetPrice;
     }
 
     public double getRegistrationTax() {
         return registrationTax;
     }
 
-    public void setRegistrationTax(double registrationTax) {
-        this.registrationTax = registrationTax;
+    public void setRegistrationTax(double newRegistrationTax) {
+        this.registrationTax = newRegistrationTax;
     }
 
     public double getCo2Emissions() {
         return co2Emissions;
     }
 
-    public void setCo2Emissions(double co2Emissions) {
-        this.co2Emissions = co2Emissions;
+    public void setCo2Emissions(double newCo2Emissions) {
+        this.co2Emissions = newCo2Emissions;
     }
 
     public String getStatus() {
@@ -131,11 +137,4 @@ public class Car {
         this.status = status;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

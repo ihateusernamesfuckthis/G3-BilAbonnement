@@ -51,6 +51,7 @@ public class CarRepository {
             }
             return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
+
     public void updateCarStatus(Car car, String newStatus){
         String sql = "UPDATE car SET car_status_id = (SELECT car_status.id FROM car_status WHERE status = ?) WHERE car.id = ?";
         jdbcTemplate.update(sql, newStatus, car.getId());
