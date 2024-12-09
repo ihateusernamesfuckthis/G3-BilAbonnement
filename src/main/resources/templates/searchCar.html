@@ -44,9 +44,10 @@
         </div>
     </form>
 
-<!-- Pop up message if the no cars found-->
-<div th:if="${cars != null && cars.size() == 0}">
-    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', ${currentLocation}, 'Ok')"></div>
+    <!-- Pop up message if the no cars found-->
+    <div th:if="${cars != null && cars.size() == 0}">
+        <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', 'search', 'Ok')"></div>
+    </div>
 </div>
 </body>
 </html>
