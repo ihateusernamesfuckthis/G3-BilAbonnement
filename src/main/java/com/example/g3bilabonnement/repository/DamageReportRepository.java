@@ -22,7 +22,6 @@ public class DamageReportRepository {
             @Override
             public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
                 DamageReport damageReport = new DamageReport();
-                damageReport.setId(rs.getInt("id"));
                 LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
                 int carId = rs.getInt("carId");
                 Car car = new Car();// Her sætter jeg IDét i et car objekt.
@@ -34,25 +33,19 @@ public class DamageReportRepository {
         };
     }
 
-        public int createDamageReport (DamageReport damageReport){
-            String sql = "INSERT INTO damage_report (creation_date, carId) VALUES (?, ?)";
-            template.update(sql, damageReport.getCreationDate(), damageReport.getCar().getId());
-            return getLastCreatedDamageReportId();
-        }
+    public int createDamageReport(DamageReport damageReport) {
+        String sql = "INSERT INTO damage_report (creation_date, carId) VALUES (?, ?)";
+        template.update(sql, damageReport.getCreationDate(), damageReport.getCar().getId());
+        return getLastCreatedDamageReportId();
+    }
 
-        public int getLastCreatedDamageReportId () {
-            String sql = "SELECT LAST_INSERT_ID()";
-            return template.queryForObject(sql, Integer.class);
-        }
+    public int getLastCreatedDamageReportId() {
+        String sql = "SELECT LAST_INSERT_ID()";
+        return template.queryForObject(sql, Integer.class);
+    }
 
-        public DamageReport getDamageReportById ( int id){
-            String sql = "SELECT * FROM damage_report WHERE damage_report_id = ?";
-            return template.queryForObject(sql, damageReportRowMapper(), id);
-        }
-
-    public DamageReport getDamageReportByCarId ( int id){
-        String sql = "SELECT * FROM damage_report WHERE carId = ?";
+    public DamageReport getDamageReportById(int id) {
+        String sql = "SELECT * FROM damage_report WHERE damage_report_id = ?";
         return template.queryForObject(sql, damageReportRowMapper(), id);
     }
-
-    }
+}
