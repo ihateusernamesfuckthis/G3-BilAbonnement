@@ -13,3 +13,14 @@
     <label th:for="${name}" th:text="${label}" class="form-group__label"></label>
     <input th:id="${name}" th:name="${name}" th:type="${type}" class="form-group__input" th:required="${required}" />
 </div>
+
+<div th:fragment="checkbox(name, label, cssClass, checked)">
+    <div class="checkbox_fragment" th:classappend="${cssClass}">
+        <label class="checkbox_label" th:for="${name}" th:text="${label}"></label>
+        <input class="checkbox_input" type="checkbox"
+               th:id="${name}"
+               th:name="${name}"
+               th:checked="${checked}"
+               value="true">
+    </div>
+</div>

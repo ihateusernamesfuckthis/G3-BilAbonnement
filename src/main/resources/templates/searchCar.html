@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
+    <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <form th:action="@{/car/search}" method="get" class="car-search__form">
-    <label for="missingDamageReport">Biler der mangler skaderapport</label>
-    <input type="checkbox" id="missingDamageReport" name="missingDamageReport"
-           th:checked="${filter.missingDamageReport}" value="true"/>
+    <div th:replace="~{fragments/formGroupFragments :: checkbox(name='missingDamageReport', label='Biler der mangler skaderapport', cssClass='formGroupFragment', checked=${filter.missingDamageReport})}"></div>
     <input type="text" name="carVehicleNumber" placeholder="Enter vehicle number"/>
     <button type="submit">Search</button>
 </form>
@@ -29,7 +28,7 @@
 
 <!-- Pop up message if the no cars found-->
 <div th:if="${cars != null && cars.size() == 0}">
-    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', ${currentLocation}, 'Ok')"></div>
+    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', 'search', 'Ok')"></div>
 </div>
 </body>
 </html>
