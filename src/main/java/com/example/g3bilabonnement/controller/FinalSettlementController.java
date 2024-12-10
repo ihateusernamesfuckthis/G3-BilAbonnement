@@ -1,9 +1,9 @@
 package com.example.g3bilabonnement.controller;
 
-import com.example.g3bilabonnement.repository.RentalAgreementRepository;
 import com.example.g3bilabonnement.service.DamageReportService;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.entity.*;
+import com.example.g3bilabonnement.service.RentalAgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ public class FinalSettlementController {
     FinalSettlementService finalSettlementService;
 
     @Autowired
-    RentalAgreementRepository rentalAgreementRepository;
+    RentalAgreementService rentalAgreementService;
 
     @Autowired
     DamageReportService damageReportService;
@@ -38,7 +38,7 @@ public class FinalSettlementController {
         FinalSettlement finalSettlement = new FinalSettlement();
 
         //her hentes og sættes rentalagreement objektet ud fra brugerens input
-        RentalAgreement rentalAgreement = rentalAgreementRepository.getById(rentalAgreementId);
+        RentalAgreement rentalAgreement = rentalAgreementService.getById(rentalAgreementId);
         finalSettlement.setRentalAgreement(rentalAgreement);
 
         //Her hentes og sættes DamageReport objektet ud fra bil id'er hentet fra rental agreement objektet
