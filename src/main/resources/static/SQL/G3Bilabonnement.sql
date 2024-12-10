@@ -1,10 +1,10 @@
 DROP
-    DATABASE IF EXISTS G3Bilabonnement;
+DATABASE IF EXISTS G3Bilabonnement;
 CREATE
-    DATABASE G3Bilabonnement;
+DATABASE G3Bilabonnement;
 
 USE
-    G3Bilabonnement;
+G3Bilabonnement;
 
 CREATE TABLE location
 (
@@ -106,30 +106,13 @@ CREATE TABLE rental_agreement
     FOREIGN KEY (renter_id) REFERENCES Renter (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE final_settlement
-(
-    id 				INT AUTO_INCREMENT PRIMARY KEY,
-    rental_agreement_id INT NOT NULL,
-    damage_report_id INT NOT NULL,
-    total_km_driven INT NOT NULL,
-    total_price DECIMAL (10,2) NOT NULL
-);
-
-CREATE TABLE purchase_agreement
-(
-    id                 	    INT AUTO_INCREMENT PRIMARY KEY,
-    car_id             	    INT NOT NULL,
-    final_settlement_id 	INT NOT NULL,
-    pickup_location		    VARCHAR (100) NOT NULL,
-    final_price			    INT NOT NULL
-);
 
 CREATE TABLE damage_report
 (
-    damage_report_id int  NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    carId            int  NOT NULL,
+    id int  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    car_id            int  NOT NULL,
     creation_date    date NOT NULL,
-    FOREIGN KEY (carID) REFERENCES car (id)
+    FOREIGN KEY (car_id) REFERENCES car (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE damage_specification
@@ -138,11 +121,33 @@ CREATE TABLE damage_specification
     damage_description      varchar(200)   NOT NULL,
     damage_price            decimal(10, 2) NOT NULL,
     damage_report_id        int            NOT NULL,
-    FOREIGN KEY (damage_report_id) REFERENCES damage_report (damage_report_id)
+    FOREIGN KEY (damage_report_id) REFERENCES damage_report (id)
+);
+
+CREATE TABLE final_settlement
+(
+    id 				INT AUTO_INCREMENT PRIMARY KEY,
+    rental_agreement_id INT NOT NULL,
+    damage_report_id INT NOT NULL,
+    total_km_driven INT NOT NULL,
+    total_price DECIMAL (10,2) NOT NULL,
+    FOREIGN KEY (rental_agreement_id) REFERENCES rental_agreement (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (damage_report_id) REFERENCES damage_report (id)
+);
+
+CREATE TABLE purchase_agreement
+(
+    id                 	    INT AUTO_INCREMENT PRIMARY KEY,
+    car_id             	    INT NOT NULL,
+    final_settlement_id 	INT NOT NULL,
+    pickup_location		    VARCHAR (100) NOT NULL,
+    final_price			    INT NOT NULL,
+    FOREIGN KEY (car_id) REFERENCES car (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (final_settlement_id) REFERENCES final_settlement (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Populate Location table
-INSERT INTO Location (address, city, zip_code)
+INSERT INTO location (address, city, zip_code)
 VALUES ('123 Main St', 'Copenhagen', '1000'),
        ('456 Elm St', 'Aarhus', '8000'),
        ('789 Pine Ave', 'Odense', '5000');
@@ -222,7 +227,7 @@ VALUES (1, 1, 1, '2024-01-01', '2024-06-01', 1, 2),
        (2, 2, 2, '2024-02-01', '2024-05-01', 2, 3);
 
 -- Populate damage_report table
-INSERT INTO damage_report (carId, creation_date)
+INSERT INTO damage_report (car_id, creation_date)
 VALUES (1, '2024-03-01'),
        (2, '2024-04-01');
 
