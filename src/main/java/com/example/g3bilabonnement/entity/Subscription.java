@@ -1,23 +1,37 @@
 package com.example.g3bilabonnement.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Subscription {
     private int id;
-    private double baseSubscriptionPrice;
+    private double baseSubscriptionPricePerMonth;
+    List<SubscriptionAddon> subscriptionAddons;
     private String subscriptionType;
-    private int allowedKmPerMonth;
+    private KilometerOption kilometerOption;
     private double totalPricePerMonth;
 
     public Subscription() {
     }
 
-    public Subscription(int id, double baseSubscriptionPrice, String subscriptionType,
-                        int allowedKmPerMonth, Location pickupLocation, Location returnLocation,
-                        double totalPricePerMonth) {
+    public Subscription(int id, double baseSubscriptionPricePerMonth, List<SubscriptionAddon> subscriptionAddons, String subscriptionType, KilometerOption kilometerOption, double totalPricePerMonth) {
         this.id = id;
-        this.baseSubscriptionPrice = baseSubscriptionPrice;
+        this.baseSubscriptionPricePerMonth = baseSubscriptionPricePerMonth;
+        this.subscriptionAddons = subscriptionAddons;
         this.subscriptionType = subscriptionType;
-        this.allowedKmPerMonth = allowedKmPerMonth;
+        this.kilometerOption = kilometerOption;
         this.totalPricePerMonth = totalPricePerMonth;
+    }
+
+    public void calculateTotalPricePerMonth() {
+        double addonPricePerMonth = 0.0;
+        if (subscriptionAddons != null) {
+            for (SubscriptionAddon addon : subscriptionAddons) {
+                addonPricePerMonth += addon.getPricePerMonth();
+            }
+        }
+        double kilometerPricePerMonth = (kilometerOption != null) ? kilometerOption.getPricePerMonth() : 0.0;
+        this.totalPricePerMonth = baseSubscriptionPricePerMonth + addonPricePerMonth + kilometerPricePerMonth;
     }
 
     public int getId() {
@@ -29,11 +43,11 @@ public class Subscription {
     }
 
     public double getBaseSubscriptionPrice() {
-        return baseSubscriptionPrice;
+        return baseSubscriptionPricePerMonth;
     }
 
     public void setBaseSubscriptionPrice(double baseSubscriptionPrice) {
-        this.baseSubscriptionPrice = baseSubscriptionPrice;
+        this.baseSubscriptionPricePerMonth = baseSubscriptionPrice;
     }
 
     public String getSubscriptionType() {
@@ -44,19 +58,43 @@ public class Subscription {
         this.subscriptionType = subscriptionType;
     }
 
-    public int getAllowedKmPerMonth() {
-        return allowedKmPerMonth;
-    }
-
-    public void setAllowedKmPerMonth(int allowedKmPerMonth) {
-        this.allowedKmPerMonth = allowedKmPerMonth;
-    }
-
     public double getTotalPricePerMonth() {
         return totalPricePerMonth;
     }
 
     public void setTotalPricePerMonth(double totalPricePerMonth) {
         this.totalPricePerMonth = totalPricePerMonth;
+    }
+
+    public List<SubscriptionAddon> getSubscriptionAddons() {
+        return subscriptionAddons;
+    }
+
+    public void setSubscriptionAddons(List<SubscriptionAddon> subscriptionAddons) {
+        this.subscriptionAddons = subscriptionAddons;
+    }
+
+    public void addSubscriptionAddon(SubscriptionAddon subscriptionAddon) {
+        // Makes sure there is a list
+        if (this.subscriptionAddons == null) {
+            this.subscriptionAddons = new ArrayList<>(); // <SubscriptionAddon>
+        }
+        this.subscriptionAddons.add(subscriptionAddon);
+    }
+
+    public double getBaseSubscriptionPricePerMonth() {
+        return baseSubscriptionPricePerMonth;
+    }
+
+    public void setBaseSubscriptionPricePerMonth(double baseSubscriptionPricePerMonth) {
+        this.baseSubscriptionPricePerMonth = baseSubscriptionPricePerMonth;
+    }
+
+    public KilometerOption getKilometerOption() {
+        return kilometerOption;
+    }
+
+    public void setKilometerOption(KilometerOption kilometerOption) {
+        this.kilometerOption = kilometerOption;
     }
 }

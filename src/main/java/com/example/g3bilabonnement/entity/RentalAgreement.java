@@ -14,6 +14,7 @@ public class RentalAgreement {
     private LocalDate endDate;
     private double totalPrice;
 
+
     public RentalAgreement() {
     }
 
@@ -57,9 +58,8 @@ public class RentalAgreement {
 
     public double calculateOverdrivenKilometerPrice(int totalKilometerDriven){
 
-        int totalAllowedKilometer = calculateTotalMonths() * subscription.getAllowedKmPerMonth();
+        int totalAllowedKilometer = calculateTotalMonths() * subscription.getKilometerOption().getKilometersPerMonth();
         int overdrivenKilometer = totalKilometerDriven - (totalAllowedKilometer);
-
 
         //hvis prisen er 0 eller mindre returnerer den 0, hvis den er over ganger den antallet kilometer med 0.75
         return overdrivenKilometer <= 0 ? 0.0 : overdrivenKilometer * 0.75;

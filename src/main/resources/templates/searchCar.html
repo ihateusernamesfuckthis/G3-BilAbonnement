@@ -23,7 +23,7 @@
         vehicleNumber=${filter.vehicleNumber}, status=${filter.status})},40,'car-search-form-close-button')}"></div>
         </div>
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'vehicleNumber', 'Registreringsnummer', 'car-search-form-group-vehicle-number-input', false)}"></div>
-        <div th:replace="~{fragments/formGroupFragments :: select-input('Status', 'car-search-form-group-status-select', false, ${statusSelectOptions})}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: select-input('Status','Status', 'car-search-form-group-status-select', false, false, ${statusSelectOptions})}"></div>
         <div th:replace="~{fragments/formGroupFragments :: checkbox(name='missingDamageReport', label='Biler der mangler skaderapport', cssClass='formGroupFragment', checked=${filter.missingDamageReport})}"></div>
         <button type="submit" class="search-form-button">Search</button>
     </form>
@@ -44,9 +44,10 @@
         </div>
     </form>
 
-<!-- Pop up message if the no cars found-->
-<div th:if="${cars != null && cars.size() == 0}">
-    <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', ${currentLocation}, 'Ok')"></div>
+    <!-- Pop up message if the no cars found-->
+    <div th:if="${cars != null && cars.size() == 0}">
+        <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen biler fundet', 'search', 'Ok')"></div>
+    </div>
 </div>
 </body>
 </html>
