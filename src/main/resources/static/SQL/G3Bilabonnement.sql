@@ -6,7 +6,7 @@ CREATE
 USE
     G3Bilabonnement;
 
-CREATE TABLE Location
+CREATE TABLE location
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     address  VARCHAR(255) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE kilometer_options
     price_per_month      DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE Renter
+CREATE TABLE renter
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     firstname      VARCHAR(100) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE Renter
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE Car
+CREATE TABLE car
 (
     id                INT AUTO_INCREMENT PRIMARY KEY,
     image_url         VARCHAR(255),
@@ -106,16 +106,22 @@ CREATE TABLE rental_agreement
     FOREIGN KEY (renter_id) REFERENCES Renter (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE FinalSettlement
+CREATE TABLE final_settlement
 (
-    id INT AUTO_INCREMENT PRIMARY KEY
+    id 				INT AUTO_INCREMENT PRIMARY KEY,
+    rental_agreement_id INT NOT NULL,
+    damage_report_id INT NOT NULL,
+    total_km_driven INT NOT NULL,
+    total_price DECIMAL (10,2) NOT NULL
 );
 
-CREATE TABLE PurchaseAgreement
+CREATE TABLE purchase_agreement
 (
-    id                 INT AUTO_INCREMENT PRIMARY KEY,
-    car_id             INT NOT NULL,
-    finalSettlement_id INT NOT NULL
+    id                 	    INT AUTO_INCREMENT PRIMARY KEY,
+    car_id             	    INT NOT NULL,
+    final_settlement_id 	INT NOT NULL,
+    pickup_location		    VARCHAR (100) NOT NULL,
+    final_price			    INT NOT NULL
 );
 
 CREATE TABLE damage_report
@@ -204,25 +210,16 @@ VALUES ('https://example.com/car2.jpg', 'VN12345', 'VIN0001', 'Tesla', 'Model S'
         'Automatgear', 39999.00, 1000.00, 0.00, 1);
 
 -- Populate Subscription table
-INSERT INTO Subscription (baseprice, subscription_type, allowed_km_per_month, price_per_month)
-VALUES (200.00, 'Standard', 1000, 500.00),
-       (300.00, 'Premium', 2000, 800.00),
-       (400.00, 'Unlimited', NULL, 1200.00);
+INSERT INTO Subscription (baseprice, subscription_type, kilometer_options_id, price_per_month)
+VALUES (200.00, 'Standard', 1, 500.00),
+       (300.00, 'Premium', 2, 800.00),
+       (400.00, 'Unlimited', 3, 1200.00);
 
 -- Populate rental_agreement table
 INSERT INTO rental_agreement (car_id, subscription_id, renter_id, start_date, end_date, pickup_location_id,
                               return_location_id)
 VALUES (1, 1, 1, '2024-01-01', '2024-06-01', 1, 2),
        (2, 2, 2, '2024-02-01', '2024-05-01', 2, 3);
-
--- Populate FinalSettlement table
-INSERT INTO FinalSettlement ()
-VALUES (),
-       ();
-
--- Populate PurchaseAgreement table
-INSERT INTO PurchaseAgreement (car_id, finalSettlement_id)
-VALUES (3, 1);
 
 -- Populate damage_report table
 INSERT INTO damage_report (carId, creation_date)
