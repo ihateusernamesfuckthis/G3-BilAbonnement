@@ -13,7 +13,6 @@ public class KilometerOption {
 
     public KilometerOption() {
     }
-
     public int getId() {
         return id;
     }

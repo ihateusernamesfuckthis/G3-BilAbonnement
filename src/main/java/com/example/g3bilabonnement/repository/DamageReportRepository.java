@@ -22,9 +22,9 @@ public class DamageReportRepository {
             @Override
             public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
                 DamageReport damageReport = new DamageReport();
-                damageReport.setId(rs.getInt("damage_report_id"));
+                damageReport.setId(rs.getInt("id"));
                 LocalDate creationDate = rs.getDate("creation_date").toLocalDate();
-                int carId = rs.getInt("carId");
+                int carId = rs.getInt("car_id");
                 Car car = new Car();// Her sætter jeg IDét i et car objekt.
                 car.setId(carId);
                 damageReport.setCar(car);
@@ -35,7 +35,7 @@ public class DamageReportRepository {
     }
 
     public int createDamageReport(DamageReport damageReport) {
-        String sql = "INSERT INTO damage_report (creation_date, carId) VALUES (?, ?)";
+        String sql = "INSERT INTO damage_report (creation_date, car_id) VALUES (?, ?)";
         template.update(sql, damageReport.getCreationDate(), damageReport.getCar().getId());
         return getLastCreatedDamageReportId();
     }
@@ -46,12 +46,12 @@ public class DamageReportRepository {
     }
 
     public DamageReport getDamageReportById(int id) {
-        String sql = "SELECT * FROM damage_report WHERE damage_report_id = ?";
+        String sql = "SELECT * FROM damage_report WHERE id = ?";
         return template.queryForObject(sql, damageReportRowMapper(), id);
     }
 
     public DamageReport getDamageReportByCarId ( int id){
-        String sql = "SELECT * FROM damage_report WHERE carId = ?";
+        String sql = "SELECT * FROM damage_report WHERE car_id = ?";
         return template.queryForObject(sql, damageReportRowMapper(), id);
     }
 }
