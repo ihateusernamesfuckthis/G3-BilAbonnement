@@ -3,8 +3,6 @@ package com.example.g3bilabonnement.service;
 import com.example.g3bilabonnement.entity.KilometerOption;
 import com.example.g3bilabonnement.entity.Subscription;
 import com.example.g3bilabonnement.entity.SubscriptionAddon;
-import com.example.g3bilabonnement.repository.KilometerOptionsRepository;
-import com.example.g3bilabonnement.repository.SubscriptionAddonRepository;
 import com.example.g3bilabonnement.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +14,17 @@ public class SubscriptionService {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
     @Autowired
-    private SubscriptionAddonRepository subscriptionAddonRepository;
+    private SubscriptionAddonService subscriptionAddonService;
     @Autowired
-    KilometerOptionsRepository kilometerOptionsRepository;
+    private KilometerOptionsService kilometerOptionsService;
 
     public Subscription getById(int id) {
         Subscription subscription = subscriptionRepository.getById(id);
-        List<SubscriptionAddon> addons = subscriptionAddonRepository.findBySubscriptionId(id);
+        List<SubscriptionAddon> addons = subscriptionAddonService.findBySubscriptionId(id);
         // Attach addons to the subscription (if Subscription has an addons field)
         subscription.setSubscriptionAddons(addons);
 
-        KilometerOption kilometerOption = kilometerOptionsRepository.getById(subscription.getKilometerOption().getId());
+        KilometerOption kilometerOption = kilometerOptionsService.getById(subscription.getKilometerOption().getId());
         subscription.setKilometerOption(kilometerOption);
 
         subscription.calculateTotalPricePerMonth();
@@ -43,7 +41,7 @@ public class SubscriptionService {
         }
 
         for(SubscriptionAddon addon : subscription.getSubscriptionAddons()) {
-            subscriptionAddonRepository.addSubscriptionAddonToSubscription(subscription.getId(), addon.getId());
+            subscriptionAddonService.addSubscriptionAddonToSubscription(subscription.getId(), addon.getId());
         }
 
         return id;

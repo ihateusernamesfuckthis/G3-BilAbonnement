@@ -64,7 +64,7 @@ CREATE TABLE car
 CREATE TABLE Subscription
 (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
-    baseprice            DECIMAL(10, 2),
+    base_price            DECIMAL(10, 2),
     subscription_type    VARCHAR(50),
     kilometer_options_id    INT,
     price_per_month      DECIMAL(10, 2),
@@ -215,7 +215,7 @@ VALUES ('https://example.com/car2.jpg', 'VN12345', 'VIN0001', 'Tesla', 'Model S'
         'Automatgear', 39999.00, 1000.00, 0.00, 1);
 
 -- Populate Subscription table
-INSERT INTO Subscription (baseprice, subscription_type, kilometer_options_id, price_per_month)
+INSERT INTO Subscription (base_price, subscription_type, kilometer_options_id, price_per_month)
 VALUES (200.00, 'Standard', 1, 500.00),
        (300.00, 'Premium', 2, 800.00),
        (400.00, 'Unlimited', 3, 1200.00);
