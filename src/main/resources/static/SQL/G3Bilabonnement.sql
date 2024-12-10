@@ -228,10 +228,8 @@ VALUES (1, 1, 1, '2024-01-01', '2024-06-01', 1, 2),
 
 -- Populate damage_report table
 INSERT INTO damage_report (car_id, creation_date)
-VALUES (1, '2024-03-01'),
-       (2, '2024-04-01');
+VALUES (1, '2024-03-01');
 
 -- Populate damage_specification table
 INSERT INTO damage_specification (damage_description, damage_price, damage_report_id)
-VALUES ('Front bumper scratch', 200.00, 1),
-       ('Cracked windshield', 500.00, 2);
+VALUES ('Front bumper scratch', 200.00, 1);

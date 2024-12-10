@@ -64,9 +64,9 @@ public class CarRepository {
     public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
         String sql = "SELECT ra.car_id " +
                 "FROM rental_agreement ra " +
-                "LEFT JOIN damage_report dr ON ra.car_id = dr.carId " +
+                "LEFT JOIN damage_report dr ON ra.car_id = dr.car_id " +
                 "WHERE ra.end_date < ? " +
-                "AND dr.carId IS NULL";
+                "AND dr.car_id IS NULL";
         return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
     }
 }
