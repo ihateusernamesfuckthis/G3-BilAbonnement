@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -18,7 +19,7 @@ public class PurchaseStockAndMonitoringMainController {
     com.example.g3bilabonnement.service.CarService carService;
     @GetMapping("/purchaseAgreementFunctions")
     public String purchaseAgreementMainPage(Model model) {
-        Map<String, String> headerButtons = new HashMap<>();
+        Map<String, String> headerButtons = new LinkedHashMap<>();
         headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
         headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
         headerButtons.put("OVERVÅGNING", "/monitoring");
@@ -27,7 +28,7 @@ public class PurchaseStockAndMonitoringMainController {
     }
     @GetMapping("/monitoring")
     public String monitoringMainPage(Model model) {
-        Map<String, String> headerButtons = new HashMap<>();
+        Map<String, String> headerButtons = new LinkedHashMap<>();
         headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
         headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
         headerButtons.put("OVERVÅGNING", "/monitoring");
@@ -36,7 +37,7 @@ public class PurchaseStockAndMonitoringMainController {
     }
     @GetMapping("/stockFunctionsAndView")
     public String stockFunctionsAndViewMainPage(Model model) {
-        Map<String, String> headerButtons = new HashMap<>();
+        Map<String, String> headerButtons = new LinkedHashMap<>();
         headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
         headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
         headerButtons.put("OVERVÅGNING", "/monitoring");

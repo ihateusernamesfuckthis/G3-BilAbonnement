@@ -8,8 +8,9 @@
 
     <div class="header-buttons">
         <div th:each="entry : ${headerButtons}">
-            <a th:href="@{${entry.value}}" class="headerButton">
-                    <span class="headerButtonText" th:text="${entry.key}"></span>
+            <a th:href="@{${entry.value}}"
+               class="headerButton">
+                    <span class="headerButtonText" th:text="${entry.key}" ></span>
             </a>
         </div>
     </div>

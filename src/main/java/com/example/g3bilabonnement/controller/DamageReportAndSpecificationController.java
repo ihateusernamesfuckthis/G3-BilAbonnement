@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class DamageReportAndSpecificationController {
@@ -31,7 +28,7 @@ public class DamageReportAndSpecificationController {
 
     @GetMapping("/damageReportFunctions")
     public String damageReportFunctions(Model model) {
-        Map<String, String> headerButtons = new HashMap<>();
+        Map<String, String> headerButtons = new LinkedHashMap<>();
         headerButtons.put("SKADERAPPORT", "/damageReportMainPage");
         model.addAttribute("headerButtons", headerButtons);
         return "damageReportMainPage";
