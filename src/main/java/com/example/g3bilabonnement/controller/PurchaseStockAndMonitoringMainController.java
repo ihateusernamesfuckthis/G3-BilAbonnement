@@ -25,4 +25,22 @@ public class PurchaseStockAndMonitoringMainController {
         model.addAttribute("headerButtons", headerButtons);
         return "purchaseAgreementMainPage";
     }
+    @GetMapping("/monitoring")
+    public String monitoringMainPage(Model model) {
+        Map<String, String> headerButtons = new HashMap<>();
+        headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
+        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
+        headerButtons.put("OVERVÅGNING", "/monitoring");
+        model.addAttribute("headerButtons", headerButtons);
+        return "monitoringMainPage";
+    }
+    @GetMapping("/stockFunctionsAndView")
+    public String stockFunctionsAndViewMainPage(Model model) {
+        Map<String, String> headerButtons = new HashMap<>();
+        headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
+        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
+        headerButtons.put("OVERVÅGNING", "/monitoring");
+        model.addAttribute("headerButtons", headerButtons);
+        return "/stockFunctionsAndViewMainPage";
+    }
 }
