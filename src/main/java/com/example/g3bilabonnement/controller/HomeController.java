@@ -21,7 +21,7 @@ public class HomeController {
         headerButtons.put("LEJEAFTALE", "/rentalAgreementFunctions");
         headerButtons.put("SLUTOPGØRELSE", "/finalSettlementFunctions");
         model.addAttribute("headerButtons", headerButtons);
-        return "rentalAgreement_finalSettlementMainPage";
+        return "rentalAgreementMainPage";
     }
 
     @GetMapping("/damageReportMainPage")
@@ -35,7 +35,7 @@ public class HomeController {
         headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
         headerButtons.put("OVERVÅGNING", "/monitoring");
         model.addAttribute("headerButtons", headerButtons);
-        return "purchaseStockAndMonitoringMainPage";
+        return "monitoringMainPage";
     }
 
 }
