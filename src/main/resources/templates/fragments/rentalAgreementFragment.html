@@ -1,0 +1,97 @@
+<div th:fragment="rental-agreement-display-card(rentalAgreement, customCssClass, showActions)"
+     class="rental-agreement-display-card"
+     th:classappend="${customCssClass}">
+
+    <!-- If rental-agreement is available uses this-->
+    <div th:if="${rentalAgreement != null}">
+        <div th:replace="~{fragments/rentalAgreementFragment :: rental-agreement-display-card-inner(${rentalAgreement}, ${showActions})}"></div>
+    </div>
+
+    <!-- If rental-agreement is NOT available uses this and displays a grayed out template-->
+    <div th:if="${rentalAgreement == null}">
+        <div th:else
+             class="rental-agreement-display-card__inner card rental-agreement-display-card__inner--placeholder">
+            <div class="rental-agreement-display-card__image-section rental-agreement-display-card__image-section--placeholder">
+                <div class="rental-agreement-display-card__image-placeholder"></div>
+            </div>
+
+            <div class="rental-agreement-display-card__details">
+                <div class="rental-agreement-display-card__details-section">
+                    <div class="rental-agreement-display-card__details-column">
+                        <div class="rental-agreement-display-card__detail-placeholder rental-agreement-display-card__detail-placeholder--large"></div>
+                        <div class="rental-agreement-display-card__detail-placeholder rental-agreement-display-card__detail-placeholder--small"></div>
+                    </div>
+                    <div class="rental-agreement-display-card__details-column">
+                        <div class="rental-agreement-display-card__detail-placeholder rental-agreement-display-card__detail-placeholder--large"></div>
+                        <div class="rental-agreement-display-card__detail-placeholder rental-agreement-display-card__detail-placeholder--small"></div>
+                    </div>
+                </div>
+                <div class="rental-agreement-display-card__details-section rental-agreement-display-card__details-section--actions">
+                    <div class="rental-agreement-display-card__actions">
+                        <div th:if="${showActions}"
+                             th:replace="~{fragments/logoButtonFragment :: logo-button('square-add', @{/rental-agreement/new}, '1.5rem','rental-agreement-form-group-rental-agreement-search-button')}"></div>
+                    </div>
+                    <div class="rental-agreement-display-card__details-column">
+                        <div class="rental-agreement-display-card__detail-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="rental-agreement-display-card-inner(rentalAgreement, showActions)">
+    <div class="rental-agreement-display-card__inner card">
+        <!-- Details Section -->
+        <div class="rental-agreement-display-card__details">
+            <!-- General Details -->
+            <div class="rental-agreement-display-card__details-section">
+                <div class="rental-agreement-display-card__details-column">
+                    <div class="rental-agreement-display-card__detail-container">
+                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--renter"
+                              th:text="${rentalAgreement.renter.firstname} + ' ' + ${rentalAgreement.renter.lastname}">Renter name</span>
+                    </div>
+                    <div class="rental-agreement-display-card__detail-container">
+                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--date-range"
+                              th:text="${rentalAgreement.startDate} + ' / ' + ${rentalAgreement.endDate}">Start date - end date</span>
+                    </div>
+                </div>
+                <div class="rental-agreement-display-card__details-column">
+                    <div class="rental-agreement-display-card__detail-container">
+                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--vehicle-number"
+                              th:text="${rentalAgreement.car.vehicleNumber}">Vehicle number</span>
+                    </div>
+                    <div class="rental-agreement-display-card__detail-container">
+                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--car-status"
+                              th:text="${rentalAgreement.car.status}">Car status</span>
+                    </div>
+                </div>
+                <div class="rental-agreement-display-card__details-column">
+                    <div class="rental-agreement-display-card__detail-container">
+                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--subscription-type"
+                              th:text="${rentalAgreement.subscription.subscriptionType}">Subscription Type</span>
+                    </div>
+                    <div class="rental-agreement-display-card__detail-container">
+                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--final-settlement"
+                              th:text="${rentalAgreement.hasFinalSettlement ? 'Har slutopgørelse' : 'Ingen slutopgørelse'}">Slut opgørelse</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing and Actions -->
+            <div class="rental-agreement-display-card__details-section rental-agreement-display-card__details-section--actions">
+                <div class="rental-agreement-display-card__actions">
+                    <div th:if="${showActions}">
+                        <!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/rental-agreement/search}, '1.5rem', 'rental-agreement-display-card__actions-edit-button')}"></div>-->
+                    </div>
+                </div>
+                <div class="rental-agreement-display-card__details-column rental-agreement-display-card__detail--total-price">
+                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                    <span class="rental-agreement-display-card__detail"
+                          th:text="${rentalAgreement.totalPrice}">Net Price</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

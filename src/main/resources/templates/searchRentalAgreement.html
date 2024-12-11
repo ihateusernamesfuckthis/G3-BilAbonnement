@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Søg efter lejekontrakt</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/searchRentalAgreement.css">
+    <link rel="stylesheet" href="/css/fragments/rentalAgreementFragment.css">
+</head>
+<body>
+
+<div class="rental-agreement-search-search-container container">
+    <div class="rental-agreement-search-result">
+        <div th:each="rentalAgreement : ${rentalAgreements}">
+            <div th:replace="~{fragments/rentalAgreementFragment :: rental-agreement-display-card(${rentalAgreement}, 'rental-agreement-form-group-subscription', false)}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

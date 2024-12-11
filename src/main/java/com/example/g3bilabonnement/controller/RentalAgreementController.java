@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/rental-agreement")
@@ -37,6 +38,13 @@ public class RentalAgreementController {
         model.addAttribute("subscription", subscription);
 
         return "createRentalAgreement";
+    }
+
+    @GetMapping("/search")
+    public String searchRentalAgreements(Model model) {
+        List<RentalAgreement> rentalAgreements = rentalAgreementService.getAll();
+        model.addAttribute("rentalAgreements", rentalAgreements);
+        return "searchRentalAgreement";
     }
 
     @PostMapping("/create")
