@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
-    <link rel="stylesheet"  href="/css/redirect_btn.css">
+    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
 <div class="container">
-<div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/rental-agreement/new', redirectBtnText='Opret lejekontrakt')}"></div>
-<div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/subscription/new', redirectBtnText='Opret abonnement')}"></div>
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret lejekontrakt', '/rental-agreement/new')"></div>
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret abonnement', '/subscription/new')"></div>
 </div>
 </body>
 </html>

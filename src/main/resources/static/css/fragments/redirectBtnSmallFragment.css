@@ -1,3 +1,10 @@
+.redirectBtnSmallText{
+    font-family: "Montserrat" , sans-serif;
+    color: black;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+}
 .redirectBtnSmallFragment{
     display: flex;
     justify-content: center;
@@ -9,17 +16,11 @@
     margin-right: 30px;
     border-radius: 50px;
     transition: background-color 0.3s, transform 0.3s;
+    position: relative;
 }
-.redirectBtnSmallText{
-    font-family: "Montserrat" , sans-serif;
-    color: black;
-    font-size: 15px;
-    display: block;
-    text-align: center;
-}
-
 .redirectBtnSmallFragment:hover {
     font-weight: bolder;
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(255, 253, 253, 0.7);
 }
+

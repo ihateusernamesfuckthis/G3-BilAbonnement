@@ -44,6 +44,7 @@ body {
     padding: 0;
     line-height: 1.6;
     letter-spacing: 0.02rem;
+
 }
 
 /* Headings */
@@ -112,17 +113,15 @@ input:focus, select:focus, textarea:focus {
 }
 
 .container {
-    max-width: 80vw;
-    max-height: 80vh;
     overflow-y: scroll;
     padding: 35px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 1315px;
-    height: auto;
+    width: 1392px;
+    height: 615px;
     left: 20px;
     background-color: white;
     position: absolute;
-    top: 180px;
+    top: 140px;
 }
 
 .card {

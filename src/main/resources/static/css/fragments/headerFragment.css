@@ -1,7 +1,7 @@
 .headerbox {
     background-color: rgb(186, 199, 208);
     width: 100%;
-    height: 170px;
+    height: 140px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -26,12 +26,16 @@
 .header-buttons{
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 60px;
     margin-top: 20px;
+}
+.headerButton .active{
+    background-color: rgb(148, 169, 185);
 }
 
 .headerButton {
     border-radius: 3px;
+    padding: 5px;
 }
 .headerButtonText {
     font-family: "Montserrat", sans-serif;
@@ -40,5 +44,5 @@
 }
 .headerButton:hover {
     transform: scale(1.05);
-    background-color: rgb(166, 176, 185);
+    background-color: rgb(148, 169, 185);
 }

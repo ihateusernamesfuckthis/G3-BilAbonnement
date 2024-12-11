@@ -28,9 +28,14 @@ public class HomeController {
     public String damageReportMainPage() {
     return "redirect:/damageReportFunctions";
 }
-    @GetMapping("/purchaseAgreementMainPage")
-    public String purchaseAgreementMainPage() {
-        return "purchaseAgreementMainPage";
+    @GetMapping("/purchaseStockAndMonitoringMainPage")
+    public String purchaseAgreementMainPage(Model model) {
+        Map<String, String> headerButtons = new HashMap<>();
+        headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
+        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
+        headerButtons.put("OVERVÅGNING", "/monitoring");
+        model.addAttribute("headerButtons", headerButtons);
+        return "purchaseStockAndMonitoringMainPage";
     }
 
 }
