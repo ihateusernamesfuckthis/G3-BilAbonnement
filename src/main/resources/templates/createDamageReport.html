@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/damageReportMainPage.css">
+    <link rel="stylesheet" href="/css/fragments/headerRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
+    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/carFragment.css">
+</head>
+<body>
+<div class="container">
+        <form action="/createDamageReport" method="post">
+            <h2>Opret Skaderapport</h2>
+            <label>Vælg Bil:</label>
+            <div class="__form-group">
+                <label>
+                    <input th:if="${car != null}" type="text" name="carId" class="hidden" th:value="${car.id}"/>
+                </label>
+                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, true)}"></div>
+            </div>
+            <label for="creationDate">Oprettelsesdato:</label>
+            <input type="date" name="creationDate" id="creationDate" required>
+
+            <div id="damageSpecificationSection">
+                <div>
+                    <h3>Karosseriskader</h3>
+                    <label for="damageDescription">Skadebeskrivelse:</label>
+                    <input type="text" name="damageDescriptions[]" id="damageDescription" value="-" required>
+                    <label id="damagePricesLabel" for="damagePrice">Skadepris:</label>
+                    <input type="number" name="damagePrices[]" id="damagePrice" value="0" required>
+                </div>
+                <div>
+                    <h3>Glas-og lygteskader</h3>
+                    <label for="damageDescription1">Skadebeskrivelse:</label>
+                    <input type="text" name="damageDescriptions[]" id="damageDescription1" value="-" required>
+                    <label for="damagePrice1">Skadepris:</label>
+                    <input type="number" name="damagePrices[]" id="damagePrice1" value="0" required>
+                </div>
+                <div>
+                    <h3>Hjul- og dækskader</h3>
+                    <label for="damageDescription2">Skadebeskrivelse:</label>
+                    <input type="text" name="damageDescriptions[]" id="damageDescription2" value="-" required>
+                    <label for="damagePrice2">Skadepris:</label>
+                    <input type="number" name="damagePrices[]" id="damagePrice2" value="0" required>
+                </div>
+                <div>
+                    <h3>Interiørskader</h3>
+                    <label for="damageDescription3">Skadebeskrivelse:</label>
+                    <input type="text" name="damageDescriptions[]" id="damageDescription3" value="-" required>
+                    <label for="damagePrice3">Skadepris:</label>
+                    <input type="number" name="damagePrices[]" id="damagePrice3" value="0" required>
+                </div>
+                <div>
+                    <h3>Mekaniske og tekniske skader</h3>
+                    <label for="damageDescription4">Skadebeskrivelse:</label>
+                    <input type="text" name="damageDescriptions[]" id="damageDescription4" value="-" required>
+                    <label for="damagePrice4">Skadepris:</label>
+                    <input type="number" name="damagePrices[]" id="damagePrice4" value="0" required>
+                </div>
+                <div>
+                    <h3>Andet</h3>
+                    <label for="damageDescription5">Skadebeskrivelse:</label>
+                    <input type="text" name="damageDescriptions[]" id="damageDescription5" value="-" required>
+                    <label for="damagePrice5">Skadepris:</label>
+                    <input type="number" name="damagePrices[]" id="damagePrice5" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-group form-group__submit-button">
+                <button type="submit">Opret</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

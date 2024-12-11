@@ -3,6 +3,7 @@ package com.example.g3bilabonnement.controller;
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.DamageSpecification;
+import com.example.g3bilabonnement.entity.helper.Button;
 import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.DamageReportService;
 import com.example.g3bilabonnement.service.DamageSpecificationService;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DamageReportAndSpecificationController {
@@ -28,14 +32,20 @@ public class DamageReportAndSpecificationController {
     private DamageSpecificationService damageSpecificationService;
 
     @GetMapping("/damageReportFunctions")
-    public String updateContractSection(@RequestParam String damageReportFunction,HttpSession session, Model model) {
-        model.addAttribute("selectedContractFunction", damageReportFunction);
-        session.setAttribute("returnPath", "/damageReportFunctions?damageReportFunction=create");
-        Car car = (Car) session.getAttribute("car");
-        model.addAttribute("car", car);
+    public String damageReportFunctions(Model model) {
+        List<Button> headerButtons = new ArrayList<>();
+        headerButtons.add(new Button("SKADERAPPORT", "/damageReportFunctions"));
+
+        model.addAttribute("headerButtons", headerButtons);
         return "damageReportMainPage";
     }
-
+    @GetMapping("/createDamageReport")
+    public String damageReportFunctions(HttpSession session, Model model) {
+        session.setAttribute("returnPath", "/createDamageReport");
+        Car car = (Car) session.getAttribute("car");
+        model.addAttribute("car", car);
+        return "createDamageReport";
+    }
     @PostMapping("/createDamageReport")
     public String createDamageReportWithSpecifications(
             @RequestParam("carId") int carId,

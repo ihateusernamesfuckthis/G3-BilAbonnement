@@ -38,7 +38,7 @@
 /* General Styles */
 body {
     font-family: var(--font-family);
-    background-color: rgb(186, 199, 208);
+    background-color: rgb(121, 171, 208);
     color: var(--color-border-focus);
     margin: 0;
     padding: 0;
