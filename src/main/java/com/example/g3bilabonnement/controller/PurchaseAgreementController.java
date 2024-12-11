@@ -1,7 +1,7 @@
 package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
-import com.example.g3bilabonnement.repository.CarRepository;
+import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.service.PurchaseAgreementService;
 import com.example.g3bilabonnement.entity.FinalSettlement;
@@ -23,7 +23,7 @@ public class PurchaseAgreementController {
     @Autowired
     FinalSettlementService finalSettlementService;
     @Autowired
-    CarRepository carRepository;
+    CarService carService;
 
     @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
@@ -36,7 +36,7 @@ public class PurchaseAgreementController {
                                           @RequestParam("pickuplocation") String pickupLocation) {
 
         //her hentes bil-objektet til købsaftalen baseret på brugerinput
-        Car car = carRepository.getById(carId);
+        Car car = carService.getById(carId);
 
         //Her hentes slutopgørelsen der sidder på det valgte bilobjekt på købsaftalen
         FinalSettlement finalSettlement = finalSettlementService.getByCarId(carId);

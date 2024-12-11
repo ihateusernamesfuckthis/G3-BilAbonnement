@@ -15,4 +15,12 @@ public class SubscriptionAddonService {
     public List<SubscriptionAddon> getAll() {
         return subscriptionAddonRepository.getAll();
     }
+
+    public List<SubscriptionAddon> findBySubscriptionId(Integer subscriptionId) {
+        return subscriptionAddonRepository.findBySubscriptionId(subscriptionId);
+    }
+
+    public void addSubscriptionAddonToSubscription(int subscriptionId, int addonId) {
+        subscriptionAddonRepository.addSubscriptionAddonToSubscription(subscriptionId, addonId);
+    }
 }
