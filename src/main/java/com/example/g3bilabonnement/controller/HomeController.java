@@ -29,7 +29,7 @@ public class HomeController {
     return "redirect:/damageReportFunctions";
 }
     @GetMapping("/purchaseStockAndMonitoringMainPage")
-    public String purchaseAgreementMainPage(Model model) {
+    public String purchaseStockAndMonitoringMainPage(Model model) {
         Map<String, String> headerButtons = new HashMap<>();
         headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
         headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
