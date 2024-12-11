@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+</head>
+<body>
 
 <div th:fragment="header(headerButtons)" class="headerbox">
     <div class="header-logo-left">
@@ -8,8 +16,10 @@
 
     <div class="header-buttons">
         <div th:each="entry : ${headerButtons}">
-            <a th:href="@{${entry.value}}" class="headerButton">
+            <a th:href="@{${entry.value}}">
+                <button>
                     <span class="headerButtonText" th:text="${entry.key}"></span>
+                </button>
             </a>
         </div>
     </div>
@@ -20,3 +30,5 @@
         </a>
     </div>
 </div>
+</body>
+</html>

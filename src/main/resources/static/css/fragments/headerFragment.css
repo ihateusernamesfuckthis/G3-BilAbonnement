@@ -5,14 +5,13 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 10px;
 }
 
 .header-logo-left {
     display: flex;
     align-items: center;
-
 }
 
 .header-logo-right {
@@ -20,57 +19,26 @@
     width: auto;
 }
 
-.headerImages{
+.headerImages {
     height: 70px;
     width: auto;
 }
-
-.header-buttons {
-
-}
-
-.header-buttons {
+.header-buttons{
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 10px;
-    border: none;
-    height: 40px;
-    width: 200px;
-    text-align: center;
-    align-items: center;
-    background-color: rgba(162, 183, 201, 0);
-    border-radius: 25px;
-    font-family: "Montserrat", sans-serif;
+    gap: 30px;
+    margin-top: 20px;
 }
 
+.headerButton {
+    border-radius: 3px;
+}
 .headerButtonText {
-    font-weight: bold;
-    color: white;
-    font-size: 18px;
-}
-.small-header-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 10px;
-    align-items: center;
-    height: 60px;
-    width: 200px;
-    background-color: #eeeded;
-    border-radius: 50px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.small-header-buttons:hover {
-    font-weight: bolder;
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 253, 253, 0.7);
-}
-
-.headerButtonSmallText {
     font-family: "Montserrat", sans-serif;
-    color: black;
-    font-size: 15px !important;
-    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+.headerButton:hover {
+    transform: scale(1.05);
+    background-color: rgb(166, 176, 185);
 }

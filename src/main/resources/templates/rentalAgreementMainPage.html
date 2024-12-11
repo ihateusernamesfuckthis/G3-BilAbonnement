@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LEJEAFTALE & SLUTOPGØRELSE</title>
+    <title>Title</title>
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet"  href="/css/redirect_btn.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
-<div class="container"></div>
-
-
+<div class="container">
+<div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/rental-agreement/new', redirectBtnText='Opret lejekontrakt')}"></div>
+<div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/subscription/new', redirectBtnText='Opret abonnement')}"></div>
+</div>
 </body>
 </html>

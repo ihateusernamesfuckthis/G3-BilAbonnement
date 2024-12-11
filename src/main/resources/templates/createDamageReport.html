@@ -5,14 +5,15 @@
     <title>Title</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
-    <link rel="stylesheet" href="/css/fragments/headerRedirectBtnFragment.css">
-    <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
 </head>
 <body>
+<div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
 <div class="container">
-        <form action="/createDamageReport" method="post">
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')"></div>
+    <form action="/createDamageReport" method="post">
             <h2>Opret Skaderapport</h2>
             <label>Vælg Bil:</label>
             <div class="__form-group">

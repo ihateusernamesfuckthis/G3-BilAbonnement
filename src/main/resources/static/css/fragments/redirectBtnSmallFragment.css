@@ -1,22 +1,25 @@
 .redirectBtnSmallFragment{
-    padding: 5px;
-    background-color: #b9b9b9;
-    width: 210px;
-    height: 50px;
-    border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60px;
+    width: 240px;
+    background-color: #eeeded;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 50px;
     transition: background-color 0.3s, transform 0.3s;
-    font-family: "Montserrat", sans-serif;
-    font-size: 15px;
+}
+.redirectBtnSmallText{
+    font-family: "Montserrat" , sans-serif;
     color: black;
+    font-size: 15px;
+    display: block;
+    text-align: center;
 }
 
 .redirectBtnSmallFragment:hover {
-    font-weight: bold;
-    background-color: lightgrey;
-}
-.redirectBtnSmallFragment > button{
-    all:unset;
+    font-weight: bolder;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 253, 253, 0.7);
 }
