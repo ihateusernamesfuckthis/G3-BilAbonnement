@@ -7,11 +7,17 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/finalSettlementFragment.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
 <div class="container">
-    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret slutopgørelse', '/final-settlement/new')"></div>
+    <div th:replace="~{fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret slutopgørelse', '/final-settlement/new')}"></div>
+    <div class="final-settlement-search-result">
+        <div th:each="finalSettlement : ${finalSettlements}">
+            <div th:replace="~{fragments/finalSettlementFragment :: final-settlement-display-card(${finalSettlement}, 'final-settlement-form-group-subscription', false)}"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
