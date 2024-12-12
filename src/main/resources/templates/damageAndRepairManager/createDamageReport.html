@@ -5,38 +5,23 @@
     <title>Title</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
-    <link rel="stylesheet" href="/css/fragments/headerRedirectBtnFragment.css">
-    <link rel="stylesheet" href="/css/fragments/headerChosenRedirectBtnFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
 </head>
 <body>
-<div class="headerbox">
-    <img src="/images/Logo.png" alt="Logo" class="headerLogo">
-    <div class="btnChoice">
-        <div th:replace="~{fragments/headerChosenRedirectBtnFragment :: headerChosenRedirectBtnFragment(path='/damageReportMainpage', headerChosenRedirectBtnText='SKADERAPPORT')}"></div>
-        <span class="separator"> | </span>
-        <div th:replace="~{fragments/headerRedirectBtnFragment :: headerRedirectBtnFragment(path='/damageReportMainpage', headerRedirectBtnText='BIL')}"></div>
-    </div>
-    <div class="damageReportFunctionsBtn">
-        <form action="/damageReportFunctions" method="get">
-            <div th:replace="~{fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment(name='damageReportFunction', value='create', redirectBtnSmallText='Opret Skaderapport')}"></div>
-        </form>
-    </div>
-</div>
-
+<div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
 <div class="container">
-    <div class="createDamageReport" th:if="${selectedContractFunction == 'create'}">
-        <form action="/createDamageReport" method="post">
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')"></div>
+    <form action="/createDamageReport" method="post">
             <h2>Opret Skaderapport</h2>
-
             <label>Vælg Bil:</label>
-                <div class="__form-group">
-                    <label>
-                        <input th:if="${car != null}" type="text" name="carId" class="hidden" th:value="${car.id}"/>
-                    </label>
-                    <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, true)}"></div>
-                </div>
+            <div class="__form-group">
+                <label>
+                    <input th:if="${car != null}" type="text" name="carId" class="hidden" th:value="${car.id}"/>
+                </label>
+                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, true)}"></div>
+            </div>
             <label for="creationDate">Oprettelsesdato:</label>
             <input type="date" name="creationDate" id="creationDate" required>
 
@@ -91,6 +76,5 @@
         </form>
     </div>
 </div>
-
 </body>
 </html>

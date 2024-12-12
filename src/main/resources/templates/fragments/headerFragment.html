@@ -1,0 +1,23 @@
+
+<div th:fragment="header(headerButtons)" class="headerbox">
+    <div class="header-logo-left">
+        <a th:href="@{'/'}">
+            <img src="/images/BilALogo.png" alt="BilAbonnement Logo" class="headerImages">
+        </a>
+    </div>
+
+    <div class="header-buttons">
+        <div th:each="entry : ${headerButtons}">
+            <a th:href="@{${entry.value}}"
+               class="headerButton">
+                    <span class="headerButtonText" th:text="${entry.key}" ></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="header-logo-right">
+        <a th:href="@{'/'}">
+            <img src="/images/home.icon.png" alt="Home Logo" class="headerImages">
+        </a>
+    </div>
+</div>

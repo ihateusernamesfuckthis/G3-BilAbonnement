@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+</head>
+<body>
+
+<div th:fragment="header(headerButtons)" class="headerbox">
+    <div class="header-logo-left">
+        <a th:href="@{'/'}">
+            <img src="/images/BilALogo.png" alt="BilAbonnement Logo" class="headerImages">
+        </a>
+    </div>
+
+    <div class="header-buttons">
+        <div th:each="entry : ${headerButtons}">
+            <a th:href="@{${entry.value}}">
+                <button>
+                    <span class="headerButtonText" th:text="${entry.key}"></span>
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="header-logo-right">
+        <a th:href="@{'/'}">
+            <img src="" alt="Home Logo" class="headerImages">
+        </a>
+    </div>
+</div>
+</body>
+</html>

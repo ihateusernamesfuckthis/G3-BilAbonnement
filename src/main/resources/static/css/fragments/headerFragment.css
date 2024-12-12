@@ -1,0 +1,44 @@
+.headerbox {
+    background-color: rgb(186, 199, 208);
+    width: 100%;
+    height: 140px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.header-logo-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-right {
+    height: 70px;
+    width: auto;
+}
+
+.headerImages {
+    height: 70px;
+    width: auto;
+}
+.header-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 20px;
+}
+.headerButton {
+    border-radius: 3px;
+    padding: 5px;
+}
+.headerButtonText {
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    font-size: 25px;
+}
+.headerButton:hover {
+    transform: scale(1.05);
+    background-color: rgb(148, 169, 185);
+}
