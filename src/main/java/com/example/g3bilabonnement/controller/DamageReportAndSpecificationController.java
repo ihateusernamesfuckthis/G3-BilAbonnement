@@ -87,4 +87,13 @@ public class DamageReportAndSpecificationController {
 
         return "createdDamageReportView";
     }
+
+    @GetMapping("/search")
+    public String search(int damageReportId, Model model){
+    List<DamageReport> damageReports = damageReportService.getAll(damageReportId);
+
+    model.addAttribute("damagereports", damageReports);
+
+    return "search";
+    }
 }

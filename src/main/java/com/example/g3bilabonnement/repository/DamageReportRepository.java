@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public class DamageReportRepository {
@@ -53,5 +54,10 @@ public class DamageReportRepository {
     public DamageReport getDamageReportByCarId ( int id){
         String sql = "SELECT * FROM damage_report WHERE car_id = ?";
         return template.queryForObject(sql, damageReportRowMapper(), id);
+    }
+
+    public List <DamageReport> getAll (int id){
+        String sql = "SELECT * FROM damage_report WHERE id = ?";
+        return template.query(sql, damageReportRowMapper(), id);
     }
 }
