@@ -3,7 +3,6 @@ package com.example.g3bilabonnement.entity;
 public class FinalSettlement {
 
     int id;
-    Car car;
     RentalAgreement rentalAgreement;
     DamageReport damageReport;
     double totalDamageReportPrice;
@@ -12,9 +11,8 @@ public class FinalSettlement {
     double totalPrice;
 
     public FinalSettlement(){}
-    public FinalSettlement(int id, Car car, RentalAgreement rentalAgreement, DamageReport damageReport, Double totalDamageReportPrice, int totalKilometerDriven, double overdrivenKilometerPrice, Double totalPrice) {
+    public FinalSettlement(int id, RentalAgreement rentalAgreement, DamageReport damageReport, Double totalDamageReportPrice, int totalKilometerDriven, double overdrivenKilometerPrice, Double totalPrice) {
         this.id = id;
-        this.car = car;
         this.rentalAgreement = rentalAgreement;
         this.damageReport = damageReport;
         this.totalDamageReportPrice = totalDamageReportPrice;
@@ -37,14 +35,6 @@ public class FinalSettlement {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
     }
 
     public RentalAgreement getRentalAgreement() {
