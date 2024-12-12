@@ -15,8 +15,7 @@ public class RentalAgreementAndFinalSettlementMainController {
 
     @GetMapping("/rentalAgreementFunctions")
     public String rentalAgreementFunctions(Model model) {
-        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
-        return "/dataRegistrator/searchRentalAgreement";
+        return "redirect:/rental-agreement/search";
     }
 
     @GetMapping("/finalSettlementFunctions")

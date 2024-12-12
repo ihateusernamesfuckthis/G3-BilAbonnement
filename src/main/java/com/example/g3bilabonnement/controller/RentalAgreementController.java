@@ -23,6 +23,8 @@ public class RentalAgreementController {
     private RentalAgreementService rentalAgreementService;
     @Autowired
     private SubscriptionService subscriptionService;
+    @Autowired
+    private HomeController homeController;
 
     @GetMapping("/new")
     public String createRentalAgreementPage(Model model, HttpSession session) {
@@ -42,6 +44,7 @@ public class RentalAgreementController {
 
     @GetMapping("/search")
     public String searchRentalAgreements(Model model) {
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
         List<RentalAgreement> rentalAgreements = rentalAgreementService.getAll();
         model.addAttribute("rentalAgreements", rentalAgreements);
         return "searchRentalAgreement";
