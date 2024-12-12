@@ -1,0 +1,14 @@
+.stock-functions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stock-functions-card {
+    height: 100%; /* Set the height of the cards */
+    background-color: #f5f5f5; /* Optional: Set a background to visualize cards */
+    border: 1px solid #ccc; /* Optional: Add a border */
+    display: flex; /* Optional: Center content inside */
+    justify-content: center; /* Optional: Center content inside */
+    align-items: center; /* Optional: Center content inside */
+}

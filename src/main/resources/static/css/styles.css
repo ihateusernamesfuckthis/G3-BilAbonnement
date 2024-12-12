@@ -113,15 +113,11 @@ input:focus, select:focus, textarea:focus {
 }
 
 .container {
-    overflow-y: scroll;
-    padding: 35px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 1392px;
-    height: 615px;
-    left: 20px;
-    background-color: white;
-    position: absolute;
-    top: 140px;
+    overflow-y: auto;
+    margin: 0 2rem 2rem;
+    padding: 2rem;
+    background-color: var(--color-white);
+    min-height: calc(100vh - 140px - 2rem); /* Subtract 140px from the height of the header and 2rem from the margin-bottom */
 }
 
 .card {

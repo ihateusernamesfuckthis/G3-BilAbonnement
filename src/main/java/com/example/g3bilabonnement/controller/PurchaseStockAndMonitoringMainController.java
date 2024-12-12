@@ -1,5 +1,6 @@
 package com.example.g3bilabonnement.controller;
 
+import com.example.g3bilabonnement.helper.FormatHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ public class PurchaseStockAndMonitoringMainController {
     @GetMapping("/stockFunctionsAndView")
     public String stockFunctionsAndViewMainPage(Model model) {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
+        model.addAttribute("totalCarPrice", FormatHelper.formatDouble(carService.getTotalCarPrice("Udlejet")));
         return "/businessDeveloper/stockFunctionsAndView";
     }
 }

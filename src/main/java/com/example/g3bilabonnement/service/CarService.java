@@ -46,4 +46,8 @@ public class CarService {
     public List<String> getCarStatuses() {
         return carRepository.getCarStatuses();
     }
+
+    public double getTotalCarPrice(String carStatus) {
+        return carRepository.getTotalCarPrice(carStatus);
+    }
 }
