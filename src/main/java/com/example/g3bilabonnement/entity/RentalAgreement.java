@@ -87,7 +87,6 @@ public class RentalAgreement {
 
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
-        calculateTotalPrice();
     }
 
     public Renter getRenter() {

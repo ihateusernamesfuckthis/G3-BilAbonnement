@@ -8,12 +8,20 @@
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+    <link rel="stylesheet" href="/css/fragments/purchaseAgreementFragment.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment :: header(${headerButtons})}"></div>
 <div class="container">
     <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Købsaftale', '/purchase-agreement/new')"></div>
-</div>
 
+    <div class="purchase-agreeement-search-result">
+        <div th:each="purchaseAgreement : ${purchaseAgreements}">
+            <div th:replace="~{fragments/purchaseAgreementFragment :: purchase-agreement-display-card(${purchaseAgreement}, 'purchase-agreement-search-form-group', false)}">
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
