@@ -28,7 +28,7 @@ public class PurchaseAgreementController {
     @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
         model.addAttribute("returnpath", "/purchase-agreement/create");
-        return "createPurchaseAgreement";
+        return "/businessDeveloper/createPurchaseAgreement";
     }
 
     @PostMapping("/create")
@@ -61,6 +61,6 @@ public class PurchaseAgreementController {
         model.addAttribute("redirect", "/purchase-agreement/new");
         model.addAttribute("redirectText", "Ok");
 
-        return"createPurchaseAgreementResult";
+        return"/businessDeveloper/createPurchaseAgreementResult";
     }
 }

@@ -25,20 +25,20 @@ public class DamageReportAndSpecificationController {
     private DamageReportService damageReportService;
     @Autowired
     private DamageSpecificationService damageSpecificationService;
+    @Autowired
+    HomeController homeController;
 
     @GetMapping("/damageReportFunctions")
     public String damageReportFunctions(Model model) {
-        Map<String, String> headerButtons = new LinkedHashMap<>();
-        headerButtons.put("SKADERAPPORT", "/damageReportMainPage");
-        model.addAttribute("headerButtons", headerButtons);
-        return "damageReportMainPage";
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
+        return "/damageAndRepairManager/searchDamageReport";
     }
     @GetMapping("/createDamageReport")
     public String damageReportFunctions(HttpSession session, Model model) {
         session.setAttribute("returnPath", "/createDamageReport");
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("car", car);
-        return "createDamageReport";
+        return "/damageAndRepairManager/createDamageReport";
     }
     @PostMapping("/createDamageReport")
     public String createDamageReportWithSpecifications(
@@ -75,7 +75,7 @@ public class DamageReportAndSpecificationController {
 
         session.removeAttribute("car");
 
-        return "redirect:/createdDamageReportView?damageReportId=" + damageReportId;
+        return "redirect:/damageAndRepairManage/createdDamageReportView?damageReportId=" + damageReportId;
     }
 
     @GetMapping("/createdDamageReportView")
@@ -89,6 +89,6 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("damageReport", damageReport);
         model.addAttribute("car", car);
 
-        return "createdDamageReportView";
+        return "/damageAndRepairManager/createdDamageReportView";
     }
 }

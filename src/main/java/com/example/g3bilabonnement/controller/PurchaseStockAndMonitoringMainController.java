@@ -16,31 +16,21 @@ public class PurchaseStockAndMonitoringMainController {
     com.example.g3bilabonnement.service.FinalSettlementService finalSettlementService;
     @Autowired
     com.example.g3bilabonnement.service.CarService carService;
+    @Autowired
+    HomeController homeController;
     @GetMapping("/purchaseAgreementFunctions")
     public String purchaseAgreementMainPage(Model model) {
-        Map<String, String> headerButtons = new LinkedHashMap<>();
-        headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
-        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
-        headerButtons.put("OVERVÅGNING", "/monitoring");
-        model.addAttribute("headerButtons", headerButtons);
-        return "purchaseAgreementMainPage";
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
+        return "/businessDeveloper/searchPurchaseAgreement";
     }
     @GetMapping("/monitoring")
     public String monitoringMainPage(Model model) {
-        Map<String, String> headerButtons = new LinkedHashMap<>();
-        headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
-        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
-        headerButtons.put("OVERVÅGNING", "/monitoring");
-        model.addAttribute("headerButtons", headerButtons);
-        return "monitoringMainPage";
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
+        return "/businessDeveloper/monitoring";
     }
     @GetMapping("/stockFunctionsAndView")
     public String stockFunctionsAndViewMainPage(Model model) {
-        Map<String, String> headerButtons = new LinkedHashMap<>();
-        headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
-        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
-        headerButtons.put("OVERVÅGNING", "/monitoring");
-        model.addAttribute("headerButtons", headerButtons);
-        return "/stockFunctionsAndViewMainPage";
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
+        return "/businessDeveloper/stockFunctionsAndView";
     }
 }
