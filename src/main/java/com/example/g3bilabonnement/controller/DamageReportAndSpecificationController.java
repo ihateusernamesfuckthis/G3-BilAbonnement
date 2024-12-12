@@ -92,12 +92,12 @@ public class DamageReportAndSpecificationController {
         return "/damageAndRepairManager/createdDamageReportView";
     }
 
-    @GetMapping("/search")
-    public String search(int damageReportId, Model model){
-    List<DamageReport> damageReports = damageReportService.getAll(damageReportId);
+    @GetMapping("/searchDamageReport")
+    public String search(Model model){
+    List<DamageReport> damageReports = damageReportService.getAll();
 
     model.addAttribute("damagereports", damageReports);
 
-    return "search";
+    return "/damageAndRepairManager/searchDamageReport";
     }
 }

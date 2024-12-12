@@ -8,11 +8,20 @@
     <link rel="stylesheet" href="/css/damageReportMainPage.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/damageReportFragment.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment :: header(${headerButtons})}"></div>
 <div class="container">
     <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')"></div>
+
+    <div class="damage-report-search-result">
+        <div th:each="damageReport : ${damagereports}">
+            <div th:replace="~{fragments/damageReportFragment :: damage-report-display-card(${damageReport}, 'damage-report-search-form-group', false)}">
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

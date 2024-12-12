@@ -34,8 +34,8 @@ public class DamageReportService {
         return damageReport;
     }
 
-    public List <DamageReport> getAll (int damageReportId){
-        List <DamageReport> damageReports = damageReportRepository.getAll(damageReportId);
+    public List <DamageReport> getAll (){
+        List <DamageReport> damageReports = damageReportRepository.getAll();
 
         for (DamageReport damageReport : damageReports){
             damageReport.setCar(carService.getById(damageReport.getCar().getId()));

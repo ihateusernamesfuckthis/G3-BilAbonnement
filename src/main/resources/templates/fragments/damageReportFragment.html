@@ -4,7 +4,7 @@
 
     <!-- hvis objektet man sender er tilgængelig, bliver objektet vist -->
     <div th:if="${damageReport != null}">
-        <div th:replace="~{fragments/subscriptionFragment :: damage-report-display-card-inner(${damageReport}, ${showActions})}"></div>
+        <div th:replace="~{fragments/damageReportFragment :: damage-report-display-card-inner(${damageReport}, ${showActions})}"></div>
 
         <!-- hvis man skal kunne vælge objektet, skal dette fragment inkluderes
 
@@ -46,7 +46,7 @@
 </div>
 
 <!-- hvis objektet man sender er tilgængelig, bliver objektet vist -->
-<div th:fragment="damage-report-display-card-inner(damage-report, showActions)">
+<div th:fragment="damage-report-display-card-inner(damageReport, showActions)">
     <div class="damage-report-display-card__inner card">
         <!-- Details Section -->
         <div class="damage-report-display-card__details">
@@ -54,22 +54,25 @@
             <div class="damage-report-display-card__details-section">
                 <div class="damage-report-display-card__details-column">
                     <div class="damage-report-display-card__detail-container">
-                        <span class="damage-report-display-card__detail damage-report-display-card__detail--base-price"
-                              th:text="${damageReport.car.vehicle} + 'vogn nummer' ">vehicle number</span>
+                       <span class="damage-report-display-card__detail damage-report-display-card__detail--base-price"
+                             th:text="${damageReport.car.vehicleNumber} + '' ">vehicle number</span>
+
                     </div>
                     <div class="damage-report-display-card__detail-container">
-                        <span class="damage-report-display-card__detail damage-report-display-card__detail--kilometer-option"
-                              th:text="${#dates.format(damageReport.creationDate, 'dd-MM-yyyy')} + 'Dato for oprettelse' + ' kr./md.'">creationDate</span>
+                         <span class="damage-report-display-card__detail damage-report-display-card__detail--kilometer-option"
+
+                               th:text="'Dato for oprettelse ' + ${(damageReport.creationDate)} + ''">creationDate</span>
+
                     </div>
                 </div>
                 <div class="damage-report-display-card__details-column">
                     <div class="damage-report-display-card__detail-container">
                         <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
-                              th:text="${damageReport.damageSpecifications != null ? damageReport.damageSpecifications.size() + 'skadespecifikationer' : 'Ingen skadespecifikationer' }">damage-report damageSpecifications</span>
+                              th:text="${(damageReport.damageSpecifications != null && !damageReport.damageSpecifications.isEmpty()) ? damageReport.damageSpecifications.size() + ' Skadespecifikationer' : ' Ingen skadespecifikationer' }">damage-report damageSpecifications</span>
+
                     </div>
                     <div class="damage-report-display-card__detail-container">
-                        <span class="damage-report-display-card__detail damage-report-display-card__detail--addons"
-                              th:text="${damageReport.totalDamagePrice} + 'total damage price'" >total damage price</span>
+                     <span class="damage-report-display-card__detail damage-report-display-card__detail--addons" th:text="${damageReport.totalDamagePrice != 0.0 ? damageReport.totalDamagePrice + ' Samlet skade Pris' : 'Ingen skade pris'}">Total damage price </span>
                     </div>
                 </div>
             </div>
@@ -78,13 +81,16 @@
             <div class="damage-report-display-card__details-section damage-report-display-card__details-section--actions">
                 <div class="damage-report-display-card__actions">
                     <div th:if="${showActions}">
-                        <!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/damage-report/search}, '1.5rem', 'damage-report-display-card__actions-edit-button')}"></div>-->
+                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/damage-report/search}, '1.5rem', 'damage-report-display-card__actions-edit-button')}"></div>
+                        -->
                     </div>
                 </div>
                 <div class="damage-report-display-card__details-column damage-report-display-card__detail--total-price">
-                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                    <!-- <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
                     <span class="damage-report-display-card__detail"
+
                           th:text="${damageReport.totalPricePerMonth != null ? damageReport.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
+                    -->
                 </div>
 
             </div>

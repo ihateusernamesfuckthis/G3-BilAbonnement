@@ -56,8 +56,8 @@ public class DamageReportRepository {
         return template.queryForObject(sql, damageReportRowMapper(), id);
     }
 
-    public List <DamageReport> getAll (int id){
-        String sql = "SELECT * FROM damage_report WHERE id = ?";
-        return template.query(sql, damageReportRowMapper(), id);
+    public List <DamageReport> getAll (){
+        String sql = "SELECT * FROM damage_report";
+        return template.query(sql, damageReportRowMapper());
     }
 }
