@@ -2,18 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+    <title>Søg efter lejekontrakt</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/damageReportMainPage.css">
-    <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet" href="/css/searchRentalAgreement.css">
+    <link rel="stylesheet" href="/css/fragments/rentalAgreementFragment.css">
+    <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
-<div class="container">
-    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret lejekontrakt', '/rental-agreement/new')"></div>
-    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret abonnement', '/subscription/new')"></div>
+<div class="rental-agreement-search-search-container container">
+<div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret lejekontrakt', '/rental-agreement/new')"></div>
+<div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret abonnement', '/subscription/new')"></div>
+    <div class="rental-agreement-search-result">
+        <div th:each="rentalAgreement : ${rentalAgreements}">
+            <div th:replace="~{fragments/rentalAgreementFragment :: rental-agreement-display-card(${rentalAgreement}, 'rental-agreement-form-group-subscription', false)}"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

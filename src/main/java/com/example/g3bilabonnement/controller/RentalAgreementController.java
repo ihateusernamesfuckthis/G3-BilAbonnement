@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/rental-agreement")
@@ -22,6 +23,8 @@ public class RentalAgreementController {
     private RentalAgreementService rentalAgreementService;
     @Autowired
     private SubscriptionService subscriptionService;
+    @Autowired
+    private HomeController homeController;
 
     @GetMapping("/new")
     public String createRentalAgreementPage(Model model, HttpSession session) {
@@ -37,6 +40,14 @@ public class RentalAgreementController {
         model.addAttribute("subscription", subscription);
 
         return "/dataRegistrator/createRentalAgreement";
+    }
+
+    @GetMapping("/search")
+    public String searchRentalAgreements(Model model) {
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
+        List<RentalAgreement> rentalAgreements = rentalAgreementService.getAll();
+        model.addAttribute("rentalAgreements", rentalAgreements);
+        return "/dataRegistrator/searchRentalAgreement";
     }
 
     @PostMapping("/create")
