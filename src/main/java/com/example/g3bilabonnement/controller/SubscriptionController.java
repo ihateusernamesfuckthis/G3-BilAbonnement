@@ -4,6 +4,7 @@ import com.example.g3bilabonnement.entity.KilometerOption;
 import com.example.g3bilabonnement.entity.Subscription;
 import com.example.g3bilabonnement.entity.SubscriptionAddon;
 import com.example.g3bilabonnement.entity.helper.SelectOption;
+import com.example.g3bilabonnement.helper.FormatHelper;
 import com.example.g3bilabonnement.service.KilometerOptionsService;
 import com.example.g3bilabonnement.service.SubscriptionAddonService;
 import com.example.g3bilabonnement.service.SubscriptionService;
@@ -29,15 +30,12 @@ public class SubscriptionController {
 
     @GetMapping("/new")
     public String createSubscriptionPage(Model model) {
-        // formats decimals to 2 decimal but omits trailing zeros
-        DecimalFormat decimalFormat = new DecimalFormat("0.##");
-
         List<SubscriptionAddon> subscriptionAddons = subscriptionAddonService.getAll();
         // Transform the list of SubscriptionAddon into a list of SelectOption to use in formSelectFragment
         // Used for displaying the options in a dropdown
         List<SelectOption> subscriptionAddonSelectOptions = new ArrayList<>(); // <SelectOption>
         for (SubscriptionAddon subscriptionAddon : subscriptionAddons) {
-            SelectOption option = new SelectOption(String.valueOf(subscriptionAddon.getId()), subscriptionAddon.getName() + " " + decimalFormat.format(subscriptionAddon.getPricePerMonth()) + "kr./md.");
+            SelectOption option = new SelectOption(String.valueOf(subscriptionAddon.getId()), subscriptionAddon.getName() + " " + FormatHelper.formatDouble(subscriptionAddon.getPricePerMonth()) + "kr./md.");
             subscriptionAddonSelectOptions.add(option);
         }
         model.addAttribute("subscriptionAddonSelectOptions", subscriptionAddonSelectOptions);
@@ -50,7 +48,7 @@ public class SubscriptionController {
         List<KilometerOption> kilometerOptions = kilometerOptionsService.getKilometerOptions();
         List<SelectOption> kilometerOptionsSelectOptions = new ArrayList<>(); // <SelectOption>
         for (KilometerOption kilometerOption : kilometerOptions) {
-            SelectOption option = new SelectOption(String.valueOf(kilometerOption.getId()), kilometerOption.getKilometersPerMonth() + "km. " + decimalFormat.format(kilometerOption.getPricePerMonth()) + "kr./md.");
+            SelectOption option = new SelectOption(String.valueOf(kilometerOption.getId()), kilometerOption.getKilometersPerMonth() + "km. " + FormatHelper.formatDouble(kilometerOption.getPricePerMonth()) + "kr./md.");
             kilometerOptionsSelectOptions.add(option);
         }
         model.addAttribute("kilometerOptionsSelectOptions", kilometerOptionsSelectOptions);
