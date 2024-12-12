@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class DamageReportAndSpecificationController {
@@ -26,16 +25,21 @@ public class DamageReportAndSpecificationController {
     private DamageReportService damageReportService;
     @Autowired
     private DamageSpecificationService damageSpecificationService;
+    @Autowired
+    HomeController homeController;
 
     @GetMapping("/damageReportFunctions")
-    public String updateContractSection(@RequestParam String damageReportFunction,HttpSession session, Model model) {
-        model.addAttribute("selectedContractFunction", damageReportFunction);
-        session.setAttribute("returnPath", "/damageReportFunctions?damageReportFunction=create");
+    public String damageReportFunctions(Model model) {
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
+        return "/damageAndRepairManager/searchDamageReport";
+    }
+    @GetMapping("/createDamageReport")
+    public String damageReportFunctions(HttpSession session, Model model) {
+        session.setAttribute("returnPath", "/createDamageReport");
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("car", car);
-        return "damageReportMainPage";
+        return "/damageAndRepairManager/createDamageReport";
     }
-
     @PostMapping("/createDamageReport")
     public String createDamageReportWithSpecifications(
             @RequestParam("carId") int carId,
@@ -71,7 +75,7 @@ public class DamageReportAndSpecificationController {
 
         session.removeAttribute("car");
 
-        return "redirect:/createdDamageReportView?damageReportId=" + damageReportId;
+        return "redirect:/damageAndRepairManage/createdDamageReportView?damageReportId=" + damageReportId;
     }
 
     @GetMapping("/createdDamageReportView")
@@ -85,7 +89,7 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("damageReport", damageReport);
         model.addAttribute("car", car);
 
-        return "createdDamageReportView";
+        return "/damageAndRepairManager/createdDamageReportView";
     }
 
     @GetMapping("/search")

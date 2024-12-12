@@ -36,7 +36,7 @@ public class RentalAgreementController {
         Subscription subscription = subscriptionId == null ? null : subscriptionService.getById(subscriptionId);
         model.addAttribute("subscription", subscription);
 
-        return "createRentalAgreement";
+        return "/dataRegistrator/createRentalAgreement";
     }
 
     @PostMapping("/create")
@@ -98,6 +98,6 @@ public class RentalAgreementController {
         model.addAttribute("type", "success");
         model.addAttribute("redirect", "/rental-agreement/new");
         model.addAttribute("redirectText", "Ok");
-        return "createRentalAgreementResult";
+        return "/dataRegistrator/createRentalAgreementResult";
     }
 }

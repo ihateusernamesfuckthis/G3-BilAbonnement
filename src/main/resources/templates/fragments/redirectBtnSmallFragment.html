@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
 </head>
 <body>
-<div th:fragment="redirectBtnSmallFragment(name, value, redirectBtnSmallText)" class="redirectBtnSmallFragment">
-    <button type="submit" th:name="${name}" th:value="${value}">
+<div th:fragment="redirectBtnSmallFragment(redirectBtnSmallText, path)" class="redirectBtnSmallFragment">
+    <a th:href="@{${path}}"class="redirectBtnSmallPath">
         <span th:text="${redirectBtnSmallText}" class="redirectBtnSmallText"></span>
-    </button>
+    </a>
 </div>
 </body>
 </html>
