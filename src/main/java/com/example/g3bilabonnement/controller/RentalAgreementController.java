@@ -35,9 +35,14 @@ public class RentalAgreementController {
         model.addAttribute("car", car);
 
         // returns subscriptionId if there is one else null - Page handles null value
-        Integer subscriptionId = (Integer) session.getAttribute("subscriptionId");
-        Subscription subscription = subscriptionId == null ? null : subscriptionService.getById(subscriptionId);
+        Subscription subscription = (Subscription) session.getAttribute("subscription");
         model.addAttribute("subscription", subscription);
+
+        // returns renter if there is one else null - Page handles null value
+        Renter renter = (Renter) session.getAttribute("renter");
+        model.addAttribute("renter", renter);
+
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
 
         return "/dataRegistrator/createRentalAgreement";
     }

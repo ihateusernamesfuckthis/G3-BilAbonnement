@@ -1,0 +1,89 @@
+<div th:fragment="renter-display-card(renter, customCssClass, selectable, showActions)"
+     class="renter-display-card"
+     th:classappend="${selectable} ? 'renter-display-card--selectable ' + ${customCssClass} : ${customCssClass}">
+
+    <!-- If renter is available uses this-->
+    <div th:if="${renter != null}">
+        <label th:if="${selectable}" class="renter-display-card__select-label">
+            <input type="radio" name="renterId" class="renter-display-card__select-checkbox" th:value="${renter.id}">
+            <div th:replace="~{fragments/renterFragment :: renter-display-card-inner(${renter}, ${showActions})}"></div>
+        </label>
+
+        <div th:if="${!selectable}">
+            <div th:replace="~{fragments/renterFragment :: renter-display-card-inner(${renter}, ${showActions})}"></div>
+        </div>
+    </div>
+
+    <!-- If renter is NOT available uses this and displays a grayed out template-->
+    <div th:if="${renter == null}">
+        <div th:else
+             class="renter-display-card__inner card renter-display-card__inner--placeholder">
+            <div class="renter-display-card__image-section renter-display-card__image-section--placeholder">
+                <div class="renter-display-card__image-placeholder"></div>
+            </div>
+
+            <div class="renter-display-card__details">
+                <div class="renter-display-card__details-section">
+                    <div class="renter-display-card__details-column">
+                        <div class="renter-display-card__detail-placeholder renter-display-card__detail-placeholder--large"></div>
+                        <div class="renter-display-card__detail-placeholder renter-display-card__detail-placeholder--small"></div>
+                    </div>
+                    <div class="renter-display-card__details-column">
+                        <div class="renter-display-card__detail-placeholder renter-display-card__detail-placeholder--large"></div>
+                        <div class="renter-display-card__detail-placeholder renter-display-card__detail-placeholder--small"></div>
+                    </div>
+                    <div class="renter-display-card__details-column">
+                        <div class="renter-display-card__detail-placeholder renter-display-card__detail-placeholder--large"></div>
+                        <div class="renter-display-card__detail-placeholder renter-display-card__detail-placeholder--small"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="renter-display-card-inner(renter, showActions)">
+    <div class="renter-display-card__inner card">
+        <!-- Details Section -->
+        <div class="renter-display-card__details">
+            <!-- General Details -->
+            <div class="renter-display-card__details-section">
+                <div class="renter-display-card__details-column">
+                    <div class="renter-display-card__detail-container">
+                        <span class="renter-display-card__detail renter-display-card__detail--name"
+                              th:text="${renter.firstname} + ' ' + ${renter.lastname}">Renter name</span>
+                    </div>
+                    <div class="renter-display-card__detail-container">
+                        <span class="renter-display-card__detail renter-display-card__detail--email"
+                              th:text="${renter.email}">Email</span>
+                    </div>
+                </div>
+                <div class="renter-display-card__details-column">
+                    <div class="renter-display-card__detail-container">
+                        <span class="renter-display-card__detail renter-display-card__detail--phone-number"
+                              th:text="${renter.phoneNumber}">Phone Number</span>
+                    </div>
+                    <div class="renter-display-card__detail-container">
+                        <span class="renter-display-card__detail renter-display-card__detail--cpr-number"
+                              th:text="${renter.cprNumber}">CPR number</span>
+                    </div>
+                </div>
+                <div class="renter-display-card__details-column">
+                    <div class="renter-display-card__detail-container">
+                        <span class="renter-display-card__detail renter-display-card__detail--address"
+                              th:text="${renter.location.address}">Address</span>
+                    </div>
+                    <div class="renter-display-card__detail-container">
+                        <span class="renter-display-card__detail renter-display-card__detail--zipcode-city"
+                              th:text="${renter.location.zipCode} + ' ' + ${renter.location.city}">Zipcode and city</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing and Actions -->
+            <div class="renter-display-card__details-section--actions" th:if="${showActions}">
+                <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/renter/search}, '1.5rem', 'renter-display-card__actions-edit-button')}"></div>
+            </div>
+        </div>
+    </div>
+</div>
