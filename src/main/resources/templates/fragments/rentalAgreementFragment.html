@@ -79,18 +79,8 @@
             </div>
 
             <!-- Pricing and Actions -->
-            <div class="rental-agreement-display-card__details-section rental-agreement-display-card__details-section--actions">
-                <div class="rental-agreement-display-card__actions">
-                    <div th:if="${showActions}">
-                        <!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/rental-agreement/search}, '1.5rem', 'rental-agreement-display-card__actions-edit-button')}"></div>-->
-                    </div>
-                </div>
-                <div class="rental-agreement-display-card__details-column rental-agreement-display-card__detail--total-price">
-                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
-                    <span class="rental-agreement-display-card__detail"
-                          th:text="${rentalAgreement.totalPrice}">Net Price</span>
-                </div>
-
+            <div class="rental-agreement-display-card__details-section--actions" th:if="${showActions}">
+                <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/rental-agreement/search}, '1.5rem', 'rental-agreement-display-card__actions-edit-button')}"></div>
             </div>
         </div>
     </div>

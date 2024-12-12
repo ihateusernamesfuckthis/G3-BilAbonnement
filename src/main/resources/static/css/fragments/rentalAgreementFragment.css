@@ -14,7 +14,7 @@
     height: 100px;
     flex: 1 1 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     gap: 1rem;
 }
@@ -42,6 +42,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    flex: 1 1 auto;
 }
 
 .rental-agreement-display-card__details-column {
@@ -52,6 +53,10 @@
     flex-direction: column;
     border-left: 1px var(--color-border) solid;
     padding-left: 1rem;
+}
+
+.rental-agreement-display-card__details-section--actions {
+    flex: 0 0 auto;
 }
 
 .rental-agreement-display-card__details-column:first-child {
