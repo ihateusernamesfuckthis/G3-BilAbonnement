@@ -15,9 +15,6 @@ public class FinalSettlementRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    RentalAgreementRepository rentalAgreementRepository;
-
-    @Autowired
     DamageReportRepository damageReportRepository;
     @Autowired
     SubscriptionRepository subscriptionRepository;

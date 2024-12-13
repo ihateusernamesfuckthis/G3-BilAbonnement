@@ -1,6 +1,7 @@
 package com.example.g3bilabonnement.repository;
 
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.entity.FinalSettlement;
 import com.example.g3bilabonnement.entity.PurchaseAgreement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class PurchaseAgreementRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    CarRepository carRepository;
 
     public void add(PurchaseAgreement purchaseAgreement) {
         String sql = "INSERT INTO purchase_agreement (car_id, final_settlement_id, " +
@@ -36,37 +36,27 @@ public class PurchaseAgreementRepository {
 
         //sætter bilobjektet på købsaftalen
         int carId = rs.getInt("car_id");
-        CarRepository carRepository = new CarRepository();
-        Car car = carRepository.getById(carId);
+        Car car = new Car();
+        car.setId(carId);
         purchaseAgreement.setCar(car);
 
+
         //sætter slutopgørelseobjektet på purchaseAgreement
-        int finalSettlementId = rs.getInt("finalSettlement_id");
-        FinalSettlementRepository finalSettlementRepository = new FinalSettlementRepository();
-        FinalSettlement finalSettlement = finalSettlementRepository.getByCarId(finalSettlementId);
+        int finalSettlementId = rs.getInt("final_settlement_id");
+        FinalSettlement finalSettlement = new FinalSettlement();
+        finalSettlement.setId(finalSettlementId);
+
         purchaseAgreement.setFinalSettlement(finalSettlement);
 
         purchaseAgreement.setPickUpLocation(rs.getString("pickup_location"));
-        purchaseAgreement.setFinalPrice(rs.getDouble("total_price"));
+        purchaseAgreement.setFinalPrice(rs.getDouble("final_price"));
 
         return purchaseAgreement;
     };
 
-    public PurchaseAgreement getCarByCarId(int carId){
-        String sql = "SELECT * FROM final_settlement WHERE car_id =?";
-        return jdbcTemplate.queryForObject(sql, purchaseAgreementRowMapper, carId);
-    }
-
-
-    public void updateCarStatusToPrepurchased(int carId, Boolean prepurchased) {
-        String sql = "UPDATE Car SET prepurchased = ? WHERE id = ?";
-        jdbcTemplate.update(sql, prepurchased, carId);
-    }
-
-    public boolean hasDamageReport(int carId) {
-        String sql = "SELECT COUNT(*) FROM DamageReport WHERE car_id = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, new Object[]{carId}, Integer.class);
-        return count != null && count > 0;
+    public List<PurchaseAgreement> getAll (){
+        String sql = "SELECT * FROM purchase_agreement";
+        return jdbcTemplate.query(sql, purchaseAgreementRowMapper);
     }
 }
 

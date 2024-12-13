@@ -69,4 +69,11 @@ public class CarRepository {
                 "AND dr.car_id IS NULL";
         return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
     }
+
+    public double getTotalCarPrice(String carStatus) {
+        String sql = "SELECT SUM(c.net_price) FROM car c \n" +
+                "JOIN car_status cs ON c.car_status_id = cs.id\n" +
+                "WHERE cs.status = ?";
+        return jdbcTemplate.queryForObject(sql, Double.class, carStatus);
+    }
 }

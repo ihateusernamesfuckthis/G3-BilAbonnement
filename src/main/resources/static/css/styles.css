@@ -113,15 +113,11 @@ input:focus, select:focus, textarea:focus {
 }
 
 .container {
-    overflow-y: scroll;
-    padding: 35px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 1392px;
-    height: 615px;
-    left: 20px;
-    background-color: white;
-    position: absolute;
-    top: 140px;
+    overflow-y: auto;
+    margin: 0 2rem 2rem;
+    padding: 2rem;
+    background-color: var(--color-white);
+    min-height: calc(100vh - 140px - 2rem); /* Subtract 140px from the height of the header and 2rem from the margin-bottom */
 }
 
 .card {
@@ -176,10 +172,11 @@ tr:nth-child(even) {
     gap: 10px;
     flex-direction: column;
     position: absolute;
-    top: 10%;
-    left: 10%;
-    width: 80%;
-    height: 80%;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    z-index: 1;
 }
 
 .search-form > div {
@@ -187,7 +184,7 @@ tr:nth-child(even) {
 }
 
 .search-form-button {
-    margin: auto auto 1rem;
+    margin: 1rem auto;
 }
 
 /* Utility Classes */

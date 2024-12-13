@@ -1,6 +1,7 @@
 package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.DamageReport;
 import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.service.PurchaseAgreementService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @RequestMapping("/purchase-agreement")
 @Controller
@@ -62,5 +65,13 @@ public class PurchaseAgreementController {
         model.addAttribute("redirectText", "Ok");
 
         return"/businessDeveloper/createPurchaseAgreementResult";
+    }
+    @GetMapping("/searchPurchaseAgreement")
+    public String search(Model model){
+        List<PurchaseAgreement> purchaseAgreements = purchaseAgreementService.getAll();
+
+        model.addAttribute("purchaseAgreements", purchaseAgreements);
+
+        return "businessDeveloper/searchPurchaseAgreement";
     }
 }
