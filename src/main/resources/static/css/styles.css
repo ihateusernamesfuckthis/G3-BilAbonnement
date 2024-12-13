@@ -175,8 +175,9 @@ tr:nth-child(even) {
     top: 5%;
     left: 5%;
     width: 90%;
-    height: 90%;
+    height: auto;
     z-index: 1;
+    box-shadow: 0 10px 100px 50px rgb(186, 199, 208);
 }
 
 .search-form > div {

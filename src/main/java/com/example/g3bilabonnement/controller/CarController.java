@@ -43,16 +43,7 @@ public class CarController {
             List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
 
             cars = expiredCars;
-        } else {
-            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
-
-            cars.addAll(expiredCars);
-
-            Set<Car> carsWithoutDuplicates = new HashSet<>(cars);
-            cars = new ArrayList<>(carsWithoutDuplicates);
         }
-
         model.addAttribute("cars", cars);
 
 
