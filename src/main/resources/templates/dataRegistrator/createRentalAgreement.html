@@ -38,7 +38,7 @@
 
         <div class="rental-agreement__form-group">
             <label>
-                <input th:if="${subscription != null}" type="text" name="renterId" class="hidden"
+                <input th:if="${renter != null}" type="text" name="renterId" class="hidden"
                        th:value="${renter.id}"/>
             </label>
             <div class="rental-agreement__form-group__overlay"
