@@ -13,4 +13,9 @@ public class LocationService {
     public int add(Location location){
         return locationRepository.add(location);
     }
+
+
+    public Location getById(int id){
+        return locationRepository.getById(id);
+    }
 }

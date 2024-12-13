@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Søg efter Kunde</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/searchRenter.css">
+    <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
+    <link rel="stylesheet" href="/css/fragments/renterFragment.css">
+    <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
+    <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+</head>
+<body>
+
+    <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
+<div class="renter-search-container search-form-container container">
+    <!-- search form uses search-form class for styling-->
+    <form th:if="${showSearchFilter}" th:action="@{/renter/search(showSearchFilter=${!showSearchFilter},name=${filter.name}, licensePlate=${filter.licensePlate}, phoneNumber=${filter.phoneNumber}, email=${filter.email})}" method="get"
+          class="renter-search-form search-form card" th:object="${filter}">
+        <div class="search-form-header">
+            <h2 class="renter-search-form-title">Søg efter lejer</h2>
+            <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/renter/search(showSearchFilter=${!showSearchFilter},name=${filter.name}, licensePlate=${filter.licensePlate}, phoneNumber=${filter.phoneNumber}, email=${filter.email})},40,'renter-search-form-close-button')}"></div>
+        </div>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'name', 'Navn på lejer', 'renter-search-form-group-renter-name-input', false)}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'licensePlate', 'Nummerplade', 'renter-search-form-group-renter-name-input', false)}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'phoneNumber', 'Telefon nummer', 'renter-search-form-group-renter-name-input', false)}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'email', 'Email', 'renter-search-form-group-renter-name-input', false)}"></div>
+        <button type="submit" class="search-form-button">Search</button>
+    </form>
+
+    <form  th:action="@{/renter/return}" method="post"
+          class="renter-search-result__form">
+        <div class="renter-search-result__form-header">
+            <button type="submit" class="renter-search-result__form-header__submit-button">Vælg</button>
+<!--            Only show the search button if the search filter is not open already-->
+            <div th:if="${!showSearchFilter}">
+                <div th:replace="~{fragments/logoButtonFragment :: logo-button('search',@{/renter/search(showSearchFilter=${!showSearchFilter},name=${filter.name}, licensePlate=${filter.licensePlate}, phoneNumber=${filter.phoneNumber}, email=${filter.email})},38,'renter-search-form-close-button')}"></div>
+            </div>
+        </div>
+
+<!--        List of renters shown here-->
+        <div th:if="${renters != null && renters.size() > 0}" class="renter-search-result__cars">
+            <div th:each="renter :${renters}">
+                <div th:replace="~{fragments/renterFragment :: renter-display-card(${renter}, 'renter-search-form-group-renter', true, false)}"></div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Pop up message if the no renters found-->
+    <div th:if="${renters != null && renters.size() == 0}">
+        <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen kunder fundet', 'search', 'Ok')"></div>
+    </div>
+</div>
+</body>
+</html>

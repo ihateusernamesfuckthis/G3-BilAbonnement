@@ -13,12 +13,13 @@ public class RentalAgreement {
     private LocalDate startDate;
     private LocalDate endDate;
     private double totalPrice;
+    private boolean hasFinalSettlement;
 
 
     public RentalAgreement() {
     }
 
-    public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, Location pickupLocation, Location returnLocation, LocalDate startDate, LocalDate endDate, double totalPrice) {
+    public RentalAgreement(int id, Car car, Subscription subscription, Renter renter, Location pickupLocation, Location returnLocation, LocalDate startDate, LocalDate endDate, double totalPrice, boolean hasFinalSettlement) {
         this.id = id;
         this.car = car;
         this.subscription = subscription;
@@ -28,7 +29,9 @@ public class RentalAgreement {
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalPrice = totalPrice;
+        this.hasFinalSettlement = hasFinalSettlement;
     }
+
 
     public int calculateTotalMonths() {
         int startYear = startDate.getYear();
@@ -138,5 +141,13 @@ public class RentalAgreement {
 
     public void setReturnLocation(Location returnLocation) {
         this.returnLocation = returnLocation;
+    }
+
+    public boolean isHasFinalSettlement() {
+        return hasFinalSettlement;
+    }
+
+    public void setHasFinalSettlement(boolean hasFinalSettlement) {
+        this.hasFinalSettlement = hasFinalSettlement;
     }
 }

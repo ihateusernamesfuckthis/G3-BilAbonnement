@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
     <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="car-search-container search-form-container">
@@ -19,7 +18,7 @@
         <div class="search-form-header">
             <h2 class="car-search-form-title">Søg efter bil</h2>
             <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/car/search(showSearchFilter=${!showSearchFilter},
-        vehicleNumber=${filter.vehicleNumber}, status=${filter.status})},40,'car-search-form-close-button')}"></div>
+        vehicleNumber=${filter.vehicleNumber}, status=${filter.status}, checked=${filter.missingDamageReport})},40,'car-search-form-close-button')}"></div>
         </div>
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'vehicleNumber', 'Registreringsnummer', 'car-search-form-group-vehicle-number-input', false)}"></div>
         <div th:replace="~{fragments/formGroupFragments :: select-input('Status','Status', 'car-search-form-group-status-select', false, false, ${statusSelectOptions})}"></div>

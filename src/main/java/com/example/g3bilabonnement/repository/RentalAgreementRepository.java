@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RentalAgreementRepository {
     @Autowired
@@ -53,11 +55,26 @@ public class RentalAgreementRepository {
         rentalAgreement.setStartDate(rs.getDate("start_date").toLocalDate());
         rentalAgreement.setEndDate(rs.getDate("end_date").toLocalDate());
 
+        Location pickupLocation = new Location();
+        pickupLocation.setId(rs.getInt("pickup_location_id"));
+        rentalAgreement.setPickupLocation(pickupLocation);
+
+        Location returnLocation = new Location();
+        returnLocation.setId(rs.getInt("return_location_id"));
+        rentalAgreement.setReturnLocation(returnLocation);
+
+        rentalAgreement.setHasFinalSettlement(rs.getBoolean("has_final_settlement"));
+
         return rentalAgreement;
     };
 
     public RentalAgreement getById(int id) {
-        String sql = "SELECT * FROM rental_agreement WHERE id =?";
+        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id WHERE ra.id = ?";
         return jdbcTemplate.queryForObject(sql, rentalAgreementRowMapper, id);
+    }
+
+    public List<RentalAgreement> getAll() {
+        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id";
+        return jdbcTemplate.query(sql, rentalAgreementRowMapper);
     }
 }
