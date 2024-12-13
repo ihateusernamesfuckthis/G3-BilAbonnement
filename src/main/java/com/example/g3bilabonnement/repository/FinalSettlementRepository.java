@@ -15,9 +15,6 @@ public class FinalSettlementRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    RentalAgreementRepository rentalAgreementRepository;
-
-    @Autowired
     DamageReportRepository damageReportRepository;
 
     private final RowMapper<FinalSettlement> finalSettlementRowMapper = (rs, rowNum) -> {
@@ -27,19 +24,16 @@ public class FinalSettlementRepository {
 
         //her hentes og sættes rentalagreementet objektet ud fra rentalagreement id'et i databasen
         int rentalAgreementId = rs.getInt("rental_agreement_id");
-        RentalAgreement rentalAgreement = rentalAgreementRepository.getById(rentalAgreementId);
+        RentalAgreement rentalAgreement = new RentalAgreement();
+        rentalAgreement.setId(rentalAgreementId);
+
         finalSettlement.setRentalAgreement(rentalAgreement);
 
-        //Her hentes og sættes DamageReport objektet ud fra bil id'er hentet fra rental agreement objektet
-        int carId = rentalAgreement.getCar().getId();
-        DamageReport damageReport = damageReportRepository.getDamageReportByCarId(carId);
+        int damageReportId = rs.getInt("damage_report_id");
+        DamageReport damageReport = new DamageReport();
+        damageReport.setId(damageReportId);
+
         finalSettlement.setDamageReport(damageReport);
-
-        double overDrivenKilometerPrice = rentalAgreement.calculateOverdrivenKilometerPrice(finalSettlement.getTotalKilometerDriven());
-        finalSettlement.setOverdrivenKilometerPrice(overDrivenKilometerPrice);
-
-        double totalPrice = finalSettlement.calculateTotalPrice();
-        finalSettlement.setTotalPrice(totalPrice);
 
         return finalSettlement;
     };
