@@ -22,29 +22,26 @@ public class FinalSettlementRepository {
     @Autowired
     SubscriptionRepository subscriptionRepository;
 
-        private final RowMapper<FinalSettlement> finalSettlementRowMapper = (rs, rowNum) -> {
-            FinalSettlement finalSettlement = new FinalSettlement();
-            finalSettlement.setId(rs.getInt("id"));
-            finalSettlement.setTotalKilometerDriven(rs.getInt("total_km_driven"));
+    private final RowMapper<FinalSettlement> finalSettlementRowMapper = (rs, rowNum) -> {
+        FinalSettlement finalSettlement = new FinalSettlement();
+        finalSettlement.setId(rs.getInt("id"));
+        finalSettlement.setTotalKilometerDriven(rs.getInt("total_km_driven"));
 
-            //her hentes og sættes rentalagreementet objektet ud fra rentalagreement id'et i databasen
-            int rentalAgreementId = rs.getInt("rental_agreement_id");
-            RentalAgreement rentalAgreement = rentalAgreementRepository.getById(rentalAgreementId);
-            finalSettlement.setRentalAgreement(rentalAgreement);
+        //her hentes og sættes rentalagreementet objektet ud fra rentalagreement id'et i databasen
+        int rentalAgreementId = rs.getInt("rental_agreement_id");
+        RentalAgreement rentalAgreement = new RentalAgreement();
+        rentalAgreement.setId(rentalAgreementId);
 
-            //Her hentes og sættes DamageReport objektet ud fra bil id'er hentet fra rental agreement objektet
-            int carId = rentalAgreement.getCar().getId();
-            DamageReport damageReport = damageReportRepository.getDamageReportByCarId(carId);
-            finalSettlement.setDamageReport(damageReport);
+        finalSettlement.setRentalAgreement(rentalAgreement);
 
-            double overDrivenKilometerPrice = rentalAgreement.calculateOverdrivenKilometerPrice(finalSettlement.getTotalKilometerDriven());
-            finalSettlement.setOverdrivenKilometerPrice(overDrivenKilometerPrice);
+        int damageReportId = rs.getInt("damage_report_id");
+        DamageReport damageReport = new DamageReport();
+        damageReport.setId(damageReportId);
 
-            double totalPrice = finalSettlement.calculateTotalPrice();
-            finalSettlement.setTotalPrice(totalPrice);
+        finalSettlement.setDamageReport(damageReport);
 
-            return finalSettlement;
-        };
+        return finalSettlement;
+    };
 
     public void add (FinalSettlement finalSettlement){
         String sql = "INSERT INTO final_settlement (rental_agreement_id, damage_report_id, total_km_driven, total_price) " +

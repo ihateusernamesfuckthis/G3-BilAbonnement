@@ -19,7 +19,7 @@
                         <div class="final-settlement-display-card__detail-placeholder final-settlement-display-card__detail-placeholder--large"></div>
                         <div class="final-settlement-display-card__detail-placeholder final-settlement-display-card__detail-placeholder--small"></div>
                     </div>
-                    <div class="rental-agreement-display-card__details-column">
+                    <div class="final-settlement-display-card__details-column">
                         <div class="final-settlement-display-card__detail-placeholder final-settlement-display-card__detail-placeholder--large"></div>
                         <div class="final-settlement-display-card__detail-placeholder final-settlement-display-card__detail-placeholder--small"></div>
                     </div>
@@ -39,40 +39,40 @@
             <div class="final-settlement-display-card__details-section">
                 <div class="final-settlement-display-card__details-column">
                     <div class="final-settlement-display-card__detail-container">
-                        <span>ID</span>
-                        <strong class="final-settlement-display-card__detail final-settlement-display-card__detail--id"
-                              th:text="${finalSettlement.id}"></strong>
+                        <h3>ID: </h3>
+                        <h3 class="final-settlement-display-card__detail final-settlement-display-card__detail--id"
+                                th:text="${finalSettlement.id}"></h3>
                     </div>
                     <div class="final-settlement-display-card__detail-container">
                         <span>Lejeaftale ID: </span>
                         <span class="final-settlement-display-card__detail final-settlement-display-card__detail--rentalAgreementId"
                               th:text="${finalSettlement.rentalAgreement.id}"></span>
                     </div>
-                    <div class="rental-agreement-display-card__detail-container">
+                    <div class="final-settlement-display-card__detail-container">
                         <span>Lejerens Navn: </span>
-                        <span class="final-settlement-display-card__detail rental-agreement-display-card__detail--renter"
-                              th:text="${finalSettlement.rentalAgreement.renter.firstname} + ' ' + ${rentalAgreement.rentalAgreement.renter.lastname}"></span>
+                        <span class="final-settlement-display-card__detail final-settlement-display-card__detail--renter"
+                              th:text="${finalSettlement.rentalAgreement.renter.firstname} + ' ' + ${finalSettlement.rentalAgreement.renter.lastname}"></span>
                     </div>
-                    <div class="rental-agreement-display-card__detail-container">
+                    <div class="final-settlement-display-card__detail-container">
                         <span>Lejeperiode: </span>
-                        <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--date-range"
+                        <span class="rental-agreement-display-card__detail final-settlement-display-card__detail--date-range"
                               th:text="${finalSettlement.rentalAgreement.startDate} + ' / ' + ${finalSettlement.rentalAgreement.endDate}"></span>
                     </div>
                 </div>
                 <div class="final-settlement-display-card__details-column">
                     <div class="final-settlement-display-card__detail-container">
-                        <span>Bil: </span>
+                        <div th:replace="~{fragments/logoFragment :: logo('car',20)}"></div>
                         <span class="final-settlement-display-card__detail final-settlement-display-card__detail--BrandAndModel"
-                              th:text="${finalSettlement.rentalAgreement.car.brand} + ' / ' + ${finalSettlement.rentalAgreement.car.model}"></span>
+                              th:text="${finalSettlement.rentalAgreement.car.brand} + ' ' + ${finalSettlement.rentalAgreement.car.model}"></span>
                     </div>
 
                     <div class="final-settlement-display-card__detail-container">
-                        <span>Registreringsnummer: </span>
+                        <div th:replace="~{fragments/logoFragment :: logo('licensePlate',20)}"></div>
                         <span class="final-settlement-display-card__detail final-settlement-display-card__detail--vehicle-number"
                               th:text="${finalSettlement.rentalAgreement.car.vehicleNumber}"></span>
                     </div>
                     <div class="final-settlement-display-card__detail-container">
-                        <span>Status: </span>
+                        <div th:replace="~{fragments/logoFragment :: logo('status',20)}"></div>
                         <span class="final-settlement-display-card__detail final-settlement-display-card__detail--car-status"
                               th:text="${finalSettlement.rentalAgreement.car.status}"></span>
                     </div>
@@ -91,17 +91,17 @@
                     </div>
 
                     <div class="final-settlement-display-card__detail-container">
-                    <span>Totalpris: </span>
-                    <span class="final-settlement-display-card__detail final-settlement-display-card__detail--totalPrice"
-                          th:text="${finalSettlement.totalPrice}"></span>
+                        <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                        <span class="final-settlement-display-card__detail final-settlement-display-card__detail--totalPrice"
+                              th:text="${finalSettlement.totalPrice}"></span>
+                    </div>
                 </div>
-            </div>
+                </div>
 
-            <!-- Pricing and Actions -->
-            <div class="final-settlement-display-card__details-section--actions" th:if="${showActions}">
-                <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/rental-agreement/search}, '1.5rem', 'final-settlement-display-card__actions-edit-button')}"></div>
+                <!-- Pricing and Actions -->
+                <div class="final-settlement-display-card__details-section--actions" th:if="${showActions}">
+                    <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/rental-agreement/search}, '1.5rem', 'final-settlement-display-card__actions-edit-button')}"></div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-</div>

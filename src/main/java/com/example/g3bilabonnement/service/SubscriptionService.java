@@ -46,10 +46,4 @@ public class SubscriptionService {
 
         return id;
     }
-    public Subscription getSubscriptionWithKilometerOption(int subscriptionId) {
-        Subscription subscription = subscriptionRepository.getById(subscriptionId);
-            KilometerOption kilometerOption = kilometerOptionsService.getById(subscription.getKilometerOption().getId());
-            subscription.setKilometerOption(kilometerOption);
-        return subscription;
-    }
 }

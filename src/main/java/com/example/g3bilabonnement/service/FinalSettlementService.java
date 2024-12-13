@@ -26,31 +26,14 @@ public class FinalSettlementService {
     public FinalSettlement getByCarId(int carId) {
         return finalSettlementRepository.getByCarId(carId);
     }
-
     public List<FinalSettlement> getAll() {
-        // Hent alle FinalSettlements
         List<FinalSettlement> finalSettlements = finalSettlementRepository.getAll();
-
-        // Gennemgå hver FinalSettlement
         for (FinalSettlement finalSettlement : finalSettlements) {
-            // Hent RentalAgreement og sæt det
-            RentalAgreement rentalAgreement = rentalAgreementService.getById(finalSettlement.getRentalAgreement().getId());
-            finalSettlement.setRentalAgreement(rentalAgreement);
-
-            // Hent DamageReport og sæt det
-            DamageReport damageReport = damageReportService.getDamageReportById(finalSettlement.getDamageReport().getId());
-            finalSettlement.setDamageReport(damageReport);
-
-            // Hent Subscription med KilometerOption fra RentalAgreement
-            Subscription subscription = rentalAgreement.getSubscription(); // Hent Subscription fra RentalAgreement
-            if (subscription != null) {
-                // Brug metoden getSubscriptionWithKilometerOption til at hente Subscription og KilometerOption
-                Subscription fullSubscription = subscriptionService.getSubscriptionWithKilometerOption(subscription.getId());
-                finalSettlement.getRentalAgreement().setSubscription(fullSubscription); // Sæt full Subscription på RentalAgreement
-            }
+            finalSettlement.setRentalAgreement(rentalAgreementService.getById(finalSettlement.getRentalAgreement().getId()));
+            finalSettlement.setDamageReport(damageReportService.getDamageReportById(finalSettlement.getDamageReport().getId()));
         }
-
         return finalSettlements;
     }
+
 }
 

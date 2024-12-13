@@ -23,15 +23,13 @@ public class SubscriptionRepository {
         subscription.setKilometerOption(kilometerOption);
 
         subscription.setTotalPricePerMonth(rs.getDouble("price_per_month"));
+
         return subscription;
     };
-
     public Subscription getById(int id) {
         String sql = "SELECT * FROM subscription WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, subscriptionRowMapper, id);
     }
-
-    // Returns id of the newly created subscription
     public int add(Subscription subscription) {
         String sql = "INSERT INTO subscription (base_price, subscription_type, kilometer_options_id, price_per_month) " +
                 "VALUES (?, ?, ?, ?)";
