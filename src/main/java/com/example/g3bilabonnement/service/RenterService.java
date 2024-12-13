@@ -13,11 +13,20 @@ public class RenterService {
     @Autowired
     private RenterRepository renterRepository;
 
+    @Autowired
+    private LocationService locationService;
+
     public Renter getById(int id) {
-        return renterRepository.getById(id);
+        Renter renter = renterRepository.getById(id);
+        renter.setLocation(locationService.getById(renter.getLocation().getId()));
+        return renter;
     }
 
     public List<Renter> searchByFilter(RenterFilter renterFilter) {
-        return renterRepository.searchByFilter(renterFilter);
+        List<Renter> renters = renterRepository.searchByFilter(renterFilter);
+        for (Renter renter : renters) {
+            renter.setLocation(locationService.getById(renter.getLocation().getId()));
+        }
+        return renters;
     }
 }

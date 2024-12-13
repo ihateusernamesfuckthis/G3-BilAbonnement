@@ -35,10 +35,6 @@
                     </div>
                 </div>
                 <div class="car-display-card__details-section car-display-card__details-section--actions">
-                    <div class="car-display-card__actions">
-                        <div th:if="${showActions}"
-                             th:replace="~{fragments/logoButtonFragment :: logo-button('search', @{/car/search}, '1.5rem','rental-agreement-form-group-car-search-button')}"></div>
-                    </div>
                     <div class="car-display-card__details-column">
                         <div class="car-display-card__detail-placeholder"></div>
                     </div>
@@ -91,7 +87,7 @@
             <div class="car-display-card__details-section car-display-card__details-section--actions">
                 <div class="car-display-card__actions">
                     <div th:if="${showActions}">
-                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/car/search}, '1.5rem', 'car-display-card__actions-edit-button')}"></div>
+<!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/car/search}, '1.5rem', 'car-display-card__actions-edit-button')}"></div>-->
                     </div>
                 </div>
                 <div class="car-display-card__details-column car-display-card__detail--net-price">

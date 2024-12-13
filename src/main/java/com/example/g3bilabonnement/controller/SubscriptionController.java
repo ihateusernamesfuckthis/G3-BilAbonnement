@@ -40,6 +40,7 @@ public class SubscriptionController {
         }
         model.addAttribute("subscriptionAddonSelectOptions", subscriptionAddonSelectOptions);
 
+        // TODO - get from database
         List<SelectOption> subscriptionTypeSelectOptions = new ArrayList<>(); // <SelectOption>
         subscriptionTypeSelectOptions.add(new SelectOption("Limited", "Limited"));
         subscriptionTypeSelectOptions.add(new SelectOption("Unlimited", "Unlimited"));

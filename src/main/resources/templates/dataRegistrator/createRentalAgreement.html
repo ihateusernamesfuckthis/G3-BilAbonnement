@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rental Agreement</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/createRentalAgreement.css">
     <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
@@ -27,23 +26,45 @@
             <label>
                 <input th:if="${car != null}" type="text" name="carId" class="hidden" th:value="${car.id}"/>
             </label>
-            <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'rental-agreement-form-group-car', false, true)}"></div>
+            <div class="rental-agreement__form-group__overlay"
+                 th:classappend="${car == null ? 'rental-agreement--form-group--overlay--show' : ''}">
+                <a class="button" th:href="@{/car/search(Status='Klar til udlejning')}" th:if="${car == null}">Søg efter bil</a>
+                <div th:if="${car != null}">
+                    <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/rental-agreement/new(removeCar=true)}, 30, 'rental-agreement--form-group--overlay--remove')}"></div>
+                </div>
+            </div>
+            <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'rental-agreement-form-group-car', false, false)}"></div>
         </div>
 
         <div class="rental-agreement__form-group">
             <label>
-                <input th:if="${subscription != null}" type="text" name="renterId" class="hidden" th:value="${renter.id}"/>
+                <input th:if="${subscription != null}" type="text" name="renterId" class="hidden"
+                       th:value="${renter.id}"/>
             </label>
+            <div class="rental-agreement__form-group__overlay"
+                 th:classappend="${renter == null ? 'rental-agreement--form-group--overlay--show' : ''}">
+                <a class="button" th:href="@{/renter/search}" th:if="${renter == null}">Søg efter lejer</a>
+                <div th:if="${renter != null}">
+                    <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/rental-agreement/new(removeRenter=true)}, 30, 'rental-agreement--form-group--overlay--remove')}"></div>
+                </div>
+            </div>
             <div th:replace="~{fragments/renterFragment :: renter-display-card(${renter}, 'rental-agreement-form-group-subscription', false, false)}"></div>
         </div>
 
         <div class="rental-agreement__form-group">
             <label>
-                <input th:if="${subscription != null}" type="text" name="subscriptionId" class="hidden" th:value="${subscription.id}"/>
+                <input th:if="${subscription != null}" type="text" name="subscriptionId" class="hidden"
+                       th:value="${subscription.id}"/>
             </label>
+            <div class="rental-agreement__form-group__overlay"
+                 th:classappend="${subscription == null ? 'rental-agreement--form-group--overlay--show' : ''}">
+                <a class="button" th:href="@{/subscription/new}" th:if="${subscription == null}">Opret abonnement</a>
+                <div th:if="${subscription != null}">
+                    <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/rental-agreement/new(removeSubscription=true)}, 30, 'rental-agreement--form-group--overlay--remove')}"></div>
+                </div>
+            </div>
             <div th:replace="~{fragments/subscriptionFragment :: subscription-display-card(${subscription}, 'rental-agreement-form-group-subscription', false)}"></div>
         </div>
-<!--        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'subscriptionId', 'Subscription id', 'rental-agreement__form-group__subscription-input form-group-input', true)}"></div>-->
 
         <div class="rental-agreement__form-group__pickup-location-container">
             <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickupLocationAddress', 'Opsamling adresse', 'rental-agreement__form-group__pickup-location-address-input form-group-input', true)}"></div>
