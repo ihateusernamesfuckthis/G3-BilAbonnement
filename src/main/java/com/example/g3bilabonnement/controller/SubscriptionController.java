@@ -40,6 +40,7 @@ public class SubscriptionController {
         }
         model.addAttribute("subscriptionAddonSelectOptions", subscriptionAddonSelectOptions);
 
+        // TODO - get from database
         List<SelectOption> subscriptionTypeSelectOptions = new ArrayList<>(); // <SelectOption>
         subscriptionTypeSelectOptions.add(new SelectOption("Limited", "Limited"));
         subscriptionTypeSelectOptions.add(new SelectOption("Unlimited", "Unlimited"));
@@ -77,7 +78,7 @@ public class SubscriptionController {
 
         // setting subscription on session to access it from the next page and keep it during refreshes
         subscription.setId(subscriptionService.add(subscription));
-        session.setAttribute("subscriptionId", subscription.getId());
+        session.setAttribute("subscription", subscriptionService.getById(subscription.getId()));
 
         String returnPath = (String) session.getAttribute("returnPath");
         if (returnPath == null) {

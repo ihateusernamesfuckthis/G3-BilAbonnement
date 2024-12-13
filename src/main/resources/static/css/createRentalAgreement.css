@@ -16,7 +16,35 @@
     margin-bottom: 1.2rem;
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    position: relative;
+}
+
+.rental-agreement__form-group > label {
+    padding: 0;
+}
+
+.rental-agreement__form-group__overlay {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border-radius: var(--border-radius);
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.rental-agreement__form-group__overlay .rental-agreement--form-group--overlay--remove {
+    z-index: 1;
+    padding: 0.5rem;
+}
+
+.rental-agreement--form-group--overlay--show {
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2); /* Black background with 0.3 opacity */
 }
 
 .form-group__submit-button {

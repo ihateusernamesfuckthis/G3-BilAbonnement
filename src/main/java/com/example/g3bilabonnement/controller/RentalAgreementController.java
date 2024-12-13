@@ -27,17 +27,40 @@ public class RentalAgreementController {
     private HomeController homeController;
 
     @GetMapping("/new")
-    public String createRentalAgreementPage(Model model, HttpSession session) {
+    public String createRentalAgreementPage(Model model, HttpSession session,
+                                            @RequestParam(required = false) boolean removeRenter,
+                                            @RequestParam(required = false) boolean removeCar,
+                                            @RequestParam(required = false) boolean removeSubscription) {
         session.setAttribute("returnPath", "/rental-agreement/new");
 
+        // if removeCar is true, set car to null
+        if (removeCar) {
+            session.removeAttribute("car");
+        }
         // returns car if there is one else null - Page handles null value
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("car", car);
 
+
+        // if removeSubscription is true, set subscription to null
+        if (removeSubscription) {
+            session.removeAttribute("subscription");
+        }
         // returns subscriptionId if there is one else null - Page handles null value
-        Integer subscriptionId = (Integer) session.getAttribute("subscriptionId");
-        Subscription subscription = subscriptionId == null ? null : subscriptionService.getById(subscriptionId);
+        Subscription subscription = (Subscription) session.getAttribute("subscription");
         model.addAttribute("subscription", subscription);
+
+
+        // if removeRenter is true, set renter to null
+        if (removeRenter) {
+            session.removeAttribute("renter");
+        }
+        // returns renter if there is one else null - Page handles null value
+        Renter renter = (Renter) session.getAttribute("renter");
+        model.addAttribute("renter", renter);
+
+        // Header buttons to show in the view
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
 
         return "/dataRegistrator/createRentalAgreement";
     }
@@ -98,7 +121,8 @@ public class RentalAgreementController {
 
         // Clear session data for rental agreement to "reset" the form
         session.removeAttribute("car");
-        session.removeAttribute("subscriptionId");
+        session.removeAttribute("subscription");
+        session.removeAttribute("renter");
 
         return "redirect:/rental-agreement/success"; // Redirect to success page
     }
