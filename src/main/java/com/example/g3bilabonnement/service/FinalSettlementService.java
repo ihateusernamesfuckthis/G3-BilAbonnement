@@ -1,28 +1,40 @@
 package com.example.g3bilabonnement.service;
 
+import com.example.g3bilabonnement.entity.*;
 import com.example.g3bilabonnement.repository.FinalSettlementRepository;
-import com.example.g3bilabonnement.entity.FinalSettlement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FinalSettlementService {
 
     @Autowired
-    private FinalSettlementRepository finalSettlementRepository;
-
+    FinalSettlementRepository finalSettlementRepository;
     @Autowired
-    private RentalAgreementService rentalAgreementService;
-
+    RentalAgreementService rentalAgreementService;
     @Autowired
-    private DamageReportService damageReportService;
+    DamageReportService damageReportService;
+    @Autowired
+    SubscriptionService subscriptionService;
 
     public void add(FinalSettlement finalSettlement){
+
         finalSettlementRepository.add(finalSettlement);
     }
 
-    public FinalSettlement getByCarId(int carId){
+    public FinalSettlement getByCarId(int carId) {
         return finalSettlementRepository.getByCarId(carId);
+    }
+  
+    public List<FinalSettlement> getAll() {
+        List<FinalSettlement> finalSettlements = finalSettlementRepository.getAll();
+        for (FinalSettlement finalSettlement : finalSettlements) {
+            finalSettlement.setRentalAgreement(rentalAgreementService.getById(finalSettlement.getRentalAgreement().getId()));
+            finalSettlement.setDamageReport(damageReportService.getDamageReportById(finalSettlement.getDamageReport().getId()));
+        }
+        return finalSettlements;
     }
 
     public FinalSettlement getById(int id){
@@ -38,3 +50,4 @@ public class FinalSettlementService {
         return finalSettlementRepository.getById(id);
     }
 }
+
