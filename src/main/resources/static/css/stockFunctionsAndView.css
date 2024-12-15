@@ -50,6 +50,7 @@
     margin-bottom: 5px;
 }
 
+/*Targeting the middle column, if there are more than 5 this needs to change aswell. Its used to show the current month*/
 .chart-column:nth-of-type(3) {
     background-color: var(--color-primary);
 }
