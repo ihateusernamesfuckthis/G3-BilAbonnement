@@ -12,3 +12,54 @@
     justify-content: center; /* Optional: Center content inside */
     align-items: center; /* Optional: Center content inside */
 }
+
+.stock-functions-monthly-earnings {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 300px;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.chart-column {
+    width: calc((1/5 * 100%) - 1rem);
+    background-color: var(--color-secondary);
+    text-align: center;
+    position: relative;
+    border-radius: 5px;
+}
+
+/*The month*/
+.chart-column span:first-of-type {
+    color: var(--color-white);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.chart-column:nth-of-type(3) {
+    background-color: var(--color-primary);
+}
+
+/*The price*/
+.chart-column span:last-of-type {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    text-wrap: nowrap;
+}

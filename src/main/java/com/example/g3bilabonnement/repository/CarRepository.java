@@ -24,7 +24,7 @@ public class CarRepository {
         car.setBrand(rs.getString("brand"));
         car.setModel(rs.getString("model"));
         car.setEquipmentLevel(rs.getString("equipment_level"));
-        car.setPowerSourceType(rs.getString("power_source_type"));
+        car.setPowerSourceType(rs.getString("power_source"));
         car.setTransmissionType(rs.getString("transmission_type"));
         car.setNetPrice(rs.getDouble("net_price"));
         car.setRegistrationTax(rs.getDouble("registration_tax"));
@@ -34,7 +34,7 @@ public class CarRepository {
     };
 
     public Car getById(int id) {
-        String sql = "SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE car.id = ?";
+        String sql = "SELECT car.*, car_status.status, power_source.name AS power_source, transmission_type.name AS transmission_type, equipment_level.name AS equipment_level, b.name AS brand, cm.model_name as model FROM car JOIN car_status ON car.car_status_id = car_status.id LEFT JOIN power_source ON car.power_source_id = power_source.id LEFT JOIN transmission_type ON car.transmission_type_id = transmission_type.id LEFT JOIN equipment_level ON car.equipment_level_id = equipment_level.id LEFT JOIN car_model cm ON car.car_model_id = cm.id LEFT JOIN brand b ON cm.brand_id = b.id WHERE car.id = ?";
         return jdbcTemplate.queryForObject(sql, carRowMapper, id);
     }
 

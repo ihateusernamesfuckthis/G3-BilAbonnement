@@ -15,7 +15,18 @@
         <span th:text="'Total pris for alle udlejede biler: ' + ${totalCarPrice} + 'kr.'"></span>
     </div>
     <div class="stock-functions-card stock-functions-rental-contract"></div>
-    <div class="stock-functions-card stock-functions-purchase-agreement"></div>
+    <div class="stock-functions-card stock-functions-monthly-earnings">
+        <h2 class="form-title">Månedlige indtægter fra lejekontrakter</h2>
+        <div class="chart">
+            <div class="chart-column"
+                 th:each="entry : ${monthToTotalPriceMap}"
+                 th:style="'height: ' + (${entry.value} / ${maxTotalPrice}) * 100 + '%;'">
+                <span th:text="${entry.key}"></span>
+                <span th:text="${entry.value} + ' kr'"></span>
+            </div>
+        </div>
+
+    </div>
     <div class="stock-functions-card stock-functions-damage-report"></div>
 </div>
 </body>
