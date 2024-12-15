@@ -81,7 +81,6 @@
 .damage-report-display-card__inner--placeholder {
     background-color: var(--color-light-gray);
     opacity: 0.6;
-    opacity: 0.6;
 }
 
 .damage-report-display-card__detail-placeholder {
@@ -95,3 +94,10 @@
 .damage-report-display-card__detail-placeholder--large {
     width: 160px;
 }
+.damage-report-display-card__actions {
+    flex-direction: column;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+

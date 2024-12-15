@@ -20,7 +20,14 @@
                 <label>
                     <input th:if="${car != null}" type="text" name="carId" class="hidden" th:value="${car.id}"/>
                 </label>
-                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, true)}"></div>
+                <div class="rental-agreement__form-group__overlay"
+                     th:classappend="${car == null ? 'rental-agreement--form-group--overlay--show' : ''}">
+                    <a class="button" th:href="@{/car/search(Status='Klar til udlejning')}" th:if="${car == null}">Søg efter bil</a>
+                    <div th:if="${car != null}">
+                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/createDamageReport(removeCar=true)}, 30, 'rental-agreement--form-group--overlay--remove')}"></div>
+                    </div>
+                </div>
+                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'rental-agreement-form-group-car', false, false)}"></div>
             </div>
             <label for="creationDate">Oprettelsesdato:</label>
             <input type="date" name="creationDate" id="creationDate" required>
