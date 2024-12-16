@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/damageReportMainPage.css">
+    <link rel="stylesheet" href="/css/createDamageReport.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/damageReportFragment.css">
@@ -19,9 +19,8 @@
         <h2>Skaderapport</h2>
         <form action="/updateDamageReport" method="post">
             <input type="hidden" name="damageReportId" th:value="${damageReport.id}">
-
             <label for="creationDate"><strong>Dato for oprettelse: </strong></label>
-            <input type="text" id="creationDate" name="creationDate" th:value="${damageReport.creationDate}" required>
+            <input type="date" id="creationDate" name="creationDate" th:value="${damageReport.creationDate}" required>
 
             <br><br>
 
@@ -42,78 +41,84 @@
                 <tr>
                     <td>Karosseriskader</td>
                     <td>
+                        <input type="hidden" id="damageSpecificationId0" name="damageSpecificationId[]" th:value="${damageReport.damageSpecifications[0]?.id}">
                         <label for="damageDescription0">Skadebeskrivelse</label>
-                        <input type="text" id="damageDescription0" name="damageSpecifications[0].damageDescription"
+                        <input type="text" id="damageDescription0" name="damageDescriptions[]"
                                th:value="${damageReport.damageSpecifications[0]?.damageDescription}" required>
                     </td>
                     <td>
                         <label for="damagePrice0">Skadepris</label>
-                        <input type="number" id="damagePrice0" name="damageSpecifications[0].damagePrice"
+                        <input type="number" id="damagePrice0" name="damagePrices[]"
                                th:value="${damageReport.damageSpecifications[0]?.damagePrice}" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Glas- og lygteskader</td>
                     <td>
+                        <input type="hidden" id="damageSpecificationId1" name="damageSpecificationId[]" th:value="${damageReport.damageSpecifications[1]?.id}">
                         <label for="damageDescription1">Skadebeskrivelse</label>
-                        <input type="text" id="damageDescription1" name="damageSpecifications[1].damageDescription"
+                        <input type="text" id="damageDescription1" name="damageDescriptions[]"
                                th:value="${damageReport.damageSpecifications[1]?.damageDescription}" required>
                     </td>
                     <td>
                         <label for="damagePrice1">Skadepris</label>
-                        <input type="number" id="damagePrice1" name="damageSpecifications[1].damagePrice"
+                        <input type="number" id="damagePrice1" name="damagePrices[]"
                                th:value="${damageReport.damageSpecifications[1]?.damagePrice}" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Hjul- og dækskader</td>
                     <td>
+                        <input type="hidden" id="damageSpecificationId2" name="damageSpecificationId[]" th:value="${damageReport.damageSpecifications[2]?.id}">
                         <label for="damageDescription2">Skadebeskrivelse</label>
-                        <input type="text" id="damageDescription2" name="damageSpecifications[2].damageDescription"
+                        <input type="text" id="damageDescription2" name="damageDescriptions[]"
                                th:value="${damageReport.damageSpecifications[2]?.damageDescription}" required>
                     </td>
                     <td>
                         <label for="damagePrice2">Skadepris</label>
-                        <input type="number" id="damagePrice2" name="damageSpecifications[2].damagePrice"
+                        <input type="number" id="damagePrice2" name="damagePrices[]"
                                th:value="${damageReport.damageSpecifications[2]?.damagePrice}" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Interiørskader</td>
                     <td>
+                        <input type="hidden" id="damageSpecificationId3" name="damageSpecificationId[]" th:value="${damageReport.damageSpecifications[3]?.id}">
                         <label for="damageDescription3">Skadebeskrivelse</label>
-                        <input type="text" id="damageDescription3" name="damageSpecifications[3].damageDescription"
+                        <input type="text" id="damageDescription3" name="damageDescriptions[]"
                                th:value="${damageReport.damageSpecifications[3]?.damageDescription}" required>
                     </td>
                     <td>
                         <label for="damagePrice3">Skadepris</label>
-                        <input type="number" id="damagePrice3" name="damageSpecifications[3].damagePrice"
+                        <input type="number" id="damagePrice3" name="damagePrices[]"
                                th:value="${damageReport.damageSpecifications[3]?.damagePrice}" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Mekaniske og tekniske skader</td>
                     <td>
+                        <input type="hidden" id="damageSpecificationId4" name="damageSpecificationId[]" th:value="${damageReport.damageSpecifications[4]?.id}">
                         <label for="damageDescription4">Skadebeskrivelse</label>
-                        <input type="text" id="damageDescription4" name="damageSpecifications[4].damageDescription"
+                        <input type="text" id="damageDescription4" name="damageDescriptions[]"
                                th:value="${damageReport.damageSpecifications[4]?.damageDescription}" required>
                     </td>
                     <td>
                         <label for="damagePrice4">Skadepris</label>
-                        <input type="number" id="damagePrice4" name="damageSpecifications[4].damagePrice"
+                        <input type="number" id="damagePrice4" name="damagePrices[]"
                                th:value="${damageReport.damageSpecifications[4]?.damagePrice}" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Andet</td>
                     <td>
+                        <input type="hidden" id="damageSpecificationId5" name="damageSpecificationId[]" th:value="${damageReport.damageSpecifications[5]?.id}">
                         <label for="damageDescription5">Skadebeskrivelse</label>
-                        <input type="text" id="damageDescription5" name="damageSpecifications[5].damageDescription"
+                        <input type="text" id="damageDescription5" name="damageDescriptions[]"
                                th:value="${damageReport.damageSpecifications[5]?.damageDescription}" required>
                     </td>
                     <td>
                         <label for="damagePrice5">Skadepris</label>
-                        <input type="number" id="damagePrice5" name="damageSpecifications[5].damagePrice"
+                        <input type="number" id="damagePrice5" name="damagePrices[]"
                                th:value="${damageReport.damageSpecifications[5]?.damagePrice}" required>
                     </td>
                 </tr>
@@ -125,10 +130,8 @@
                 </tr>
                 </tbody>
             </table>
-
-            <div class="__form-group">
                 <button type="submit">Gem ændringer</button>
-            </div>
+                    <a class="button" th:href="@{/damageFunctions}">Fortryd ændringer</a>
         </form>
     </div>
 </div>

@@ -232,5 +232,9 @@ VALUES (1, '2024-03-01');
 
 -- Populate damage_specification table
 INSERT INTO damage_specification (damage_description, damage_price, damage_report_id)
-VALUES ('Front bumper scratch', 200.00, 1);
-
+VALUES ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1);

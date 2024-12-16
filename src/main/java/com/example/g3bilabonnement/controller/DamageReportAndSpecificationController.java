@@ -27,13 +27,14 @@ public class DamageReportAndSpecificationController {
     HomeController homeController;
 
     @GetMapping("/damageFunctions")
-    public String search(Model model){
+    public String search(Model model) {
         List<DamageReport> damageReports = damageReportService.getAll();
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("damagereports", damageReports);
 
         return "/damageAndRepairManager/searchDamageReport";
     }
+
     @GetMapping("/createDamageReport")
     public String damageReportFunctions(HttpSession session, Model model) {
         session.setAttribute("returnPath", "/createDamageReport");
@@ -42,6 +43,7 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("car", car);
         return "/damageAndRepairManager/createDamageReport";
     }
+
     @PostMapping("/createDamageReport")
     public String createDamageReportWithSpecifications(
             @RequestParam("carId") int carId,
@@ -50,14 +52,6 @@ public class DamageReportAndSpecificationController {
             @RequestParam List<Double> damagePrices,
             HttpSession session,
             Model model) {
-
-        /*List<Integer> validCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-
-        if (!validCarIds.contains(carId)) {
-            model.addAttribute("errorMessage", "Skaderapport kan kun oprettes, hvis lejeaftalen er udløbet og bilen ikke har en eksisterende skaderapport.");
-            model.addAttribute("errorType", "failure");
-            return "damageReportMainPage";
-        }*/
 
         DamageReport damageReport = new DamageReport();
 
@@ -96,7 +90,7 @@ public class DamageReportAndSpecificationController {
     }
 
     @GetMapping("/updateDamageReport")
-    public String updateDamageReport(@RequestParam int damageReportId, Model model){
+    public String updateDamageReport(@RequestParam int damageReportId, Model model) {
         DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
         List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReportId);
         damageReport.setDamageSpecifications(damageSpecifications);
@@ -104,17 +98,48 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("damageReport", damageReport);
         model.addAttribute("car", car);
-
         return "damageAndRepairManager/updateDamageReport";
     }
+
     @PostMapping("/updateDamageReport")
-    public String updateDamageReport(@ModelAttribute DamageReport damageReport, Model model) {
+    public String updateDamageReport(
+            @RequestParam("damageReportId") int damageReportId,
+            @RequestParam LocalDate creationDate,
+            @RequestParam List<Integer> damageSpecificationId,
+            @RequestParam List<String> damageDescriptions,
+            @RequestParam List<Double> damagePrices,
+            Model model) {
+
+        DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
+
+        damageReport.setCreationDate(creationDate);
+
         damageReportService.updateDamageReport(damageReport);
 
-        model.addAttribute("successMessage", "Skade rapporten er opdateret.");
+        List<DamageSpecification> specifications = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            DamageSpecification ds = new DamageSpecification();
+            ds.setId(damageSpecificationId.get(i));
+            ds.setDamageDescription(damageDescriptions.get(i));
+            ds.setDamagePrice(damagePrices.get(i));
+            specifications.add(ds);
+        }
 
-        return "redirect:/damageFunctions";
+        damageSpecificationService.updateDamageSpecifications(specifications, damageReportId);
+
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
+
+        return "redirect:/damageReportUpdateSuccess";
     }
-
-
-}
+    @GetMapping("/damageReportUpdateSuccess")
+    public String showSuccessPage(Model model) {
+        model.addAttribute("message", "Skaderapport er blevet redigeret");
+        model.addAttribute("type", "success");
+        model.addAttribute("redirect", "/damageFunctions");
+        model.addAttribute("redirectText", "Ok");
+        List<DamageReport> damageReports = damageReportService.getAll();
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
+        model.addAttribute("damagereports", damageReports);
+        return "/damageAndRepairManager/damageReportIsUpdated";
+    }
+    }

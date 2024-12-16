@@ -76,21 +76,23 @@
                               th:text="${damageReport.totalDamagePrice != 0.0 ? damageReport.totalDamagePrice + ' Samlet skade Pris' : 'Ingen skade pris'}">Total damage price </span>
                     </div>
                 </div>
-                <div class="damage-report-display-card__details-section damage-report-display-card__details-section--actions">
-                    <div class="damage-report-display-card__actions">
-                        <div th:if="${showActions}">
+            </div>
+            <div class="damage-report-display-card__details-section damage-report-display-card__details-section--actions">
+                <div class="damage-report-display-card__actions">
+                    <div th:if="${showActions}">
 
                             <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
                                   th:replace="~{fragments/logoButtonFragment :: logo-button('eye', @{/viewDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-view-button')}"></span>
 
-                            <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
-                                  th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/updateDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-edit-button')}"></span>
-                        </div>
+                        <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
+                              th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/updateDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-edit-button')}"></span>
+
+                        <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
+                              th:replace="~{fragments/logoButtonFragment :: logo-button('delete', @{/updateDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-edit-button')}"></span>
                     </div>
+                </div>
 
-            </div>
-
-            <!-- Pricing and Actions -->
+                <!-- Pricing and Actions -->
 
                 <!--<div class="damage-report-display-card__details-column damage-report-display-card__detail--total-price">
                     <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
@@ -98,7 +100,7 @@
 
                           th:text="${damageReport.totalPricePerMonth != null ? damageReport.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
                     -->
-                </div>
             </div>
         </div>
     </div>
+</div>
