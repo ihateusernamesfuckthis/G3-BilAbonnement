@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -50,16 +48,13 @@ public class PurchaseStockAndMonitoringMainController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
         return "redirect:/purchase-agreement/search";
     }
+
     @GetMapping("/monitoring")
-    public String monitoringMainPage(Model model) {
-        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
-        return "/businessDeveloper/monitoring";
-    }
-    @GetMapping("/stockFunctionsAndView")
     public String stockFunctionsAndViewMainPage(@RequestParam(required = false) boolean showForm, Model model) {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
         model.addAttribute("totalCarPrice", FormatHelper.formatDouble(carService.getTotalCarPrice("Udlejet")));
 
+        // Car model limits
         List<CarModelLimit> carModelLimits = carmodelLimitService.getCarModelLimits();
         Collections.sort(carModelLimits); // Sorts list of CarModelLimits showing under limit first
         model.addAttribute("carModelLimits", carModelLimits);
@@ -73,8 +68,10 @@ public class PurchaseStockAndMonitoringMainController {
             }
             model.addAttribute("carModelsSelectOptions", carModelsSelectOptions);
         }
-
         model.addAttribute("showForm", showForm);
+        // Car model limits
+
+        // Total price per month
         DateTimeFormatter danishMonthFormatter = DateTimeFormatter.ofPattern("MMMM", new Locale("da", "DK"));
         List<LocalDate[]> ranges = DateHelper.getMonthDateRanges(2, 2);
         Map<String, Double> monthToTotalPriceMap = new LinkedHashMap<>(); // Linked to keep the order
@@ -90,7 +87,8 @@ public class PurchaseStockAndMonitoringMainController {
         }
         model.addAttribute("maxTotalPrice", maxTotalPrice);
         model.addAttribute("monthToTotalPriceMap", monthToTotalPriceMap);
+        // Total price per month
 
-        return "/businessDeveloper/stockFunctionsAndView";
+        return "/businessDeveloper/monitoring";
     }
 }
