@@ -1,0 +1,98 @@
+<div th:fragment="purchase-agreement-display-card(purchaseAgreement, customCssClass, showActions)"
+     class="purchase-agreement-display-card"
+     th:classappend="${customCssClass}">
+
+    <!-- If purchase-agreement is available uses this-->
+    <div th:if="${purchaseAgreement != null}">
+        <div th:replace="~{fragments/purchaseAgreementFragment :: purchase-agreement-display-card-inner(${purchaseAgreement}, ${showActions})}"></div>
+    </div>
+
+    <!-- If purchase-agreement is NOT available uses this and displays a grayed out template-->
+    <div th:if="${purchaseAgreement == null}">
+        <div th:else class="purchase-agreement-display-card__inner card purchase-agreement-display-card__inner--placeholder">
+            <div class="purchase-agreement-display-card__image-section purchase-agreement-display-card__image-section--placeholder">
+                <div class="purchase-agreement-display-card__image-placeholder"></div>
+            </div>
+
+            <div class="purchase-agreement-display-card__details">
+                <div class="purchase-agreement-display-card__details-section">
+                    <div class="purchase-agreement-display-card__details-column">
+                        <div class="purchase-agreement-display-card__detail-placeholder purchase-agreement-display-card__detail-placeholder--large"></div>
+                        <div class="purchase-agreement-display-card__detail-placeholder purchase-agreement-display-card__detail-placeholder--small"></div>
+                    </div>
+                    <div class="purchase-agreement-display-card__details-column">
+                        <div class="purchase-agreement-display-card__detail-placeholder purchase-agreement-display-card__detail-placeholder--large"></div>
+                        <div class="purchase-agreement-display-card__detail-placeholder purchase-agreement-display-card__detail-placeholder--small"></div>
+                    </div>
+                </div>
+                <div class="purchase-agreement-display-card__details-section purchase-agreement-display-card__details-section--actions">
+                    <div class="purchase-agreement-display-card__actions">
+                        <div th:if="${showActions}"
+                             th:replace="~{fragments/logoButtonFragment :: logo-button('square-add', @{/purchase-agreement/new}, '1.5rem','rental-agreement-form-group-purchase-agreement-search-button')}"></div>
+                    </div>
+                    <div class="purchase-agreement-display-card__details-column">
+                        <div class="purchase-agreement-display-card__detail-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="purchase-agreement-display-card-inner(purchaseAgreement, showActions)">
+    <div class="purchase-agreement-display-card__inner card">
+        <!-- Details Section -->
+        <div class="purchase-agreement-display-card__details">
+            <!-- General Details -->
+            <div class="purchase-agreement-display-card__details-section">
+
+                    <div class="purchase-agreement-display-card__image-section">
+                        <img th:src="${purchaseAgreement.car.imageUrl}"
+                             th:alt="'Image of ' + ${purchaseAgreement.car.brand} + ' ' + ${purchaseAgreement.car.model}"
+                             class="car-display-card__image">
+                    </div>
+
+                <div class="purchase-agreement-display-card__details-column">
+                    <div class="purchase-agreement-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('car',20)}"></div>
+                        <span class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--base-price"
+                              th:text="${purchaseAgreement.car.vehicleNumber} + ''">VehicleNumber</span>
+                    </div>
+
+                    <div class="purchase-agreement-display-card__detail-container">
+                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/car/search}, '1.5rem', 'car-display-card__actions-edit-button')}"></div>
+                        <span class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--kilometer-option"
+                              th:text="'Afhentningslokation: ' + ${purchaseAgreement.pickUpLocation} + ''">PickupLocation</span>
+                    </div>
+                </div>
+                <div class="purchase-agreement-display-card__details-column">
+                    <div class="purchase-agreement-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                        <span class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--type"
+                              th:text="'Pris: ' + ${purchaseAgreement.finalPrice} + ' DKK'">PurchaseAgreement finalPrice</span>
+                    </div>
+                    <!--<div class="purchase-agreement-display-card__detail-container">
+                        <span class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--addons"
+                              th:text="${purchaseAgreement.subscriptionAddons != null ? purchaseAgreement.subscriptionAddons.size() + ' tilføjelser' : 'Ingen tilføjelser'}">purchase-agreement addons amount</span>
+                    </div>
+                    -->
+                </div>
+            </div>
+
+            <!-- Pricing and Actions -->
+            <div class="purchase-agreement-display-card__details-section purchase-agreement-display-card__details-section--actions">
+                <div class="purchase-agreement-display-card__actions">
+                    <div th:if="${showActions}">
+                        <!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/purchase-agreement/search}, '1.5rem', 'purchase-agreement-display-card__actions-edit-button')}"></div>-->
+                    </div>
+                </div>
+                <!--<div class="purchase-agreement-display-card__details-column purchase-agreement-display-card__detail--total-price">
+                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+
+                   <span class="purchase-agreement-display-card__detail"
+                          th:text="${purchaseAgreement.totalPricePerMonth != null ? purchaseAgreement.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
+                -->
+                </div>
+            </div>
+        </div>
+    </div>

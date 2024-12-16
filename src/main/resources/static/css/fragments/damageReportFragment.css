@@ -1,0 +1,108 @@
+.damage-report-display-card {
+    width: 100%;
+}
+
+.damage-report-display-card__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background-color: var(--color-white);
+}
+
+.damage-report-display-card__details {
+    height: 100px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.damage-report-display-card__detail-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.damage-report-display-card__details .logo {
+    display: flex;
+    align-items: center;
+}
+
+.damage-report-display-card__detail {
+    text-align: left;
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if text is too long */
+}
+
+
+.damage-report-display-card__details-section {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1 1 auto;
+}
+
+.damage-report-display-card__details-section--actions {
+    flex: 0 1 auto;
+}
+
+.damage-report-display-card__details-column {
+    flex: 1 0 50%;
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+    flex-direction: column;
+    border-left: 1px var(--color-border) solid;
+}
+
+.damage-report-display-card__details-column:first-child {
+    border-left: none;
+}
+
+.damage-report-display-card__details-column:last-of-type {
+    padding-left: 1rem;
+}
+
+.damage-report-display-card__actions {
+    flex-direction: row;
+    flex: 0 0 50%;
+    display: flex;
+    gap: 1rem;
+}
+
+.damage-report-display-card__detail--total-price {
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-left: calc(1rem + 1px); /* Add 1px to account for the border when using box-sizing: border-box */
+    font-weight: bold;
+    flex: 0 0 50%;
+}
+
+
+/* Placeholder styles */
+.damage-report-display-card__inner--placeholder {
+    background-color: var(--color-light-gray);
+    opacity: 0.6;
+}
+
+.damage-report-display-card__detail-placeholder {
+    width: 120px;
+    height: 1rem;
+    background-color: #ddd;
+    margin: 0.5rem 0;
+    border-radius: var(--border-radius);
+}
+
+.damage-report-display-card__detail-placeholder--large {
+    width: 160px;
+}
+.damage-report-display-card__actions {
+    flex-direction: column;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+

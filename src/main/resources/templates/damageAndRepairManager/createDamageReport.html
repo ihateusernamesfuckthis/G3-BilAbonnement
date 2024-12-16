@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/damageReportMainPage.css">
+    <link rel="stylesheet" href="/css/createDamageReport.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
@@ -16,11 +16,18 @@
     <form action="/createDamageReport" method="post">
             <h2>Opret Skaderapport</h2>
             <label>Vælg Bil:</label>
-            <div class="__form-group">
+            <div class="damage-report__form-group">
                 <label>
                     <input th:if="${car != null}" type="text" name="carId" class="hidden" th:value="${car.id}"/>
                 </label>
-                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, true)}"></div>
+                <div class="damage-report__form-group__overlay"
+                     th:classappend="${car == null ? 'damage-report--form-group--overlay--show' : ''}">
+                    <a class="button" th:href="@{/car/search(Status='Klar til udlejning')}" th:if="${car == null}">Søg efter bil</a>
+                    <div th:if="${car != null}">
+                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/createDamageReport(removeCar=true)}, 30, 'damage-report--form-group--overlay--remove')}"></div>
+                    </div>
+                </div>
+                <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, false)}"></div>
             </div>
             <label for="creationDate">Oprettelsesdato:</label>
             <input type="date" name="creationDate" id="creationDate" required>
@@ -70,11 +77,9 @@
                 </div>
             </div>
 
-            <div class="form-group form-group__submit-button">
                 <button type="submit">Opret</button>
-            </div>
+
         </form>
     </div>
-</div>
 </body>
 </html>

@@ -61,7 +61,7 @@ CREATE TABLE car
         ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE Subscription
+CREATE TABLE subscription
 (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
     base_price            DECIMAL(10, 2),
@@ -71,14 +71,14 @@ CREATE TABLE Subscription
     FOREIGN KEY (kilometer_options_id) REFERENCES kilometer_options (id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE TABLE SubscriptionAddon
+CREATE TABLE subscriptionAddon
 (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     name            VARCHAR(255),
     price_per_month DECIMAL(10, 2)
 );
 
-CREATE TABLE Subscription_SubscriptionAddon
+CREATE TABLE subscription_SubscriptionAddon
 (
     subscription_id INT NOT NULL,
     addon_id        INT NOT NULL,
@@ -232,5 +232,9 @@ VALUES (1, '2024-03-01');
 
 -- Populate damage_specification table
 INSERT INTO damage_specification (damage_description, damage_price, damage_report_id)
-VALUES ('Front bumper scratch', 200.00, 1);
-
+VALUES ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1),
+       ('Front bumper scratch', 200.00, 1);
