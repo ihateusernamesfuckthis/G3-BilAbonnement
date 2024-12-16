@@ -36,8 +36,11 @@ public class DamageReportAndSpecificationController {
     }
 
     @GetMapping("/createDamageReport")
-    public String damageReportFunctions(HttpSession session, Model model) {
+    public String damageReportFunctions(@RequestParam(required = false) boolean removeCar, HttpSession session, Model model) {
         session.setAttribute("returnPath", "/createDamageReport");
+        if (removeCar) {
+            session.removeAttribute("car");
+        }
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("car", car);
