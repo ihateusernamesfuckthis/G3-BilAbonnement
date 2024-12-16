@@ -23,7 +23,7 @@ public class PurchaseStockAndMonitoringMainController {
     @GetMapping("/purchaseAgreementFunctions")
     public String purchaseAgreementMainPage(Model model) {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
-        return "/businessDeveloper/searchPurchaseAgreement";
+        return "redirect:/purchase-agreement/search";
     }
     @GetMapping("/monitoring")
     public String monitoringMainPage(Model model) {

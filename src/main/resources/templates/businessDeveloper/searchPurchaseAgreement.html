@@ -9,18 +9,53 @@
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
     <link rel="stylesheet" href="/css/fragments/purchaseAgreementFragment.css">
+    <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
 </head>
 <body>
+<!-- -->
+<!-- her vises headeren -->
 <div th:replace="~{fragments/headerFragment :: header(${headerButtons})}"></div>
-<div class="container">
-    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Købsaftale', '/purchase-agreement/new')"></div>
+<div class="purchase-agreement-search-container search-form-container">
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Købsaftale', '/purchase-agreement/search')"></div>
 
-    <div class="purchase-agreeement-search-result">
-        <div th:each="purchaseAgreement : ${purchaseAgreements}">
-            <div th:replace="~{fragments/purchaseAgreementFragment :: purchase-agreement-display-card(${purchaseAgreement}, 'purchase-agreement-search-form-group', false)}">
+    <!-- her vises der søgeformularen -->
+    <form th:if="${showSearchFilter}"
+          th:action="@{/purchase-agreement/search(showSearchFilter=${!showSearchFilter},vehicleNumber=${filter.vehicleNumber},minimumFinalPrice=${filter.minimumFinalPrice})}"
+          method="get"
+          class="purchase-agreement-search-form search-form card" th:object="${filter}">
+
+        <div class="search-form-header">
+            <h2 class="purchase-agreement-search-form-title">Søg efter købsaftale</h2>
+           <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/purchase-agreement/search(showSearchFilter=${!showSearchFilter},vehicleNumber=${filter.vehicleNumber},minimumFinalPrice=${filter.minimumFinalPrice})},40,'purchase-agreement-search-form-close-button')}"></div>
+        </div>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'vehicleNumber', 'Nummerplade', 'purchase-agreement-search-form-vehicle-number', false)}"></div>
+        <div th:replace="~{fragments/formGroupFragments :: input-field('number', 'minimumFinalPrice', 'Minimum pris', 'purchase-agreement-search-form-minimum-price', false)}"></div>
+        <button type="submit" class="search-form-button">Search</button>
+    </form>
+
+    <!-- her vises der søgeresultatet-->
+
+    <!-- Resultatformular -->
+    <div class="purchase-agreement-search-result__form">
+        <div class="purchase-agreement-search-result__form-header">
+            <div th:if="${!showSearchFilter}">
+                <div th:replace="~{fragments/logoButtonFragment :: logo-button('search',@{/purchase-agreement/search(showSearchFilter=${!showSearchFilter},vehicleNumber=${filter.vehicleNumber},minimumFinalPrice=${filter.minimumFinalPrice})},38,'purchase-agreement-search-form-search-button')}"></div>
             </div>
         </div>
+
+        <!-- Liste over købsaftaler -->
+        <div th:if="${purchaseAgreements != null && purchaseAgreements.size() > 0}">
+        <div class="purchase-agreeement-search-result">
+            <div th:each="agreement : ${purchaseAgreements}">
+                <div th:replace="~{fragments/purchaseAgreementFragment :: purchase-agreement-display-card(${agreement}, 'purchase-agreement-search-form-group', false)}">
+                </div>
+            </div>
+        </div>
+
+    <div th:if="${purchaseAgreements != null && purchaseAgreements.size() == 0}">
+        <div th:replace="fragments/messagePopup :: popup-message('failure', 'Ingen købsaftaler fundet', 'search', 'Ok')"></div>
     </div>
+
 
 </div>
 </body>

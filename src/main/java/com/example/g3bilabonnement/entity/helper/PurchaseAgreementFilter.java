@@ -2,24 +2,24 @@ package com.example.g3bilabonnement.entity.helper;
 
 public class PurchaseAgreementFilter {
 
-private String licensePlate;
-private double minimumFinalPrice;
+private String vehicleNumber;
+private Double minimumFinalPrice;
 
 public PurchaseAgreementFilter(){}
 
-    public String getLicensePlate() {
-        return licensePlate;
+    public String getVehicleNumber() {
+        return vehicleNumber;
     }
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
     }
 
-    public double getMinimumFinalPrice() {
+    public Double getMinimumFinalPrice() {
         return minimumFinalPrice;
     }
 
-    public void setMinimumFinalPrice(double minimumFinalPrice) {
+    public void setMinimumFinalPrice(Double minimumFinalPrice) {
         this.minimumFinalPrice = minimumFinalPrice;
     }
 }
