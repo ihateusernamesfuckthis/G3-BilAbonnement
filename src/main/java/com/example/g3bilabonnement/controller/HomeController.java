@@ -24,7 +24,7 @@ public class HomeController {
     }
     public Map<String,String> getHeaderHashMapForDamageAndRepairManager(){
         Map<String, String> headerButtons = new LinkedHashMap<>();
-        headerButtons.put("SKADERAPPORT", "/rentalAgreementFunctions");
+        headerButtons.put("SKADERAPPORT", "/damageFunctions");
         return headerButtons;
     }
     public Map<String,String> getHeaderHashMapForBusinessDeveloper(){
@@ -40,7 +40,7 @@ public class HomeController {
     }
     @GetMapping("/damageReportPage")
     public String damageReportMainPage() {
-    return "redirect:/damageReportFunctions";
+    return "redirect:/damageFunctions";
 }
     @GetMapping("/monitoringPage")
     public String purchaseStockAndMonitoringMainPage() {
