@@ -2,6 +2,7 @@ package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
 import com.example.g3bilabonnement.entity.DamageReport;
+import com.example.g3bilabonnement.entity.helper.PurchaseAgreementFilter;
 import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.FinalSettlementService;
 import com.example.g3bilabonnement.service.PurchaseAgreementService;
@@ -10,23 +11,28 @@ import com.example.g3bilabonnement.entity.PurchaseAgreement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/purchase-agreement")
 @Controller
 public class PurchaseAgreementController {
 
     @Autowired
-    PurchaseAgreementService purchaseAgreementService;
-    @Autowired
     FinalSettlementService finalSettlementService;
     @Autowired
     CarService carService;
+    @Autowired
+    PurchaseAgreementService purchaseAgreementService;
+    @Autowired
+    HomeController homeController;
+
+    @ModelAttribute("filter")
+    PurchaseAgreementFilter purchaseAgreementFilter(){
+        return new PurchaseAgreementFilter();
+    }
 
     @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
@@ -66,6 +72,28 @@ public class PurchaseAgreementController {
 
         return"/businessDeveloper/createPurchaseAgreementResult";
     }
+
+    @GetMapping("/search")
+    public String searchPurchaseAgreementsWithFilter(
+            @ModelAttribute("filter") PurchaseAgreementFilter filter,
+            @RequestParam(required = false) boolean showSearchFilter,
+            Model model) {
+
+        // her tilføjes header knapperne
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
+
+        // Her hentes en liste af relevante købskontrakter baseret på filteret
+        List<PurchaseAgreement> purchaseAgreements = purchaseAgreementService.searchByFilter(filter);
+
+        model.addAttribute("purchaseAgreements", purchaseAgreements);
+
+        model.addAttribute("showSearchFilter", showSearchFilter);
+        model.addAttribute("purchaseAgreementFilter", filter);
+
+        // Returner view-navnet, hvor data bliver præsenteret
+        return "/businessDeveloper/searchPurchaseAgreement";
+    }
+
     @GetMapping("/searchPurchaseAgreement")
     public String search(Model model){
         List<PurchaseAgreement> purchaseAgreements = purchaseAgreementService.getAll();

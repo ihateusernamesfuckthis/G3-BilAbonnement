@@ -60,4 +60,8 @@ public class DamageReportRepository {
         String sql = "SELECT * FROM damage_report";
         return template.query(sql, damageReportRowMapper());
     }
+    public void updateDamageReport(DamageReport damageReport) {
+        String sql = "UPDATE damage_report SET car_id = ?, creation_date = ? WHERE id = ?";
+        template.update(sql, damageReport.getCar().getId(), damageReport.getCreationDate(), damageReport.getId());
+    }
 }

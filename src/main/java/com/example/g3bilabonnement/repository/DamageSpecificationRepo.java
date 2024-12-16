@@ -35,4 +35,16 @@ public class DamageSpecificationRepo {
         String sql = "SELECT * FROM damage_specification WHERE damage_report_id = ?";
         return template.query(sql, damageSpecificationRowMapper(), damageReportId);
     }
+    public void updateDamageSpecifications(List<DamageSpecification> damageSpecifications, int damageReportId) {
+        for (DamageSpecification ds : damageSpecifications) {
+            String sql = "UPDATE damage_specification SET damage_description = ?, damage_price = ? WHERE damage_report_id = ? AND damage_specification_id = ?";
+            template.update(sql, ds.getDamageDescription(), ds.getDamagePrice(), damageReportId, ds.getId());
+        }
+    }
+
+    /*public void deleteDamageSpecification(int damageReportId) {
+        String sql = "DELETE FROM damage_specification WHERE damage_report_id = ?";
+        template.update(sql, damageReportid);
+    }*/
+
 }

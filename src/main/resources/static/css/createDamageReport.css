@@ -1,0 +1,55 @@
+/*.redirectBtnSmallFragment{
+    position: absolute;
+    left: 200px;
+}*/
+.damage-report__form-group{
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: row;
+}
+.damage-report__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.damage-report__form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.damage-report__form-group > label {
+    padding: 0;
+}
+
+.damage-report__form-group__overlay {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border-radius: var(--border-radius);
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.damage-report__form-group__overlay .rental-agreement--form-group--overlay--remove {
+    z-index: 1;
+    padding: 0.5rem;
+}
+
+.damage-report--form-group--overlay--show {
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.2); /* Black background with 0.3 opacity */
+}
+.form-group__submit-button {
+    margin-top: 20px;
+}
+
+.damage-report-form-group-car-search-button {
+    align-self: flex-end;
+}

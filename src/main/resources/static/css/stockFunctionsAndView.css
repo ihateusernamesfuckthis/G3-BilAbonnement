@@ -1,16 +1,72 @@
 .stock-functions {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc(50% - 0.5rem)); /* 2 columns with 1rem gap so width is 50% minus the gap */
+    grid-template-rows: repeat(2, calc(50% - 0.5rem)); /* 2 rows with 1rem gap so height is 50% minus the gap */
     gap: 1rem;
 }
 
 .stock-functions-card {
-    height: 100%; /* Set the height of the cards */
-    background-color: #f5f5f5; /* Optional: Set a background to visualize cards */
-    border: 1px solid #ccc; /* Optional: Add a border */
-    display: flex; /* Optional: Center content inside */
-    justify-content: center; /* Optional: Center content inside */
-    align-items: center; /* Optional: Center content inside */
+    height: 100%;
+    background-color: var(--color-darker-gray);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.stock-functions-minimum-car-stock {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Ensures content stacks vertically */
+    gap: 1rem; /* Adds spacing between elements */
+    overflow: auto; /* Enables scrolling */
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stock-functions-minimum-car-stock-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; /* Prevents overflow */
+    z-index: 1;
+}
+
+.stock-functions-minimum-car-stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1rem 0;
+}
+
+.table-container {
+    flex-grow: 1; /* Ensures the table expands while respecting overall layout */
+    overflow: auto;
+    width: 100%;
+}
+
+.stock-functions-minimum-car-stock .logo {
+    display: flex;
+    align-items: center;
+}
+
+.table-container thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-darker-gray); /* Match your table background */
+    z-index: 2; /* Ensure it stays above table rows */
+}
+
+.table-container .table-row--red {
+    color: red;
 }
 
 .stock-functions-monthly-earnings {

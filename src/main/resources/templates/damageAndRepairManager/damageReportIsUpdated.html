@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/createDamageReport.css">
@@ -14,7 +15,7 @@
 <body>
 <div th:replace="~{fragments/headerFragment :: header(${headerButtons})}"></div>
 <div class="container">
-    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')"></div>
+    <div th:replace="~{fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')}"></div>
 
     <div class="damage-report-search-result">
         <div th:each="damageReport : ${damagereports}">
@@ -22,7 +23,7 @@
             </div>
         </div>
     </div>
-
+    <div th:replace="~{fragments/messagePopup :: popup-message(${type}, ${message}, ${redirect}, ${redirectText})}"></div>
 </div>
 </body>
 </html>

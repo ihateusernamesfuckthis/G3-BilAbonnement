@@ -1,6 +1,7 @@
 package com.example.g3bilabonnement.repository;
 
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.CarModel;
 import com.example.g3bilabonnement.entity.helper.CarFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -40,13 +42,17 @@ public class CarRepository {
 
     public List<Car> searchByFilter(CarFilter carFilter) {
         // adding 'where 1 = 1' to allow 0 -> all filters
-        StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status FROM car JOIN car_status ON car.car_status_id = car_status.id WHERE 1 = 1");
+        StringBuilder sql = new StringBuilder("SELECT car.*, car_status.status, power_source.name AS power_source, transmission_type.name AS transmission_type, equipment_level.name AS equipment_level, b.name AS brand, cm.model_name as model FROM car JOIN car_status ON car.car_status_id = car_status.id LEFT JOIN power_source ON car.power_source_id = power_source.id LEFT JOIN transmission_type ON car.transmission_type_id = transmission_type.id LEFT JOIN equipment_level ON car.equipment_level_id = equipment_level.id LEFT JOIN car_model cm ON car.car_model_id = cm.id LEFT JOIN brand b ON cm.brand_id = b.id WHERE 1 = 1");
 
         if (carFilter.getStatus() != null && !carFilter.getStatus().isEmpty()) {
             sql.append(" AND status = '").append(carFilter.getStatus()).append("'");
         }
         if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
             sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
+        }
+        if (carFilter.isMissingDamageReport()){
+            // Gets cars that does not already have a damage report and rental contract end date has been reached.
+            sql.append(" AND car.id NOT IN (SELECT car_id FROM damage_report) AND car.id IN (SELECT car_id FROM rental_agreement WHERE end_date < CURDATE())");
         }
         return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
@@ -61,14 +67,14 @@ public class CarRepository {
         return jdbcTemplate.queryForList(sql, String.class);
     }
 
-    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
-        String sql = "SELECT ra.car_id " +
-                "FROM rental_agreement ra " +
-                "LEFT JOIN damage_report dr ON ra.car_id = dr.car_id " +
-                "WHERE ra.end_date < ? " +
-                "AND dr.car_id IS NULL";
-        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
-    }
+//    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
+//        String sql = "SELECT ra.car_id " +
+//                "FROM rental_agreement ra " +
+//                "LEFT JOIN damage_report dr ON ra.car_id = dr.car_id " +
+//                "WHERE ra.end_date < ? " +
+//                "AND dr.car_id IS NULL";
+//        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
+//    }
 
     public double getTotalCarPrice(String carStatus) {
         String sql = "SELECT SUM(c.net_price) FROM car c \n" +

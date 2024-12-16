@@ -57,6 +57,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Links */
 a {
     color: var(--color-primary);
+    font-size: 1rem;
+    font-family: var(--font-family), sans-serif;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -73,6 +75,7 @@ button, .button {
     padding: 0.5rem 1rem;
     border-radius: var(--button-border-radius);
     font-size: 1rem;
+    font-family: var(--font-family), sans-serif;
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -175,8 +178,9 @@ tr:nth-child(even) {
     top: 5%;
     left: 5%;
     width: 90%;
-    height: 90%;
+    height: auto;
     z-index: 1;
+    box-shadow: 0 10px 100px 50px rgb(186, 199, 208);
 }
 
 .search-form > div {

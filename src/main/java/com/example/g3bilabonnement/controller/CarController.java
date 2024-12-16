@@ -1,8 +1,11 @@
 package com.example.g3bilabonnement.controller;
 
 import com.example.g3bilabonnement.entity.Car;
+import com.example.g3bilabonnement.entity.CarModel;
+import com.example.g3bilabonnement.entity.CarModelLimit;
 import com.example.g3bilabonnement.entity.helper.CarFilter;
 import com.example.g3bilabonnement.entity.helper.SelectOption;
+import com.example.g3bilabonnement.service.CarModelLimitService;
 import com.example.g3bilabonnement.service.CarService;
 import com.example.g3bilabonnement.service.SubscriptionAddonService;
 import jakarta.servlet.http.HttpSession;
@@ -25,7 +28,7 @@ public class CarController {
     private CarService carService;
 
     @Autowired
-    private SubscriptionAddonService subscriptionAddonService;
+    private CarModelLimitService carmodelLimitService;
 
     // Ensures the filter is always present in the model
     @ModelAttribute("filter")
@@ -38,21 +41,12 @@ public class CarController {
                         // carFilter indeholder de værdier, som brugeren har udfyldt.
         List<Car> cars = carService.searchByFilter(carFilter);
 
-        if (carFilter.isMissingDamageReport()) {
-            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
-
-            cars = expiredCars;
-        } else {
-            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
-
-            cars.addAll(expiredCars);
-
-            Set<Car> carsWithoutDuplicates = new HashSet<>(cars);
-            cars = new ArrayList<>(carsWithoutDuplicates);
-        }
-
+//        if (carFilter.isMissingDamageReport()) {
+//            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+//            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
+//
+//            cars = expiredCars;
+//        }
         model.addAttribute("cars", cars);
 
 
@@ -87,5 +81,17 @@ public class CarController {
 
         // Redirect to the GET endpoint
         return "redirect:" + returnPath;
+    }
+
+    @PostMapping("/set-limit")
+    public String setLimit(@RequestParam int carModelId, @RequestParam int minLimit) {
+        CarModelLimit carModelLimit = new CarModelLimit();
+        CarModel carModel = new CarModel();
+        carModel.setId(carModelId);
+        carModelLimit.setCarModel(carModel);
+        carModelLimit.setMinLimit(minLimit);
+        carmodelLimitService.saveCarModelLimit(carModelLimit);
+
+        return "redirect:/stockFunctionsAndView";
     }
 }

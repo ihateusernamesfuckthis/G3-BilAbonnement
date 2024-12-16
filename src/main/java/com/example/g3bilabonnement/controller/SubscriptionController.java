@@ -59,7 +59,7 @@ public class SubscriptionController {
 
     @PostMapping("/create")
     public String createSubscription(@RequestParam double baseSubscriptionPrice, @RequestParam int kmPrMonth,
-                                     @RequestParam List<Integer> subscriptionAddons, @RequestParam String subscriptionType,
+                                     @RequestParam(required = false) List<Integer> subscriptionAddons, @RequestParam String subscriptionType,
                                      HttpSession session) {
         Subscription subscription = new Subscription();
         subscription.setBaseSubscriptionPrice(baseSubscriptionPrice);
@@ -70,10 +70,12 @@ public class SubscriptionController {
 
         subscription.setSubscriptionType(subscriptionType);
 
-        for (Integer addonId : subscriptionAddons) {
-            SubscriptionAddon addon = new SubscriptionAddon();
-            addon.setId(addonId);
-            subscription.addSubscriptionAddon(addon);
+        if (subscriptionAddons != null) {
+            for (Integer addonId : subscriptionAddons) {
+                SubscriptionAddon addon = new SubscriptionAddon();
+                addon.setId(addonId);
+                subscription.addSubscriptionAddon(addon);
+            }
         }
 
         // setting subscription on session to access it from the next page and keep it during refreshes

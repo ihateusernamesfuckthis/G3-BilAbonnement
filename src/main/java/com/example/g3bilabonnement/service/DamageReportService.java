@@ -42,4 +42,7 @@ public class DamageReportService {
         }
         return damageReports;
     }
+    public void updateDamageReport(DamageReport damageReport) {
+        damageReportRepository.updateDamageReport(damageReport);
+    }
 }
