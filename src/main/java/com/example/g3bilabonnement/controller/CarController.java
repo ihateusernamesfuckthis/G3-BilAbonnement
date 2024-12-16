@@ -38,12 +38,12 @@ public class CarController {
                         // carFilter indeholder de værdier, som brugeren har udfyldt.
         List<Car> cars = carService.searchByFilter(carFilter);
 
-        if (carFilter.isMissingDamageReport()) {
-            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
-
-            cars = expiredCars;
-        }
+//        if (carFilter.isMissingDamageReport()) {
+//            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+//            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
+//
+//            cars = expiredCars;
+//        }
         model.addAttribute("cars", cars);
 
 

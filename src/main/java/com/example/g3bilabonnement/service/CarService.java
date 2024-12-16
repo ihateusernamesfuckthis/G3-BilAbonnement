@@ -19,18 +19,18 @@ public class CarService {
         return carRepository.getById(id);
     }
 
-    public List<Car> getCarsByIds(List<Integer> carIds) {
-        List<Car> cars = new ArrayList<>();
-        if (carIds != null && !carIds.isEmpty()) {
-            for (int id : carIds) {
-                Car car = carRepository.getById(id);
-                if (car != null) {
-                    cars.add(car);
-                }
-            }
-        }
-        return cars;
-    }
+//    public List<Car> getCarsByIds(List<Integer> carIds) {
+//        List<Car> cars = new ArrayList<>();
+//        if (carIds != null && !carIds.isEmpty()) {
+//            for (int id : carIds) {
+//                Car car = carRepository.getById(id);
+//                if (car != null) {
+//                    cars.add(car);
+//                }
+//            }
+//        }
+//        return cars;
+//    }
 
     public List<Car> searchByFilter(CarFilter carFilter) {
         return carRepository.searchByFilter(carFilter);
@@ -39,9 +39,10 @@ public class CarService {
     public void updateCarStatus(Car car, String newStatus){
         carRepository.updateCarStatus(car, newStatus);
     }
-    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
-        return carRepository.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-    }
+
+//    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
+//        return carRepository.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
+//    }
 
     public List<String> getCarStatuses() {
         return carRepository.getCarStatuses();

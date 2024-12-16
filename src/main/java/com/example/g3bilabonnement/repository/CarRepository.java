@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -48,6 +49,10 @@ public class CarRepository {
         if (carFilter.getVehicleNumber() != null && !carFilter.getVehicleNumber().isEmpty()) {
             sql.append(" AND vehicle_number like '%").append(carFilter.getVehicleNumber()).append("%'");
         }
+        if (carFilter.isMissingDamageReport()){
+            // Gets cars that does not already have a damage report and rental contract end date has been reached.
+            sql.append(" AND car.id NOT IN (SELECT car_id FROM damage_report) AND car.id IN (SELECT car_id FROM rental_agreement WHERE end_date < CURDATE())");
+        }
         return jdbcTemplate.query(sql.toString(), carRowMapper);
     }
 
@@ -61,14 +66,14 @@ public class CarRepository {
         return jdbcTemplate.queryForList(sql, String.class);
     }
 
-    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
-        String sql = "SELECT ra.car_id " +
-                "FROM rental_agreement ra " +
-                "LEFT JOIN damage_report dr ON ra.car_id = dr.car_id " +
-                "WHERE ra.end_date < ? " +
-                "AND dr.car_id IS NULL";
-        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
-    }
+//    public List<Integer> getCarIdsFromExpiredRentalAgreementsWithoutDamageReports() {
+//        String sql = "SELECT ra.car_id " +
+//                "FROM rental_agreement ra " +
+//                "LEFT JOIN damage_report dr ON ra.car_id = dr.car_id " +
+//                "WHERE ra.end_date < ? " +
+//                "AND dr.car_id IS NULL";
+//        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
+//    }
 
     public double getTotalCarPrice(String carStatus) {
         String sql = "SELECT SUM(c.net_price) FROM car c \n" +

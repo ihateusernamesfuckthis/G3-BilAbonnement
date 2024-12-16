@@ -22,7 +22,7 @@
                 </label>
                 <div class="damage-report__form-group__overlay"
                      th:classappend="${car == null ? 'damage-report--form-group--overlay--show' : ''}">
-                    <a class="button" th:href="@{/car/search(Status='Klar til udlejning')}" th:if="${car == null}">Søg efter bil</a>
+                    <a class="button" th:href="@{/car/search(missingDamageReport=true)}" th:if="${car == null}">Søg efter bil</a>
                     <div th:if="${car != null}">
                         <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/createDamageReport(removeCar=true)}, 30, 'damage-report--form-group--overlay--remove')}"></div>
                     </div>
