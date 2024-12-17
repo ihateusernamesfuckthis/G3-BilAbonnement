@@ -37,7 +37,7 @@ public class PurchaseAgreementController {
     @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
         model.addAttribute("returnpath", "/purchase-agreement/create");
-        return "/businessDeveloper/createPurchaseAgreement";
+        return "businessDeveloper/createPurchaseAgreement";
     }
 
     @PostMapping("/create")
@@ -70,7 +70,7 @@ public class PurchaseAgreementController {
         model.addAttribute("redirect", "/purchase-agreement/new");
         model.addAttribute("redirectText", "Ok");
 
-        return"/businessDeveloper/createPurchaseAgreementResult";
+        return"businessDeveloper/createPurchaseAgreementResult";
     }
 
     @GetMapping("/search")
@@ -91,7 +91,7 @@ public class PurchaseAgreementController {
         model.addAttribute("purchaseAgreementFilter", filter);
 
         // Returner view-navnet, hvor data bliver præsenteret
-        return "/businessDeveloper/searchPurchaseAgreement";
+        return "businessDeveloper/searchPurchaseAgreement";
     }
 
     @GetMapping("/searchPurchaseAgreement")

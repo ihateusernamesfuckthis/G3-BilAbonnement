@@ -90,6 +90,6 @@ public class PurchaseStockAndMonitoringMainController {
         model.addAttribute("monthToTotalPriceMap", monthToTotalPriceMap);
         // Total price per month
 
-        return "/businessDeveloper/monitoring";
+        return "businessDeveloper/monitoring";
     }
 }

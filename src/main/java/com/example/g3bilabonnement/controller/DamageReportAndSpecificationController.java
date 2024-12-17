@@ -32,7 +32,7 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("damagereports", damageReports);
 
-        return "/damageAndRepairManager/searchDamageReport";
+        return "damageAndRepairManager/searchDamageReport";
     }
 
     @GetMapping("/createDamageReport")
@@ -44,7 +44,7 @@ public class DamageReportAndSpecificationController {
         Car car = (Car) session.getAttribute("car");
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("car", car);
-        return "/damageAndRepairManager/createDamageReport";
+        return "damageAndRepairManager/createDamageReport";
     }
 
     @PostMapping("/createDamageReport")
@@ -74,15 +74,13 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         session.removeAttribute("car");
 
-        return "redirect:/damageAndRepairManager/viewDamageReport?damageReportId=" + damageReportId;
+        return "redirect:/viewDamageReport?damageReportId=" + damageReportId;
     }
 
     @GetMapping("/viewDamageReport")
     public String viewDamageReport(@RequestParam int damageReportId, Model model) {
 
         DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
-        List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReportId);
-        damageReport.setDamageSpecifications(damageSpecifications);
 
         Car car = damageReport.getCar();
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
@@ -95,8 +93,6 @@ public class DamageReportAndSpecificationController {
     @GetMapping("/updateDamageReport")
     public String updateDamageReport(@RequestParam int damageReportId, Model model) {
         DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
-        List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReportId);
-        damageReport.setDamageSpecifications(damageSpecifications);
         Car car = damageReport.getCar();
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("damageReport", damageReport);
@@ -143,6 +139,6 @@ public class DamageReportAndSpecificationController {
         List<DamageReport> damageReports = damageReportService.getAll();
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
         model.addAttribute("damagereports", damageReports);
-        return "/damageAndRepairManager/damageReportIsUpdated";
+        return "damageAndRepairManager/damageReportIsUpdated";
     }
     }

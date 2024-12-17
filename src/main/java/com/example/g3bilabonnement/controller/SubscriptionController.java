@@ -59,7 +59,7 @@ public class SubscriptionController {
         }
         model.addAttribute("kilometerOptionsSelectOptions", kilometerOptionsSelectOptions);
 
-        return "/dataRegistrator/createSubscription";
+        return "dataRegistrator/createSubscription";
     }
 
     @PostMapping("/create")
