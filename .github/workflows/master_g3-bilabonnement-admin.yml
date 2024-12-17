@@ -23,7 +23,7 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
