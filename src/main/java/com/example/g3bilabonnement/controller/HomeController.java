@@ -16,6 +16,10 @@ public class HomeController {
         return "home";
     }
 
+    public Map<String,String> getHeaderHashMapEmpty(){
+        Map<String, String> headerButtons = new LinkedHashMap<>();
+        return headerButtons;
+    }
     public Map<String,String> getHeaderHashMapForDataRegistrator(){
         Map<String, String> headerButtons = new LinkedHashMap<>();
         headerButtons.put("LEJEAFTALE", "/rentalAgreementFunctions");

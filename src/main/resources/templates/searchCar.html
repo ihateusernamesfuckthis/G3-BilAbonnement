@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
     <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
 </head>
 <body>
-<div class="car-search-container search-form-container">
+<div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
+<div class="car-search-container search-form-container container">
     <!-- search form uses search-form class for styling-->
     <form th:if="${showSearchFilter}" th:action="@{/car/search}" method="get" class="car-search-form search-form card"
           th:object="${filter}">
