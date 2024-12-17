@@ -52,6 +52,7 @@ public class PurchaseStockAndMonitoringMainController {
     @GetMapping("/monitoring")
     public String stockFunctionsAndViewMainPage(@RequestParam(required = false) boolean showForm, Model model) {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
+        model.addAttribute("totalRentedCarCount", carService.getTotalRentedCarCount());
         model.addAttribute("totalCarPrice", FormatHelper.formatDouble(carService.getTotalCarPrice("Udlejet")));
 
         // Car model limits
@@ -75,7 +76,7 @@ public class PurchaseStockAndMonitoringMainController {
         DateTimeFormatter danishMonthFormatter = DateTimeFormatter.ofPattern("MMMM", new Locale("da", "DK"));
         List<LocalDate[]> ranges = DateHelper.getMonthDateRanges(2, 2);
         Map<String, Double> monthToTotalPriceMap = new LinkedHashMap<>(); // Linked to keep the order
-        double maxTotalPrice = 0;
+        double maxTotalPrice = 1; // set to 1 to avoid dividing by zero if no max price is present
         for (LocalDate[] range : ranges) {
             String month = range[0].format(danishMonthFormatter);
             String capitalizedMonth = month.substring(0, 1).toUpperCase() + month.substring(1);
