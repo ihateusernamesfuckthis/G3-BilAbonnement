@@ -70,7 +70,7 @@ public class RentalAgreementController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
         List<RentalAgreement> rentalAgreements = rentalAgreementService.getAll();
         model.addAttribute("rentalAgreements", rentalAgreements);
-        return "/dataRegistrator/searchRentalAgreement";
+        return "dataRegistrator/searchRentalAgreement";
     }
 
     @PostMapping("/create")
