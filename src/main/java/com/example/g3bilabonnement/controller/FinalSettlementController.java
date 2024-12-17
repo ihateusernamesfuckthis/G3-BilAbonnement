@@ -28,7 +28,7 @@ public class FinalSettlementController {
     @GetMapping("/new")
     public String createFinalSettlement(Model model){
         model.addAttribute("returnpath", "/final-settlement/create");
-        return "/dataRegistrator/createFinalSettlement";
+        return "dataRegistrator/createFinalSettlement";
     }
 
     @PostMapping("/create")
@@ -64,6 +64,6 @@ public class FinalSettlementController {
         model.addAttribute("type", "success");
         model.addAttribute("redirect", "/final-settlement/new");
         model.addAttribute("redirectText", "Ok");
-        return "/dataRegistrator/createFinalSettlementResult";
+        return "dataRegistrator/createFinalSettlementResult";
     }
 }

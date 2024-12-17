@@ -52,6 +52,7 @@ public class DamageReport {
         for (DamageSpecification d : damageSpecifications) {
             total += d.getDamagePrice();
         }
+        this.totalDamagePrice = total;
         return total;
     }
 

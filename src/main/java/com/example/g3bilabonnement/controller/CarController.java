@@ -86,6 +86,6 @@ public class CarController {
         carModelLimit.setMinLimit(minLimit);
         carmodelLimitService.saveCarModelLimit(carModelLimit);
 
-        return "redirect:/stockFunctionsAndView";
+        return "redirect:/monitoring";
     }
 }

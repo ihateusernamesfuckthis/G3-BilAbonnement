@@ -62,7 +62,7 @@ public class RentalAgreementController {
         // Header buttons to show in the view
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
 
-        return "/dataRegistrator/createRentalAgreement";
+        return "dataRegistrator/createRentalAgreement";
     }
 
     @GetMapping("/search")
@@ -133,6 +133,6 @@ public class RentalAgreementController {
         model.addAttribute("type", "success");
         model.addAttribute("redirect", "/rental-agreement/new");
         model.addAttribute("redirectText", "Ok");
-        return "/dataRegistrator/createRentalAgreementResult";
+        return "dataRegistrator/createRentalAgreementResult";
     }
 }

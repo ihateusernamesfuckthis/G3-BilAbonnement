@@ -28,6 +28,6 @@ public class RentalAgreementAndFinalSettlementMainController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
         List<FinalSettlement> finalSettlements = finalSettlementService.getAll();
         model.addAttribute("finalSettlements", finalSettlements);
-        return "/dataRegistrator/searchFinalSettlement";
+        return "dataRegistrator/searchFinalSettlement";
     }
 }

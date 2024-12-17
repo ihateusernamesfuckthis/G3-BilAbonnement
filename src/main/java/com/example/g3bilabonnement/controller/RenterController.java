@@ -40,7 +40,7 @@ public class RenterController {
 
         model.addAttribute("showSearchFilter", showSearchFilter);
         model.addAttribute("filter", renterFilter);
-        return "/dataRegistrator/searchRenter";
+        return "dataRegistrator/searchRenter";
     }
 
     @PostMapping("/return")
