@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -69,12 +70,25 @@ public class RentalAgreementRepository {
     };
 
     public RentalAgreement getById(int id) {
-        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id WHERE ra.id = ?";
+        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra " +
+                "LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id " +
+                "WHERE ra.id = ?";
         return jdbcTemplate.queryForObject(sql, rentalAgreementRowMapper, id);
     }
 
     public List<RentalAgreement> getAll() {
-        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id";
+        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra " +
+                "LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id";
         return jdbcTemplate.query(sql, rentalAgreementRowMapper);
+    }
+
+    // Gets rental agreements by date range if the rental agreement is active within the range
+    public List<RentalAgreement> getByDateRange(LocalDate startDate, LocalDate endDate) {
+        String sql = "SELECT ra.*, (fs.id IS NOT NULL) as has_final_settlement FROM rental_agreement as ra " +
+                "LEFT JOIN final_settlement as fs ON ra.id = fs.rental_agreement_id " +
+                "WHERE (start_date BETWEEN ? AND ?) " + // Starts within the range
+                "   OR (end_date BETWEEN ? AND ?) " + // Ends within the range
+                "   OR (start_date <= ? AND end_date >= ?)"; // Starts and ends outside the range, so still ongoing in the range
+        return jdbcTemplate.query(sql, rentalAgreementRowMapper, startDate, endDate, startDate, endDate, startDate, endDate);
     }
 }

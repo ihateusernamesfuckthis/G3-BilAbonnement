@@ -30,7 +30,6 @@ public class HomeController {
     public Map<String,String> getHeaderHashMapForBusinessDeveloper(){
         Map<String, String> headerButtons = new LinkedHashMap<>();
         headerButtons.put("KØBSKONTRAKT", "/purchaseAgreementFunctions");
-        headerButtons.put("LAGERBEHOLDNING", "/stockFunctionsAndView");
         headerButtons.put("OVERVÅGNING", "/monitoring");
         return headerButtons;
     }

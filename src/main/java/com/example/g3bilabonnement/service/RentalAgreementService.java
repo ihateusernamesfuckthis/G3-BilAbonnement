@@ -6,6 +6,7 @@ import com.example.g3bilabonnement.repository.RentalAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -59,5 +60,26 @@ public class RentalAgreementService {
             locationService.getById(rentalAgreement.getReturnLocation().getId());
         }
         return rentalAgreements;
+    }
+
+    public List<RentalAgreement> getByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<RentalAgreement> rentalAgreements = rentalAgreementRepository.getByDateRange(startDate, endDate);
+        for (RentalAgreement rentalAgreement : rentalAgreements) {
+            rentalAgreement.setCar(carService.getById(rentalAgreement.getCar().getId()));
+            rentalAgreement.setRenter(renterService.getById(rentalAgreement.getRenter().getId()));
+            rentalAgreement.setSubscription(subscriptionService.getById(rentalAgreement.getSubscription().getId()));
+            locationService.getById(rentalAgreement.getPickupLocation().getId());
+            locationService.getById(rentalAgreement.getReturnLocation().getId());
+        }
+        return rentalAgreements;
+    }
+
+    public double getTotalPriceByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<RentalAgreement> rentalAgreementsByDateRange = getByDateRange(startDate, endDate);
+        double totalPrice = 0;
+        for (RentalAgreement rentalAgreement : rentalAgreementsByDateRange) {
+            totalPrice += rentalAgreement.getTotalPrice();
+        }
+        return totalPrice;
     }
 }
