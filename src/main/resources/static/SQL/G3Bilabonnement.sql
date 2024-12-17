@@ -1,3 +1,4 @@
+-- DDL
 DROP
     DATABASE IF EXISTS G3Bilabonnement;
 CREATE
@@ -190,6 +191,9 @@ CREATE TABLE purchase_agreement
     FOREIGN KEY (car_id) REFERENCES car (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (final_settlement_id) REFERENCES final_settlement (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+-- DML
 
 -- Populate Location table
 INSERT INTO location (address, city, zip_code)

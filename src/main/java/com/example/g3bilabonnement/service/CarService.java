@@ -49,6 +49,10 @@ public class CarService {
         return carRepository.getCarStatuses();
     }
 
+    public int getTotalRentedCarCount() {
+        return carRepository.getTotalRentedCarCount();
+    }
+
     public double getTotalCarPrice(String carStatus) {
         return carRepository.getTotalCarPrice(carStatus);
     }

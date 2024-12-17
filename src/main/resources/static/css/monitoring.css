@@ -1,8 +1,20 @@
+.stock-functions-card.total-car-price h3{
+    padding: 1rem;
+}
+
+.stock-functions-card.total-car-price div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .stock-functions {
     display: grid;
     grid-template-columns: repeat(2, calc(50% - 0.5rem)); /* 2 columns with 1rem gap so width is 50% minus the gap */
     grid-template-rows: repeat(2, calc(50% - 0.5rem)); /* 2 rows with 1rem gap so height is 50% minus the gap */
     gap: 1rem;
+    height: calc(100vh - 140px - 2rem);
 }
 
 .stock-functions-card {

@@ -82,4 +82,11 @@ public class CarRepository {
                 "WHERE cs.status = ?";
         return jdbcTemplate.queryForObject(sql, Double.class, carStatus);
     }
+
+    public int getTotalRentedCarCount(){
+        String sql = "SELECT COUNT(*) FROM car c" +
+                " JOIN car_status cs ON c.car_status_id = cs.id" +
+                " WHERE cs.status = 'Udlejet'";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
 }
