@@ -23,10 +23,10 @@ import java.util.Set;
 @Controller
 @RequestMapping("/car")
 public class CarController {
-
+    @Autowired
+    private HomeController homeController;
     @Autowired
     private CarService carService;
-
     @Autowired
     private CarModelLimitService carmodelLimitService;
 
@@ -38,17 +38,11 @@ public class CarController {
 
     @GetMapping("/search")
     public String searchCarsWithFilter(@ModelAttribute("filter") CarFilter carFilter, @RequestParam(required = false) boolean showSearchFilter, Model model) {
-                        // carFilter indeholder de værdier, som brugeren har udfyldt.
+        // carFilter indeholder de værdier, som brugeren har udfyldt.
         List<Car> cars = carService.searchByFilter(carFilter);
-
-//        if (carFilter.isMissingDamageReport()) {
-//            List<Integer> expiredCarIds = carService.getCarIdsFromExpiredRentalAgreementsWithoutDamageReports();
-//            List<Car> expiredCars = carService.getCarsByIds(expiredCarIds);
-//
-//            cars = expiredCars;
-//        }
         model.addAttribute("cars", cars);
 
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapEmpty());
 
         if (showSearchFilter) {
             List<String> statuses = carService.getCarStatuses();

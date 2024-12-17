@@ -27,9 +27,14 @@ public class SubscriptionController {
     private SubscriptionAddonService subscriptionAddonService;
     @Autowired
     private KilometerOptionsService kilometerOptionsService;
+    @Autowired
+    private HomeController homeController;
 
     @GetMapping("/new")
     public String createSubscriptionPage(Model model) {
+        // Header buttons to show in the view
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
+
         List<SubscriptionAddon> subscriptionAddons = subscriptionAddonService.getAll();
         // Transform the list of SubscriptionAddon into a list of SelectOption to use in formSelectFragment
         // Used for displaying the options in a dropdown
