@@ -43,6 +43,11 @@
             <div class="rental-agreement-display-card__details-section">
                 <div class="rental-agreement-display-card__details-column">
                     <div class="rental-agreement-display-card__detail-container">
+                        <h3>ID: </h3>
+                        <h3 class="rental-agreement-display-card__detail rental-agreement-display-card__detail--id"
+                            th:text="${rentalAgreement.id}"></h3>
+                    </div>
+                    <div class="rental-agreement-display-card__detail-container">
                         <span class="rental-agreement-display-card__detail rental-agreement-display-card__detail--renter"
                               th:text="${rentalAgreement.renter.firstname} + ' ' + ${rentalAgreement.renter.lastname}">Renter name</span>
                     </div>

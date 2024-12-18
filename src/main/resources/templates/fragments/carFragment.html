@@ -59,6 +59,11 @@
             <div class="car-display-card__details-section">
                 <div class="car-display-card__details-column">
                     <div class="car-display-card__detail-container">
+                        <h3>ID: </h3>
+                        <h3 class="car-display-card__detail car-display-card__detail--id"
+                            th:text="${car.id}"></h3>
+                    </div>
+                    <div class="car-display-card__detail-container">
                         <div th:replace="~{fragments/logoFragment :: logo('car',20)}"></div>
                         <span class="car-display-card__detail car-display-card__detail--brand-model"
                               th:text="${car.brand} + ' ' + ${car.model}">Model and Brand</span>

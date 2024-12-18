@@ -43,6 +43,11 @@
             <div class="subscription-display-card__details-section">
                 <div class="subscription-display-card__details-column">
                     <div class="subscription-display-card__detail-container">
+                        <h3>ID: </h3>
+                        <h3 class="subscription-display-card__detail subscription-display-card__detail--id"
+                            th:text="${subscription.id}"></h3>
+                    </div>
+                    <div class="subscription-display-card__detail-container">
                         <span class="subscription-display-card__detail subscription-display-card__detail--base-price"
                               th:text="${subscription.baseSubscriptionPricePerMonth} + 'kr./md.'">Base price pr month</span>
                     </div>
