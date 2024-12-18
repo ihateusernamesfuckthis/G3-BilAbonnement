@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Overvågning</title>
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
@@ -13,10 +13,10 @@
 <div th:replace="~{fragments/headerFragment :: header(${headerButtons})}"></div>
 <div class="stock-functions container">
     <div class="stock-functions-card total-car-price">
-        <h3 class="form-title">Udlejede biler statestik</h3>
+        <h3 class="form-title">Statistik over udlejede biler</h3>
         <div>
             <span th:text="'Antal udlejede biler: ' + ${totalRentedCarCount}"></span>
-            <span th:text="'Total pris for alle udlejede biler: ' + ${totalCarPrice} + 'kr.'"></span>
+            <span th:text="'Total stålpris for alle udlejede biler: ' + ${totalCarPrice} + 'kr.'"></span>
         </div>
     </div>
     <div class="stock-functions-card stock-functions-minimum-car-stock">
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="stock-functions-card stock-functions-monthly-earnings">
-        <h2 class="form-title">Månedlige indtægter fra lejekontrakter</h2>
+        <h3 class="form-title">Månedlige indtægter fra lejekontrakter</h3>
         <div class="chart">
             <div class="chart-column"
                  th:each="entry : ${monthToTotalPriceMap}"

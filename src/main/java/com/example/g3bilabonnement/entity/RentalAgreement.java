@@ -15,7 +15,6 @@ public class RentalAgreement {
     private double totalPrice;
     private boolean hasFinalSettlement;
 
-
     public RentalAgreement() {
     }
 
@@ -58,6 +57,7 @@ public class RentalAgreement {
         double pricePerMonth = subscription.getTotalPricePerMonth();
         this.totalPrice = pricePerMonth * months;
     }
+
 
     public double calculateOverdrivenKilometerPrice(int totalKilometerDriven){
 
