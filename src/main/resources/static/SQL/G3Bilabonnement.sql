@@ -192,7 +192,7 @@ CREATE TABLE purchase_agreement
     FOREIGN KEY (final_settlement_id) REFERENCES final_settlement (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Data i create script for location, renter og car er generet af ChatGPT.
+-- Data i create script for location, renter og car er genereret af ChatGPT.
 
 INSERT INTO location (address, city, zip_code)
 VALUES
