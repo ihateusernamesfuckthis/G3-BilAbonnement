@@ -54,6 +54,11 @@
             <div class="damage-report-display-card__details-section">
                 <div class="damage-report-display-card__details-column">
                     <div class="damage-report-display-card__detail-container">
+                        <h3>ID: </h3>
+                        <h3 class="damage-report-display-card__detail damage-report-display-card__detail--id"
+                            th:text="${damageReport.id}"></h3>
+                    </div>
+                    <div class="damage-report-display-card__detail-container">
                        <span class="damage-report-display-card__detail damage-report-display-card__detail--base-price"
                              th:text="${damageReport.car.vehicleNumber} + '' ">vehicle number</span>
 

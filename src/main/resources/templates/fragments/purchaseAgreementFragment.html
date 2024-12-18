@@ -9,7 +9,8 @@
 
     <!-- If purchase-agreement is NOT available uses this and displays a grayed out template-->
     <div th:if="${purchaseAgreement == null}">
-        <div th:else class="purchase-agreement-display-card__inner card purchase-agreement-display-card__inner--placeholder">
+        <div th:else
+             class="purchase-agreement-display-card__inner card purchase-agreement-display-card__inner--placeholder">
             <div class="purchase-agreement-display-card__image-section purchase-agreement-display-card__image-section--placeholder">
                 <div class="purchase-agreement-display-card__image-placeholder"></div>
             </div>
@@ -42,17 +43,21 @@
 <div th:fragment="purchase-agreement-display-card-inner(purchaseAgreement, showActions)">
     <div class="purchase-agreement-display-card__inner card">
         <!-- Details Section -->
+        <div class="purchase-agreement-display-card__image-section">
+            <img th:src="${purchaseAgreement.car.imageUrl}"
+                 th:alt="'Image of ' + ${purchaseAgreement.car.brand} + ' ' + ${purchaseAgreement.car.model}"
+                 class="purchase-agreement-display-card__image">
+        </div>
         <div class="purchase-agreement-display-card__details">
             <!-- General Details -->
             <div class="purchase-agreement-display-card__details-section">
 
-                    <div class="purchase-agreement-display-card__image-section">
-                        <img th:src="${purchaseAgreement.car.imageUrl}"
-                             th:alt="'Image of ' + ${purchaseAgreement.car.brand} + ' ' + ${purchaseAgreement.car.model}"
-                             class="purchase-agreement-display-card__image">
-                    </div>
-
                 <div class="purchase-agreement-display-card__details-column">
+                    <div class="purchase-agreement-display-card__detail-container">
+                        <h3>ID: </h3>
+                        <h3 class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--id"
+                            th:text="${purchaseAgreement.id}"></h3>
+                    </div>
                     <div class="purchase-agreement-display-card__detail-container">
                         <div th:replace="~{fragments/logoFragment :: logo('car',20)}"></div>
                         <span class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--base-price"
@@ -92,7 +97,7 @@
                    <span class="purchase-agreement-display-card__detail"
                           th:text="${purchaseAgreement.totalPricePerMonth != null ? purchaseAgreement.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
                 -->
-                </div>
             </div>
         </div>
     </div>
+</div>
