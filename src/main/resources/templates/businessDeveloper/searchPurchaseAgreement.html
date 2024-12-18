@@ -17,7 +17,7 @@
 <!-- her vises headeren -->
 <div th:replace="~{fragments/headerFragment :: header(${headerButtons})}"></div>
 <div class="purchase-agreement-search-container search-form-container container">
-    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Købsaftale', '/purchase-agreement/search')"></div>
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Købsaftale', '/purchase-agreement/new')"></div>
 
     <!-- her vises der søgeformularen -->
     <form th:if="${showSearchFilter}"
