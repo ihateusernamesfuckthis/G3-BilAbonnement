@@ -78,7 +78,7 @@ public class RentalAgreementService {
         List<RentalAgreement> rentalAgreementsByDateRange = getByDateRange(startDate, endDate);
         double totalPrice = 0;
         for (RentalAgreement rentalAgreement : rentalAgreementsByDateRange) {
-            totalPrice += rentalAgreement.getTotalPrice();
+            totalPrice += rentalAgreement.getSubscription().getTotalPricePerMonth();
         }
         return totalPrice;
     }

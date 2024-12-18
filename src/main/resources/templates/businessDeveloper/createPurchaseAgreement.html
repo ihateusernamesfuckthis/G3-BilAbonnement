@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Agreement</title>
+    <title>Opret købskontrakt</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/createPurchaseAgreement.css">
@@ -13,7 +13,7 @@
 <body>
 <div class="purchase-agreement-container container">
     <div class="purchase-agreement__title-container">
-        <h1 class="purchase-agreement__title">Opret Købsaftale</h1>
+        <h1 class="purchase-agreement__title">Opret Købskontrakt</h1>
         <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
     </div>
     <form class="purchase-agreement__form" th:action="@{/purchase-agreement/create}" th:method="post">
