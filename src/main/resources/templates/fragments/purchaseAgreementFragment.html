@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="purchase-agreement-display-card__detail-container">
-                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/car/search}, '1.5rem', 'car-display-card__actions-edit-button')}"></div>
+                        <div th:replace="~{fragments/logoFragment :: logo('location',20)}"></div>
                         <span class="purchase-agreement-display-card__detail purchase-agreement-display-card__detail--kilometer-option"
                               th:text="'Afhentningslokation: ' + ${purchaseAgreement.pickUpLocation} + ''">PickupLocation</span>
                     </div>
