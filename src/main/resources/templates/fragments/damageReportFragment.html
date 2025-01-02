@@ -93,18 +93,9 @@
                               th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/updateDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-edit-button')}"></span>
 
                         <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
-                              th:replace="~{fragments/logoButtonFragment :: logo-button('delete', @{/updateDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-edit-button')}"></span>
+                              th:replace="~{fragments/logoButtonFragment :: logo-button('delete', @{/deleteDamageReport(damageReportId=${damageReport.id})}, '40px', 'damage-report-display-card__actions-edit-button')}"></span>
                     </div>
                 </div>
-
-                <!-- Pricing and Actions -->
-
-                <!--<div class="damage-report-display-card__details-column damage-report-display-card__detail--total-price">
-                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
-                    <span class="damage-report-display-card__detail"
-
-                          th:text="${damageReport.totalPricePerMonth != null ? damageReport.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
-                    -->
             </div>
         </div>
     </div>

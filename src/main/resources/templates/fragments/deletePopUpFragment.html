@@ -1,0 +1,9 @@
+!-- fragments/deletePopUpFragment.html -->
+<!-- type = success, failure, info -->
+<div th:fragment="delete-message(message, returnPath, returnAfterDelete)" class="delete-message">
+    <div class="delete-message-container ">
+        <p class="delete-message-text" th:text="${message}"></p>
+        <a class="deleteFragment-button" th:href="${returnPath}" role="button">Slet Ikke</a>
+        <a class="deleteFragment-button" th:href="${returnAfterDelete}" role="button">Slet</a>
+    </div>
+</div>

@@ -130,6 +130,7 @@ public class DamageReportAndSpecificationController {
 
         return "redirect:/damageReportUpdateSuccess";
     }
+
     @GetMapping("/damageReportUpdateSuccess")
     public String showSuccessPage(Model model) {
         model.addAttribute("message", "Skaderapport er blevet redigeret");
@@ -141,4 +142,27 @@ public class DamageReportAndSpecificationController {
         model.addAttribute("damagereports", damageReports);
         return "damageAndRepairManager/damageReportIsUpdated";
     }
+
+    @GetMapping("/deleteDamageReport")
+    public String deleteDamageReport(@RequestParam int damageReportId, Model model) {
+        model.addAttribute("message", "Er du sikker på, at du vil slette denne skaderapport?);
+        model.addAttribute("returnPath","/damageFunctions");
+        model.addAttribute("returnAfterDelete", "/damageReportDeleted");
+        List<DamageReport> damageReports = damageReportService.getAll();
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
+        model.addAttribute("damagereports", damageReports);
+        return "damageAndRepairManager/deleteDamageReport";
     }
+
+    @GetMapping("/damageReportDeleted")
+    public String damageReportDeleted(Model model) {
+        model.addAttribute("message", "Skaderapport er blevet slettet");
+        model.addAttribute("type", "success");
+        model.addAttribute("redirect", "/damageFunctions");
+        model.addAttribute("redirectText", "Ok");
+        List<DamageReport> damageReports = damageReportService.getAll();
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDamageAndRepairManager());
+        model.addAttribute("damagereports", damageReports);
+        return "damageAndRepairManager/damageReportDeleted";
+    }
+}
