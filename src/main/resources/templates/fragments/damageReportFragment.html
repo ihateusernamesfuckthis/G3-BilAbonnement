@@ -59,26 +59,31 @@
                             th:text="${damageReport.id}"></h3>
                     </div>
                     <div class="damage-report-display-card__detail-container">
-                       <span class="damage-report-display-card__detail damage-report-display-card__detail--base-price"
-                             th:text="${damageReport.car.vehicleNumber} + '' ">vehicle number</span>
-
+                        <span>Dato for oprettelse: </span>
+                         <span class="damage-report-display-card__detail damage-report-display-card__detail--kilometer-option"
+                               th:text="${damageReport.creationDate}">creationDate</span>
                     </div>
                     <div class="damage-report-display-card__detail-container">
-                         <span class="damage-report-display-card__detail damage-report-display-card__detail--kilometer-option"
-
-                               th:text="'Dato for oprettelse ' + ${(damageReport.creationDate)} + ''">creationDate</span>
-
+                        <span>Samlet skadepris: </span>
+                        <span class="damage-report-display-card__detail damage-report-display-card__detail--addons"
+                              th:text="${damageReport.totalDamagePrice}">Total damage price </span>
                     </div>
                 </div>
                 <div class="damage-report-display-card__details-column">
                     <div class="damage-report-display-card__detail-container">
-                        <span class="damage-report-display-card__detail damage-report-display-card__detail--type"
-                              th:text="${(damageReport.damageSpecifications != null && !damageReport.damageSpecifications.isEmpty()) ? damageReport.damageSpecifications.size() + ' Skadespecifikationer' : ' Ingen skadespecifikationer' }">damage-report damageSpecifications</span>
-
+                        <div th:replace="~{fragments/logoFragment :: logo('car',20)}"></div>
+                        <span class="damage-report-display-card__detail damage-report-display-card__detail--BrandAndModel"
+                              th:text="${damageReport.car.brand} + ' ' + ${damageReport.car.model}"></span>
                     </div>
                     <div class="damage-report-display-card__detail-container">
-                        <span class="damage-report-display-card__detail damage-report-display-card__detail--addons"
-                              th:text="${damageReport.totalDamagePrice != 0.0 ? damageReport.totalDamagePrice + ' Samlet skade Pris' : 'Ingen skade pris'}">Total damage price </span>
+                        <div th:replace="~{fragments/logoFragment :: logo('licensePlate',20)}"></div>
+                        <span class="damage-report-display-card__detail damage-report-display-card__detail--vehicle-number"
+                              th:text="${damageReport.car.vehicleNumber}"></span>
+                    </div>
+                    <div class="damage-report-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('status',20)}"></div>
+                        <span class="damage-report-display-card__detail damage-report-display__detail--car-status"
+                              th:text="${damageReport.car.status}"></span>
                     </div>
                 </div>
             </div>

@@ -20,10 +20,11 @@ public class DamageSpecificationService {
     public List<DamageSpecification> getDamageSpecificationsByReportId(int damageReportId) {
         return damageSpecificationRepo.getSpecificationsByReportId(damageReportId);
     }
+
     public void updateDamageSpecifications(List<DamageSpecification> damageSpecifications, int damageReportId) {
-            damageSpecificationRepo.updateDamageSpecifications(damageSpecifications, damageReportId);
-        }
+        damageSpecificationRepo.updateDamageSpecifications(damageSpecifications, damageReportId);
     }
-    /*public void deleteDamageSpecificationById(int damageReportId) {
-        damageSpecificationRepo.deleteDamageSpecification(damageReportId);
-    }*/
+    public boolean deleteDamageSpecification(int damageReportId) {
+        return damageSpecificationRepo.deleteDamageSpecifications(damageReportId);
+    }
+}
