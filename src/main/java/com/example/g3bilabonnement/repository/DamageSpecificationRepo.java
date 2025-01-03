@@ -41,9 +41,5 @@ public class DamageSpecificationRepo {
             template.update(sql, ds.getDamageDescription(), ds.getDamagePrice(), damageReportId, ds.getId());
         }
     }
-    public boolean deleteDamageSpecifications(int damageReportId) {
-        String sql = "DELETE FROM damage_specification WHERE damage_report_id = ?";
-        return template.update(sql,damageReportId) > 0;
-    }
 
 }
