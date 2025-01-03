@@ -64,4 +64,9 @@ public class DamageReportRepository {
         String sql = "UPDATE damage_report SET car_id = ?, creation_date = ? WHERE id = ?";
         template.update(sql, damageReport.getCar().getId(), damageReport.getCreationDate(), damageReport.getId());
     }
+
+    public boolean deleteDamageReport(int id) {
+        String sql = "DELETE FROM damage_report WHERE id = ?";
+        return template.update(sql, id) > 0;
+    }
 }

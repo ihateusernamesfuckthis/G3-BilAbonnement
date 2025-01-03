@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slet Skaderapport</title>
+    <link rel="stylesheet" href="/css/fragments/popupMessageFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/createDamageReport.css">
+    <link rel="stylesheet" href="/css/fragments/carFragment.css">
+    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
+    <link rel="stylesheet" href="/css/fragments/damageReportFragment.css">
+    <link rel="stylesheet" href="/css/fragments/logoButtonFragment.css">
+    <link rel = "stylesheet" href="/css/fragments/deletePopUpFragment.css">
+</head>
+<body>
+<div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
+<div class="container">
+    <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')"></div>
+    <div th:if="${damageReport != null}">
+        <h2>Oprettet Skaderapport</h2>
+        <p class="creationDate"><strong>Dato for oprettelse: </strong><span th:text="${damageReport.creationDate}"></span></p>
+        <div class="__form-group">
+            <div th:replace="~{fragments/carFragment :: car-display-card(${car}, 'damage-report-form-group-car', false, false)}"></div>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Skadebeskrivelse</th>
+                <th>Skadepris</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Karosseriskader</td>
+                <td th:text="${damageReport.damageSpecifications[0]?.damageDescription}">Skadebeskrivelse</td>
+                <td th:text="${damageReport.damageSpecifications[0]?.damagePrice}">Skadepris</td>
+            </tr>
+            <tr>
+                <td>Glas-og lygteskader</td>
+                <td th:text="${damageReport.damageSpecifications[1]?.damageDescription}">Skadebeskrivelse</td>
+                <td th:text="${damageReport.damageSpecifications[1]?.damagePrice}">Skadepris</td>
+            </tr>
+            <tr>
+                <td>Hjul- og dækskader</td>
+                <td th:text="${damageReport.damageSpecifications[2]?.damageDescription}">Skadebeskrivelse</td>
+                <td th:text="${damageReport.damageSpecifications[2]?.damagePrice}">Skadepris</td>
+            </tr>
+            <tr>
+                <td>Interiørskader</td>
+                <td th:text="${damageReport.damageSpecifications[3]?.damageDescription}">Skadebeskrivelse</td>
+                <td th:text="${damageReport.damageSpecifications[3]?.damagePrice}">Skadepris</td>
+            </tr>
+            <tr>
+                <td>Mekaniske og tekniske skader</td>
+                <td th:text="${damageReport.damageSpecifications[4]?.damageDescription}">Skadebeskrivelse</td>
+                <td th:text="${damageReport.damageSpecifications[4]?.damagePrice}">Skadepris</td>
+            </tr>
+            <tr>
+                <td>Andet</td>
+                <td th:text="${damageReport.damageSpecifications[5]?.damageDescription}">Skadebeskrivelse</td>
+                <td th:text="${damageReport.damageSpecifications[5]?.damagePrice}">Skadepris</td>
+            </tr>
+
+            <tr>
+                <td><strong>Total:</strong></td>
+                <td></td>
+                <td th:text="${damageReport.calculateTotalDamagePrice()}">Totalpris</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group__submit-button">
+        <a class="button" th:href="@{/updateDamageReport(damageReportId=${damageReport.id})}">Redigér skadesrapport</a>
+    </div>
+    <div class="form-group__submit-button">
+        <a class="button" th:href="@{/deleteDamageReport(damageReportId=${damageReport.id})}">Slet skadesrapport</a>
+    </div>
+        <div th:replace="~{fragments/deletePopUpFragment::delete-message(${message}, ${returnPath}, ${returnAfterDelete})}">
+        </div>
+    </div>
+</body>
+</html>

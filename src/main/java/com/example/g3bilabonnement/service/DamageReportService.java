@@ -23,8 +23,6 @@ public class DamageReportService {
         return damageReportRepository.createDamageReport(damageReport);
     }
 
-
-
     public DamageReport getDamageReportById(int damageReportId) {
         DamageReport damageReport= damageReportRepository.getDamageReportById(damageReportId);
         damageReport.setCar(carService.getById(damageReport.getCar().getId()));
@@ -56,5 +54,11 @@ public class DamageReportService {
     }
     public void updateDamageReport(DamageReport damageReport) {
         damageReportRepository.updateDamageReport(damageReport);
+    }
+    public boolean deleteDamageReportAndSpecification(int id) {
+        boolean damageSpecificationDeleted = damageSpecificationService.deleteDamageSpecification(id);
+        boolean damageReportDeleted = damageReportRepository.deleteDamageReport(id);
+        boolean damageReportAndSpecificationsDeleted = damageReportDeleted && damageSpecificationDeleted;
+        return damageReportAndSpecificationsDeleted ;
     }
 }
