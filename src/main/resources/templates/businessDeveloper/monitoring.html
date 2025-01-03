@@ -23,7 +23,7 @@
         <form th:if="${showForm}" th:action="@{/car/set-limit}" method="post"
               class="stock-functions-minimum-car-stock-form card">
             <div class="form-header">
-                <h3 class="form-title">Tilføj minimums grænse for biler - Klar til udlejning</h3>
+                <h3 class="form-title">Tilføj minimumsgrænse for biler - Klar til udlejning</h3>
                 <div th:replace="~{fragments/logoButtonFragment :: logo-button('close',@{/monitoring(showSearchFilter=${!showForm})},40,'form-close-button')}"></div>
             </div>
             <div th:replace="~{fragments/formGroupFragments :: select-input('carModelId','Bil model', 'car-model-select', false, false, ${carModelsSelectOptions})}"></div>
@@ -34,7 +34,7 @@
         </form>
 
         <div th:if="${!showForm}" class="stock-functions-minimum-car-stock-header">
-            <h3 class="form-title">Minimums grænse for biler - Klar til udlejning</h3>
+            <h3 class="form-title">Minimumsgrænse for biler - Klar til udlejning</h3>
             <div class="show-form-button">
                 <div th:replace="~{fragments/logoButtonFragment :: logo-button('square-add',@{/monitoring(showForm=${!showForm})},20,'show-form-button')}"></div>
             </div>

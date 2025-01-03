@@ -55,10 +55,7 @@ public class DamageReportService {
     public void updateDamageReport(DamageReport damageReport) {
         damageReportRepository.updateDamageReport(damageReport);
     }
-    public boolean deleteDamageReportAndSpecification(int id) {
-        boolean damageSpecificationDeleted = damageSpecificationService.deleteDamageSpecification(id);
-        boolean damageReportDeleted = damageReportRepository.deleteDamageReport(id);
-        boolean damageReportAndSpecificationsDeleted = damageReportDeleted && damageSpecificationDeleted;
-        return damageReportAndSpecificationsDeleted ;
+    public boolean deleteDamageReportAndSpecification(int id) { // Sletter både DamageReport og Specifications, via CASCADE i Databasen.
+        return damageReportRepository.deleteDamageReport(id);
     }
 }

@@ -55,26 +55,31 @@
                             th:text="${renter.id}"></h3>
                     </div>
                     <div class="renter-display-card__detail-container">
+                        <span>Navn:</span>
                         <span class="renter-display-card__detail renter-display-card__detail--name"
                               th:text="${renter.firstname} + ' ' + ${renter.lastname}">Renter name</span>
                     </div>
                     <div class="renter-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('email',20)}"></div>
                         <span class="renter-display-card__detail renter-display-card__detail--email"
                               th:text="${renter.email}">Email</span>
                     </div>
                 </div>
                 <div class="renter-display-card__details-column">
                     <div class="renter-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('phone',20)}"></div>
                         <span class="renter-display-card__detail renter-display-card__detail--phone-number"
                               th:text="${renter.phoneNumber}">Phone Number</span>
                     </div>
                     <div class="renter-display-card__detail-container">
+                        <span>CPR: </span>
                         <span class="renter-display-card__detail renter-display-card__detail--cpr-number"
                               th:text="${renter.cprNumber}">CPR number</span>
                     </div>
                 </div>
                 <div class="renter-display-card__details-column">
                     <div class="renter-display-card__detail-container">
+                        <div th:replace="~{fragments/logoFragment :: logo('address',20)}"></div>
                         <span class="renter-display-card__detail renter-display-card__detail--address"
                               th:text="${renter.location.address}">Address</span>
                     </div>

@@ -133,7 +133,7 @@ public class DamageReportAndSpecificationController {
 
     @GetMapping("/damageReportUpdateSuccess")
     public String showSuccessPage(Model model) {
-        model.addAttribute("message", "Skaderapport er blevet redigeret");
+        model.addAttribute("message", "Skaderapport er ændret");
         model.addAttribute("type", "success");
         model.addAttribute("redirect", "/damageFunctions");
         model.addAttribute("redirectText", "Ok");
@@ -145,7 +145,7 @@ public class DamageReportAndSpecificationController {
 
     @GetMapping("/deleteDamageReport")
     public String deleteDamageReport(@RequestParam int damageReportId, Model model) {
-        model.addAttribute("message", "Er du sikker på, at du vil slette denne skaderapport?");
+        model.addAttribute("message", "Er du sikker på, at du vil slette denne skaderapport? (Slutopgørelse og købskontakt forbundet til denne skadesrapport slettes også.)");
         model.addAttribute("returnPath","/damageFunctions");
         model.addAttribute("returnAfterDelete", "/damageReportDeleted?damageReportId=" + damageReportId);
         DamageReport damageReport = damageReportService.getDamageReportById(damageReportId);
@@ -159,13 +159,14 @@ public class DamageReportAndSpecificationController {
 
     @GetMapping("/damageReportDeleted")
     public String damageReportDeleted(@RequestParam int damageReportId, Model model) {
-        if(damageReportService.deleteDamageReportAndSpecification(damageReportId)) {
-            model.addAttribute("message", "Skaderapport er blevet slettet");
+        boolean deleted =damageReportService.deleteDamageReportAndSpecification(damageReportId);
+        if(deleted) {
+            model.addAttribute("message", "Skaderapport er slettet");
             model.addAttribute("type", "success");
             model.addAttribute("redirect", "/damageFunctions");
             model.addAttribute("redirectText", "Ok");
         }else{
-            model.addAttribute("message", "Der skete en fejl. Skaderapporten er ikke blevet slettet");
+            model.addAttribute("message", "Der skete en fejl. Skaderapporten er ikke slettet");
             model.addAttribute("type", "failure");
             model.addAttribute("redirect", "/damageFunctions");
             model.addAttribute("redirectText", "Ok");

@@ -25,13 +25,13 @@
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'vehicleNumber', 'Registreringsnummer', 'car-search-form-group-vehicle-number-input', false)}"></div>
         <div th:replace="~{fragments/formGroupFragments :: select-input('Status','Status', 'car-search-form-group-status-select', false, false, ${statusSelectOptions})}"></div>
         <div th:replace="~{fragments/formGroupFragments :: checkbox(name='missingDamageReport', label='Biler der mangler skaderapport', cssClass='formGroupFragment', checked=${filter.missingDamageReport})}"></div>
-        <button type="submit" class="search-form-button">Search</button>
+        <button type="submit" class="search-form-button">Søg</button>
     </form>
 
     <form th:if="${cars != null && cars.size() > 0}" th:action="@{/car/return-car}" method="post"
           class="car-search-result__form">
         <div class="car-search-result__form-header">
-            <button type="submit" class="car-search-result__form-header__submit-button">Select</button>
+            <button type="submit" class="car-search-result__form-header__submit-button">Vælg</button>
             <div th:if="${!showSearchFilter}">
                 <div th:replace="~{fragments/logoButtonFragment :: logo-button('search',@{/car/search(showSearchFilter=${!showSearchFilter},
         vehicleNumber=${filter.vehicleNumber}, status=${filter.status})},38,'car-search-form-close-button')}"></div>

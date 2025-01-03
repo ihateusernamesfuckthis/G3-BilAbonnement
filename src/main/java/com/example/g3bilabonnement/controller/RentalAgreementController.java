@@ -129,7 +129,7 @@ public class RentalAgreementController {
 
     @GetMapping("/success")
     public String showSuccessPage(Model model) {
-        model.addAttribute("message", "Rental agreement created successfully!");
+        model.addAttribute("message", "Lejeaftalen er oprettet!");
         model.addAttribute("type", "success");
         model.addAttribute("redirect", "/rental-agreement/new");
         model.addAttribute("redirectText", "Ok");

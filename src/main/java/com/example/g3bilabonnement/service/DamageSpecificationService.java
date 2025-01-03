@@ -24,7 +24,4 @@ public class DamageSpecificationService {
     public void updateDamageSpecifications(List<DamageSpecification> damageSpecifications, int damageReportId) {
         damageSpecificationRepo.updateDamageSpecifications(damageSpecifications, damageReportId);
     }
-    public boolean deleteDamageSpecification(int damageReportId) {
-        return damageSpecificationRepo.deleteDamageSpecifications(damageReportId);
-    }
 }
