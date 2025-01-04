@@ -65,7 +65,7 @@ public class PurchaseAgreementController {
 
     @GetMapping("/success")
     public String showSuccesPage(Model model){
-        model.addAttribute("message", "Purchase Agreement created succesfully");
+        model.addAttribute("message", "Købsaftalen er oprettet!");
         model.addAttribute("type", "success");
         model.addAttribute("redirect", "/purchase-agreement/new");
         model.addAttribute("redirectText", "Ok");

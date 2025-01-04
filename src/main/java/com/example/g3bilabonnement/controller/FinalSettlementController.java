@@ -25,18 +25,20 @@ public class FinalSettlementController {
     @Autowired
     DamageReportService damageReportService;
 
+    @Autowired
+    HomeController homeController;
+
     @GetMapping("/new")
     public String createFinalSettlement(Model model){
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
         model.addAttribute("returnpath", "/final-settlement/create");
         return "dataRegistrator/createFinalSettlement";
     }
 
     @PostMapping("/create")
     public String createFinalSettlement(@RequestParam ("rentalAgreementId") int rentalAgreementId,
-                                        @RequestParam ("kilometersDriven") int totalKilometersDriven){
-
+                                        @RequestParam ("kilometersDriven") int totalKilometersDriven, Model model){
         FinalSettlement finalSettlement = new FinalSettlement();
-
         //her hentes og sættes rentalagreement objektet ud fra brugerens input
         RentalAgreement rentalAgreement = rentalAgreementService.getById(rentalAgreementId);
         finalSettlement.setRentalAgreement(rentalAgreement);
@@ -60,9 +62,10 @@ public class FinalSettlementController {
 
     @GetMapping("/success")
     public String showSuccessPage(Model model) {
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
         model.addAttribute("message", "Slutopgørelsen er oprettet!");
         model.addAttribute("type", "success");
-        model.addAttribute("redirect", "/final-settlement/new");
+        model.addAttribute("redirect", "/finalSettlementFunctions");
         model.addAttribute("redirectText", "Ok");
         return "dataRegistrator/createFinalSettlementResult";
     }
