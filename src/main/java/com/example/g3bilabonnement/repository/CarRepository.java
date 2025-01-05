@@ -76,7 +76,7 @@ public class CarRepository {
 //        return jdbcTemplate.queryForList(sql, Integer.class, LocalDate.now());
 //    }
 
-    public double getTotalCarPrice(String carStatus) {
+    public Double getTotalCarPrice(String carStatus) {
         String sql = "SELECT SUM(c.net_price) FROM car c \n" +
                 "JOIN car_status cs ON c.car_status_id = cs.id\n" +
                 "WHERE cs.status = ?";

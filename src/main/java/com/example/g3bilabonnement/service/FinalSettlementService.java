@@ -33,6 +33,7 @@ public class FinalSettlementService {
         for (FinalSettlement finalSettlement : finalSettlements) {
             finalSettlement.setRentalAgreement(rentalAgreementService.getById(finalSettlement.getRentalAgreement().getId()));
             finalSettlement.setDamageReport(damageReportService.getDamageReportById(finalSettlement.getDamageReport().getId()));
+            finalSettlement.calculateTotalPrice();
         }
         return finalSettlements;
     }
