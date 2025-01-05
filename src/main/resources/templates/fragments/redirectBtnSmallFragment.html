@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
-</head>
-<body>
 <div th:fragment="redirectBtnSmallFragment(redirectBtnSmallText, path)" class="redirectBtnSmallFragment">
     <a th:href="@{${path}}"class="redirectBtnSmallPath">
         <span th:text="${redirectBtnSmallText}" class="redirectBtnSmallText"></span>
     </a>
 </div>
-</body>
-</html>

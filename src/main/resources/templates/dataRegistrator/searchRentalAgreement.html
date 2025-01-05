@@ -12,7 +12,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
-<div class="rental-agreement-search-search-container container">
+<div class="container">
 <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret lejekontrakt', '/rental-agreement/new')"></div>
     <div class="rental-agreement-search-result">
         <div th:each="rentalAgreement : ${rentalAgreements}">

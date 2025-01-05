@@ -26,6 +26,14 @@ public class RentalAgreementController {
     @Autowired
     private HomeController homeController;
 
+    @GetMapping("/search")
+    public String searchRentalAgreements(Model model) {
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
+        List<RentalAgreement> rentalAgreements = rentalAgreementService.getAll();
+        model.addAttribute("rentalAgreements", rentalAgreements);
+        return "dataRegistrator/searchRentalAgreement";
+    }
+
     @GetMapping("/new")
     public String createRentalAgreementPage(Model model, HttpSession session,
                                             @RequestParam(required = false) boolean removeRenter,
@@ -63,14 +71,6 @@ public class RentalAgreementController {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
 
         return "dataRegistrator/createRentalAgreement";
-    }
-
-    @GetMapping("/search")
-    public String searchRentalAgreements(Model model) {
-        model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
-        List<RentalAgreement> rentalAgreements = rentalAgreementService.getAll();
-        model.addAttribute("rentalAgreements", rentalAgreements);
-        return "dataRegistrator/searchRentalAgreement";
     }
 
     @PostMapping("/create")

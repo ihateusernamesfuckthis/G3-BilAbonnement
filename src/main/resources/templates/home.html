@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BilAbonnement A/S Admin System</title>
-    <link rel="stylesheet"  href="/css/redirect_btn.css">
+    <link rel="stylesheet"  href="/css/fragments/redirectBtnHomeFragment.css">
     <link rel="stylesheet"  href="/css/home.css">
 </head>
 <body>
@@ -11,9 +11,9 @@
 <div class="homeBox">
     <h2><span class="BIL">BIL</span><span>ABONNEMENT</span></h2>
     <h1>ADMIN SYSTEM</h1>
-    <div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/rentalAgreementPage', redirectBtnText='LEJEAFTALE & SLUTOPGØRELSE')}"></div>
-    <div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/damageReportPage', redirectBtnText='SKADE & UDBEDRING')}"></div>
-    <div th:replace="~{fragments/redirect_btn_fragment :: redirectBtn(path='/monitoringPage', redirectBtnText='KØBSKONTRAKT, LAGERBEHOLDNING & OVERVÅGNING')}"></div>
+    <div th:replace="~{fragments/redirectBtnHomeFragment :: redirectBtnHome(path='/rentalAgreementPage', redirectBtnText='LEJEAFTALE & SLUTOPGØRELSE')}"></div>
+    <div th:replace="~{fragments/redirectBtnHomeFragment :: redirectBtnHome(path='/damageReportPage', redirectBtnText='SKADE & UDBEDRING')}"></div>
+    <div th:replace="~{fragments/redirectBtnHomeFragment :: redirectBtnHome(path='/monitoringPage', redirectBtnText='KØBSKONTRAKT, LAGERBEHOLDNING & OVERVÅGNING')}"></div>
     <img class = "Logo" src = "/images/BilALogo.png" alt = "Logo">
 </div>
 </body>

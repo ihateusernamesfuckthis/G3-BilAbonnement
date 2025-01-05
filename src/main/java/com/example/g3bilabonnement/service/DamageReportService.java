@@ -43,7 +43,6 @@ public class DamageReportService {
 
     public List <DamageReport> getAll (){
         List <DamageReport> damageReports = damageReportRepository.getAll();
-
         for (DamageReport damageReport : damageReports){
             damageReport.setCar(carService.getById(damageReport.getCar().getId()));
             List<DamageSpecification> damageSpecifications = damageSpecificationService.getDamageSpecificationsByReportId(damageReport.getId());

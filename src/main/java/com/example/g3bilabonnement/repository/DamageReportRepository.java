@@ -19,7 +19,7 @@ public class DamageReportRepository {
     private JdbcTemplate template;
 
     private RowMapper<DamageReport> damageReportRowMapper() {
-        return new RowMapper<DamageReport>() {
+        return new RowMapper<DamageReport>(){
             @Override
             public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
                 DamageReport damageReport = new DamageReport();

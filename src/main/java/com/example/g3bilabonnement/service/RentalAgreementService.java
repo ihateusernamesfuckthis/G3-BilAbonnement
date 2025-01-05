@@ -40,7 +40,6 @@ public class RentalAgreementService {
 
     public RentalAgreement getById(int id) {
         RentalAgreement rentalAgreement = rentalAgreementRepository.getById(id);
-
         rentalAgreement.setCar(carService.getById(rentalAgreement.getCar().getId()));
         rentalAgreement.setRenter(renterService.getById(rentalAgreement.getRenter().getId()));
         rentalAgreement.setSubscription(subscriptionService.getById(rentalAgreement.getSubscription().getId()));

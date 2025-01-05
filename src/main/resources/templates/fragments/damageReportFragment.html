@@ -6,11 +6,6 @@
     <div th:if="${damageReport != null}">
         <div th:replace="~{fragments/damageReportFragment :: damage-report-display-card-inner(${damageReport}, ${showActions})}"></div>
 
-        <!-- hvis man skal kunne vælge objektet, skal dette fragment inkluderes
-
-
-         -->
-
     </div>
 
     <!-- hvis objektet man sender ikke er tilgængelig, bliver vist en placeholder - dette er stylet i CSS -->
@@ -19,7 +14,6 @@
             <div class="damage-report-display-card__image-section damage-report-display-card__image-section--placeholder">
                 <div class="damage-report-display-card__image-placeholder"></div>
             </div>
-
             <div class="damage-report-display-card__details">
                 <div class="damage-report-display-card__details-section">
                     <div class="damage-report-display-card__details-column">
@@ -29,15 +23,6 @@
                     <div class="damage-report-display-card__details-column">
                         <div class="damage-report-display-card__detail-placeholder damage-report-display-card__detail-placeholder--large"></div>
                         <div class="damage-report-display-card__detail-placeholder damage-report-display-card__detail-placeholder--small"></div>
-                    </div>
-                </div>
-                <div class="damage-report-display-card__details-section damage-report-display-card__details-section--actions">
-                    <div class="damage-report-display-card__actions">
-                        <div th:if="${showActions}"
-                             th:replace="~{fragments/logoButtonFragment :: logo-button('square-add', @{/damage-report/new}, '1.5rem','rental-agreement-form-group-damage-report-search-button')}"></div>
-                    </div>
-                    <div class="damage-report-display-card__details-column">
-                        <div class="damage-report-display-card__detail-placeholder"></div>
                     </div>
                 </div>
             </div>
