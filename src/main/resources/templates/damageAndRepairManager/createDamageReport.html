@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/fragments/redirectBtnSmallFragment.css">
     <link rel="stylesheet" href="/css/fragments/carFragment.css">
     <link rel="stylesheet" href="/css/fragments/headerFragment.css">
+    <link rel="stylesheet" href="/css/fragments/returnButtonFragment.css">
 </head>
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
@@ -15,6 +16,7 @@
     <div th:replace="fragments/redirectBtnSmallFragment :: redirectBtnSmallFragment('Opret Skaderapport', '/createDamageReport')"></div>
     <form action="/createDamageReport" method="post">
             <h2>Opret Skaderapport</h2>
+        <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
             <label>Vælg Bil:</label>
             <div class="damage-report__form-group">
                 <label>

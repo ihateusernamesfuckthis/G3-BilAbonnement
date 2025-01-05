@@ -37,11 +37,12 @@ public class PurchaseAgreementController {
     @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
         model.addAttribute("returnpath", "/purchase-agreement/create");
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
         return "businessDeveloper/createPurchaseAgreement";
     }
 
     @PostMapping("/create")
-    public String createPurchaseAgreement(@RequestParam("carId") int carId,
+    public String createPurchaseAgreement(Model model, @RequestParam("carId") int carId,
                                           @RequestParam("pickuplocation") String pickupLocation) {
 
         //her hentes bil-objektet til købsaftalen baseret på brugerinput
