@@ -53,7 +53,7 @@ public class PurchaseStockAndMonitoringMainController {
     public String stockFunctionsAndViewMainPage(@RequestParam(required = false) boolean showForm, Model model) {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
         model.addAttribute("totalRentedCarCount", carService.getTotalRentedCarCount());
-        model.addAttribute("totalCarPrice", FormatHelper.formatDouble(carService.getTotalCarPrice("Udlejet")));
+        model.addAttribute("totalCarPrice", carService.getTotalCarPrice("Udlejet") == null ? 0 : FormatHelper.formatDouble(carService.getTotalCarPrice("Udlejet")));
 
         // Car model limits
         List<CarModelLimit> carModelLimits = carmodelLimitService.getCarModelLimits();
