@@ -69,11 +69,7 @@
 }
 
 .subscription-display-card__detail--total-price {
-    justify-content: flex-start;
-    flex-direction: row;
-    padding-left: calc(1rem + 1px); /* Add 1px to account for the border when using box-sizing: border-box */
     font-weight: bold;
-    flex: 0 0 50%;
 }
 
 
