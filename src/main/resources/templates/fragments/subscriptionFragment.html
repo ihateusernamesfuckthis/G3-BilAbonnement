@@ -65,22 +65,12 @@
                         <span class="subscription-display-card__detail subscription-display-card__detail--addons"
                               th:text="${subscription.subscriptionAddons != null ? subscription.subscriptionAddons.size() + ' tilføjelser' : 'Ingen tilføjelser'}">subscription addons amount</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Pricing and Actions -->
-            <div class="subscription-display-card__details-section subscription-display-card__details-section--actions">
-                <div class="subscription-display-card__actions">
-                    <div th:if="${showActions}">
-<!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/subscription/search}, '1.5rem', 'subscription-display-card__actions-edit-button')}"></div>-->
+                    <div class="subscription-display-card__detail-container subscription-display-card__detail--total-price">
+                        <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                        <span class="subscription-display-card__detail"
+                              th:text="${subscription.totalPricePerMonth != null ? subscription.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
                     </div>
                 </div>
-                <div class="subscription-display-card__details-column subscription-display-card__detail--total-price">
-                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
-                    <span class="subscription-display-card__detail"
-                          th:text="${subscription.totalPricePerMonth != null ? subscription.totalPricePerMonth + 'kr./md.' : 'Ikke udregnet'}">Net Price</span>
-                </div>
-
             </div>
         </div>
     </div>

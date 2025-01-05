@@ -85,22 +85,12 @@
                         <span class="car-display-card__detail car-display-card__detail--power-transmission"
                               th:text="${car.powerSourceType} + ' / ' + ${car.transmissionType}">Power Source and Transmission</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Pricing and Actions -->
-            <div class="car-display-card__details-section car-display-card__details-section--actions">
-                <div class="car-display-card__actions">
-                    <div th:if="${showActions}">
-<!--                        <div th:replace="~{fragments/logoButtonFragment :: logo-button('edit', @{/car/search}, '1.5rem', 'car-display-card__actions-edit-button')}"></div>-->
+                    <div class="car-display-card__detail-container car-display-card__detail--net-price">
+                        <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
+                        <span class="car-display-card__detail"
+                              th:text="${car.netPrice} + ' DKK'">Net Price</span>
                     </div>
                 </div>
-                <div class="car-display-card__details-column car-display-card__detail--net-price">
-                    <div th:replace="~{fragments/logoFragment :: logo('price',20)}"></div>
-                    <span class="car-display-card__detail"
-                          th:text="${car.netPrice} + ' DKK'">Net Price</span>
-                </div>
-
             </div>
         </div>
     </div>
