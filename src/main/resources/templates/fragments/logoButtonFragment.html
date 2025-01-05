@@ -1,6 +1,4 @@
 
-
-
 <div th:fragment="logo-button(type,path,size,cssClass)" class='logo-button' th:classappend="${cssClass}">
     <a th:href="${path}">
         <svg th:replace="~{fragments/logoFragment :: logo(${type}, ${size})}"></svg>

@@ -1,9 +1,3 @@
-/*body{
-    background-color: rgb(182, 182, 182);
-    background-image: url("Eclipse.png");
-    background-repeat: repeat;
-    background-size: 2%;
-}*/
 body {
     display: flex;
     justify-content: center;
