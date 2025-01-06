@@ -19,7 +19,6 @@
 <div class="rental-agreement-container container">
     <div class="rental-agreement__title-container">
         <h1 class="rental-agreement__title">Opret lejekontrakt</h1>
-        <!--<div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>-->
         <div th:replace="~{fragments/returnButtonFragment :: return-button('/rental-agreement/search')}"></div>
     </div>
     <form class="rental-agreement__form" th:action="@{/rental-agreement/create}" th:method="post">
