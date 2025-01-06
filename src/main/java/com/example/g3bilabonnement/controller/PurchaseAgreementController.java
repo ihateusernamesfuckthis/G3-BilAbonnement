@@ -37,6 +37,7 @@ public class PurchaseAgreementController {
     @GetMapping("/new")
     public String createPurchaseAgreementPage (Model model) {
         model.addAttribute("returnpath", "/purchase-agreement/create");
+        model.addAttribute("headerButtons", homeController.getHeaderHashMapForBusinessDeveloper());
         return "businessDeveloper/createPurchaseAgreement";
     }
 

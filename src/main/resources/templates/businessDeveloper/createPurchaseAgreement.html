@@ -9,22 +9,24 @@
     <link rel="stylesheet" href="/css/createPurchaseAgreement.css">
     <link rel="stylesheet" href="/css/fragments/formGroupFragments.css">
     <link rel="stylesheet" href="/css/fragments/returnButtonFragment.css">
+    <link rel="stylesheet" href="/css/fragments/headerFragment.css">
 </head>
 <body>
-<div class="purchase-agreement-container container">
+<div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
+<div class="container">
     <div class="purchase-agreement__title-container">
         <h1 class="purchase-agreement__title">Opret Købskontrakt</h1>
-        <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
-    </div>
-    <form class="purchase-agreement__form" th:action="@{/purchase-agreement/create}" th:method="post">
-        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'carId', 'Car ID', 'purchase-agreement__form-group__car-input form-group-input', true)}"></div>
+         <div th:replace="~{fragments/returnButtonFragment :: return-button('/purchase-agreement/search')}"></div>
+     </div>
+     <form class="purchase-agreement__form" th:action="@{/purchase-agreement/create}" th:method="post">
+         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'carId', 'Bil Id', 'purchase-agreement__form-group__car-input form-group-input', true)}"></div>
 
-        <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickuplocation', 'Pickup Location', 'purchase-agreement__form-group__pickup-location-input form-group-input', false)}"></div>
+         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'pickuplocation', 'Afhentningssted', 'purchase-agreement__form-group__pickup-location-input form-group-input', false)}"></div>
 
-        <div class="form-group__submit-button">
-            <button type="submit" class="button purchase-agreement__button">Opret</button>
-        </div>
-    </form>
-</div>
-</body>
-</html>
+         <div class="purchase-agreement__submit-button">
+             <button type="submit" class="button purchase-agreement__button">Opret</button>
+         </div>
+     </form>
+ </div>
+ </body>
+ </html>

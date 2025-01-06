@@ -14,15 +14,15 @@
 <body>
 <div th:replace="~{fragments/headerFragment.html :: header(${headerButtons})}"></div>
 <div class="container">
-    <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
         <h1 class="final-settlement__title">Opret Slutopgørelse</h1>
+    <div th:replace="~{fragments/returnButtonFragment :: return-button('/finalSettlementFunctions')}"></div>
     <form class="final-settlement__form" th:action="@{/final-settlement/create}" th:method="post">
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'rentalAgreementId', 'Lejeaftale ID: ', 'final-settlement__form-group__rental-agreement-input form-group-input', true)}"></div>
 
         <div th:replace="~{fragments/formGroupFragments :: input-field('number', 'kilometersDriven', 'Antal kørte kilometer: ', 'final-settlement__form-group__kilometers-input form-group-input', true)}"></div>
 
         <div class="final-settlement__submit-button">
-            <button type="submit" class="button rental-agreement__button">Opret</button>
+            <button type="submit" >Opret</button>
         </div>
 
     </form>
