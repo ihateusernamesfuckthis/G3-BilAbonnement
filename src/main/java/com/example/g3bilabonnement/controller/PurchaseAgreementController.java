@@ -42,7 +42,7 @@ public class PurchaseAgreementController {
     }
 
     @PostMapping("/create")
-    public String createPurchaseAgreement(Model model, @RequestParam("carId") int carId,
+    public String createPurchaseAgreement(@RequestParam("carId") int carId,
                                           @RequestParam("pickuplocation") String pickupLocation) {
 
         //her hentes bil-objektet til købsaftalen baseret på brugerinput
