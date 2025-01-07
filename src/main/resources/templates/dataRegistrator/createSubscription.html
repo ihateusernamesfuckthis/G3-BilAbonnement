@@ -16,7 +16,7 @@
 <div class="subscription-container container">
     <div class="subscription__title-container">
         <h1 class="subscription__title">Opret abonnement</h1>
-        <div th:replace="~{fragments/returnButtonFragment :: return-button}"></div>
+        <div th:replace="~{fragments/returnButtonFragment :: return-button('/rental-agreement/new')}"></div>
     </div>
     <form class="subscription__form" th:action="@{/subscription/create}" th:method="post">
         <div th:replace="~{fragments/formGroupFragments :: input-field('text', 'baseSubscriptionPrice', 'Base pris per måned', 'subscription-form-group-base-subscription-price-input', true)}"></div>

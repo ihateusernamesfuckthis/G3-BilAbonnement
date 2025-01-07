@@ -30,7 +30,7 @@ public class RenterController {
     }
 
     @GetMapping("/search")
-    public String searchCarsWithFilter(@ModelAttribute("filter") RenterFilter renterFilter, @RequestParam(required = false) boolean showSearchFilter, Model model) {
+    public String searchRenterWithFilter(@ModelAttribute("filter") RenterFilter renterFilter, @RequestParam(required = false) boolean showSearchFilter, Model model) {
         model.addAttribute("headerButtons", homeController.getHeaderHashMapForDataRegistrator());
 
         // renterFilter indeholder de værdier, som brugeren har udfyldt.
@@ -44,7 +44,7 @@ public class RenterController {
     }
 
     @PostMapping("/return")
-    public String searchCarResults(@RequestParam int renterId, HttpSession session) {
+    public String searchRenterResults(@RequestParam int renterId, HttpSession session) {
         Renter renter = renterService.getById(renterId);
         session.setAttribute("renter", renter);
 
